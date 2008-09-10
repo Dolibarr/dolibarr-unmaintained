@@ -1,0 +1,6 @@
+# Dolibarr language file - en_US - chronodocs
+# numbering module
+Saphir2NumRefModelDesc1=Generic number model
+Saphir2NumRefModelError=Failed to activate
+UseGlobalClientRef=Use global client counter
+UseGlobalClientRefHelp=Share counter value for filter {cccc000} whith other objects. <br> Tip: If you set in admin's other const ALLOWONLYREFCLIENT to 1, you can also use mask with no {000} filter if {ccc000} is used (except for bills). In this case, {@1} filter define RAZ mounth.
