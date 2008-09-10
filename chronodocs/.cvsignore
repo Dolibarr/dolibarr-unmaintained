@@ -1,0 +1,8 @@
+index.php
+*.htaccess
+*.settings
+*.project
+*.cache
+*.log
+document
+documents
