@@ -24,7 +24,7 @@
         \file       htdocs/chronodocs/document.php
         \ingroup    chronodocse
         \brief      Page de gestion des documents attachées à un chronodoc
-        \version    $Id: document.php,v 1.1 2008/09/10 09:34:56 raphael_bertrand Exp $
+        \version    $Id: document.php,v 1.2 2008/11/02 00:13:03 raphael_bertrand Exp $
 */
 
 require('./pre.inc.php');
@@ -53,7 +53,7 @@ if ($user->societe_id)
 	$action=''; 
 	$socid = $user->societe_id;
 }
-$result = restrictedArea($user, 'chronodocs', $chronodocsid, 'chronodocs_entries','entries');
+$result = restrictedArea($user, 'chronodocs', $chronodocsid, 'chronodocs_entries','entries','socid');
 
 // Get parameters
 $page=$_GET["page"];
@@ -187,5 +187,5 @@ else
 
 $db->close();
 
-llxFooter('$Date: 2008/09/10 09:34:56 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2008/11/02 00:13:03 $ - $Revision: 1.2 $');
 ?>

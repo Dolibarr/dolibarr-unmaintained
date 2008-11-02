@@ -23,7 +23,7 @@
  \file       htdocs/chronodocs/fiche.php
  \brief      Fichier fiche chronodoc
  \ingroup    chronodocs
- \version    $Id: fiche.php,v 1.1 2008/09/10 09:34:56 raphael_bertrand Exp $
+ \version    $Id: fiche.php,v 1.2 2008/11/02 00:13:02 raphael_bertrand Exp $
  */
 
 require("./pre.inc.php");
@@ -56,7 +56,7 @@ if (! empty($_POST['socid_id']))
 
 // Security check
 if ($user->societe_id) $socid=$user->societe_id;
-$result = restrictedArea($user, 'chronodocs', $chronodocsid, 'chronodocs_entries','entries');
+$result = restrictedArea($user, 'chronodocs', $chronodocsid, 'chronodocs_entries','entries','socid');
 
 if ((in_array($_POST["action"],array('create','add','update','builddoc')) 
 	 || eregi("(set.*)|(edit.*)",$_POST["action"])
@@ -697,5 +697,5 @@ if ($_GET["action"] == 'create' || $_GET["action"] == 'editAll')
 
 $db->close();
 
-llxFooter('$Date: 2008/09/10 09:34:56 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2008/11/02 00:13:02 $ - $Revision: 1.2 $');
 ?>

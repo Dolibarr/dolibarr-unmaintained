@@ -21,7 +21,7 @@
         \file       chronodocs/chronodocs_types.class.php
         \ingroup    chronodocs
         \brief      CRUD class file for chronodocs types (Create/Read/Update/Delete)
-		\version    $Id: chronodocs_types.class.php,v 1.1 2008/09/10 09:34:56 raphael_bertrand Exp $
+		\version    $Id: chronodocs_types.class.php,v 1.2 2008/11/02 00:13:03 raphael_bertrand Exp $
 		\author	Raphael Bertrand (Resultic) <raphael.bertrand@resultic.fr>
 		\remarks	Initialy built by build_class_from_table on 2008-08-18 17:28
 */
@@ -118,10 +118,10 @@ class Chronodocs_types  extends CommonObject
 		
         $sql.= ") VALUES (";
         
-		$sql.= " ".(! isset($this->ref)?'NULL':"'".$this->ref."'").",";
-		$sql.= " ".(! isset($this->title)?'NULL':"'".$this->title."'").",";
-		$sql.= " ".(! isset($this->brief)?'NULL':"'".$this->brief."'").",";
-		$sql.= " ".(! isset($this->filename)?'NULL':"'".$this->filename."'").",";
+		$sql.= " ".(! isset($this->ref)?'NULL':"'".addslashes($this->ref)."'").",";
+		$sql.= " ".(! isset($this->title)?'NULL':"'".addslashes($this->title)."'").",";
+		$sql.= " ".(! isset($this->brief)?'NULL':"'".addslashes($this->brief)."'").",";
+		$sql.= " ".(! isset($this->filename)?'NULL':"'".addslashes($this->filename)."'").",";
 		$sql.= " ".(! isset($this->date_c) || strval($this->date_c)==''?'NULL':$this->db->idate($this->date_c)).",";
 		$sql.= " ".(! isset($this->date_u) || strval($this->date_u)==''?'NULL':$this->db->idate($this->date_u)).",";
 		$sql.= " ".(! isset($this->fk_status)?'NULL':"'".$this->fk_status."'").",";

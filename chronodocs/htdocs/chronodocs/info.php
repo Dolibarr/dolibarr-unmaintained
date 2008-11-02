@@ -21,7 +21,7 @@
 	\file       htdocs/chronodocs/info.php
 	\ingroup    chronodocs
 	\brief      Page d'affichage des infos d'une chronodoc
-	\version    $Id: info.php,v 1.1 2008/09/10 09:34:56 raphael_bertrand Exp $
+	\version    $Id: info.php,v 1.2 2008/11/02 00:13:03 raphael_bertrand Exp $
 */
 
 require('./pre.inc.php');
@@ -36,7 +36,7 @@ $chronodocsid = isset($_GET["id"])?$_GET["id"]:'';
 
 // Security check
 if ($user->societe_id) $socid=$user->societe_id;
-$result = restrictedArea($user, 'chronodocs', $chronodocsid, 'chronodocs_entries','entries');
+$result = restrictedArea($user, 'chronodocs', $chronodocsid, 'chronodocs_entries','entries','socid');
 
 
 /*
@@ -68,5 +68,5 @@ print '</div>';
 
 $db->close();
 
-llxFooter('$Date: 2008/09/10 09:34:56 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2008/11/02 00:13:03 $ - $Revision: 1.2 $');
 ?>

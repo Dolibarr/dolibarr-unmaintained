@@ -21,7 +21,7 @@
         \file       dev/skeletons/chronodocs_propvalues.class.php
         \ingroup    mymodule othermodule1 othermodule2
         \brief      This file is an example for a CRUD class file (Create/Read/Update/Delete)
-		\version    $Id: chronodocs_propvalues.class.php,v 1.1 2008/09/10 09:34:55 raphael_bertrand Exp $
+		\version    $Id: chronodocs_propvalues.class.php,v 1.2 2008/11/02 00:13:03 raphael_bertrand Exp $
 		\author		Put author name here
 		\remarks	Initialy built by build_class_from_table on 2008-09-03 17:35
 */
@@ -99,7 +99,7 @@ class Chronodocs_propvalues // extends CommonObject
 		
         $sql.= ") VALUES (";
         
-		$sql.= " ".(! isset($this->content)?'NULL':"'".$this->content."'").",";
+		$sql.= " ".(! isset($this->content)?'NULL':"'".addslashes($this->content)."'").",";
 		$sql.= " ".(! isset($this->fk_propfield)?'NULL':"'".$this->fk_propfield."'").",";
 		$sql.= " ".(! isset($this->fk_objectid)?'NULL':"'".$this->fk_objectid."'")."";
 

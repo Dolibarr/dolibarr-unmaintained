@@ -22,7 +22,7 @@
         \file       chronodocs/chronodocs_propfields.class.php
         \ingroup    chronodocs
         \brief       CRUD class file for chronodocs propfields (Create/Read/Update/Delete)
-	\version    $Id: chronodocs_propfields.class.php,v 1.1 2008/09/10 09:34:56 raphael_bertrand Exp $
+	\version    $Id: chronodocs_propfields.class.php,v 1.2 2008/11/02 00:13:03 raphael_bertrand Exp $
 	\author	Raphael Bertrand (Resultic) <raphael.bertrand@resultic.fr>
 	\remarks	Initialy built by build_class_from_table on 2008-09-03 17:35
 */
@@ -105,9 +105,9 @@ class Chronodocs_propfields // extends CommonObject
 		
         $sql.= ") VALUES (";
         
-		$sql.= " ".(! isset($this->ref)?'NULL':"'".$this->ref."'").",";
-		$sql.= " ".(! isset($this->title)?'NULL':"'".$this->title."'").",";
-		$sql.= " ".(! isset($this->brief)?'NULL':"'".$this->brief."'").",";
+		$sql.= " ".(! isset($this->ref)?'NULL':"'".addslashes($this->ref)."'").",";
+		$sql.= " ".(! isset($this->title)?'NULL':"'".addslashes($this->title)."'").",";
+		$sql.= " ".(! isset($this->brief)?'NULL':"'".addslashes($this->brief)."'").",";
 		$sql.= " ".(! isset($this->fk_type)?'NULL':"'".$this->fk_type."'").",";
 		$sql.= " ".(! isset($this->fk_status)?'NULL':"'".$this->fk_status."'")."";
 
@@ -493,7 +493,7 @@ class Chronodocs_propfields // extends CommonObject
 		$auto_propfields_ref["#R_REDACTEUR#"]=$langs->trans("Propfield_R_REDACTEUR");
 		$auto_propfields_ref["#R_REDAC_NOM#"]=$langs->trans("Propfield_R_REDAC_NOM");
 		$auto_propfields_ref["#R_REDAC_PNOM#"]=$langs->trans("Propfield_R_REDAC_PNOM");
-		$auto_propfields_ref["#R_REDAC_CIV#"]=$langs->trans("Propfield_R_REDAC_CIV");
+		//$auto_propfields_ref["#R_REDAC_CIV#"]=$langs->trans("Propfield_R_REDAC_CIV");
 		$auto_propfields_ref["#R_REDAC_EMAIL#"]=$langs->trans("Propfield_R_REDAC_EMAIL");
 		
 		$auto_propfields_ref["#R_CUSTOMER#"]=$langs->trans("Propfield_R_CUSTOMER");

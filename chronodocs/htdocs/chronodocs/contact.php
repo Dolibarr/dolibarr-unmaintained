@@ -22,7 +22,7 @@
         \file       htdocs/chronodocs/contact.php
         \ingroup    chronodocs
         \brief      Onglet de gestion des contacts de chronodoc
-        \version    $Id: contact.php,v 1.1 2008/09/10 09:34:55 raphael_bertrand Exp $
+        \version    $Id: contact.php,v 1.2 2008/11/02 00:13:03 raphael_bertrand Exp $
 */
 
 require ("./pre.inc.php");
@@ -39,7 +39,7 @@ $chronodocsid = isset($_GET["id"])?$_GET["id"]:'';
 
 // Security check
 if ($user->societe_id) $socid=$user->societe_id;
-$result = restrictedArea($user, 'chronodocs', $chronodocsid, 'chronodocs_entries','entries');
+$result = restrictedArea($user, 'chronodocs', $chronodocsid, 'chronodocs_entries','entries','socid');
 
 
 if (( eregi("(add.*)|(upd.*)|(swap.*)|(del.*)|(set.*)|(edit.*)",$_POST["action"])
@@ -375,5 +375,5 @@ if ($id > 0)
 
 $db->close();
 
-llxFooter('$Date: 2008/09/10 09:34:55 $');
+llxFooter('$Date: 2008/11/02 00:13:03 $');
 ?>

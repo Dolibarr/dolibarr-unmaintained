@@ -21,7 +21,7 @@
         \file       chronodocs/chronodocs_entries.class.php
         \ingroup    chronodocs
         \brief      CRUD class file for chronodocs entries (Create/Read/Update/Delete)
-		\version    $Id: chronodocs_entries.class.php,v 1.1 2008/09/10 09:34:56 raphael_bertrand Exp $
+		\version    $Id: chronodocs_entries.class.php,v 1.2 2008/11/02 00:13:03 raphael_bertrand Exp $
 		\author	Raphael Bertrand (Resultic) <raphael.bertrand@resultic.fr>
 		\remarks	Initialy built by build_class_from_table on 2008-08-18 17:28
 */
@@ -133,12 +133,12 @@ class Chronodocs_entries  extends CommonObject
 		
         $sql.= ") VALUES (";
         
-		$sql.= " ".(! isset($this->ref)?'NULL':"'".$this->ref."'").",";
-		$sql.= " ".(! isset($this->title)?'NULL':"'".$this->title."'").",";
-		$sql.= " ".(! isset($this->filename)?'NULL':"'".$this->filename."'").",";
-		$sql.= " ".(! isset($this->filename_orig)?'NULL':"'".$this->filename_orig."'").",";
+		$sql.= " ".(! isset($this->ref)?'NULL':"'".addslashes($this->ref)."'").",";
+		$sql.= " ".(! isset($this->title)?'NULL':"'".addslashes($this->title)."'").",";
+		$sql.= " ".(! isset($this->filename)?'NULL':"'".addslashes($this->filename)."'").",";
+		$sql.= " ".(! isset($this->filename_orig)?'NULL':"'".addslashes($this->filename_orig)."'").",";
 		$sql.= " ".(! isset($this->filesize)?'NULL':"'".$this->filesize."'").",";
-		$sql.= " ".(! isset($this->brief)?'NULL':"'".$this->brief."'").",";
+		$sql.= " ".(! isset($this->brief)?'NULL':"'".addslashes($this->brief)."'").",";
 		$sql.= " ".(! isset($this->date_c) || strval($this->date_c)==''?'NULL':$this->db->idate($this->date_c)).",";
 		$sql.= " ".(! isset($this->date_u) || strval($this->date_u)==''?'NULL':$this->db->idate($this->date_u)).",";
 		$sql.= " ".(! isset($this->fk_chronodocs_type)?'NULL':"'".$this->fk_chronodocs_type."'").",";
@@ -877,17 +877,16 @@ class Chronodocs_entries  extends CommonObject
 	 */
 	function get_list($limit,$offset="0",$sortfield="f.date_c",$sortorder="DESC",$socid=0,$search_ref="",$search_societe="",$search_title="",$year=0,$month=0,$fk_chronodocs_type=0)
 	{
-		global $user, $conf, $langs;
-		$db = $this->db;
+		global $user, $conf, $langs, $db;
 		
 		$tab_objp=array();
 		
 		$sql = "SELECT s.nom,s.rowid as socid, f.ref,".$db->pdate("f.date_c")." as dp,".$db->pdate("f.date_u")." as date_u, f.rowid as fichid, f.title, f.fk_chronodocs_type";
-		if (!$user->rights->societe->client->voir && !$socid) $sql .= ", sc.socid, sc.fk_user";
+		//if (!$user->rights->societe->client->voir && !$socid) $sql .= ", sc.socid, sc.fk_user";
 		$sql.= " FROM ".MAIN_DB_PREFIX."societe as s, ".MAIN_DB_PREFIX."chronodocs_entries as f ";
 		if (!$user->rights->societe->client->voir && !$socid) $sql .= ", ".MAIN_DB_PREFIX."societe_commerciaux as sc";
 		$sql.= " WHERE f.socid = s.rowid ";
-		if (!$user->rights->societe->client->voir && !$socid) $sql .= " AND s.rowid = sc.socid AND sc.fk_user = " .$user->id;
+		if (!$user->rights->societe->client->voir && !$socid) $sql .= " AND s.rowid = sc.fk_soc AND sc.fk_user = " .$user->id;
 		if ($socid > 0)
 		{
 			$sql .= " AND s.rowid = " . $socid;
@@ -944,6 +943,7 @@ class Chronodocs_entries  extends CommonObject
 		}
 		else
 		{
+			
 			return 0;
 		}
 	}

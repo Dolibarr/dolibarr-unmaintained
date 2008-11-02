@@ -23,7 +23,7 @@
  \file       htdocs/chronodocs/types.php
  \brief      Fichier fiche type de chronodoc
  \ingroup    chronodocs
- \version    $Id: types.php,v 1.1 2008/09/10 09:34:56 raphael_bertrand Exp $
+ \version    $Id: types.php,v 1.2 2008/11/02 00:13:02 raphael_bertrand Exp $
  */
 
 require("./pre.inc.php");
@@ -58,7 +58,7 @@ if (! empty($_POST['socid_id']))
 
 // Security check
 if ($user->societe_id) $socid=$user->societe_id;
-$result = restrictedArea($user, 'chronodocs', $typeid, 'chronodocs_types','types');
+$result = restrictedArea($user, 'chronodocs', 0, 'chronodocs_types','types');
 
 if ((in_array($_POST["action"],array('create','add','update')) 
 	 || eregi("(set.*)|(edit.*)|(del_.*)",$_POST["action"])
@@ -867,5 +867,5 @@ if (empty($_GET["id"]) &&  (empty($_GET["action"]) || $_GET["action"] != 'create
 }
 $db->close();
 
-llxFooter('$Date: 2008/09/10 09:34:56 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2008/11/02 00:13:02 $ - $Revision: 1.2 $');
 ?>

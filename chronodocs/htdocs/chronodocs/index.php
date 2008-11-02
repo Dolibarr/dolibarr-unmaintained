@@ -23,7 +23,7 @@
      	\file       htdocs/chronodocs/index.php
 		\brief      Page accueil espace fiches chronodocs
 		\ingroup    chronodocs
-		\version    $Id: index.php,v 1.1 2008/09/10 09:34:56 raphael_bertrand Exp $
+		\version    $Id: index.php,v 1.2 2008/11/02 00:13:03 raphael_bertrand Exp $
 */
 
 require("./pre.inc.php");
@@ -43,7 +43,7 @@ $page=$_GET["page"]?$_GET["page"]:$_POST["page"];
 // Security check
 $chronodocsid = isset($_GET["id"])?$_GET["id"]:'';
 if ($user->societe_id) $socid=$user->societe_id;
-$result = restrictedArea($user, 'chronodocs', $chronodocsid, 'chronodocs_entries','entries');
+$result = restrictedArea($user, 'chronodocs', $chronodocsid, 'chronodocs_entries','entries','socid');
 
 if (! $sortorder) $sortorder="DESC";
 if (! $sortfield) $sortfield="f.date_c";
@@ -175,10 +175,10 @@ if (is_array($result))
 }
 else
 {
-    dolibarr_print_error($chronodocs_static->db);
+    dolibarr_print_error($db);
 }
 
 $db->close();
 
-llxFooter('$Date: 2008/09/10 09:34:56 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2008/11/02 00:13:03 $ - $Revision: 1.2 $');
 ?>
