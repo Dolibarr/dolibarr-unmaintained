@@ -24,7 +24,7 @@
         \file       htdocs/chronodocs/document.php
         \ingroup    chronodocse
         \brief      Page de gestion des documents attachées à un chronodoc
-        \version    $Id: document.php,v 1.2 2008/11/02 00:13:03 raphael_bertrand Exp $
+        \version    $Id: document.php,v 1.3 2008/11/02 00:22:22 raphael_bertrand Exp $
 */
 
 require('./pre.inc.php');
@@ -130,7 +130,7 @@ if ($chronodocsid > 0)
 	$chronodocs = new Chronodocs_entries($db);
 	if ($chronodocs->fetch($chronodocsid))
     {
-		$upload_dir = $conf->chronodocs->dir_output.'/'.sanitize_string($chronodocs->ref);
+		$upload_dir = $conf->chronodocs->dir_output.'/'.dol_string_nospecial($chronodocs->ref);
 
         $societe = new Societe($db);
         $societe->fetch($chronodocs->socid);
@@ -187,5 +187,5 @@ else
 
 $db->close();
 
-llxFooter('$Date: 2008/11/02 00:13:03 $ - $Revision: 1.2 $');
+llxFooter('$Date: 2008/11/02 00:22:22 $ - $Revision: 1.3 $');
 ?>

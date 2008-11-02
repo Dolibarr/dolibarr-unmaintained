@@ -24,7 +24,7 @@
 		\ingroup    facture
 		\brief      File of class to generate chronodocs files from wrapper model
 		\author	    Raphael Bertrand
-		\version    $Id: tpl_wrapper.modules.php,v 1.1 2008/09/10 09:34:57 raphael_bertrand Exp $
+		\version    $Id: tpl_wrapper.modules.php,v 1.2 2008/11/02 00:22:21 raphael_bertrand Exp $
 */
 
 require_once(DOL_DOCUMENT_ROOT."/includes/modules/chronodocs/modules_chronodocs.php");
@@ -135,7 +135,7 @@ class tpl_wrapper extends TplChronodocs
 			}
 			else
 			{
-				$chronodocref = sanitize_string($chronodoc->ref);
+				$chronodocref = dol_string_nospecial($chronodoc->ref);
 				$dir = $this->dir_output. "/" . $chronodocref;
 				$file = $dir . "/" . $chronodocref . $ext;
 			}

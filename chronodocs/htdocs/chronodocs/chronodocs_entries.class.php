@@ -21,7 +21,7 @@
         \file       chronodocs/chronodocs_entries.class.php
         \ingroup    chronodocs
         \brief      CRUD class file for chronodocs entries (Create/Read/Update/Delete)
-		\version    $Id: chronodocs_entries.class.php,v 1.2 2008/11/02 00:13:03 raphael_bertrand Exp $
+		\version    $Id: chronodocs_entries.class.php,v 1.3 2008/11/02 00:22:22 raphael_bertrand Exp $
 		\author	Raphael Bertrand (Resultic) <raphael.bertrand@resultic.fr>
 		\remarks	Initialy built by build_class_from_table on 2008-08-18 17:28
 */
@@ -394,7 +394,7 @@ class Chronodocs_entries  extends CommonObject
 		// Delete files
 		if(! $error)
 		{
-			$dir = DOL_DATA_ROOT."/chronodocs/" . sanitize_string($chronodocs->ref);
+			$dir = DOL_DATA_ROOT."/chronodocs/" . dol_string_nospecial($chronodocs->ref);
 			if (file_exists($dir))
 				{
 					dolibarr_syslog(get_class($this)."::delete delete_dir:".$dir);

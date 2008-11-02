@@ -23,7 +23,7 @@
  \file       htdocs/chronodocs/types.php
  \brief      Fichier fiche type de chronodoc
  \ingroup    chronodocs
- \version    $Id: types.php,v 1.2 2008/11/02 00:13:02 raphael_bertrand Exp $
+ \version    $Id: types.php,v 1.3 2008/11/02 00:22:22 raphael_bertrand Exp $
  */
 
 require("./pre.inc.php");
@@ -175,7 +175,7 @@ if ($_POST["action"] == 'setfile')
 		}
 	
 		//$filename=$_FILES['userfile']['name'];
-		$filename=sanitize_string($chronodocstype->ref.".".$_FILES['userfile']['name']);
+		$filename=dol_string_nospecial($chronodocstype->ref.".".$_FILES['userfile']['name']);
 		if (dol_move_uploaded_file($_FILES['userfile']['tmp_name'], $upload_dir . "/" . $filename,0) > 0)
 		{
 			$result=$chronodocstype->set_filename($user,$filename);
@@ -867,5 +867,5 @@ if (empty($_GET["id"]) &&  (empty($_GET["action"]) || $_GET["action"] != 'create
 }
 $db->close();
 
-llxFooter('$Date: 2008/11/02 00:13:02 $ - $Revision: 1.2 $');
+llxFooter('$Date: 2008/11/02 00:22:22 $ - $Revision: 1.3 $');
 ?>

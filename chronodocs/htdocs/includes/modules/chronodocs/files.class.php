@@ -27,7 +27,7 @@
         \brief      Classe de gestion des documents de chronodoc
         \author	Raphael Bertrand (Resultic) <raphael.bertrand@resultic.fr>
         \remarks	Initialy built from FormFile.class.php and htdocs/document.php
-        \version    $Id: files.class.php,v 1.1 2008/09/10 09:34:57 raphael_bertrand Exp $
+        \version    $Id: files.class.php,v 1.2 2008/11/02 00:22:21 raphael_bertrand Exp $
 */
 
 require_once(DOL_DOCUMENT_ROOT."/html.formfile.class.php");
@@ -96,7 +96,7 @@ class ChronodocsFiles extends FormFile
 			$forcenomultilang=0;
 		}
 
-		$filename = sanitize_string($filename);
+		$filename = dol_string_nospecial($filename);
 		$headershown=0;
 		$i=0;
 
@@ -321,7 +321,7 @@ class ChronodocsFiles extends FormFile
 			{
 				if(empty($modulepart) || $modulepart=='chronodocs_entries')
 				{
-					$path = $this->dir_output . "/" . sanitize_string($chronodocs->ref);
+					$path = $this->dir_output . "/" . dol_string_nospecial($chronodocs->ref);
 					
 					if(empty($modulepart))
 						$excludefilter='\.meta$';
@@ -359,7 +359,7 @@ class ChronodocsFiles extends FormFile
 		{
 			if(empty($upload_dir))
 			{
-				$upload_dir = $this->dir_output . "/" . sanitize_string($chronodocs->ref);
+				$upload_dir = $this->dir_output . "/" . dol_string_nospecial($chronodocs->ref);
 			}
 			if (! is_dir($upload_dir)) create_exdir($upload_dir);
 
@@ -418,7 +418,7 @@ class ChronodocsFiles extends FormFile
 		{
 			if(empty($upload_dir))
 			{
-				$upload_dir = $this->dir_output . "/" . sanitize_string($chronodocs->ref);
+				$upload_dir = $this->dir_output . "/" . dol_string_nospecial($chronodocs->ref);
 			}
 			if(empty($original_file))
 				$file = $upload_dir . '/' . urldecode($_GET['urlfile']);

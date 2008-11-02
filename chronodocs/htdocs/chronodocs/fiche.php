@@ -23,7 +23,7 @@
  \file       htdocs/chronodocs/fiche.php
  \brief      Fichier fiche chronodoc
  \ingroup    chronodocs
- \version    $Id: fiche.php,v 1.2 2008/11/02 00:13:02 raphael_bertrand Exp $
+ \version    $Id: fiche.php,v 1.3 2008/11/02 00:22:22 raphael_bertrand Exp $
  */
 
 require("./pre.inc.php");
@@ -224,8 +224,8 @@ if ($_POST["action"] == 'update')
 	
 	if($chronodocs_oldref!=$chronodocs->ref)
 	{
-		$olddir=DOL_DATA_ROOT."/chronodocs/" . sanitize_string($chronodocs_oldref);
-		$newdir=DOL_DATA_ROOT."/chronodocs/" . sanitize_string($chronodocs->ref);
+		$olddir=DOL_DATA_ROOT."/chronodocs/" . dol_string_nospecial($chronodocs_oldref);
+		$newdir=DOL_DATA_ROOT."/chronodocs/" . dol_string_nospecial($chronodocs->ref);
 		rename($olddir,$newdir);
 	}
 	$_GET["id"]=$_POST["id"];      // Force raffraichissement sur fiche venant d'etre mise a jour
@@ -481,8 +481,8 @@ if ($_GET["id"] > 0 && $_GET["action"] != 'create' )
 		require_once(DOL_DOCUMENT_ROOT."/includes/modules/chronodocs/files.class.php");
 		$formfile=new ChronodocsFiles($db);
 		
-		$filename=sanitize_string($chronodocs->ref);
-		$filedir=$formfile->dir_output . "/" . sanitize_string($chronodocs->ref);
+		$filename=dol_string_nospecial($chronodocs->ref);
+		$filedir=$formfile->dir_output . "/" . dol_string_nospecial($chronodocs->ref);
 		$urlsource=$_SERVER["PHP_SELF"]."?id=".$chronodocs->id;
 		$genallowed=$user->rights->chronodocs->entries->write;
 		$delallowed=$user->rights->chronodocs->entries->delete;
@@ -697,5 +697,5 @@ if ($_GET["action"] == 'create' || $_GET["action"] == 'editAll')
 
 $db->close();
 
-llxFooter('$Date: 2008/11/02 00:13:02 $ - $Revision: 1.2 $');
+llxFooter('$Date: 2008/11/02 00:22:22 $ - $Revision: 1.3 $');
 ?>
