@@ -18,7 +18,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  * or see http://www.gnu.org/
  *
- * $Id: chronodocs.lib.php,v 1.1 2008/09/10 09:34:58 raphael_bertrand Exp $
+ * $Id: chronodocs.lib.php,v 1.2 2008/11/02 00:11:59 raphael_bertrand Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/chronodocs/htdocs/lib/Attic/chronodocs.lib.php,v $
  */
 
@@ -26,7 +26,7 @@
    \file       htdocs/lib/chronodocs.lib.php
    \brief      Ensemble de fonctions de base pour le module chronodocs
    \ingroup    chronodocs
-   \version    $Revision: 1.1 $
+   \version    $Revision: 1.2 $
    
    Ensemble de fonctions de base de dolibarr sous forme d'include
 */
@@ -177,11 +177,12 @@ global $langs, $conf, $user;
 		{
 			if($contacts_internes[$i]['code']=='AUTHOR')
 				$id_contact_redacteur=$contacts_internes[$i]['id'];
+			
 		}
 		
 		//recuperation contact redacteur
-		if($id_contact_redacteur>0 && $chronodoc->fetch_contact($id_contact_redacteur))
-			$contact_redacteur=$chronodoc->contact;
+		if($id_contact_redacteur>0 && $chronodoc->fetch_user($id_contact_redacteur))
+			$user_redacteur=$chronodoc->user;
 		
 		//recherche id contact destinataire
 		$id_contact_dest = 0;
@@ -261,25 +262,25 @@ global $langs, $conf, $user;
 			$tab_replace['#R_TITRE_NOTE#'] = $chronodoc->title;
 		//$tab_replace['#R_TITRE_DOSSIER#'] = $chronodoc->ref;
 			
-		if (!empty($contact_redacteur))
+		if (!empty($user_redacteur))
 		{
 			if(array_key_exists('#R_REDACTEUR#',$tab_replace) && $tab_replace['#R_REDACTEUR#'] == "UNDEFINED")
-				$tab_replace['#R_REDACTEUR#'] = $contact_redacteur->getFullName($langs,1,1);
+				$tab_replace['#R_REDACTEUR#'] = $user_redacteur->fullname;
 				
 			if(array_key_exists('#R_TRIGRAMME#',$tab_replace) && $tab_replace['#R_TRIGRAMME#'] == "UNDEFINED")
-				$tab_replace['#R_TRIGRAMME#'] = chronodocs_get_R_TRIGRAMME($contact_redacteur->name,$contact_redacteur->firstname);
+				$tab_replace['#R_TRIGRAMME#'] = chronodocs_get_R_TRIGRAMME($user_redacteur->nom,$user_redacteur->prenom);
 				
 			if(array_key_exists('#R_REDAC_NOM#',$tab_replace) && $tab_replace['#R_REDAC_NOM#'] == "UNDEFINED")
-				$tab_replace['#R_REDAC_NOM#'] = $contact_redacteur->name;
+				$tab_replace['#R_REDAC_NOM#'] = $user_redacteur->nom;
 			
 			if(array_key_exists('#R_REDAC_PNOM#',$tab_replace) && $tab_replace['#R_REDAC_PNOM#'] == "UNDEFINED")
-				$tab_replace['#R_REDAC_PNOM#'] = $contact_redacteur->firstname;	
+				$tab_replace['#R_REDAC_PNOM#'] = $user_redacteur->prenom;	
 			
-			if(array_key_exists('#R_REDAC_CIV#',$tab_replace) && $tab_replace['#R_REDAC_CIV#'] == "UNDEFINED")
-				$tab_replace['#R_REDAC_CIV#'] = $contact_redacteur->getCivilityLabel();
+			//if(array_key_exists('#R_REDAC_CIV#',$tab_replace) && $tab_replace['#R_REDAC_CIV#'] == "UNDEFINED")
+			//	$tab_replace['#R_REDAC_CIV#'] = $contact_redacteur->getCivilityLabel();
 				
 			if(array_key_exists('#R_REDAC_EMAIL#',$tab_replace) && $tab_replace['#R_REDAC_EMAIL#'] == "UNDEFINED")
-				$tab_replace['#R_REDAC_EMAIL#'] = $contact_redacteur->email;	
+				$tab_replace['#R_REDAC_EMAIL#'] = $user_redacteur->email;	
 		}
 		else
 		{
