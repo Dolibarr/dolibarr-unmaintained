@@ -27,7 +27,7 @@
         \file       htdocs/includes/modules/modChronodocs.class.php
         \ingroup    chronodocs
         \brief      Description and activation file for module Chronodocs
-		\version	$Id: modChronodocs.class.php,v 1.1 2008/09/10 09:34:55 raphael_bertrand Exp $
+		\version	$Id: modChronodocs.class.php,v 1.2 2008/12/02 13:35:42 eldy Exp $
 */
 
 include_once(DOL_DOCUMENT_ROOT ."/includes/modules/DolibarrModules.class.php");
@@ -57,14 +57,14 @@ class modChronodocs extends DolibarrModules
 		// Family can be 'crm','financial','hr','projects','product','ecm','technic','other'
 		// It is used to group modules in module setup page 
 		$this->family = "ecm";		
-		// Module label (no space allowed) used if translation string 'ModuleXXXName' not found (where XXX is value of numeric property 'numero' of module)
-		$this->name = "Chronodocs";	
+		// Module label (no space allowed), used if translation string 'ModuleXXXName' not found (where XXX is value of numeric property 'numero' of module)
+		$this->name = eregi_replace('^mod','',get_class($this));
 		// Module description used if translation string 'ModuleXXXDesc' not found (where XXX is value of numeric property 'numero' of module)
 		$this->description = "Module de gestion de documents à numéro chrono";
 		// Possible values for version are: 'development', 'experimental', 'dolibarr' or version
 		$this->version = '1.0';    
 		// Key used in llx_const table to save module status enabled/disabled
-		$this->const_name = 'MAIN_MODULE_CHRONODOCS';
+        $this->const_name = 'MAIN_MODULE_'.strtoupper($this->name);
 		// Where to store the module in setup page (0=common,1=interface,2=other)
 		$this->special = 2;
 		// Name of png file (without png) used for this module.
