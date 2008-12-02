@@ -19,79 +19,79 @@
  */
 
 /**     \defgroup   chronodocs     Module Chronodocs
-        \brief      Example of a module descriptor.
-					Such a file must be copied into htdocs/includes/module directory.
-*/
+ \brief      Example of a module descriptor.
+ Such a file must be copied into htdocs/includes/module directory.
+ */
 
 /**
-        \file       htdocs/includes/modules/modChronodocs.class.php
-        \ingroup    chronodocs
-        \brief      Description and activation file for module Chronodocs
-		\version	$Id: modChronodocs.class.php,v 1.3 2008/12/02 13:45:48 eldy Exp $
-*/
+ \file       htdocs/includes/modules/modChronodocs.class.php
+ \ingroup    chronodocs
+ \brief      Description and activation file for module Chronodocs
+ \version	$Id: modChronodocs.class.php,v 1.4 2008/12/02 14:13:45 eldy Exp $
+ */
 
 include_once(DOL_DOCUMENT_ROOT ."/includes/modules/DolibarrModules.class.php");
 
 
 /**     \class      modChronodocs
-        \brief      Description and activation class for module Chronodocs
-*/
+ \brief      Description and activation class for module Chronodocs
+ */
 
 class modChronodocs extends DolibarrModules
 {
 
-    /**
-    *   \brief      Constructor. Define names, constants, directories, boxes, permissions
-    *   \param      DB      Database handler
-    */
+	/**
+	 *   \brief      Constructor. Define names, constants, directories, boxes, permissions
+	 *   \param      DB      Database handler
+	 */
 	function modChronodocs($DB)
 	{
 		$this->db = $DB;
-		
+
 		// Id for module (must be unique).
 		// Use here a free id (See in Home -> System information -> Dolibarr for list of used module id).
 		$this->numero = 2600;
 		// Key text used to identify module (for permission, menus, etc...)
 		$this->rights_class = 'chronodocs';
-		
+
 		// Family can be 'crm','financial','hr','projects','product','ecm','technic','other'
-		// It is used to group modules in module setup page 
-		$this->family = "ecm";		
+		// It is used to group modules in module setup page
+		$this->family = "ecm";
 		// Module label (no space allowed), used if translation string 'ModuleXXXName' not found (where XXX is value of numeric property 'numero' of module)
 		$this->name = eregi_replace('^mod','',get_class($this));
 		// Module description used if translation string 'ModuleXXXDesc' not found (where XXX is value of numeric property 'numero' of module)
 		$this->description = "Module de gestion de documents a numero chrono";
 		// Possible values for version are: 'development', 'experimental', 'dolibarr' or version
-		$this->version = '1.0';    
+		$this->version = '1.0';
 		// Key used in llx_const table to save module status enabled/disabled
-        $this->const_name = 'MAIN_MODULE_'.strtoupper($this->name);
+		$this->const_name = 'MAIN_MODULE_'.strtoupper($this->name);
 		// Where to store the module in setup page (0=common,1=interface,2=other)
 		$this->special = 2;
 		// Name of png file (without png) used for this module.
-		// Png file must be in theme/yourtheme/img directory under name object_pictovalue.png. 
+		// Png file must be in theme/yourtheme/img directory under name object_pictovalue.png.
 		$this->picto='dir';
-		
+
 		// Data directories to create when module is enabled.
 		$this->dirs = array();
 		$this->dirs[0] = DOL_DATA_ROOT.'/chronodocs';
-        $this->dirs[1] = DOL_DATA_ROOT.'/chronodocs/temp';
- 		
+		$this->dirs[1] = DOL_DATA_ROOT.'/chronodocs/temp';
+			
 		// Relative path to module style sheet if exists. Example: '/chronodocs/mycss.css'.
 		$this->style_sheet = '';
 
 		// Config pages. Put here list of php page names stored in admin directory used to setup module.
 		$this->config_page_url = array("chronodocs.php");
-		
+
 		// Dependencies
 		$this->depends = array("modSociete","modCommercial");		// List of modules id that must be enabled if this module is enabled
 		$this->requiredby = array();	// List of modules id to disable if this one is disabled
 		$this->phpmin = array(4,1);					// Minimum version of PHP required by module
 		$this->need_dolibarr_version = array(2,4);	// Minimum version of Dolibarr required by module
 		$this->langfiles = array("chronodocs");
-		
+
 		// Constants
 		$this->const = array();			// List of parameters
-		
+
 		$this->const[1][0] = "CHRONODOCS_ADDON";
 		$this->const[1][1] = "chaine";
 		$this->const[1][2] = "mod_chronodocs_saphir2";
@@ -100,28 +100,28 @@ class modChronodocs extends DolibarrModules
 
 		// Constants
 		$this->const = array();			// List of parameters
-		
+
 		$this->const[2][0] = "CHRONODOCS_ADDON_TEMPLATE";
 		$this->const[2][1] = "chaine";
 		$this->const[2][2] = "wrapper";
 		$this->const[2][3] = 'Nom du template de generation des chronodocs';
-		$this->const[2][4] = 0;		
-		
+		$this->const[2][4] = 0;
+
 		// Boxes
-		$this->boxes = array();			// List of boxes 
+		$this->boxes = array();			// List of boxes
 		$r=0;
-		
+
 		// Add here list of php file(s) stored in includes/boxes that contains class to show a box.
 		// Example:
-        //$this->boxes[$r][1] = "myboxa.php";
-    	//$r++;
-        //$this->boxes[$r][1] = "myboxb.php";
-    	//$r++;
+		//$this->boxes[$r][1] = "myboxa.php";
+		//$r++;
+		//$this->boxes[$r][1] = "myboxb.php";
+		//$r++;
 
 		// Permissions
 		$this->rights = array();		// Permission array used by this module
 		$r=0;
-		
+
 		// Add here list of permission defined by an id, a label, a boolean and two constant strings.
 		// Example:
 		// $this->rights[$r][0] = 2000; 				// Permission id (must not be already used)
@@ -130,65 +130,65 @@ class modChronodocs extends DolibarrModules
 		// $this->rights[$r][4] = 'level1';				// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
 		// $this->rights[$r][5] = 'level2';				// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
 		// $r++;
-		
-		 $this->rights[$r][0] = 2600; 				// Permission id (must not be already used)
-		 $this->rights[$r][1] = 'Read chronodocs';	// Permission label
-		 $this->rights[$r][3] = 1; 					// Permission by default for new user (0/1)
-		 $this->rights[$r][4] = 'entries';		// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
-		 $this->rights[$r][5] = 'read';				// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
-		 $r++;
-		
-		 $this->rights[$r][0] = 2601; 				// Permission id (must not be already used)
-		 $this->rights[$r][1] = 'Write chronodocs (Create/Edit)';	// Permission label
-		 $this->rights[$r][3] = 0; 					// Permission by default for new user (0/1)
-		 $this->rights[$r][4] = 'entries';		// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
-		 $this->rights[$r][5] = 'write';			// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
-		 $r++;
-		 
-		 $this->rights[$r][0] = 2602; 				// Permission id (must not be already used)
-		 $this->rights[$r][1] = 'Delete chronodocs';	// Permission label
-		 $this->rights[$r][3] = 0; 					// Permission by default for new user (0/1)
-		 $this->rights[$r][4] = 'entries';			// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
-		 $this->rights[$r][5] = 'delete';			// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
-		 $r++;
-		 
-		 $this->rights[$r][0] = 2603; 				// Permission id (must not be already used)
-		 $this->rights[$r][1] = 'Read chronodocs_types details';	// Permission label
-		 $this->rights[$r][3] = 0; 					// Permission by default for new user (0/1)
-		 $this->rights[$r][4] = 'types';			// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
-		 $this->rights[$r][5] = 'read';			// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
-		 $r++;
-		 
-		 $this->rights[$r][0] = 2604; 				// Permission id (must not be already used)
-		 $this->rights[$r][1] = 'Write chronodocs_types (Create/Edit)';	// Permission label
-		 $this->rights[$r][3] = 0; 					// Permission by default for new user (0/1)
-		 $this->rights[$r][4] = 'types';			// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
-		 $this->rights[$r][5] = 'write';			// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
-		 $r++;
-		 
-		 $this->rights[$r][0] = 2605; 				// Permission id (must not be already used)
-		 $this->rights[$r][1] = 'Delete chronodocs_types';	// Permission label
-		 $this->rights[$r][3] = 0; 					// Permission by default for new user (0/1)
-		 $this->rights[$r][4] = 'types';			// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
-		 $this->rights[$r][5] = 'delete';			// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
-		 $r++;
+
+		$this->rights[$r][0] = 2600; 				// Permission id (must not be already used)
+		$this->rights[$r][1] = 'Read chronodocs';	// Permission label
+		$this->rights[$r][3] = 1; 					// Permission by default for new user (0/1)
+		$this->rights[$r][4] = 'entries';		// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
+		$this->rights[$r][5] = 'read';				// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
+		$r++;
+
+		$this->rights[$r][0] = 2601; 				// Permission id (must not be already used)
+		$this->rights[$r][1] = 'Write chronodocs (Create/Edit)';	// Permission label
+		$this->rights[$r][3] = 0; 					// Permission by default for new user (0/1)
+		$this->rights[$r][4] = 'entries';		// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
+		$this->rights[$r][5] = 'write';			// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
+		$r++;
+			
+		$this->rights[$r][0] = 2602; 				// Permission id (must not be already used)
+		$this->rights[$r][1] = 'Delete chronodocs';	// Permission label
+		$this->rights[$r][3] = 0; 					// Permission by default for new user (0/1)
+		$this->rights[$r][4] = 'entries';			// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
+		$this->rights[$r][5] = 'delete';			// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
+		$r++;
+			
+		$this->rights[$r][0] = 2603; 				// Permission id (must not be already used)
+		$this->rights[$r][1] = 'Read chronodocs_types details';	// Permission label
+		$this->rights[$r][3] = 0; 					// Permission by default for new user (0/1)
+		$this->rights[$r][4] = 'types';			// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
+		$this->rights[$r][5] = 'read';			// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
+		$r++;
+			
+		$this->rights[$r][0] = 2604; 				// Permission id (must not be already used)
+		$this->rights[$r][1] = 'Write chronodocs_types (Create/Edit)';	// Permission label
+		$this->rights[$r][3] = 0; 					// Permission by default for new user (0/1)
+		$this->rights[$r][4] = 'types';			// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
+		$this->rights[$r][5] = 'write';			// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
+		$r++;
+			
+		$this->rights[$r][0] = 2605; 				// Permission id (must not be already used)
+		$this->rights[$r][1] = 'Delete chronodocs_types';	// Permission label
+		$this->rights[$r][3] = 0; 					// Permission by default for new user (0/1)
+		$this->rights[$r][4] = 'types';			// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
+		$this->rights[$r][5] = 'delete';			// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
+		$r++;
 
 		// Exports
-        $r=1;
-    
-        // $this->export_code[$r]=$this->rights_class.'_'.$r;
-        // $this->export_label[$r]='CustomersInvoicesAndInvoiceLines';	// Translation key (used only if key ExportDataset_xxx_z not found)
-        // $this->export_permission[$r]=array(array("facture","facture","export"));
-        // $this->export_fields_array[$r]=array('s.rowid'=>"IdCompany",'s.nom'=>'CompanyName','s.address'=>'Address','s.cp'=>'Zip','s.ville'=>'Town','s.fk_pays'=>'Country','s.tel'=>'Phone','s.siren'=>'ProfId1','s.siret'=>'ProfId2','s.ape'=>'ProfId3','s.idprof4'=>'ProfId4','s.code_compta'=>'CustomerAccountancyCode','s.code_compta_fournisseur'=>'SupplierAccountancyCode','f.rowid'=>"InvoiceId",'f.facnumber'=>"InvoiceRef",'f.datec'=>"InvoiceDateCreation",'f.datef'=>"DateInvoice",'f.total'=>"TotalHT",'f.total_ttc'=>"TotalTTC",'f.tva'=>"TotalVAT",'f.paye'=>"InvoicePayed",'f.fk_statut'=>'InvoiceStatus','f.note'=>"InvoiceNote",'fd.rowid'=>'LineId','fd.description'=>"LineDescription",'fd.price'=>"LineUnitPrice",'fd.tva_taux'=>"LineVATRate",'fd.qty'=>"LineQty",'fd.total_ht'=>"LineTotalHT",'fd.total_tva'=>"LineTotalTVA",'fd.total_ttc'=>"LineTotalTTC",'fd.date_start'=>"DateStart",'fd.date_end'=>"DateEnd",'fd.fk_product'=>'ProductId','p.ref'=>'ProductRef');
+		$r=1;
+
+		// $this->export_code[$r]=$this->rights_class.'_'.$r;
+		// $this->export_label[$r]='CustomersInvoicesAndInvoiceLines';	// Translation key (used only if key ExportDataset_xxx_z not found)
+		// $this->export_permission[$r]=array(array("facture","facture","export"));
+		// $this->export_fields_array[$r]=array('s.rowid'=>"IdCompany",'s.nom'=>'CompanyName','s.address'=>'Address','s.cp'=>'Zip','s.ville'=>'Town','s.fk_pays'=>'Country','s.tel'=>'Phone','s.siren'=>'ProfId1','s.siret'=>'ProfId2','s.ape'=>'ProfId3','s.idprof4'=>'ProfId4','s.code_compta'=>'CustomerAccountancyCode','s.code_compta_fournisseur'=>'SupplierAccountancyCode','f.rowid'=>"InvoiceId",'f.facnumber'=>"InvoiceRef",'f.datec'=>"InvoiceDateCreation",'f.datef'=>"DateInvoice",'f.total'=>"TotalHT",'f.total_ttc'=>"TotalTTC",'f.tva'=>"TotalVAT",'f.paye'=>"InvoicePayed",'f.fk_statut'=>'InvoiceStatus','f.note'=>"InvoiceNote",'fd.rowid'=>'LineId','fd.description'=>"LineDescription",'fd.price'=>"LineUnitPrice",'fd.tva_taux'=>"LineVATRate",'fd.qty'=>"LineQty",'fd.total_ht'=>"LineTotalHT",'fd.total_tva'=>"LineTotalTVA",'fd.total_ttc'=>"LineTotalTTC",'fd.date_start'=>"DateStart",'fd.date_end'=>"DateEnd",'fd.fk_product'=>'ProductId','p.ref'=>'ProductRef');
 		// $this->export_entities_array[$r]=array('s.rowid'=>"company",'s.nom'=>'company','s.address'=>'company','s.cp'=>'company','s.ville'=>'company','s.fk_pays'=>'company','s.tel'=>'company','s.siren'=>'company','s.siret'=>'company','s.ape'=>'company','s.idprof4'=>'company','s.code_compta'=>'company','s.code_compta_fournisseur'=>'company','f.rowid'=>"invoice",'f.facnumber'=>"invoice",'f.datec'=>"invoice",'f.datef'=>"invoice",'f.total'=>"invoice",'f.total_ttc'=>"invoice",'f.tva'=>"invoice",'f.paye'=>"invoice",'f.fk_statut'=>'invoice','f.note'=>"invoice",'fd.rowid'=>'invoice_line','fd.description'=>"invoice_line",'fd.price'=>"invoice_line",'fd.total_ht'=>"invoice_line",'fd.total_tva'=>"invoice_line",'fd.total_ttc'=>"invoice_line",'fd.tva_taux'=>"invoice_line",'fd.qty'=>"invoice_line",'fd.date_start'=>"invoice_line",'fd.date_end'=>"invoice_line",'fd.fk_product'=>'product','p.ref'=>'product');
-        // $this->export_alias_array[$r]=array('s.rowid'=>"socid",'s.nom'=>'soc_name','s.address'=>'soc_adres','s.cp'=>'soc_zip','s.ville'=>'soc_ville','s.fk_pays'=>'soc_pays','s.tel'=>'soc_tel','s.siren'=>'soc_siren','s.siret'=>'soc_siret','s.ape'=>'soc_ape','s.idprof4'=>'soc_idprof4','s.code_compta'=>'soc_customer_accountancy','s.code_compta_fournisseur'=>'soc_supplier_accountancy','f.rowid'=>"invoiceid",'f.facnumber'=>"ref",'f.datec'=>"datecreation",'f.datef'=>"dateinvoice",'f.total'=>"totalht",'f.total_ttc'=>"totalttc",'f.tva'=>"totalvat",'f.paye'=>"paid",'f.fk_statut'=>'status','f.note'=>"note",'fd.rowid'=>'lineid','fd.description'=>"linedescription",'fd.price'=>"lineprice",'fd.total_ht'=>"linetotalht",'fd.total_tva'=>"linetotaltva",'fd.total_ttc'=>"linetotalttc",'fd.tva_taux'=>"linevatrate",'fd.qty'=>"lineqty",'fd.date_start'=>"linedatestart",'fd.date_end'=>"linedateend",'fd.fk_product'=>'productid','p.ref'=>'productref');
-        // $this->export_sql_start[$r]='SELECT DISTINCT ';
-        // $this->export_sql_end[$r]  =' FROM ('.MAIN_DB_PREFIX.'facture as f, '.MAIN_DB_PREFIX.'facturedet as fd, '.MAIN_DB_PREFIX.'societe as s)';
+		// $this->export_alias_array[$r]=array('s.rowid'=>"socid",'s.nom'=>'soc_name','s.address'=>'soc_adres','s.cp'=>'soc_zip','s.ville'=>'soc_ville','s.fk_pays'=>'soc_pays','s.tel'=>'soc_tel','s.siren'=>'soc_siren','s.siret'=>'soc_siret','s.ape'=>'soc_ape','s.idprof4'=>'soc_idprof4','s.code_compta'=>'soc_customer_accountancy','s.code_compta_fournisseur'=>'soc_supplier_accountancy','f.rowid'=>"invoiceid",'f.facnumber'=>"ref",'f.datec'=>"datecreation",'f.datef'=>"dateinvoice",'f.total'=>"totalht",'f.total_ttc'=>"totalttc",'f.tva'=>"totalvat",'f.paye'=>"paid",'f.fk_statut'=>'status','f.note'=>"note",'fd.rowid'=>'lineid','fd.description'=>"linedescription",'fd.price'=>"lineprice",'fd.total_ht'=>"linetotalht",'fd.total_tva'=>"linetotaltva",'fd.total_ttc'=>"linetotalttc",'fd.tva_taux'=>"linevatrate",'fd.qty'=>"lineqty",'fd.date_start'=>"linedatestart",'fd.date_end'=>"linedateend",'fd.fk_product'=>'productid','p.ref'=>'productref');
+		// $this->export_sql_start[$r]='SELECT DISTINCT ';
+		// $this->export_sql_end[$r]  =' FROM ('.MAIN_DB_PREFIX.'facture as f, '.MAIN_DB_PREFIX.'facturedet as fd, '.MAIN_DB_PREFIX.'societe as s)';
 		// $this->export_sql_end[$r] .=' LEFT JOIN '.MAIN_DB_PREFIX.'product as p on (fd.fk_product = p.rowid)';
 		// $this->export_sql_end[$r] .=' WHERE f.fk_soc = s.rowid AND f.rowid = fd.fk_facture';
-        // $r++;
-        
-        
+		// $r++;
+
+
 		// Main menu entries
 		$this->menus = array();			// List of menus to add
 		$r=0;
@@ -220,8 +220,8 @@ class modChronodocs extends DolibarrModules
 		//							'target'=>'',
 		//							'user'=>0);				// 0=menu for all users
 		// $r++;
-		
-				$this->menu[$r]=array(	'fk_menu'=>0,			// Put 0 if this is a top menu
+
+		$this->menu[$r]=array(	'fk_menu'=>0,			// Put 0 if this is a top menu
 									'type'=>'top',			// This is a Top menu entry
 									'titre'=>'Chronodocs',
 									'mainmenu'=>'chronodocs',
@@ -233,8 +233,8 @@ class modChronodocs extends DolibarrModules
 									'target'=>'',
 									'user'=>0);				// 0=menu for all users
 		$r++;
-		
-		  $this->menu[$r]=array(	'fk_menu'=>'r=0',		// Use r=value where r is index key used for the top menu entry
+
+		$this->menu[$r]=array(	'fk_menu'=>'r=0',		// Use r=value where r is index key used for the top menu entry
 									'type'=>'left',			// This is a Left menu entry
 									'titre'=>'Liste chronodocs',
 									'mainmenu'=>'chronodocs',
@@ -245,7 +245,7 @@ class modChronodocs extends DolibarrModules
 									'target'=>'',
 									'user'=>0);				// 0=menu for all users
 		$r++;
-		
+
 		$this->menu[$r]=array(	'fk_menu'=>'r=0',		// Use r=value where r is index key used for the top menu entry
 									'type'=>'left',			// This is a Left menu entry
 									'titre'=>'Nouveau chronodoc',
@@ -257,7 +257,7 @@ class modChronodocs extends DolibarrModules
 									'target'=>'',
 									'user'=>0);				// 0=menu for all users
 		$r++;
-		
+
 		$this->menu[$r]=array(	'fk_menu'=>'r=0',		// Use r=value where r is index key used for the top menu entry
 									'type'=>'left',			// This is a Left menu entry
 									'titre'=>'Types chronodoc',
@@ -269,54 +269,54 @@ class modChronodocs extends DolibarrModules
 									'target'=>'',
 									'user'=>0);				// 0=menu for all users
 		$r++;
-		
+
 	}
 
 	/**
-     *		\brief      Function called when module is enabled.
-     *					The init function add constants, boxes, permissions and menus (defined in constructor) into Dolibarr database.
-     *					It also creates data directories.
+	 *		\brief      Function called when module is enabled.
+	 *					The init function add constants, boxes, permissions and menus (defined in constructor) into Dolibarr database.
+	 *					It also creates data directories.
 	 *      \return     int             1 if OK, 0 if KO
-     */
+	 */
 	function init()
-  	{
-    	$sql = array();
-    
+	{
+		$sql = array();
+
 		$result=$this->load_tables();
-		
-		$sql[] = "REPLACE INTO `".MAIN_DB_PREFIX."c_type_contact` ( `rowid` , `element` , `source` , `code` , `libelle` , `active` ) VALUES ('2601', 'chronodocs_entries', 'external', 'CUSTOMER', 'Contact client suivi document', '1');";
-		$sql[] = "REPLACE INTO `".MAIN_DB_PREFIX."c_type_contact` ( `rowid` , `element` , `source` , `code` , `libelle` , `active` ) VALUES ('2602', 'chronodocs_entries', 'internal', 'AUTHOR', 'Rédacteur document', '1');";
-	
-    	return $this->_init($sql);
-  	}
+
+		$sql[] = "REPLACE INTO `".MAIN_DB_PREFIX."c_type_contact` ( `rowid` , `element` , `source` , `code` , `libelle` , `active` ) VALUES ('2601', 'chronodocs_entries', 'external', 'CUSTOMER', 'Contact client suivi document', '1')";
+		$sql[] = "REPLACE INTO `".MAIN_DB_PREFIX."c_type_contact` ( `rowid` , `element` , `source` , `code` , `libelle` , `active` ) VALUES ('2602', 'chronodocs_entries', 'internal', 'AUTHOR', 'Redacteur document', '1')";
+
+		return $this->_init($sql);
+	}
 
 	/**
 	 *		\brief		Function called when module is disabled.
- 	 *              	Remove from database constants, boxes and permissions from Dolibarr database.
- 	 *					Data directories are not deleted.
+	 *              	Remove from database constants, boxes and permissions from Dolibarr database.
+	 *					Data directories are not deleted.
 	 *      \return     int             1 if OK, 0 if KO
- 	 */
+	 */
 	function remove()
 	{
-    	$sql = array();
+		$sql = array();
 
-    	return $this->_remove($sql);
-  	}
+		return $this->_remove($sql);
+	}
 
-	
+
 	/**
-	*		\brief		Create tables and keys required by module
-	* 					Files chronodocs.sql and chronodocs.key.sql with create table and create keys
-	* 					commands must be stored in directory /mysql/tables/chronodocs/.
-	*					This function is called by this->init.
-	* 		\return		int		<=0 if KO, >0 if OK
-	*/
+	 *		\brief		Create tables and keys required by module
+	 * 					Files chronodocs.sql and chronodocs.key.sql with create table and create keys
+	 * 					commands must be stored in directory /mysql/tables/chronodocs/.
+	 *					This function is called by this->init.
+	 * 		\return		int		<=0 if KO, >0 if OK
+	 */
 	function load_tables()
 	{
 		include_once(DOL_DOCUMENT_ROOT ."/lib/admin.lib.php");
 
 		global $db;
-		
+
 		$ok = 1;
 		if ($ok)
 		{
@@ -325,32 +325,38 @@ class modChronodocs extends DolibarrModules
 
 			// Run llx_mytable.sql files
 			$handle=opendir($dir);
-			while (($file = readdir($handle))!==false)
+			if ($hanlde)
 			{
-				if (eregi('\.sql$',$file) && substr($file,0,4) == 'llx_' && substr($file, -8) <> '.key.sql')
+				while (($file = readdir($handle))!==false)
 				{
-					$result=run_sql($dir.$file,1);
+					if (eregi('\.sql$',$file) && substr($file,0,4) == 'llx_' && substr($file, -8) <> '.key.sql')
+					{
+						$result=run_sql($dir.$file,1);
+					}
 				}
+				closedir($handle);
 			}
-			closedir($handle);
 
 			// Run llx_mytable.key.sql files
 			$handle=opendir($dir);
-			while (($file = readdir($handle))!==false)
+			if ($hanlde)
 			{
-				if (eregi('\.sql$',$file) && substr($file,0,4) == 'llx_' && substr($file, -8) == '.key.sql')
+				while (($file = readdir($handle))!==false)
 				{
-					$result=run_sql($dir.$file,1);
+					if (eregi('\.sql$',$file) && substr($file,0,4) == 'llx_' && substr($file, -8) == '.key.sql')
+					{
+						$result=run_sql($dir.$file,1);
+					}
 				}
+				closedir($handle);
 			}
-			closedir($handle);
-
+			
 			if ($error == 0)
 			{
 				$ok = 1;
 			}
 		}
-		
+
 		return $ok;
 	}
 }
