@@ -15,14 +15,12 @@
 -- along with this program; if not, write to the Free Software
 -- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 --
--- $Id: llx_chronodocs_types.key.sql,v 1.1 2008/08/18 13:59:32 Raphael Exp $
+-- $Id: llx_chronodocs_propvalues.key.sql,v 1.1 2008/12/07 18:14:36 eldy Exp $
 -- ============================================================================
 
 
-ALTER TABLE llx_chronodocs_types ADD INDEX idx_chronodocs_types_ref (ref);
-ALTER TABLE llx_chronodocs_types ADD INDEX idx_chronodocs_types_title (title);
-ALTER TABLE llx_chronodocs_types ADD INDEX idx_chronodocs_types_date_c (date_c);
-ALTER TABLE llx_chronodocs_types ADD INDEX idx_chronodocs_types_fk_status (fk_status);
+ALTER TABLE llx_chronodocs_propvalues ADD INDEX idx_chronodocs_propvalues_fk_objectid (fk_objectid);
+ALTER TABLE llx_chronodocs_propvalues ADD INDEX idx_chronodocs_propvalues_fk_propfield (fk_propfield);
 
-ALTER TABLE llx_chronodocs_types ADD CONSTRAINT fk_chronodocs_types_fk_user_c     FOREIGN KEY (fk_user_c)      REFERENCES llx_user (rowid);
-ALTER TABLE llx_chronodocs_types ADD CONSTRAINT fk_chronodocs_types_fk_user_u     FOREIGN KEY (fk_user_u)      REFERENCES llx_user (rowid);
+ALTER TABLE llx_chronodocs_propvalues ADD CONSTRAINT fk_chronodocs_propvalues_fk_objectid     FOREIGN KEY (fk_objectid)      REFERENCES llx_chronodocs_entries (rowid);
+ALTER TABLE llx_chronodocs_propvalues ADD CONSTRAINT fk_chronodocs_propvalues_fk_propfield     FOREIGN KEY (fk_propfield)      REFERENCES llx_chronodocs_propfields (rowid);

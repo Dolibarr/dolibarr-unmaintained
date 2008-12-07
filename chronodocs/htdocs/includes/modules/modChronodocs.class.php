@@ -1,7 +1,7 @@
 <?php
 /* Copyright (C) 2003      Rodolphe Quiedeville <rodolphe@quiedeville.org>
  * Copyright (C) 2004-2008 Laurent Destailleur  <eldy@users.sourceforge.net>
- * Copyright (C) 2008 Raphael Bertrand (Resultic) <raphael.bertrand@resultic.fr>
+ * Copyright (C) 2008      Raphael Bertrand (Resultic) <raphael.bertrand@resultic.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,24 +19,23 @@
  */
 
 /**     \defgroup   chronodocs     Module Chronodocs
- \brief      Example of a module descriptor.
- Such a file must be copied into htdocs/includes/module directory.
+ *		\brief      Example of a module descriptor.
+ *					Such a file must be copied into htdocs/includes/module directory.
  */
 
 /**
- \file       htdocs/includes/modules/modChronodocs.class.php
- \ingroup    chronodocs
- \brief      Description and activation file for module Chronodocs
- \version	$Id: modChronodocs.class.php,v 1.5 2008/12/07 16:07:08 eldy Exp $
+ *	\file       htdocs/includes/modules/modChronodocs.class.php
+ *	\ingroup    chronodocs
+ *	\brief      Description and activation file for module Chronodocs
+ *	\version	$Id: modChronodocs.class.php,v 1.6 2008/12/07 18:14:37 eldy Exp $
  */
 
 include_once(DOL_DOCUMENT_ROOT ."/includes/modules/DolibarrModules.class.php");
 
 
 /**     \class      modChronodocs
- \brief      Description and activation class for module Chronodocs
+ *		\brief      Description and activation class for module Chronodocs
  */
-
 class modChronodocs extends DolibarrModules
 {
 
@@ -317,7 +316,7 @@ class modChronodocs extends DolibarrModules
 		$ok = 1;
 		if ($ok)
 		{
-			$dir = DOL_DOCUMENT_ROOT.'/mysql/tables/chronodocs/';
+			$dir = DOL_DOCUMENT_ROOT.'/chronodocs/sql/';
 			$ok = 0;
 
 			// Run llx_mytable.sql files

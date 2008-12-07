@@ -1,4 +1,4 @@
--- ============================================================================
+-- ===================================================================
 -- Copyright (C) 2008      Raphael Bertrand (Resultic) <raphael.bertrand@resultic.fr>
 --
 -- This program is free software; you can redistribute it and/or modify
@@ -15,12 +15,15 @@
 -- along with this program; if not, write to the Free Software
 -- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 --
--- $Id: llx_chronodocs_propvalues.key.sql,v 1.1 2008/09/03 15:23:09 Raphael Exp $
--- ============================================================================
+-- $Id: llx_chronodocs_propvalues.sql,v 1.1 2008/12/07 18:14:35 eldy Exp $
+-- ===================================================================
 
+-- drop table llx_chronodocs_types;
 
-ALTER TABLE llx_chronodocs_propvalues ADD INDEX idx_chronodocs_propvalues_fk_objectid (fk_objectid);
-ALTER TABLE llx_chronodocs_propvalues ADD INDEX idx_chronodocs_propvalues_fk_propfield (fk_propfield);
-
-ALTER TABLE llx_chronodocs_propvalues ADD CONSTRAINT fk_chronodocs_propvalues_fk_objectid     FOREIGN KEY (fk_objectid)      REFERENCES llx_chronodocs_entries (rowid);
-ALTER TABLE llx_chronodocs_propvalues ADD CONSTRAINT fk_chronodocs_propvalues_fk_propfield     FOREIGN KEY (fk_propfield)      REFERENCES llx_chronodocs_propfields (rowid);
+create table llx_chronodocs_propvalues
+(
+  rowid           integer AUTO_INCREMENT PRIMARY KEY,
+  content         text, -- Prop Value
+  fk_propfield    integer NOT NULL, -- Id Propriete concerne
+  fk_objectid     integer NOT NULL -- Id Chronodoc concerne
+) type=innodb;

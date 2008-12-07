@@ -15,15 +15,21 @@
 -- along with this program; if not, write to the Free Software
 -- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 --
--- $Id: llx_chronodocs_propvalues.sql,v 1.2 2008/09/03 15:33:14 Raphael Exp $
+-- $Id: llx_chronodocs_types.sql,v 1.1 2008/12/07 18:14:36 eldy Exp $
 -- ===================================================================
 
 -- drop table llx_chronodocs_types;
 
-create table llx_chronodocs_propvalues
+create table llx_chronodocs_types
 (
   rowid           integer AUTO_INCREMENT PRIMARY KEY,
-  content         text, -- Prop Value
-  fk_propfield    integer NOT NULL, -- Id Propriete concerne
-  fk_objectid     integer NOT NULL -- Id Chronodoc concerne
+  ref             varchar(8)  NOT NULL, -- Reference du type de document, utilise pour numerotation
+  title           varchar(255) NOT NULL, -- Titre du type de document
+  brief           text, -- Description
+  filename        varchar(255), -- Fichier modele
+  date_c          timestamp, -- Date creation fiche
+  date_u		  timestamp, -- Date edition fiche
+  fk_status		  smallint DEFAULT '0',	
+  fk_user_c       integer,
+  fk_user_u       integer
 ) type=innodb;

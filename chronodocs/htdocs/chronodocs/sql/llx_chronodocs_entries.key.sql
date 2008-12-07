@@ -15,7 +15,7 @@
 -- along with this program; if not, write to the Free Software
 -- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 --
--- $Id: llx_chronodocs_entries.key.sql,v 1.3 2008/08/21 14:38:12 Raphael Exp $
+-- $Id: llx_chronodocs_entries.key.sql,v 1.1 2008/12/07 18:14:36 eldy Exp $
 -- ============================================================================
 
 

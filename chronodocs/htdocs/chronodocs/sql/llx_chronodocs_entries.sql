@@ -15,17 +15,25 @@
 -- along with this program; if not, write to the Free Software
 -- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 --
--- $Id: llx_chronodocs_propfields.sql,v 1.2 2008/09/03 15:31:52 Raphael Exp $
+-- $Id: llx_chronodocs_entries.sql,v 1.1 2008/12/07 18:14:35 eldy Exp $
 -- ===================================================================
 
--- drop table llx_chronodocs_types;
+-- drop table llx_chronodocs_entries;
 
-create table llx_chronodocs_propfields
+create table llx_chronodocs_entries
 (
   rowid           integer AUTO_INCREMENT PRIMARY KEY,
-  ref             varchar(16)  NOT NULL, -- Reference de la propriete, utilise pour parsing
-  title           varchar(255) NOT NULL, -- Titre de la propriete
+  ref             varchar(32)  NOT NULL, -- Reference du document
+  title           varchar(255) NOT NULL, -- Titre du document 
+  filename        varchar(255), -- Nom de stockage du fichier joint (si existe)
+  filename_orig   varchar(255), -- Nom d'origine du fichier joint (si existe)
+  filesize        integer, -- Taille du fichier joint (si existe)
   brief           text, -- Description
-  fk_type         integer NOT NULL, -- Type document concerne
-  fk_status		  smallint DEFAULT '0'
+  date_c	      date, -- Date du document (saisie)
+  date_u		  timestamp, -- Date edition fiche
+  fk_chronodocs_type integer NOT NULL, -- Type document
+  socid           integer NOT NULL, -- Societe concernee
+  fk_status		  smallint DEFAULT '0',
+  fk_user_c       integer,
+  fk_user_u       integer
 ) type=innodb;
