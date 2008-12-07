@@ -27,7 +27,7 @@
  \file       htdocs/includes/modules/modChronodocs.class.php
  \ingroup    chronodocs
  \brief      Description and activation file for module Chronodocs
- \version	$Id: modChronodocs.class.php,v 1.4 2008/12/02 14:13:45 eldy Exp $
+ \version	$Id: modChronodocs.class.php,v 1.5 2008/12/07 16:07:08 eldy Exp $
  */
 
 include_once(DOL_DOCUMENT_ROOT ."/includes/modules/DolibarrModules.class.php");
@@ -97,9 +97,6 @@ class modChronodocs extends DolibarrModules
 		$this->const[1][2] = "mod_chronodocs_saphir2";
 		$this->const[1][3] = 'Nom du gestionnaire de numerotation des chronodocs';
 		$this->const[1][4] = 0;
-
-		// Constants
-		$this->const = array();			// List of parameters
 
 		$this->const[2][0] = "CHRONODOCS_ADDON_TEMPLATE";
 		$this->const[2][1] = "chaine";
