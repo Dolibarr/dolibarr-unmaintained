@@ -24,7 +24,7 @@
 		\ingroup    facture
 		\brief      File of class to generate chronodocs files from wrapper model
 		\author	    Raphael Bertrand
-		\version    $Id: tpl_wrapper.modules.php,v 1.2 2008/11/02 00:22:21 raphael_bertrand Exp $
+		\version    $Id: tpl_wrapper.modules.php,v 1.3 2009/06/10 19:50:52 eldy Exp $
 */
 
 require_once(DOL_DOCUMENT_ROOT."/includes/modules/chronodocs/modules_chronodocs.php");
@@ -67,7 +67,7 @@ class tpl_wrapper extends TplChronodocs
         $this->page_largeur = 210;
         $this->page_hauteur = 297;
         $this->format = array($this->page_largeur,$this->page_hauteur);
-		
+
         // Recupere emmetteur
         $this->emetteur=$mysoc;
         if (! $this->emetteur->pays_code) $this->emetteur->pays_code=substr($langs->defaultlang,-2);    // Par defaut, si n'était pas défini
@@ -84,38 +84,33 @@ class tpl_wrapper extends TplChronodocs
     function write_file($chronodoc,$outputlangs='')
 	{
 		global $user,$langs,$conf;
-		
+
 		if (! is_object($outputlangs)) $outputlangs=$langs;
 		$outputlangs->load("main");
 		$outputlangs->load("dict");
 		$outputlangs->load("companies");
-		
-		$outputlangs->setPhpLang();
-		
+
 		// Get chronodocs_type filename
 		if(empty($chronodoc->fk_chronodocs_type) || (!($chronodoc->fetch_chronodocs_type()>0)))
 		{
 			$this->error=$langs->trans("ErrorInvalidChronodocsType");
-			$langs->setPhpLang();	// On restaure langue session
 			return 0;
 		}
-		
-		if(empty($chronodoc->chronodocs_type->filename) ) 
+
+		if(empty($chronodoc->chronodocs_type->filename) )
 		{
 			$this->error=$langs->trans("ErrorChronodocsTypeFilenameNotSet");
-			$langs->setPhpLang();	// On restaure langue session
 			return 0;
 		}
-		
+
 		$input_filename=$this->dir_output."/types/".$chronodoc->chronodocs_type->filename;
 		$ext=strrchr($input_filename,'.');
-		if(empty($ext) || (! file_exists($input_filename)) || (! is_readable($input_filename))) 
+		if(empty($ext) || (! file_exists($input_filename)) || (! is_readable($input_filename)))
 		{
 			$this->error=$langs->trans("ErrorInvalidChronodocsTypeFilename");
-			$langs->setPhpLang();	// On restaure langue session
 			return 0;
 		}
-		
+
 		if ($this->dir_output)
 		{
 			// Définition de l'objet $chronodoc (pour compatibilite ascendante)
@@ -125,8 +120,8 @@ class tpl_wrapper extends TplChronodocs
 				$chronodoc = new Chronodocs_entries($this->db);
 				$ret=$chronodoc->fetch($id);
 			}
-			
-			
+
+
 			// Définition de $dir et $file
 			if ($chronodoc->specimen)
 			{
@@ -154,24 +149,20 @@ class tpl_wrapper extends TplChronodocs
 				//Generate wanted file
 				copy($input_filename,$file);
 
-				$langs->setPhpLang();	// On restaure langue session
 				return 1;   // Pas d'erreur
 			}
 			else
 			{
 				$this->error=$langs->trans("ErrorCanNotCreateDir",$dir);
-				$langs->setPhpLang();	// On restaure langue session
 				return 0;
 			}
 		}
 		else
 		{
 			$this->error=$langs->trans("ErrorConstantNotDefined","FAC_OUTPUTDIR");
-			$langs->setPhpLang();	// On restaure langue session
 			return 0;
 		}
 		$this->error=$langs->trans("ErrorUnknown");
-		$langs->setPhpLang();	// On restaure langue session
 		return 0;   // Erreur par defaut
 	}
 

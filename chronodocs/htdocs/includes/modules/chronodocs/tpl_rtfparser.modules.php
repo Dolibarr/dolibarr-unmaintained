@@ -24,7 +24,7 @@
 		\ingroup    facture
 		\brief      File of class to generate chronodocs files from wrapper model
 		\author	    Raphael Bertrand
-		\version    $Id: tpl_rtfparser.modules.php,v 1.2 2008/11/02 00:22:21 raphael_bertrand Exp $
+		\version    $Id: tpl_rtfparser.modules.php,v 1.3 2009/06/10 19:50:52 eldy Exp $
 */
 
 require_once(DOL_DOCUMENT_ROOT."/includes/modules/chronodocs/modules_chronodocs.php");
@@ -66,7 +66,7 @@ class tpl_rtfparser extends TplChronodocs
         $this->page_largeur = 210;
         $this->page_hauteur = 297;
         $this->format = array($this->page_largeur,$this->page_hauteur);
-		
+
         // Recupere emmetteur
         $this->emetteur=$mysoc;
         if (! $this->emetteur->pays_code) $this->emetteur->pays_code=substr($langs->defaultlang,-2);    // Par defaut, si n'était pas défini
@@ -83,42 +83,36 @@ class tpl_rtfparser extends TplChronodocs
     function write_file($chronodoc,$outputlangs='')
 	{
 		global $user,$langs,$conf;
-		
+
 		dolibarr_syslog(get_class($this)."::write_file ");
-		
+
 		// Chargement langue
 		if (! is_object($outputlangs)) $outputlangs=$langs;
 		$outputlangs->load("main");
 		$outputlangs->load("dict");
 		$outputlangs->load("companies");
-		
-		$outputlangs->setPhpLang();
-		
-		
+
 		// Get chronodocs_type filename
 		if(empty($chronodoc->fk_chronodocs_type) || (!($chronodoc->fetch_chronodocs_type()>0)))
 		{
 			$this->error=$langs->trans("ErrorInvalidChronodocsType");
-			$langs->setPhpLang();	// On restaure langue session
 			return 0;
 		}
-		
-		if(empty($chronodoc->chronodocs_type->filename) ) 
+
+		if(empty($chronodoc->chronodocs_type->filename) )
 		{
 			$this->error=$langs->trans("ErrorChronodocsTypeFilenameNotSet");
-			$langs->setPhpLang();	// On restaure langue session
 			return 0;
 		}
-		
+
 		$input_filename=$this->dir_output."/types/".$chronodoc->chronodocs_type->filename;
 		$ext=strrchr($input_filename,'.');
-		if(empty($ext) || (! file_exists($input_filename)) || (! is_readable($input_filename))) 
+		if(empty($ext) || (! file_exists($input_filename)) || (! is_readable($input_filename)))
 		{
 			$this->error=$langs->trans("ErrorInvalidChronodocsTypeFilename");
-			$langs->setPhpLang();	// On restaure langue session
 			return 0;
 		}
-		
+
 		if ($this->dir_output)
 		{
 			// Définition de l'objet $chronodoc (pour compatibilite ascendante)
@@ -128,7 +122,7 @@ class tpl_rtfparser extends TplChronodocs
 				$chronodoc = new Chronodocs_entries($this->db);
 				$ret=$chronodoc->fetch($id);
 			}
-			
+
 			// Définition de $dir et $file
 			if ($chronodoc->specimen)
 			{
@@ -153,15 +147,15 @@ class tpl_rtfparser extends TplChronodocs
 
 			if (file_exists($dir))
 			{
-				
+
 				// Definition variables de remplacement
 				$tab_replace=chronodocs_get_tab_replace($chronodoc,$outputlangs);
-				
+
 				// get contents of input file into a string
 				$handle = fopen($input_filename, "r");
 				$contents = fread($handle, filesize($input_filename));
 				fclose($handle);
-				
+
 				//Remplace marqueurs
 				$nbreplace=0;
 				foreach ($tab_replace as $key => $value)
@@ -173,56 +167,52 @@ class tpl_rtfparser extends TplChronodocs
 				}
 				//$contents = str_replace("#date#","$date_jour", $contents);
 
-				
+
 				//Generate wanted file from content
 				$handle = fopen($file, "w");
 				fwrite($handle,$contents);
 				fclose($handle);
 
-				$langs->setPhpLang();	// On restaure langue session
 				return 1;   // Pas d'erreur
 			}
 			else
 			{
 				$this->error=$langs->trans("ErrorCanNotCreateDir",$dir);
-				$langs->setPhpLang();	// On restaure langue session
 				return 0;
 			}
 		}
 		else
 		{
 			$this->error=$langs->trans("ErrorConstantNotDefined","FAC_OUTPUTDIR");
-			$langs->setPhpLang();	// On restaure langue session
 			return 0;
 		}
 		$this->error=$langs->trans("ErrorUnknown");
-		$langs->setPhpLang();	// On restaure langue session
 		return 0;   // Erreur par defaut
 	}
-	
+
 
 	function _rtfspecialchars($texte)
 	{
-			
+
 		// remplace certains caracteres spéciaux tels que les guillemets dans un format rtf
-		$texte= str_replace("'"," \rquote ",$texte); 
-		$texte= str_replace('"'," \ldblquote ",$texte); 
-		$texte= str_replace('{'," \{ ",$texte); 
+		$texte= str_replace("'"," \rquote ",$texte);
+		$texte= str_replace('"'," \ldblquote ",$texte);
+		$texte= str_replace('{'," \{ ",$texte);
 		$texte= str_replace('}'," \} ",$texte);
-		$texte= str_replace('<br />'," \line ",$texte); 
+		$texte= str_replace('<br />'," \line ",$texte);
 
 		return $texte;
 	}
-	
 
-	
+
+
 	function _contextual_eval($streval,$chronodoc,$mysoc=null)
 	{
 		eval("\$streval = \"$streval\";");
 		return $streval;
 	}
-	
-	
+
+
 }
 
 ?>
