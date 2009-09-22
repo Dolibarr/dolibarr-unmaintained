@@ -1,0 +1,15 @@
+# Dolibarr language file - fr_FR - speedfinder
+SpeedfinderSetup=Outils de configuration pour intégrer un Speedfinder de contact
+
+SFinderParamHeight=Hauteur (en pixels) de la liste de résultats
+SFinderParamScroll=Affichage des ascenseurs dans la liste de résultats
+SFinderParamPopup=Afficher un lien d'ouverture en Popup autonome
+SFinderParamPopupW=Largeur (en pixels) de la Popup
+SFinderParamPopupH=Hauteur (en pixels) de la Popup
+SFinderSetupHelp=<u>Note :</u> Pour faciliter la recherche sur les fiches Contacts, pensez bien a ne pas saisir de ponctuation dans les numeros de téléphone, pas de "." (point), ni de " " (espace) ... <br />Exemple correct : 0468123456  <br /> "SpeedFinder" est un module Dolibarr Opensource édité par %s
+
+SFinderSubTitle=SpeedFinder
+SFinderSubTitleHelp=Saisir un numéro de téléphone partiel pour retrouver la société ou le contact associé en moins de 2 secondes.
+SFinderSearch=Recherche rapide
+SFinderPhone=Téléphone
+SFinderEmpty=Aucune suggestion

@@ -1,0 +1,16 @@
+# Dolibarr language file - en_US - speedfinder
+SpeedfinderSetup=Speedfinder tools integration setup
+
+SFinderParamHeight=Height (in pixels) for the displayed result list
+SFinderParamScroll=Set the display mode for the iframe scrollbar
+SFinderParamPopup=Display a link for a popup window
+SFinderParamPopupW=Popup width (in pixels)
+SFinderParamPopupH=Popup height (in pixels)
+SFinderSetupHelp=<u>Note :</u> To optimize the Speed search, you need to write contact's phone in a whole single number (no space, no point separator)<br />Correct example : 7778123456  <br /> "SpeedFinder" is an Opensource Dolibarr Module edited by %s
+
+SFinderSubTitle=SpeedFinder
+SFinderSubTitleHelp=Type a partial phone number to find the firm or the contact in less than 2 seconds.
+SFinderSearch=Speed search
+SFinderPhone=Phone
+SFinderEmpty=No suggestion
+
