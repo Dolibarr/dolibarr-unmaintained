@@ -1,0 +1,14 @@
+# Dolibarr language file - es_ES - speedfinder
+CHARSET = UTF-8
+SpeedfinderSetup = Herramientas de configuración para integrar un Speedfinder de contacto
+SFinderParamHeight = Altura (en píxeles) en la lista de resultados
+SFinderParamScroll = Mostrar barras de desplazamiento en la lista de resultados
+SFinderParamPopup = Mostrar un enlace para abrir en una ventana emergente autónoma
+SFinderParamPopupW = Ancho (en píxeles) de la ventana emergente
+SFinderParamPopupH = Alto (en píxeles) de la ventana emergente
+SFinderSetupHelp = <u>Nota :</u> Para facilitar la búsqueda en las fichas de Contactos, recuerde no teclear signos de puntuación en los números telefónicos, nada de "." (punto), ni de " " (espacio) ... <br />Ejemplo correcto : 0468123456 <br /> "SpeedFinder" és un módulo Dolibarr Opensource editado por %s
+SFinderSubTitle = SpeedFinder
+SFinderSubTitleHelp = Introduzca parcialmente un número de teléfono para encontrar la empresa o el contacto asociado en menos de 2 segundos.
+SFinderSearch = Búsqueda rápida
+SFinderPhone = Teléfono
+SFinderEmpty = Ninguna sugerencia
