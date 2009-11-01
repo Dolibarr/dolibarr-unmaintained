@@ -21,19 +21,27 @@
  *	\file			htdocs/lib/functionsnumberswords.lib.php
  *	\brief			A set of functions for Dolibarr
  *					This file contains functions for plugin numberwords.
- *	\version		$Id: functions_numberwords.lib.php,v 1.1 2009/08/25 20:50:39 eldy Exp $
+ *	\version		$Id: functions_numberwords.lib.php,v 1.2 2009/11/01 15:25:34 eldy Exp $
  */
 
 
 /**
  * 		\brief		Function called to complete subsitution array
  * 					functions xxx_completesubstitutionarray are called by make_substitutions()
+ * 		\return		The entry parameter $substitutionarray is modified
  */
-function numberwords_completesubstitutionarray(&$substitutionarray,&$langs,&$object)
+function numberwords_completesubstitutionarray(&$substitutionarray,$langs,$object)
 {
 	global $conf;
-	$numbertext=$langs->getLabelFromNumber($object->total_ttc,1,$conf->monnaie);
-	$substitutionarray['__TOTAL_TTC_WORDS__']=$numbertext;
+	if (is_object($object))
+	{
+		$numbertext=$langs->getLabelFromNumber($object->total_ttc,1,$conf->monnaie);
+		$substitutionarray['__TOTAL_TTC_WORDS__']=$numbertext;
+		$numbertext=$langs->getLabelFromNumber($object->total_ht,1,$conf->monnaie);
+		$substitutionarray['__TOTAL_HT_WORDS__']=$numbertext;
+		$numbertext=$langs->getLabelFromNumber($object->total_vat,1,$conf->monnaie);
+		$substitutionarray['__TOTAL_VAT_WORDS__']=$numbertext;
+	}
 }
 
 /**
