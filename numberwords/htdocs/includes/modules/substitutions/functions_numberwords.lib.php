@@ -21,7 +21,7 @@
  *	\file			htdocs/lib/functionsnumberswords.lib.php
  *	\brief			A set of functions for Dolibarr
  *					This file contains functions for plugin numberwords.
- *	\version		$Id: functions_numberwords.lib.php,v 1.2 2009/11/01 15:25:34 eldy Exp $
+ *	\version		$Id: functions_numberwords.lib.php,v 1.3 2009/11/06 21:40:44 eldy Exp $
  */
 
 
@@ -54,6 +54,8 @@ function numberwords_completesubstitutionarray(&$substitutionarray,$langs,$objec
  */
 function numberwords_getLabelFromNumber($langs,$number,$isamount=0)
 {
+	global $conf;
+
 	dol_syslog("numberwords_getLabelFromNumber langs->defaultlang=".$langs->defaultlang." number=".$number." isamount=".$isamount);
 	$outlang=$langs->defaultlang;	// Output language we want
 	$outlangarray=split('_',$outlang,2);
@@ -65,7 +67,28 @@ function numberwords_getLabelFromNumber($langs,$number,$isamount=0)
 	require_once(dirname(__FILE__).'/../../Numbers/Words.php');
 	$handle = new Numbers_Words();
 	$handle->dir=dirname(__FILE__).'/../../';
-	if ($isamount) $numberwords=$handle->toCurrency($number, $outlang);
+
+	// $outlang = fr_FR, fr_CH, pt_PT ...
+	if (! file_exists($handle->dir.'Numbers/Words/lang.'.$outlang.'.php'))
+	{
+		// We try with short code
+		$tmparray=explode('_',$outlang);
+		$outlang=$tmparray[0];
+	}
+
+	if (! file_exists($handle->dir.'Numbers/Words/lang.'.$outlang.'.php'))
+	{
+		return "(Error: No rule file to convert number to text for language ".$langs->defaultlang.")";
+	}
+
+	// Overwrite label of currency and cents to ours
+	$handle->labelcurrency=$conf->monnaie;
+	$handle->labelcents='cent';
+	if ($langs->transnoentitiesnoconv("CurrencySing".$conf->monnaie)!='CurrencySing'.$conf->monnaie) $handle->labelcurrency=$langs->transnoentitiesnoconv("CurrencySing".$conf->monnaie);
+	elseif ($langs->transnoentitiesnoconv("Currency".$conf->monnaie)!='Currency'.$conf->monnaie) $handle->labelcurrency=$langs->transnoentitiesnoconv("Currency".$conf->monnaie);
+	if ($langs->transnoentitiesnoconv("CurrencyCent".$conf->monnaie)!='CurrencyCent'.$conf->monnaie) $handle->labelcents=$langs->transnoentitiesnoconv("CurrencyCent".$conf->monnaie);
+
+	if ($isamount) $numberwords=$handle->toCurrency($number, $outlang, $conf->monnaie);
 	else $numberwords=$handle->toWords($number, $outlang);
 
 	if (empty($handle->error)) return $numberwords;

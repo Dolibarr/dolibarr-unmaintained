@@ -20,7 +20,7 @@
  * @package  Numbers_Words
  * @author   Piotr Klaban <makler@man.torun.pl>
  * @license  PHP 3.0 http://www.php.net/license/3_0.txt
- * @version  CVS: $Id: Words.php,v 1.1 2009/08/25 20:50:39 eldy Exp $
+ * @version  CVS: $Id: Words.php,v 1.2 2009/11/06 21:40:44 eldy Exp $
  * @link     http://pear.php.net/package/Numbers_Words
  */
 
@@ -124,6 +124,9 @@ class Numbers_Words
         }
 
         @$obj = new $classname;
+
+        // DOL_CHANGE
+		$obj->_currency_names[$int_curr]=array(array($this->labelcurrency),array($this->labelcents));
 
         if (strpos($num, '.') === false) {
             return trim($obj->toCurrencyWords($int_curr, $num));
