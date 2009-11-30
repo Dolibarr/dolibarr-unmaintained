@@ -1,15 +1,36 @@
 # Dolibarr language file - fr_FR - speedfinder
-SpeedfinderSetup=Outils de configuration pour int�grer un Speedfinder de contact
+CHARSET = UTF-8
+SpeedfinderSetup=Outils de configuration pour intégrer un Speedfinder de contact
 
-SFinderParamHeight=Hauteur (en pixels) de la liste de r�sultats
-SFinderParamScroll=Affichage des ascenseurs dans la liste de r�sultats
-SFinderParamPopup=Afficher un lien d'ouverture en Popup autonome
-SFinderParamPopupW=Largeur (en pixels) de la Popup
-SFinderParamPopupH=Hauteur (en pixels) de la Popup
-SFinderSetupHelp=<u>Note :</u> Pour faciliter la recherche sur les fiches Contacts, pensez bien a ne pas saisir de ponctuation dans les numeros de t�l�phone, pas de "." (point), ni de " " (espace) ... <br />Exemple correct : 0468123456  <br /> "SpeedFinder" est un module Dolibarr Opensource �dit� par %s
+SFinderParamWidth=Largeur de la liste de résultats
+SFinderParamWidthHelp=en pixels
+SFinderParamHeight=Hauteur de la liste de résultats
+SFinderParamHeightHelp=en pixels
+SFinderParamScroll=Affichage des ascenseurs de la liste
+SFinderParamScrollHelp=automatic=uniquement si besoin, always=toujours présents, never=jamais affichés
+SFinderParamPhoneSepar=Séparateur de téléphone
+SFinderParamPhoneSeparHelp=caractère pour séparer les numéros de téléphones dans l'affichage des résultats
+SFinderParamPopup=Afficher un lien pour Popup autonome
+SFinderParamPopupHelp=Lien permettant d'ouvrir SpeedFinder dans une popup indépendante de Dolibarr
+SFinderParamPopupW=Largeur de la Popup
+SFinderParamPopupWHelp=en pixels
+SFinderParamPopupH=Hauteur de la Popup
+SFinderParamPopupHHelp=en pixels
+SFinderParamAutoFocus=Auto Focus
+SFinderParamAutoFocusHelp=Le curseur est automatiquement positionné dans la zone texte de recherche suite à la selection du menu SpeedFinder
+SFinderParamSelectText=Sélection du texte
+SFinderParamSelectTextHelp=Lors d'un click dans la zone de texte, le texte deja saisi est automatiquement sélectionné
+SFinderParamSizeText=Taille de la zone de recherche
+SFinderParamSizeTextHelp=Taille en nombre de caractere de large pour la zone texte de recherche
+SFinderParamNbCar=Nbr minimum de caracteres à saisir
+SFinderParamNbCarHelp=définir entre 1 et 5 pour le nombre de caracteres à renseigner avant que la recherche automatique ne se lance
+SFinderSetupHelp=<u>Note :</u> Pour faciliter la recherche sur les fiches Contacts, pensez bien a ne pas saisir de ponctuation dans les numeros de téléphone, pas de "." (point), ni de " " (espace) ... <br />Exemple correct : 0468123456  <br /> "SpeedFinder" est un module Dolibarr Opensource édité par %s
 
 SFinderSubTitle=SpeedFinder
-SFinderSubTitleHelp=Saisir un num�ro de t�l�phone partiel pour retrouver la soci�t� ou le contact associ� en moins de 2 secondes.
+SFinderSubTitleHelp=Saisir un nom ou numéro de téléphone partiel pour retrouver la société ou le contact associé en moins de 2 secondes.
 SFinderSearch=Recherche rapide
-SFinderPhone=T�l�phone
+SFinderPhone=Téléphone
 SFinderEmpty=Aucune suggestion
+SFinderSearchLabel=Saisir un num tel. ou un nom
+SFinderSearchLimit=(saisir au moins %s caractère%s)
+

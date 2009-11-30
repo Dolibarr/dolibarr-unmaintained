@@ -8,7 +8,7 @@
 		\file       htdocs/speedfinder/pre.inc.php
 		\ingroup    company
 		\brief      Fichier gestionnaire du menu gauche des notifications
-		\version    $Id: pre.inc.php,v 1.1 2009/09/22 14:09:41 hregis Exp $
+		\version    $Id: pre.inc.php,v 1.2 2009/11/30 22:37:40 hregis Exp $
 */
 
 require ("../main.inc.php");

@@ -8,7 +8,7 @@
     	\file       htdocs/speedfinder/livesearch.php
 		\ingroup    speedfinder
 		\brief      Speedfinder AJAX SQL result constructor page
-		\version    $Id: livesearch.php,v 1.2 2009/11/30 22:37:40 hregis Exp $
+		\version    $Id: livesearch_popup.php,v 1.1 2009/11/30 22:37:40 hregis Exp $
 		\author		Marc STUDER
 */
 
@@ -51,7 +51,7 @@ if (strlen($q) >= $NBCAR_MINI) {
 
 			// obligation de faire un (if !("===false")) =si pas(pas trouvé)), car le strrpos peut renvoyer 0 si trouvé en position de debut
 			if ( !(strrpos($obj->tel, $q) === false) || !(strrpos(strtolower($obj->nom), $q) === false) ) {
-				$hint=$hint . "<a href='../soc.php?socid=".$obj->SOCid."' target='_top'>".$obj->nom." ".$obj->tel."</a>  (".$obj->name." ".$obj->firstname.")<br />";
+				$hint=$hint . "<a href='#' target='_top' onClick=window.opener.location.href='../soc.php?socid=".$obj->SOCid."'>".$obj->nom." ".$obj->tel."</a>  (".$obj->name." ".$obj->firstname.")<br />";
 				$retraitContactassoc = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|---";
 			}
 
@@ -74,7 +74,7 @@ if (strlen($q) >= $NBCAR_MINI) {
 			if (!empty($currPhone)) {
 				$contactSoc = "";
 				if (empty($retraitContactassoc)) $contactSoc = $obj->nom." : ";
-				$hint=$hint.$retraitContactassoc."<a href='../contact/fiche.php?id=".$obj->CTCid."' target='_top'>".$contactSoc.$obj->name." ".$obj->firstname.$currPhone."</a><br />";
+				$hint=$hint.$retraitContactassoc."<a href='#' target='_top' onClick=window.opener.location.href='../contact/fiche.php?id=".$obj->CTCid."'>".$contactSoc.$obj->name." ".$obj->firstname.$currPhone."</a><br />";
 			
 			}
 			$retraitContactassoc = "";

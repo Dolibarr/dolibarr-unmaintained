@@ -6,13 +6,10 @@
 
 /**     \defgroup   speedfinder     Module Speedfinder
         \brief      Module to Speedfinder tools integration.
-*/
-
-/**
         \file       htdocs/includes/modules/modSpeedfinder.class.php
         \ingroup    speedfinder
         \brief      Description and activation file for module Speedfinder
-		\version	$Id: modSpeedfinder.class.php,v 1.1 2009/09/22 14:09:40 hregis Exp $
+		\version	$Id: modSpeedfinder.class.php,v 1.2 2009/11/30 22:37:41 hregis Exp $
 */
 
 include_once(DOL_DOCUMENT_ROOT ."/includes/modules/DolibarrModules.class.php");
@@ -45,9 +42,9 @@ class modSpeedfinder extends DolibarrModules
 		// Module label (no space allowed), used if translation string 'ModuleXXXName' not found (where XXX is value of numeric property 'numero' of module)
 		$this->name = eregi_replace('^mod','',get_class($this));
 		// Module description used if translation string 'ModuleXXXDesc' not found (XXX is value MyModule)
-		$this->description = "Search engine in AJAX to find a name from a part of a phone number within 2 seconds";
+		$this->description = "Search engine in AJAX to find a contact from a part of a name or phone number";
 		// Possible values for version are: 'development', 'experimental', 'dolibarr' or version
-		$this->version = '0.4a Beta';    
+		$this->version = '0.5';    
 		// Key used in llx_const table to save module status enabled/disabled (where MYMODULE is value of property name of module in uppercase)
 		$this->const_name = 'MAIN_MODULE_'.strtoupper($this->name);
 		// Where to store the module in setup page (0=common,1=interface,2=other)
