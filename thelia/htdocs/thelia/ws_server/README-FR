@@ -1,0 +1,40 @@
+Interface THELIA et Dolibarr
+-------------------------
+
+
+INSTALATION A FAIRE SUR LE SITE THELIA :
+
+Copier le contenu du répertoire ws_server sur le seveur web qui héberge la boutique THELIA.
+Cela inclut le répertoire lib qui contient la librairie nusoap, le répertoire includes qui contient
+le fichier configure.php et les fichiers ws_*
+
+Configuration :
+Tout est dans le fichier ws_server/includes/configure.php 
+
+C'est tout !
+Votre application THELIA offre maintenant des web services utilisables par d'autres application (comme
+Dolibarr).
+
+
+
+TEST DE L'INSTALLATION
+
+Ouvrir la page ws_index.html sur votre serveur THELIA.
+Les liens accedent a certaines methodes des webservices.
+
+
+TEST DEPUIS DOLIBARR
+Dans le menu, un nouvel item est dispo apres activation du plugin : Thelia
+
+
+********************
+ATTENTION :version en developpement...
+********************
+
+
+
+
+
+
+
+
