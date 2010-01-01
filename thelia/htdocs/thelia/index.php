@@ -21,18 +21,18 @@
  \file       htdocs/oscommerce_ws/index.php
  \ingroup    oscommerce2
  \brief      Page accueil zone boutique
- \version    $Id: index.php,v 1.1 2009/12/17 14:57:00 hregis Exp $
+ \version    $Id: index.php,v 1.2 2010/01/01 19:18:35 jfefe Exp $
  */
 
 require("./pre.inc.php");
 
-$langs->load("shop");
+$langs->load("thelia");
 $langs->load("orders");
 
 
-llxHeader("",$langs->trans("TheliaShop"));
+llxHeader("",$langs->trans("Thelia"));
 
-print_fiche_titre($langs->trans("TheliaShop"));
+print_fiche_titre($langs->trans("Thelia"));
 
 if (! @ini_get('allow_url_fopen'))
 {
@@ -56,8 +56,8 @@ require_once("./includes/configure.php");
 $parameters = array();
 
 // Set the WebService URL
-//print THELIA_DIR."ws_orders.php"; exit;
-$client = new nusoap_client(THELIA_DIR."ws_orders.php");
+//print THELIA_WS_URL."ws_orders.php"; exit;
+$client = new nusoap_client(THELIA_WS_URL."ws_orders.php");
 if ($client)
 {
 	$client->soap_defencoding='UTF-8';
@@ -284,5 +284,5 @@ else {
 print '</tr></table>';
 
 
-llxFooter('$Date: 2009/12/17 14:57:00 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2010/01/01 19:18:35 $ - $Revision: 1.2 $');
 ?>

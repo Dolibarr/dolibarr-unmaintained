@@ -19,15 +19,15 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-/**     \defgroup   thelia     Module oscommercews
+/**     \defgroup   thelia     Module thelia
  *		\brief      Module pour gerer une boutique et interface avec THELIA via Web Services
  */
 
 /**
- *	\file       htdocs/includes/modules/modOSCommerce2.class.php
+ *	\file       htdocs/includes/modules/modthelia.class.php
  *	\ingroup    thelia
  *	\brief      Fichier de description et activation du module THELIA
- * 	\version	$Id: modThelia.class.php,v 1.1 2009/12/17 14:57:01 hregis Exp $
+ * 	\version	$Id: modThelia.class.php,v 1.2 2010/01/01 19:18:33 jfefe Exp $
  */
 include_once(DOL_DOCUMENT_ROOT ."/includes/modules/DolibarrModules.class.php");
 
@@ -60,7 +60,7 @@ class modThelia extends DolibarrModules
 		$this->dirs = array();
 
 		// Config pages
-		$this->config_page_url = array();
+      $this->config_page_url =  array("thelia_setup.php");
 
 		// Dependances
 		$this->depends = array();
@@ -76,36 +76,35 @@ class modThelia extends DolibarrModules
 
 		// Permissions
 		$this->rights = array();
-	//	$this->rights_class = 'boutique';
-      
-      
- 
+      //	$this->rights_class = 'boutique';
+         
+         
       
       // Menus
       //------
       $r=0;
       
       $this->menu[$r]=array(
-         'fk_menu'=>0,
-         'type'=>'top',
-         'titre'=>'Thelia',
-         'mainmenu'=>'thelia',
-         'leftmenu'=>'1',
-         'url'=>'/thelia/index.php',
-         'langs'=>'other',
-         'position'=>100,
-         'perms'=>'1',
-         'target'=>'',
-         'user'=>0);
+      'fk_menu'=>0,
+      'type'=>'top',
+      'titre'=>'Thelia WS',
+      'mainmenu'=>'theliaws',
+      'leftmenu'=>'1',
+      'url'=>'/thelia_ws/index.php',
+      'langs'=>'other',
+      'position'=>100,
+      'perms'=>'1',
+      'target'=>'',
+      'user'=>0);
       $r++;
       
       // Example to declare a Left Menu entry:
       $this->menu[$r]=array(
       'fk_menu'=>'r=0',    // Use r=value where r is index key used for the parent menu entry (higher parent must be a top menu entry)
       'type'=>'left',         // This is a Left menu entry
-      'titre'=>'Thelia',
-      'mainmenu'=>'thelia',
-      'url'=>'/thelia/index.php',
+      'titre'=>'Thelia WS',
+      'mainmenu'=>'theliaws',
+      'url'=>'/thelia_ws/index.php',
       'langs'=>'other',  // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
       'position'=>100,
       'enabled'=>'1',         // Define condition to show or hide menu entry. Use '$conf->mymodule->enabled' if entry must be visible if module is enabled.
@@ -113,16 +112,19 @@ class modThelia extends DolibarrModules
       'target'=>'',
       'user'=>0);          // 0=Menu for internal users,1=external users, 2=both
       $r++;      
-      
+
       // Example to declare a Left Menu entry:
-      $this->menu[$r]=array('fk_menu'=>'r=1', 'type'=>'left', 'titre'=>'Commandes', 'mainmenu'=>'thelia', 'url'=>'/thelia/commandes/index.php', 'langs'=>'other', 'position'=>101, 'enabled'=>'1', 'perms'=>'1', 'target'=>'', 'user'=>0);       
+      $this->menu[$r]=array('fk_menu'=>'r=1', 'type'=>'left', 'titre'=>'Commandes', 'mainmenu'=>'theliaws', 'url'=>'/thelia_ws/commandes/index.php', 'langs'=>'other', 'position'=>101, 'enabled'=>'1', 'perms'=>'1', 'target'=>'', 'user'=>0);       
       $r++;         
-      $this->menu[$r]=array('fk_menu'=>'r=1', 'type'=>'left', 'titre'=>'Clients', 'mainmenu'=>'thelia', 'url'=>'/thelia/clients/index.php', 'langs'=>'other', 'position'=>102, 'enabled'=>'1', 'perms'=>'1', 'target'=>'', 'user'=>0);       
+      $this->menu[$r]=array('fk_menu'=>'r=1', 'type'=>'left', 'titre'=>'Clients', 'mainmenu'=>'theliaws', 'url'=>'/thelia_ws/clients/index.php', 'langs'=>'other', 'position'=>102, 'enabled'=>'1', 'perms'=>'1', 'target'=>'', 'user'=>0);       
       $r++;
-      $this->menu[$r]=array('fk_menu'=>'r=1', 'type'=>'left', 'titre'=>'Produits', 'mainmenu'=>'thelia', 'url'=>'/thelia/produits/index.php', 'langs'=>'other', 'position'=>103, 'enabled'=>'1', 'perms'=>'1', 'target'=>'', 'user'=>0);       
+      $this->menu[$r]=array('fk_menu'=>'r=1', 'type'=>'left', 'titre'=>'Produits', 'mainmenu'=>'theliaws', 'url'=>'/thelia_ws/produits/index.php', 'langs'=>'other', 'position'=>103, 'enabled'=>'1', 'perms'=>'1', 'target'=>'', 'user'=>0);       
       $r++;
-      $this->menu[$r]=array('fk_menu'=>'r=1', 'type'=>'left', 'titre'=>'Catégories', 'mainmenu'=>'thelia', 'url'=>'/thelia/produits/categories.php', 'langs'=>'other', 'position'=>104, 'enabled'=>'1', 'perms'=>'1', 'target'=>'', 'user'=>0);       
+      $this->menu[$r]=array('fk_menu'=>'r=1', 'type'=>'left', 'titre'=>'Catégories', 'mainmenu'=>'theliaws', 'url'=>'/thelia_ws/produits/categories.php', 'langs'=>'other', 'position'=>104, 'enabled'=>'1', 'perms'=>'1', 'target'=>'', 'user'=>0);       
       $r++;
+
+      // Array to add new pages in new tabs
+      $this->tabs = array('product:Thelia:@theliaws:'.DOL_URL_ROOT.'/thelia_ws/produits/fiche.php?dol_id=__ID__');
 	}
 
 	/**

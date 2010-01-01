@@ -1,5 +1,5 @@
 <?php
-/* Copyright (C) 2006      Jean Heimburger        <jean@tiaris.info>
+/*  Copyright (C) 2006      Jean Heimburger     <jean@tiaris.info>
  * Copyright (C) 2009      Jean-Francois FERRY    <jfefe@aternatik.fr>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -16,20 +16,20 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: thelia_product.class.php,v 1.1 2009/12/17 14:57:00 hregis Exp $
+ * $Id: thelia_product.class.php,v 1.2 2010/01/01 19:18:34 jfefe Exp $
  */
 
 /**
- *      \file       htdocs/thelia/produits/thelia_product.class.php
- *      \ingroup    thelia
- *      \brief      Fichier de la classe des produits issus de Thelia
- *      \version    $Revision: 1.1 $
- */
+        \file       htdocs/thelia_ws/produits/thelia_product.class.php
+        \ingroup    thelia_ws/produits/
+        \brief      Fichier de la classe des produits issus de OSC
+        \version    $Revision: 1.2 $
+*/
 
 
 /**
- *       \class      Thelia_product
- *       \brief      Classe permettant la gestion des produits issus d'une base Thelia
+ *       \class      Osc_product
+ *       \brief      Classe permettant la gestion des produits issus d'une base OSC
  */
 class Thelia_product
 {
@@ -66,11 +66,11 @@ class Thelia_product
 
 /**
      *      \brief      Charge le produit OsC en m�moire
-     *      \param      id      Id du produit dans OsC
-     *      \param      ref     Ref du produit dans OsC (doit �tre unique dans OsC)
-     *      \return     int     <0 si ko, >0 si ok
+     *      \param      id      Id du produit dans Thelia
+     *      \param      ref     Ref du produit dans Thelia (doit �tre unique dans OsC)
+     *      \return     int     <0 si ko, thelia_id si ok
      */
-   	function fetch($id='',$ref='')
+      function fetch($id='',$ref='')
     {
         global $langs;
          global $conf;
@@ -94,7 +94,7 @@ class Thelia_product
 		$parameters = array("id"=>$id,"ref"=>$ref);
 
 		// Set the WebService URL
-		$client = new nusoap_client(THELIA_DIR."/ws_articles.php");
+		$client = new nusoap_client(THELIA_WS_URL."/ws_articles.php");
 	    if ($client)
 		{
 			$client->soap_defencoding='UTF-8';
@@ -102,7 +102,6 @@ class Thelia_product
 
 		// Call the WebSeclient->fault)rvice and store its result in $obj
 		$obj = $client->call("get_article",$parameters );
-     
 		if ($client->fault) {
 			$this->error="Fault detected";
 			return -1;
@@ -115,17 +114,26 @@ class Thelia_product
   			$this->thelia_stock = $obj['stock'];
          $this->thelia_statut = $obj['statut'];
 			$this->thelia_prix = $obj['prix'];
+         $this->thelia_prix2 = $obj['prix2'];
+         $this->thelia_promo = $obj['promo'];
+         $this->thelia_nouveaute = $obj['nouveaute'];
+         $this->thelia_poids = $obj['poids'];
+         $this->thelia_tva = $obj['tva'];
 			$this->thelia_image = $obj['image'];
 			$this->thelia_catid = $obj['rubrique'];
-  			}
-  		else {
+         
+         return $this->thelia_id;
+         
+      }
+  		else 
+      {
 		    $this->error = 'Erreur '.$client->getError();
 			return -1;
 		}
 		return 0;
 	}
 
-// renvoie un objet commande dolibarr
+// renvoie un objet produit dolibarr
 	function thelia2dolibarr($thelia_productid)
 	{
 
@@ -189,7 +197,8 @@ class Thelia_product
 		$result=$this->db->query($sql);
         if ($result)
         {
-		}
+            return 1;
+         }
         else
         {
             dol_syslog("thelia_product::transcode echec insert");
@@ -216,7 +225,7 @@ class Thelia_product
 
 	function get_catid($theliacatid)
 	{
-		require_once(DOL_DOCUMENT_ROOT."/thelia/produits/thelia_categories.class.php");
+		require_once(DOL_DOCUMENT_ROOT."/thelia_ws/produits/thelia_categories.class.php");
 		$mycat=new Thelia_categorie($this->db);
 
 		if ($mycat->fetch_theliacat($theliacatid) > 0)
@@ -240,7 +249,7 @@ class Thelia_product
 
 
 	  /**
-     *    \brief      cr�ation d'un article dans base OSC
+     *    \brief      cr�ation d'un article dans base THELIA
      *    \param      $user utilisateur
      */
 	function create($user)
@@ -249,7 +258,7 @@ class Thelia_product
     }
 
 	  /**
-     *    \brief      modification d'un article dans base OSC
+     *    \brief      modification d'un article dans base THELIA
      *    \param      $user utilisateur
      */
 	function update($id, $user)
@@ -258,7 +267,7 @@ class Thelia_product
     }
 
     /**
-     *    \brief      Suppression du produit en base OSC
+     *    \brief      Suppression du produit en base THELIA
      *    \param      id          id du produit
      */
    function delete($id)

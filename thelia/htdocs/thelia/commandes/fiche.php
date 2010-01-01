@@ -16,14 +16,12 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: fiche.php,v 1.1 2009/12/17 14:57:00 hregis Exp $
+ * $Id: fiche.php,v 1.2 2010/01/01 19:18:34 jfefe Exp $
  */
  
 require("./pre.inc.php");
 require_once(DOL_DOCUMENT_ROOT."/commande/commande.class.php");
 require_once("../includes/configure.php");
-require_once("../clients/thelia_customer.class.php");
-require_once("../produits/thelia_product.class.php");
 
 
 
@@ -42,11 +40,12 @@ if ($action == '' && !$cancel) {
       print_fiche_titre("Fiche commande THELIA : ".$thelia_order->ref);
 
       print '<table class="noborder" width="100%" cellspacing="0" >';
+      print '<tr class="pair"><td width="20%">Date commande</td><td width="80%">'.dol_print_date($thelia_order->orderdate,"dayhour").'</td></tr>';
       print '<tr class="impair"><td width="20%">client Thelia</td><td width="80%"><a href="../clients/fiche.php?custid='.$thelia_order->client_id.'">'.$thelia_order->client_id.'</a></td></tr>';
       print '<tr  class="pair"><td width="20%">Nom client</td><td width="80%">'.$thelia_order->nom.'</td></tr>';
-      print '<tr class="impair"><td width="20%">Montant</td><td width="80%">'.convert_price($thelia_order->total).'</td></tr>';
-      print '<tr class="pair"><td width="20%">Date commande</td><td width="80%">'.$thelia_order->orderdate.'</td></tr>';
-      print '<tr class="impair"><td width="20%">Méthode de paiement</td><td width="80%">'.$thelia_order->paiement.'</td></tr>';
+      print '<tr class="impair"><td width="20%">Montant total TTC (hors frais de port)</td><td width="80%">'.convert_price($thelia_order->total).'</td></tr>';
+      print '<tr class="pair"><td width="20%">Statut commande</td><td width="80%">'.$thelia_order->convert_statut($thelia_order->statut).'</td></tr>';
+      print '<tr class="impair"><td width="20%">Méthode de paiement</td><td width="80%">'.$thelia_order->convert_paiement($thelia_order->paiement).'</td></tr>';
       if ($thelia_order->get_orderid($thelia_order->orderid)>0)
       {
          print '<tr><td>Commande Dolibarr </td><td><a href="../../commande/fiche.php?id='.$thelia_order->get_orderid($thelia_order->orderid).'">Voir la commande</a></td></tr>';
@@ -56,9 +55,9 @@ if ($action == '' && !$cancel) {
       
       print '<table class="noborder" width="100%" cellspacing="0" >';
       print '<tr class="liste_titre">
-      <th class="liste_titre">ID THELIA</th>
-      <th class="liste_titre">ID doli</th>
-      <th class="liste_titre">Ref thelia</th>
+      <th class="liste_titre">Thelia</th>
+      <th class="liste_titre">Dolibarr</th>
+      <th class="liste_titre">Réf thelia</th>
       <th class="liste_titre">Titre</th>
       <th class="liste_titre">Prix TTC</th>
       <th class="liste_titre">Quantite</th>
@@ -70,9 +69,9 @@ if ($action == '' && !$cancel) {
       {
          $var=!$var;
          print '<tr '. $bc[$var].'>
-         <td>'.$thelia_order->thelia_lines[$l]["prod_id"].'</td>';
-         if($thelia_prod->get_productid($thelia_order->thelia_lines[$l]["prod_id"])>0) print '<td><a href="../../product/fiche.php?id='.$thelia_prod->get_productid($thelia_order->thelia_lines[$l]["prod_id"]).'">'.$thelia_prod->get_productid($thelia_order->thelia_lines[$l]["prod_id"]).'</a></td>';
-         else print '<td>a importer</td>';
+         <td><a href="'.THELIA_ADMIN_URL.'produit_modifier.php?ref='.$thelia_order->thelia_lines[$l]["prod_ref"].'">modifier</a></td>';
+         if($thelia_prod->get_productid($thelia_order->thelia_lines[$l]["prod_id"])>0) print '<td><a href="../../product/fiche.php?id='.$thelia_prod->get_productid($thelia_order->thelia_lines[$l]["prod_id"]).'">voir fiche</a></td>';
+         else print '<td>à importer</td>';
          print '<td><a href="../produits/fiche.php?id='.$thelia_order->thelia_lines[$l]["prod_id"].'">'.$thelia_order->thelia_lines[$l]["prod_ref"].'</a></td>
          <td>'.$thelia_order->thelia_lines[$l]["prod_titre"].'</td>
          <td>'.convert_price($thelia_order->thelia_lines[$l]["subprice"]).'</td>
@@ -112,7 +111,7 @@ if ($action == '' && !$cancel) {
 	  print "\n</div><br>\n";
  }
 }
-/* action Import creation de l'objet commande de dolibarr 
+/* action Import création de l'objet commande de dolibarr 
 *
 */
  if (($_GET["action"] == 'import' ) && ( $_GET["orderid"] != '' ) && $user->rights->commande->creer)
@@ -130,7 +129,7 @@ if ($action == '' && !$cancel) {
          print '<p class="warning">Cette commande existe déjà : <a href="../../commande/fiche.php?id='.$thelia_order->get_orderid($thelia_order->orderid).'">Voir la commande</a></p>';
 		}
 		else {
-      // verifier que la societe est renseignee, sinon importer le client d'abord
+      // vérifier que la société est renseignée, sinon importer le client d'abord
 			if ( ! $commande->socid) 
 			{
 				$thelia_cust = new Thelia_customer($db, $thelia_order->client_id);
@@ -146,8 +145,8 @@ if ($action == '' && !$cancel) {
 					print "\n</div><br>\n";
 		    	}
             
-            /* initialisation */
-            $societe->nom = $thelia_cust->entreprise.' '.$thelia_cust->nom;
+            /* initialisation des données client à partir des infos THELIA*/
+            $societe->nom = $thelia_cust->entreprise .' '.strtoupper($thelia_cust->nom). ' '.ucwords($thelia_cust->prenom);
             $societe->adresse = $thelia_cust->adresse1;
             $societe->cp = $thelia_cust->cpostal;
             $societe->ville = $thelia_cust->ville;
@@ -170,7 +169,9 @@ if ($action == '' && !$cancel) {
 					$commande->socid = $societe->id;
 		    	  	print '<p class="ok">création réussie du nouveau nouveau client/prospect : '.$societe->nom;
 			    	$res = $thelia_cust->transcode($thelia_cust->thelia_custid,$societe->id);
+               /* TODO : barre d'action */
 					print ' : Id Dolibarr '.$societe->id.' , Id thelia : '.$thelia_cust->thelia_custid.'</p>';
+               
 			    }
 			    else
 			    {
@@ -179,7 +180,7 @@ if ($action == '' && !$cancel) {
 			    }
 				}
 			}
-      // v�rifier l'existence des produits command�s
+      // vérifier l'existence des produits commandés
 			$thelia_product = new Thelia_Product($db);
 			$err = 0;
 
@@ -188,16 +189,20 @@ if ($action == '' && !$cancel) {
 				print "<p>traitement de ".$commande->lines[$lig]->fk_product."</p>";
 				if (! $commande->thelia_lines[$lig]->prod_id) 
 				{
-               print "<p>Article non trouvé ".$commande->thelia_lines[$lig]->titre." : ".$commande->thelia_lines[$lig]->desc."</p>";
+               print '<p class="error">Article non trouvé '.$commande->thelia_lines[$lig]->titre.' : '.$commande->thelia_lines[$lig]->desc.'</p>';
 					$err ++;
 				}
 			}			
 			if ($err > 0) {
-				print ("<p> Des produits de la commande sont inexistants</p>");
+				print '<p class="warning"> Des produits de la commande sont inexistants</p>';
 				$id =-9;
 			}
-         // Reste à voir pour création : date de commande, remise, gestion des adresse de livraison
-			else $id = $commande->create($user);
+			else 
+         {
+            // Création de la commande 
+            ;// TODO: date de commande, remise, gestion des adresse de livraison
+            $id = $commande->create($user);
+         }
 
 		    if ($id > 0)
 		    {
@@ -244,5 +249,5 @@ if ($action == '' && !$cancel) {
  
     }
 
-llxFooter('$Date: 2009/12/17 14:57:00 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2010/01/01 19:18:34 $ - $Revision: 1.2 $');
 ?>

@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: index.php,v 1.1 2009/12/17 14:57:00 hregis Exp $
+ * $Id: index.php,v 1.2 2010/01/01 19:18:34 jfefe Exp $
  */
 
 require("./pre.inc.php");
@@ -45,7 +45,7 @@ require_once("../includes/configure.php");
 $parameters = array("orderid"=>"0");
 
 // Set the WebService URL
-$client = new nusoap_client(THELIA_DIR."ws_orders.php");
+$client = new nusoap_client(THELIA_WS_URL."ws_orders.php");
 if ($client)
 {
 	$client->soap_defencoding='UTF-8';
@@ -66,13 +66,11 @@ elseif (!($err = $client->getError()) )
 	$var=True;
   	$i=0;
 
-// une commande thelia
-	$OscOrder = new Thelia_Order($db);
+	$TheliaOrder = new Thelia_Order($db);
 
   	if ($num > 0) {
 		print "<TABLE width=\"100%\" class=\"noborder\">";
 		print '<TR class="liste_titre">';
-		print "<td>Id</td>";
 		print '<TD align="center">'.$langs->trans("Order").'</TD>';
 		print '<td>'.$langs->trans("Customer").'</td>';
 		print '<td>'.$langs->trans("Date").'</td>';
@@ -85,16 +83,15 @@ elseif (!($err = $client->getError()) )
 		while ($i < $num) {
       		$var=!$var;
 
-         $ordid = $OscOrder->get_orderid($result[$i][id]);
+         $ordid = $TheliaOrder->get_orderid($result[$i][id]);
          print "<TR $bc[$var]>";
-         print '<TD><a href="fiche.php?orderid='.$result[$i][id].'">'.$result[$i][id]."</TD>\n";
-         print '<TD><a href="../../commande/fiche.php?id='.$ordid.'">'.$result[$i][ref]."</a> </TD>\n";
-    		print "<TD>".$result[$i][nom]."</TD>\n";
-    		print "<TD>".$result[$i][date]."</TD>\n";
+         print '<TD id="'.$result[$i][id].'"><a href="fiche.php?orderid='.$result[$i][id].'">'.$result[$i][ref]."</a> </TD>\n";
+         print "<TD>".$result[$i][entreprise] .' '.strtoupper($result[$i][nom]). ' '.ucwords($result[$i][prenom])."</TD>\n";
+         print "<TD>".dol_print_date($result[$i][date],"dayhour")."</TD>\n";
 			$tot = convert_price($result[$i][total]) + convert_price($result[$i][port]);
     		print "<TD>".$tot."</TD>\n";
-    		print '<TD align="center">'.' '.$result[$i][paiement]."</TD>\n";
-    		print '<TD align="center">'.$result[$i][statut]."</TD>\n";
+         print '<TD align="center">'.' '.$TheliaOrder->convert_paiement($result[$i][paiement])."</TD>\n";
+         print '<TD align="center">'.$TheliaOrder->convert_statut($result[$i][statut])."</TD>\n";
     		if ($ordid) $lib = "modifier";
     		else $lib = "<u>importer</u>";
     		print '<TD align="center"><a href="fiche.php?action=import&orderid='.$result[$i][id].'">'.$lib."</a></TD>\n";
@@ -114,5 +111,5 @@ else {
 print "</TABLE>";
 
 
-llxFooter('$Date: 2009/12/17 14:57:00 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2010/01/01 19:18:34 $ - $Revision: 1.2 $');
 ?>

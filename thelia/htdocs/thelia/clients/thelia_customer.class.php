@@ -1,6 +1,6 @@
 <?php
-/* Copyright (C) 2006      Jean Heimburger        <jean@tiaris.info>
- * Copyright (C) 2009      Jean-Francois FERRY    <jfefe@aternatik.fr>
+/*  Copyright (C) 2006      Jean Heimburger     <jean@tiaris.info>
+* Copyright (C) 2009      Jean-Francois FERRY    <jfefe@aternatik.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,14 +16,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: thelia_customer.class.php,v 1.1 2009/12/17 14:57:01 hregis Exp $
+ * $Id: thelia_customer.class.php,v 1.2 2010/01/01 19:18:34 jfefe Exp $
  */
 
 /**
         \file       htdocs/thelia/clients/thelia_customer.class.php
-        \ingroup    thelia
+        \ingroup    thelia2
         \brief      Fichier de la classe des clients issus de Thelia
-        \version    $Revision: 1.1 $
+        \version    $Revision: 1.2 $
 */
 
 
@@ -104,7 +104,7 @@ class Thelia_customer
 		$parameters = array("custid"=>$id);
 
 		// Set the WebService URL
-		$client = new nusoap_client(THELIA_DIR."/ws_customers.php");
+		$client = new nusoap_client(THELIA_WS_URL."/ws_customers.php");
 	    if ($client)
 		{
 			$client->soap_defencoding='UTF-8';
@@ -200,6 +200,20 @@ class Thelia_customer
 		if ($obj) return $obj->fk_soc;
 		else return '';
 	}
+   
+   // retourne l'id de la commande thelia en fonction de l'id doliabarr
+   function get_thelia_clientid($doli_clientid)
+   {
+      $sql = "SELECT fk_soc";
+      $sql.= " FROM ".MAIN_DB_PREFIX."thelia_customer";
+      $sql.= " WHERE rowid = ".$doli_clientid;
+      dol_syslog("get_thelia_clientid : " .$sql);
+      $resql=$this->db->query($sql);
+      $obj = $this->db->fetch_object($resql);
+      // test d'erreurs
+      if ($obj) return $obj->rowid;
+      else return 0;
+   }
 
 	}
 

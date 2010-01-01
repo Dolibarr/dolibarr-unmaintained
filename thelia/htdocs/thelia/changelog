@@ -1,0 +1,12 @@
+01/01/2010 :
+- Bonne année !
+- Page de configuration du module
+
+30/12/2009 :
+- correction du bug de prise en compte de la date de commande lors d'un import 
+- Suppression d'infos inutiles (id des commandes, clients...)
+- ajout d'action lors des appels aux triggers : suppression d'une commande, suppression client (relation dolibarr->thelia); 
+- formatage des dates 
+- conversion statut des commandes thelia (numérique -> texte)
+- conversion des statuts paiements (en attendant de trouver mieux...)
+- suppression de l'affichage des commandes annulées dans le listing des commandes thelia 

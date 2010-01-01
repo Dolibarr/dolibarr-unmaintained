@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: fiche.php,v 1.1 2009/12/17 14:57:01 hregis Exp $
+ * $Id: fiche.php,v 1.2 2010/01/01 19:18:34 jfefe Exp $
  */
 
 require("./pre.inc.php");
@@ -155,7 +155,7 @@ if (($_GET["action"] == 'import' ) && ( $_GET["custid"] != '' ) && ($user->right
 			}
 			if ($id == -2)
 			{
-				// la reference existe on fait un update
+				/* la r�f�rence existe on fait un update */
 				$societe_control = new Societe($db);
 				if ($_error == 1)
 				{
@@ -180,5 +180,5 @@ if (($_GET["action"] == 'import' ) && ( $_GET["custid"] != '' ) && ($user->right
 
 }
 
-llxFooter('$Date: 2009/12/17 14:57:01 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2010/01/01 19:18:34 $ - $Revision: 1.2 $');
 ?>

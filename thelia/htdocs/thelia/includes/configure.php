@@ -18,22 +18,15 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: configure.php,v 1.1 2009/12/17 14:57:01 hregis Exp $
+ * $Id: configure.php,v 1.2 2010/01/01 19:18:34 jfefe Exp $
  */
 
 /**
- *	\file       htdocs/thelia/includes/configure.php
- *	\ingroup    thelia
+ *	\file       htdocs/thelia_ws/includes/configure.php
+ *	\ingroup    thelia_ws
  *	\brief      Configuration client Webservice
- *	\version    $Revision: 1.1 $
+ *	\version    $Revision: 1.2 $
  */
-
-// URL To reach web services
-define(THELIA_DIR,'http://thelia/ws_server/');
-
-// URL To reach Thelia
-define(THELIA_URL, 'http://yourdomain.com/'); // url du site OSC
-
 
 
 //affichages dans la page d'accueil
@@ -45,14 +38,14 @@ define(THELIA_ENTREPOT, 1); //l'entrepot lie au stock du site web
 define(TX_CURRENCY, 1); // le taux de conversion monnaie site osc - monnaie dolibarr (1 euro = 119.33 XPF)
 define(NB_DECIMALS, 2);
 define(NB_DECIMALSITE, 2); // nb de decimales sur le site
-define(FK_PORT, 2); // l'id du service frais de port defini.
+define(FK_PORT, 6); // l'id du service frais de port defini (à créer au préalable dans dolibarr).
 
 // fonctions
 
 /**
  *      \brief      assure la conversion en monnaie de dolibarr
  *      \param      oscid      Id du produit dans OsC
- *	   \param	   prodid	  champ r�f�rence
+ *	   \param	   prodid	  champ référence
  *      \return     int     <0 si ko, >0 si ok
  */
 function convert_price($price)
@@ -63,7 +56,7 @@ function convert_price($price)
 /**
  *      \brief      assure la conversion en monnaie de dolibarr
  *      \param      oscid      Id du produit dans OsC
- *	   \param	   prodid	  champ r�f�rence
+ *	   \param	   prodid	  champ référence
  *      \return     int     <0 si ko, >0 si ok
  */
 function convert_backprice($price)

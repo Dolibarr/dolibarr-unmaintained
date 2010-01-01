@@ -1,5 +1,5 @@
 <?php
-/* Copyright (C) 2006      Jean Heimburger        <jean@tiaris.info>
+/*  Copyright (C) 2006      Jean Heimburger     <jean@tiaris.info>
  * Copyright (C) 2009      Jean-Francois FERRY    <jfefe@aternatik.fr>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -16,21 +16,21 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: thelia_order.class.php,v 1.1 2009/12/17 14:57:00 hregis Exp $
+ * $Id: thelia_order.class.php,v 1.2 2010/01/01 19:18:34 jfefe Exp $
  */
 
 /**
- *      \file       htdocs/thelia/commandes/thelia_order.class.php
- *      \ingroup    thelia
- *      \brief      Fichier de la classe des commandes issus de Thelia
- *      \version    $Revision: 1.1 $
- */
+        \file       htdocs/thelia/commandes/thelia_order.class.php
+        \ingroup    thelia/orders
+        \brief      Fichier de la classe des commandes issus de Thelia
+        \version    $Revision: 1.2 $
+*/
 
 
-require("../clients/thelia_customer.class.php");
-require("../produits/thelia_product.class.php");
+require_once(DOL_DOCUMENT_ROOT."/thelia/clients/thelia_customer.class.php");
+require_once(DOL_DOCUMENT_ROOT."/thelia/produits/thelia_product.class.php");
 require_once(DOL_DOCUMENT_ROOT."/commande/commande.class.php");
-require_once("../includes/configure.php");
+require_once(DOL_DOCUMENT_ROOT."/thelia/includes/configure.php");
 
 
 /**
@@ -61,7 +61,7 @@ class Thelia_order
    var $paiement;
    var $statut;
    var $lang;
- var $prod_prixu;
+   var $prod_prixu;
 	var $total; //total de la commande TTC
       
    var $client_ref; //identifant du client thelia
@@ -81,13 +81,13 @@ class Thelia_order
         global $langs;
 
         $this->orderid = $id ;
-		$this->db = $DB;
-        /* les initialisations n�cessaires */
+         $this->db = $DB;
+        
 	}
 
 
 /**
-*      \brief      Charge la commande OsC en m�moire
+*      \brief      Charge la commande THELIA en mémoire
 *      \param      id      Id de la commande dans OsC
 *      \return     int     <0 si ko, >0 si ok
 */
@@ -115,7 +115,7 @@ class Thelia_order
 		$parameters = array("orderid"=>$id);
 
 		// Set the WebService URL
-		$client = new nusoap_client(THELIA_DIR."/ws_orders.php");
+		$client = new nusoap_client(THELIA_WS_URL."/ws_orders.php");
 	    if ($client)
 		{
 			$client->soap_defencoding='ISO-8859-1';
@@ -162,7 +162,7 @@ class Thelia_order
 		return 0;
 	}
 
-// renvoie un objet commande dolibarr
+   // renvoie un objet commande dolibarr
 	function thelia2dolibarr($thelia_orderid)
 	{
 	  $result = $this->fetch($thelia_orderid);
@@ -179,11 +179,12 @@ class Thelia_order
 			$clientid = $theliaclient->get_clientid($this->client_id);
 
 			$theliaproduct = new Thelia_product($this->db);
-
+         
 			$commande->socid = $clientid;
 			$commande->ref = $this->orderid;
-//			$commande->date = $this->orderdate;
-//			$commande->date_commande = $this->orderdate;
+			$commande->date = $this->orderdate;
+         $commande->date_commande = $this->orderdate;
+
 			/* on force */
 			$commande->statut = 0; //� voir
 			$commande->source = 0; // � v�rifier
@@ -214,7 +215,7 @@ class Thelia_order
 			$commande->lines[$fp]->subprice = convert_price($this->port);
 			$commande->lines[$fp]->qty = 1;
 			$commande->lines[$fp]->tva_tx = 0;
-			$commande->lines[$fp]->fk_product = 0;
+         $commande->lines[$fp]->fk_product = FK_PORT;
 			$commande->lines[$fp]->remise_percent = 0;
 
 		return $commande;
@@ -262,8 +263,9 @@ class Thelia_order
       }
       return $doli_orderid;
      }
-// converti le client thelia en client dolibarr
-
+     
+     
+   // retourne l'id de la commande dolibarr en fonction de l'id THELIA
 	function get_orderid($thelia_orderid)
 	{
 		$sql = "SELECT fk_commande";
@@ -271,11 +273,47 @@ class Thelia_order
 		$sql.= " WHERE rowid = ".$thelia_orderid;
 		$resql=$this->db->query($sql);
 		$obj = $this->db->fetch_object($resql);
-// test d'erreurs
+      // test d'erreurs
 		if ($obj) return $obj->fk_commande;
-		else return '';
+		else return 0;
 	}
 
-	}
+   // retourne l'id de la commande thelia en fonction de l'id doliabarr
+   function get_thelia_orderid($doli_orderid)
+   {
+      $sql = "SELECT rowid";
+      $sql.= " FROM ".MAIN_DB_PREFIX."thelia_order";
+      $sql.= " WHERE fk_commande = ".$doli_orderid;
+      dol_syslog("get_thelia_orderid : " .$sql);
+      $resql=$this->db->query($sql);
+      $obj = $this->db->fetch_object($resql);
+      // test d'erreurs
+      if ($obj) return $obj->rowid;
+      else return 0;
+   }
+   
+   
+  function convert_statut($statut)
+  {
+      $statut_thelia = array(
+      "1" => "Non payée",
+      "2" => "Payée",
+      "3" => "Traitement",
+      "4" => "Envoyée",
+         "5" => "Annulée");
+
+      return $statut_thelia[$statut];
+  }
+  
+  function convert_paiement($paiement)
+  {
+      $statut_thelia = array(
+      "11" => "Paypal",
+      "9" => "Virement",
+      "6" => "Chèque");
+
+      return $statut_thelia[$paiement];
+  }
+}
 
 ?>

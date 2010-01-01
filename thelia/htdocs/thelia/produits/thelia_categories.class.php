@@ -1,7 +1,7 @@
 <?php
 /* Copyright (C) 2007 Laurent Destailleur  <eldy@users.sourceforge.net>
  * Copyright (C) 2007 Jean Heimburger      <jean@tiaris.info>
- * Copyright (C) 2009 Jean-Francois FERRY  <jfefe@aternatik.fr>
+ * Copyright (C) 2009      Jean-Francois FERRY    <jfefe@aternatik.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,15 +17,15 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: thelia_categories.class.php,v 1.1 2009/12/17 14:57:00 hregis Exp $
+ * $Id: thelia_categories.class.php,v 1.2 2010/01/01 19:18:34 jfefe Exp $
  */
 
 /**
- *      \file       thelia/thelia_categories.class.class.php
- *      \ingroup    thelia
- *      \brief      Example for class
- *      \version    $Revision: 1.1 $
- */
+        \file       thelia_ws/thelia_categories.class.class.php
+        \ingroup    core
+        \brief      Example for class
+        \version    $Revision: 1.2 $
+*/
 
 // Put here all includes required by your script
 //require_once(DOL_DOCUMENT_ROOT."/societe.class.php");
@@ -147,7 +147,7 @@ class Thelia_Categorie
             // Appel des triggers
             include_once(DOL_DOCUMENT_ROOT . "/interfaces.class.php");
             $interface=new Interfaces($this->db);
-            $result=$interface->run_triggers('MYOBJECT_MODIFY',$this,$user,$langs,$conf);
+            $result=$interface->run_triggers('THELIACATEGORIE_MODIFY',$this,$user,$langs,$conf);
             if ($result < 0) { $error++; $this->errors=$interface->errors; }
             // Fin appel triggers
     	}
@@ -179,7 +179,7 @@ class Thelia_Categorie
 
                 $this->id    = $obj->rowid;
                 $this->dolicatid = $obj->dolicatid;
-                $this->theliaatid = $obj->theliacatid;
+                $this->theliacatid = $obj->theliacatid;
             }
             $this->db->free($resql);
 

@@ -15,16 +15,20 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: fiche.php,v 1.1 2009/12/17 14:57:00 hregis Exp $
+ * $Id: fiche.php,v 1.2 2010/01/01 19:18:34 jfefe Exp $
  */
 
 require("./pre.inc.php");
 require_once(DOL_DOCUMENT_ROOT."/product.class.php");
+require_once(DOL_DOCUMENT_ROOT."/lib/product.lib.php");
+
 require_once("../includes/configure.php");
 
-llxHeader();
+// Load traductions files
+$langs->load("companies");
+$langs->load("thelia");
 
-print_fiche_titre($langs->trans("FicheArticleTHELIA"));
+llxHeader();
 
 
 
@@ -132,26 +136,76 @@ if (($_GET["action"] == 'import' ) && ( $_GET["id"] != '' ) && ($user->rights->p
 
 if ($action == '' && !$cancel) {
 
-	if ($_GET['id'])
-	{
-		$thelia_prod = new Thelia_product($db, $_GET['id']);
+  $thelia_prod = new Thelia_product($db, $_GET['id']);
+
+  // Consultation de la fiche depuis l'onglet "THELIA"
+  if ($_GET['dol_id'])
+  {
+   // retrouve le produit THELIA associé au produit DOLIBARR
+   $thelia_prodid = $thelia_prod->get_thelia_productid($_GET['dol_id']);
+   
+   if($thelia_prodid > 0 )
+   {
+      $_GET['id'] = $thelia_prodid;
+   }
+      
+      $product = new Product($db);
+      $product->fetch($_GET['dol_id']);
+      $head=product_prepare_head($product, $user);
+      $titre=$langs->trans("CardProduct".$product->type);
+      $picto='product';
+      dol_fiche_head($head, 'thelia_ws', $titre, 0, $picto);
+  }
+  else
+  {
+     print_titre("Fiche Article THELIA");
+  
+  }
+     
+      
+		// récupère les infos du produit thelia par le webservice
 		$result = $thelia_prod->fetch($_GET['id']);
       
-		if ( !$result)
+		if ( $result > 0)
 		{
          
 			$id_prod = $thelia_prod->get_productid($_GET['id']);
-			print '<table class="noborder impair" width="100%" cellspacing="0" cellpadding="4">';
-			print '<tr class="liste_titre"><td colspan="2">'.$thelia_prod->thelia_titre.'</td></tr>';
-			print '<tr class="impair"><td width="20%">Description</td><td width="80%">'.$thelia_prod->thelia_desc.'</td></tr>';
-			print '<tr class="pair"><td width="20%">Référence </td><td width="80%">'.$thelia_prod->thelia_ref.'</td></tr>';
-			print '<tr class="impair"><td width="20%">ID THELIA</td><td width="80%">'.$thelia_prod->thelia_id.'</td></tr>';
-		        print '<tr class="impair"><td width="20%">ID Dolibarr</td>';
-		        if(!$id_prod) print '<td width="80%">à importer</td>';
-		        else print '<td><a href="../../product/fiche.php?id='.$id_prod.'">voir le produit</a></td>';
-		        print '</tr>';
-		        print '<tr class="pair"><td width="20%">Prix</td><td width="80%">'.$thelia_prod->thelia_prix.'</td></tr>';
-			print "</table>";
+         print '<table class="border" width="100%"><tr>';
+         // Reference
+         print '<td width="15%">'.$langs->trans("Ref").'</td><td width="85%">';
+         print $thelia_prod->thelia_ref;
+         print '</td>';
+         
+         // Libelle
+         print '<tr><td>'.$langs->trans("Label").'</td><td>'.$thelia_prod->thelia_titre.'</td></tr>';
+         
+         // Prix 
+         print '<tr><td>'.$langs->trans("SellingPrice").'</td><td>'.price2num($thelia_prod->thelia_prix).'</td></tr>';
+         print '<tr><td>'.$langs->trans("SellingPrice").' 2</td><td>'.price2num($thelia_prod->thelia_prix2).'</td>';
+         print '</tr>';
+         
+         // TVA 
+         print '<tr><td>'.$langs->trans("VAT").'</td><td>'.vatrate($thelia_prod->thelia_tva,true).'</td></tr>';
+         
+         // Statut
+         print '<tr><td>'.$langs->trans("Status").'</td><td>';
+         print $product->getLibStatut(2);
+         print '</td></tr>';
+         
+         // Description
+         print '<tr><td valign="top">'.$langs->trans("Description").'</td><td>'.nl2br($thelia_prod->thelia_desc).'</td></tr>';
+         
+         
+			
+        // Promo / nouveautés
+         print '<tr><td>'.$langs->trans("TheliaPromo").'</td><td>'.$thelia_prod->thelia_promo.'</td></tr>';
+         print '<tr><td>'.$langs->trans("TheliaNew").'</td><td>'.$thelia_prod->thelia_nouveaute.'</td></tr>';
+         
+         // Stock et poids
+         print '<tr><td>'.$langs->trans("Stock").'</td><td>'.$thelia_prod->thelia_stock.'</td></tr>';
+         print '<tr><td>'.$langs->trans("Weight").'</td><td>'.$thelia_prod->thelia_poids.'</td></tr>';
+        
+			print "</table></div>";
 
 			/* ************************************************************************** */
 			/*                                                                            */
@@ -162,10 +216,12 @@ if ($action == '' && !$cancel) {
 
 			if ($user->rights->produit->creer || $user->rights->service->creer)
 			{
-				print '<a class="butAction" href="fiche.php?action=import&amp;id='.$thelia_prod->thelia_id.'">'.$langs->trans("Import").'</a>';
+            if(!$id_prod) print '<a class="butAction" href="fiche.php?action=import&amp;id='.$thelia_prod->thelia_id.'">'.$langs->trans("Import").'</a>';
 			}
-
-			print '<a class="butAction" href="index.php#'.$_GET['id'].'">'.$langs->trans("Retour").'</a>';
+         if($id_prod && !isset($_GET['dol_id'])) print '<a class="butAction" href="../../product/fiche.php?id='.$id_prod.'">Fiche produit Dolibarr</a>';
+         print '<a class="butAction" href="'.THELIA_ADMIN_URL.'produit_modifier.php?ref='.$thelia_prod->thelia_ref.'">Voir dans le back office Thelia</a>';
+         print '<a class="butAction" href="'.THELIA_URL.'produit.php?ref='.$thelia_prod->thelia_ref.'">Voir sur le site Thelia</a>';
+         print '<a class="butAction" href="index.php#'.$_GET['id'].'">'.$langs->trans("TheliaListProducts").'</a>';
 			print "\n</div><br>\n";
 			// seule action importer
 
@@ -175,13 +231,8 @@ if ($action == '' && !$cancel) {
 			print "<p>ERROR 1 : produit non trouvé</p>\n";
 			dol_print_error('',"erreur webservice ".$thelia_prod->error);
 		}
-	}
-	else
-	{
-		print "<p>ERROR 1</p>\n";
-		print "Error";
-	}
+
 }
 
-llxFooter('$Date: 2009/12/17 14:57:00 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2010/01/01 19:18:34 $ - $Revision: 1.2 $');
 ?>

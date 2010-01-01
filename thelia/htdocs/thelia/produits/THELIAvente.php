@@ -15,19 +15,19 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: THELIAvente.php,v 1.1 2009/12/17 14:57:00 hregis Exp $
+ * $Id: THELIAvente.php,v 1.2 2010/01/01 19:18:34 jfefe Exp $
  */
 
 require("./pre.inc.php");
 require_once(DOL_DOCUMENT_ROOT."/product.class.php");
-require_once(DOL_DOCUMENT_ROOT."/thelia/includes/configure.php");
+require_once(DOL_DOCUMENT_ROOT."/thelia_ws/includes/configure.php");
 
 llxHeader();
 $html = new Form($db);
 
 if ($_GET["action"] == 'liste' )
 {
-	// affichage des produits en vente a partir de la table de transco
+	// affichage des produits en vente a partir de la tavle de transco
 	$sql = "SELECT o.doli_prodidp as idp, o.osc_prodid as oscid, o.osc_lastmodif as date ";
 	$sql .= "FROM ".MAIN_DB_PREFIX."osc_product as o";
 
@@ -103,7 +103,7 @@ if ($_GET["action"] == 'vendre' )
 		$parameters = array("prod"=>$prod);
 
 		// Set the WebService URL
-		$client = new nusoap_client(THELIA_DIR."ws_articles.php");
+		$client = new nusoap_client(THELIA_WS_URL."ws_articles.php");
 		if ($client)
 		{
 			$client->soap_defencoding='UTF-8';
@@ -165,5 +165,5 @@ if ($_GET["action"] == 'vendre' )
  		print '<a class="tabAction" href="OSCvente.php?action=liste">'.$langs->trans("Liste").'</a>';
 	print "\n</div>\n";
 
-llxFooter('$Date: 2009/12/17 14:57:00 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2010/01/01 19:18:34 $ - $Revision: 1.2 $');
 ?>

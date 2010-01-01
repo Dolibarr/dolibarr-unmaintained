@@ -17,14 +17,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: categories.php,v 1.1 2009/12/17 14:57:00 hregis Exp $
+ * $Id: categories.php,v 1.2 2010/01/01 19:18:34 jfefe Exp $
  */
 
 /**
     	\file       dev/skeletons/skeleton_page.php
 		\ingroup    core
 		\brief      Example of a php page
-		\version    $Revision: 1.1 $
+		\version    $Revision: 1.2 $
 */
 
 require("./pre.inc.php");
@@ -295,7 +295,7 @@ else $catid= 0;
 $parameters = array("catid"=>$catid);
 
 // Set the WebService URL
-$client = new nusoap_client(THELIA_DIR."ws_articles.php");
+$client = new nusoap_client(THELIA_WS_URL."ws_articles.php");
 if ($client)
 {
 	$client->soap_defencoding='UTF-8';
@@ -360,5 +360,5 @@ elseif ( !($err = $client->getError()) )
 
 // End of page
 $db->close();
-llxFooter('$Date: 2009/12/17 14:57:00 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2010/01/01 19:18:34 $ - $Revision: 1.2 $');
 ?>
