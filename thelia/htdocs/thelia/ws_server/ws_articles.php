@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: ws_articles.php,v 1.1 2009/12/17 14:57:00 hregis Exp $
+ * $Id: ws_articles.php,v 1.2 2010/01/01 19:22:53 jfefe Exp $
  */
 
 set_magic_quotes_runtime(0);
@@ -42,11 +42,22 @@ $s->wsdl->addComplexType(
    array(
       'THELIA_id'=> array('name'=>'THELIA_id','type'=>'xsd:int','use'=>'optionnal'),
       'ref'=>array('name'=>'ref','type'=>'xsd:string', 'use'=>'optionnal'),
+      'datemodif'=>array('name'=>'datemodif','type'=>'xsd:string', 'use'=>'optionnal'),
+      'prix'=>array('name'=>'prix','type'=>'xsd:string', 'use'=>'optionnal'),
+      'ecotaxe'=>array('name'=>'ecotaxe','type'=>'xsd:string', 'use'=>'optionnal'),
+      'promo'=>array('name'=>'promo','type'=>'xsd:string', 'use'=>'optionnal'),
+      'prix2'=>array('name'=>'prix2','type'=>'xsd:string', 'use'=>'optionnal'),
+      'rubrique'=>array('name'=>'rubrique','type'=>'xsd:string', 'use'=>'optionnal'),
+      'nouveaute'=>array('name'=>'nouveaute','type'=>'xsd:string', 'use'=>'optionnal'),
+      'perso'=>array('name'=>'perso','type'=>'xsd:string', 'use'=>'optionnal'),
+      'stock'=>array('name'=>'stock','type'=>'xsd:string', 'use'=>'optionnal'),               
       'status'=>array('name'=>'status','type'=>'xsd:string', 'use'=>'optionnal'),
+      'garantie'=>array('name'=>'garantie','type'=>'xsd:string', 'use'=>'optionnal'),
+      'poids'=>array('name'=>'poids','type'=>'xsd:string', 'use'=>'optionnal'),
+      'tva'=>array('name'=>'tva','type'=>'xsd:string', 'use'=>'optionnal'),
       'titre'=>array('name'=>'type','type'=>'xsd:string', 'use'=>'optionnal'),
       'description'=>array('name'=>'description','type'=>'xsd:string', 'use'=>'optionnal'),
-      'stock'=>array('name'=>'stock','type'=>'xsd:string', 'use'=>'optionnal'),
-      'prix'=>array('name'=>'prix','type'=>'xsd:string', 'use'=>'optionnal')
+
    )
 );
    
@@ -92,7 +103,24 @@ $s->wsdl->addComplexType(
 ); 
 
 // Register a method available for clients
-$s->register('get_article', array(), array('id'=>'xsd:int', 'ref'=>'xsd:string', 'prix'=>'xsd:string', 'stock'=>'xsd:string', 'rubrique'=>'xsd:string','statut'=>'xsd:int', 'titre'=>'xsd:string','description'=>'xsd:string' ), $ns);
+$s->register('get_article', array(), array(
+   'id'=>'xsd:int', 
+   'ref'=>'xsd:string', 
+   'datemodif'=>'xsd:string', 
+   'prix'=>'xsd:string', 
+   'ecotaxe'=>'xsd:string', 
+   'promo'=>'xsd:string', 
+   'prix2'=>'xsd:string', 
+   'rubrique'=>'xsd:string',
+   'nouveaute'=>'xsd:string', 
+   'perso'=>'xsd:string',
+   'stock'=>'xsd:string',
+   'statut'=>'xsd:int', 
+   'garantie'=>'xsd:int', 
+   'poids'=>'xsd:string', 
+   'tva'=>'xsd:string', 
+   'titre'=>'xsd:string',
+   'description'=>'xsd:string' ), $ns);
 $s->register("get_listearticles", array(), array('produits'=>'tns:produits'), $ns);
 $s->register('create_article');
 $s->register('get_categorylist', array('catid'=>''), array('categories'=>'tns:rubriques'),$ns);
@@ -149,7 +177,7 @@ function get_article($id='',$ref='')
 	if (!($db = mysql_select_db(DB_DATABASE, $connexion)))  return new soap_fault("Server", "MySQL 2", mysql_error());
 
 	//on recherche
-	$sql = "SELECT p.id, p.ref, p.stock, p.ligne as statut, p.prix, p.rubrique,d.titre ,d.chapo,d.description";
+   $sql = "SELECT p.id, p.ref, p.prix, p.ecotaxe, p.promo, p.prix2, p.rubrique, p.nouveaute, p.stock, p.ligne as statut, p.poids, p.tva, d.titre ,d.chapo,d.description";
 	$sql .= " FROM produit as p ";
 	$sql .= " JOIN produitdesc as d ON p.id = d.produit ";
 	$sql .= " WHERE d.lang =" . OSC_LANGUAGE_ID;
@@ -181,7 +209,7 @@ function get_listearticles() {
 	if (!($db = mysql_select_db(DB_DATABASE, $connexion)))  return new soap_fault("Server", "MySQL 2", mysql_error());
    $liste_articles = array();
 	//on recherche
-	$sql = "SELECT p.id as THELIA_id, p.ref as ref, p.stock as stock, p.ligne as status, d.titre as titre, d.description";
+   $sql = "SELECT p.id as THELIA_id, p.ref as ref, p.stock as stock, p.promo, p.prix, p.prix2, p.poids, p.nouveaute,p.ligne as status, p.datemodif, d.titre as titre, d.description";
 	$sql .= " FROM produit as p";
 	$sql .= " JOIN produitdesc as d ON p.id = d.produit "; 		 	
 	$sql .= " WHERE d.lang =" . OSC_LANGUAGE_ID;
@@ -210,7 +238,7 @@ function saveImage($name,$content)
 	$fich = fopen(OSCIMAGES.$name, 'wb');
 	fwrite($fich,base64_decode($content));
 	fclose($fich);
-	return $name.' enregistr�';
+	return $name.' enregistré';
 }
 
 

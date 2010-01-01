@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: ws_orders.php,v 1.1 2009/12/17 14:57:00 hregis Exp $
+ * $Id: ws_orders.php,v 1.2 2010/01/01 19:22:53 jfefe Exp $
  */
 set_magic_quotes_runtime(0);
 //if (function_exists('xdebug_disable')) xdebug_disable();
@@ -25,6 +25,7 @@ set_magic_quotes_runtime(0);
 require_once('./lib/nusoap.php');
 
 require_once('./includes/configure.php');
+
 /*
 // fichier THELIA_id 
 include_once("../classes/Commande.class.php");
@@ -40,7 +41,7 @@ include_once("classes/Devise.class.php");*/
 // Create the soap Object
 $s = new soap_server;
 $ns='thelia';
-$s->configureWSDL('WebServicesOSCommerceForDolibarOrders',$ns);
+$s->configureWSDL('WebServicesTheliaForDolibarrOrders',$ns);
 $s->wsdl->schemaTargetNamespace=$ns;
 
 
@@ -167,7 +168,7 @@ function get_orders($limit='', $status='') {
 	if (!($db = mysql_select_db(DB_DATABASE, $connexion)))  return new soap_fault("Server", "MySQL 2", mysql_error());
 
 //on recherche//
-$sql = "SELECT c.id, c.ref, c.date, c.paiement, cl.id as id_client, cl.ref as ref_client, cl.nom, cl.prenom";
+$sql = "SELECT c.id, c.ref, UNIX_TIMESTAMP(c.date) as date, c.paiement, cl.id as id_client, cl.ref as ref_client, cl.nom, cl.prenom";
 $sql .= " FROM commande as c ";
 $sql .= "JOIN client as cl ON cl.id=c.client ";
 if ($status > 0) $sql .=  " WHERE c.statut = ".$status;
@@ -242,7 +243,7 @@ return $result;
 
 //renvoie la commande $id ou toute la liste des commandes si $id = 0
 
-function get_Order($orderid="0")
+function get_Order($orderid="0",$limit='')
 {
 
 //on se connecte
@@ -255,10 +256,10 @@ $sql .= " FROM orders_total as t JOIN orders as o on o.orders_id = t.orders_id "
 $sql .= " WHERE t.class = 'ot_subtotal'";
 */
 // o.orders_id, o.customers_name, o.customers_id, o.date_purchased, o.payment_method, t.value as total, sum(p.value) as port, s.orders_status_name as statut  
-$sql = "SELECT c.id, c.ref, c.date, c.transaction, c.port, c.livraison as bl, c.remise, c.colis, c.paiement, c.statut, cl.id as client_id, cl.ref as client_ref, cl.nom, cl.prenom";
+$sql = "SELECT c.id, c.ref, UNIX_TIMESTAMP(c.date) as date, c.transaction, c.port, c.livraison as bl, c.remise, c.colis, c.paiement, c.statut, cl.id as client_id, cl.ref as client_ref, cl.nom, cl.prenom";
 $sql .= " FROM commande as c ";
 $sql .= " JOIN client as cl ON cl.id=c.client ";
-//$sql .= " WHERE c.statut < 5 "; // élimine les commandes annulées
+$sql .= " WHERE c.statut < 5 "; // élimine les commandes annulées
 if ($orderid > 0) $sql .=  " AND c.id = '".$orderid."'";
 $sql .= " ORDER BY c.date desc";
 //echo $sql; 
