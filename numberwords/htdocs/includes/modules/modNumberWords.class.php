@@ -24,7 +24,7 @@
 /**
  *      \defgroup   numberwords     Module numberwords
  *      \brief      Module to add function to convert amount in number to strings
- *		\brief		$Id: modNumberWords.class.php,v 1.1 2010/01/13 16:26:23 eldy Exp $
+ *		\brief		$Id: modNumberWords.class.php,v 1.2 2010/01/13 16:43:31 eldy Exp $
  */
 
 /**
@@ -61,7 +61,7 @@ class modNumberWords extends DolibarrModules
 		// Module label (no space allowed), used if translation string 'ModuleXXXName' not found (where XXX is value of numeric property 'numero' of module)
 		$this->name = preg_replace('/^mod/i','',get_class($this));
 		// Module description, used if translation string 'ModuleXXXDesc' not found (where XXX is value of numeric property 'numero' of module)
-		$this->description = "Add capabilities to convert amount in number into value in full text";
+		$this->description = "Add capabilities to convert amounts and numbers into value in full text (only few languages supported)";
 		// Possible values for version are: 'development', 'experimental', 'dolibarr' or version
 		$this->version = '1.0';
 		// Key used in llx_const table to save module status enabled/disabled (where MYMODULE is value of property name of module in uppercase)
@@ -88,7 +88,7 @@ class modNumberWords extends DolibarrModules
 		$this->depends = array();		// List of modules id that must be enabled if this module is enabled
 		$this->requiredby = array();	// List of modules id to disable if this one is disabled
 		$this->phpmin = array(4,3);					// Minimum version of PHP required by module
-		$this->need_dolibarr_version = array(2,7);	// Minimum version of Dolibarr required by module
+		$this->need_dolibarr_version = array(2,8,-1);	// Minimum version of Dolibarr required by module
 		$this->langfiles = array();
 
 		// Constants
