@@ -20,7 +20,7 @@
  * @package  Numbers_Words
  * @author   Piotr Klaban <makler@man.torun.pl>
  * @license  PHP 3.0 http://www.php.net/license/3_0.txt
- * @version  CVS: $Id: Words.php,v 1.2 2009/11/06 21:40:44 eldy Exp $
+ * @version  CVS: $Id: Words.php,v 1.3 2010/01/13 16:36:01 eldy Exp $
  * @link     http://pear.php.net/package/Numbers_Words
  */
 
@@ -202,7 +202,7 @@ class Numbers_Words
         //include_once 'PEAR.php';
         //return PEAR::raiseError($msg);
         $this->error=$msg;
-        dol_print_error('',$msg);
+        //dol_print_error('',$msg);
         return -1;
     }
     // }}}

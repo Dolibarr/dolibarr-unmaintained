@@ -21,7 +21,7 @@
  *	\file			htdocs/lib/functionsnumberswords.lib.php
  *	\brief			A set of functions for Dolibarr
  *					This file contains functions for plugin numberwords.
- *	\version		$Id: functions_numberwords.lib.php,v 1.4 2010/01/13 16:26:23 eldy Exp $
+ *	\version		$Id: functions_numberwords.lib.php,v 1.5 2010/01/13 16:36:01 eldy Exp $
  */
 
 
@@ -106,8 +106,14 @@ function numberwords_getLabelFromNumber($langs,$number,$isamount=0)
 	}
 
 	// Call method of object handle to make convertion
-	if ($isamount) $numberwords=$handle->toCurrency($number, $outlang, $conf->monnaie);
-	else $numberwords=$handle->toWords($number, $outlang);
+	if ($isamount)
+	{
+		$numberwords=$handle->toCurrency($number, $outlang, $conf->monnaie);
+	}
+	else
+	{
+		$numberwords=$handle->toWords($number, $outlang);
+	}
 
 	if (empty($handle->error)) return $numberwords;
 	else return $handle->error;
