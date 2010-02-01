@@ -20,7 +20,7 @@
 /**
  *	\defgroup   energie     Module energy
  * 	\brief      Module pour le suivi de la consommation d'energie
- *	\version	$Id: modEnergie.class.php,v 1.1 2009/10/20 16:19:32 eldy Exp $
+ *	\version	$Id: modEnergie.class.php,v 1.2 2010/02/01 11:09:10 hregis Exp $
  */
 
 /**
@@ -98,6 +98,8 @@ class modEnergie extends DolibarrModules
 		$this->remove();
 
 		$sql = array();
+		
+		$result=$this->load_tables();
 
 		return $this->_init($sql);
 	}
@@ -111,6 +113,16 @@ class modEnergie extends DolibarrModules
 		$sql = array();
 
 		return $this->_remove($sql);
+	}
+	
+	/**
+	 *		\brief		Create tables and keys required by module
+	 *					This function is called by this->init.
+	 * 		\return		int		<=0 if KO, >0 if OK
+	 */
+	function load_tables()
+	{
+		return $this->_load_tables('/composition/sql/');
 	}
 }
 ?>
