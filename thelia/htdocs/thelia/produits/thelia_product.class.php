@@ -16,15 +16,17 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: thelia_product.class.php,v 1.2 2010/01/01 19:18:34 jfefe Exp $
+ * $Id: thelia_product.class.php,v 1.3 2010/02/08 00:50:30 jfefe Exp $
  */
 
 /**
         \file       htdocs/thelia_ws/produits/thelia_product.class.php
         \ingroup    thelia_ws/produits/
         \brief      Fichier de la classe des produits issus de OSC
-        \version    $Revision: 1.2 $
+        \version    $Revision: 1.3 $
 */
+
+require_once(DOL_DOCUMENT_ROOT."/thelia/produits/thelia_categories.class.php");
 
 
 /**
@@ -65,24 +67,24 @@ class Thelia_product
 	}
 
 /**
-     *      \brief      Charge le produit OsC en m�moire
+     *      \brief      Charge le produit Thelia en mémoire
      *      \param      id      Id du produit dans Thelia
-     *      \param      ref     Ref du produit dans Thelia (doit �tre unique dans OsC)
+     *      \param      ref     Ref du produit dans Thelia (doit être unique)
      *      \return     int     <0 si ko, thelia_id si ok
      */
-      function fetch($id='',$ref='')
+   function fetch($id='',$ref='')
     {
         global $langs;
          global $conf;
 
 		$this->error = '';
 		dol_syslog("Thelia_product::fetch id=$id ref=$ref");
-      	// Verification parametres
-      	if (! $id && ! $ref)
-        {
-            $this->error=$langs->trans('ErrorWrongParameters');
-            return -1;
-        }
+      // Verification parametres
+      if (! $id && ! $ref)
+      {
+         $this->error=$langs->trans('ErrorWrongParameters');
+         return -1;
+      }
 
 		set_magic_quotes_runtime(0);
 
@@ -102,14 +104,16 @@ class Thelia_product
 
 		// Call the WebSeclient->fault)rvice and store its result in $obj
 		$obj = $client->call("get_article",$parameters );
+      //print_r( $obj);
 		if ($client->fault) {
 			$this->error="Fault detected";
+         dol_syslog("Thelia_product::fetch Erreur webservice !");
 			return -1;
 		}
 		elseif (!($err=$client->getError()) ) {
   			$this->thelia_id = $obj['id'];
   			$this->thelia_ref = $obj['ref'];
-  			$this->thelia_titre = $obj['titre'];
+  			$this->thelia_titre = utf8_encode($obj['titre']);
   			$this->thelia_desc = $obj['description'];
   			$this->thelia_stock = $obj['stock'];
          $this->thelia_statut = $obj['statut'];
@@ -138,7 +142,7 @@ class Thelia_product
 	{
 
 	  $result = $this->fetch($thelia_productid);
-	  if ( !$result )
+	  if ( $result )
 	  {
 	  		$product = new Product($this->db);
 	    	if ($this->error == 1)
@@ -225,7 +229,6 @@ class Thelia_product
 
 	function get_catid($theliacatid)
 	{
-		require_once(DOL_DOCUMENT_ROOT."/thelia_ws/produits/thelia_categories.class.php");
 		$mycat=new Thelia_categorie($this->db);
 
 		if ($mycat->fetch_theliacat($theliacatid) > 0)
@@ -246,8 +249,22 @@ class Thelia_product
 		if ($row) return $row[0];
 		else return -1;
 	}
-
-
+   
+   
+   /**
+   *    \brief      retourne sous forme de texte le statut d'un produit (en vente en ligne ou non)
+   *    \param      $statut : correspond au statut dans THELIA
+   *    \return      chaine de caractères avec image      
+   */
+   function getStatut($statut)
+   {
+      global $langs;
+      if ($statut==1) return img_picto($langs->trans('ProductOnLine'),'on').' '.$langs->trans('ProductOnLine');
+      if ($statut==0) return img_picto($langs->trans('ProductOffLine'),'off').' '.$langs->trans('ProductOffLine');
+   
+   }
+   
+   
 	  /**
      *    \brief      cr�ation d'un article dans base THELIA
      *    \param      $user utilisateur

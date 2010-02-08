@@ -16,14 +16,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: thelia_order.class.php,v 1.2 2010/01/01 19:18:34 jfefe Exp $
+ * $Id: thelia_order.class.php,v 1.3 2010/02/08 00:50:30 jfefe Exp $
  */
 
 /**
         \file       htdocs/thelia/commandes/thelia_order.class.php
         \ingroup    thelia/orders
         \brief      Fichier de la classe des commandes issus de Thelia
-        \version    $Revision: 1.2 $
+        \version    $Revision: 1.3 $
 */
 
 
@@ -97,7 +97,7 @@ class Thelia_order
 		global $conf;
 
 		$this->error = '';
-		dol_syslog("Osc_order::fetch $id=$id ");
+		dol_syslog("Thelia_order::fetch $id=$id ");
       // Verification parametres
       if (! $id )
         {
@@ -118,12 +118,12 @@ class Thelia_order
 		$client = new nusoap_client(THELIA_WS_URL."/ws_orders.php");
 	    if ($client)
 		{
-			$client->soap_defencoding='ISO-8859-1';
+			//$client->soap_defencoding='ISO-8859-1';
 		}
 
 		// Call the WebService and store its result in $obj
 		$obj = $client->call("get_Order",$parameters );
-   //   var_dump($obj);
+      //var_dump($obj);
 		if ($client->fault) {
 			$this->error="Fault detected ".$client->getError();
 			return -1;
@@ -133,21 +133,23 @@ class Thelia_order
   			$this->orderid = $obj[0][id];
 		   $this->ref = $obj[0][ref];
 			$this->nom = $obj[0][nom];
+         $this->prenom = $obj[0][prenom];
 			$this->client_id = $obj[0][client_id];
          $this->client_ref = $obj[0][client_ref];
 			$this->orderdate = $obj[0][date];
 			$this->total = $obj[0][total];
+         $this->totalport = $obj[0][total] + $obj[0][port];
 			$this->paiement = $obj[0][paiement];
 			$this->statut = $obj[0][statut];
          $this->port = $obj[0][port];
-         $this->remise_absolue =  $obj[0][remise];
+         $this->remise =  $obj[0][remise];
 
 
 			for ($i=1;$i<count($obj);$i++) {
 			// les lignes
 				$this->thelia_lines[$i-1][prod_id] = $obj[$i][prod_id];
 				$this->thelia_lines[$i-1][prod_ref] = $obj[$i][prod_ref];
-            $this->thelia_lines[$i-1][prod_titre] = $obj[$i][prod_titre];
+            $this->thelia_lines[$i-1][prod_titre] = utf8_encode($obj[$i][prod_titre]);
 				$this->thelia_lines[$i-1][subprice] = $obj[$i][prod_prixu];
 				$this->thelia_lines[$i-1][final_price] = $obj[$i][final_price];
 				$this->thelia_lines[$i-1][tva] = "19.6";
@@ -182,12 +184,13 @@ class Thelia_order
          
 			$commande->socid = $clientid;
 			$commande->ref = $this->orderid;
+         $commande->ref_client = $this->ref;
 			$commande->date = $this->orderdate;
          $commande->date_commande = $this->orderdate;
 
 			/* on force */
-			$commande->statut = 0; //� voir
-			$commande->source = 0; // � v�rifier
+			$commande->statut = 0; // TODO: si la commande est payée, on passe à statut=1
+			$commande->source = 0; // TODO: vérifier les valeurs correspondantes
 
 			//les lignes
 
@@ -296,11 +299,12 @@ class Thelia_order
   function convert_statut($statut)
   {
       $statut_thelia = array(
-      "1" => "Non payée",
-      "2" => "Payée",
-      "3" => "Traitement",
-      "4" => "Envoyée",
-         "5" => "Annulée");
+         "1" => img_picto("Non payée",'statut0')." NonPayée",
+         "2" => img_picto("Payée",'statut1')." Payée",
+         "3" => img_picto("Traitement",'statut4')." Traitement",
+         "4" => img_picto("Envoyée",'statut6')." Envoyée",
+         "5" => img_picto("Annulée",'statut5')." Annulée"
+      );
 
       return $statut_thelia[$statut];
   }

@@ -18,13 +18,13 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: pre.inc.php,v 1.2 2010/01/01 19:18:35 jfefe Exp $
+ * $Id: pre.inc.php,v 1.3 2010/02/08 00:50:30 jfefe Exp $
  */
 
 /**
       \file       htdocs/thelia/pre.inc.php
 		\brief      Fichier gestionnaire du menu de gauche
-		\version    $Revision: 1.2 $
+		\version    $Revision: 1.3 $
 */
 
 require("../main.inc.php");

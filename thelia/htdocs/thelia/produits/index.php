@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: index.php,v 1.2 2010/01/01 19:18:34 jfefe Exp $
+ * $Id: index.php,v 1.3 2010/02/08 00:50:30 jfefe Exp $
  */
 
 require("./pre.inc.php");
@@ -65,38 +65,43 @@ elseif (!($err = $client->getError()) )
   	$i=0;
 
 // un produit osc
-	$OscProd = new Thelia_Product($db);
+	$TheliaProd = new Thelia_Product($db);
 
   	if ($num > 0) {
 		print "<table width=\"100%\" class=\"noborder\">";
 		print '<TR class="liste_titre">';
-		print "<td>id</td>";
 		print "<td>Ref</td>";
 		print "<td>ProductId</td>";
 		print "<td>Titre</td>";
 		print "<td>Groupe</td>";
 		print '<td align="center">Stock</td>';
-		print '<TD align="center">Status</TD>';
-		print '<TD align="center">Importer</TD>';
+		print '<TD align="center">Statut</TD>';
+		print '<TD align="center">Action</TD>';
   		print "</TR>\n";
 
 		while ($i < $num) {
       		$var=!$var;
             
-      		$prodid = $OscProd->get_productid($result[$i][THELIA_id]);
+      		$prodid = $TheliaProd->get_productid($result[$i][THELIA_id]);
         
-		    print "<TR $bc[$var] >";
-          print '<TD id="'.$result[$i][THELIA_id].'"><a href="fiche.php?id='.$result[$i][THELIA_id].'">'.$result[$i][THELIA_id]."</TD>\n";
-    		print '<TD >'.$result[$i][ref]."</TD>\n";
+		    print "<tr $bc[$var] >";
+          print '<td id="'.$result[$i][THELIA_id].'"><a href="fiche.php?id='.$result[$i][THELIA_id].'">'.$result[$i][ref]."</td>\n";
     		print '<td><a href="../../product/fiche.php?id='.$prodid.'">'.$prodid.'</a></td>';
-         print "<TD>".$langs->convToOutputCharset($result[$i]["titre"])."</TD>\n";
-    		print "<TD>".$result[$i][manufacturer]."</TD>\n";
-    		print '<TD align="center">'.$result[$i][stock]."</TD>\n";
-    		print '<TD align="center">'.$result[$i][status]."</TD>\n";
-    		if ($prodid) $lib = "modifier";
-    		else $lib = "<u>importer</u>";
-    		print '<TD align="center"><a href="fiche.php?action=import&id='.$result[$i][THELIA_id].'"'.">".$lib."</a></TD>\n";
-    		print '</TR>'."\n";
+         print "<td>".$langs->convToOutputCharset($result[$i]["titre"])."</td>\n";
+    		print "<td>".$result[$i][manufacturer]."</td>\n";
+    		print '<td align="center">'.$result[$i][stock]."</td>\n";
+         print '<td align="center">'.$TheliaProd->getStatut($result[$i][status])."</td>\n";
+         
+    		if ($prodid) 
+         {  
+            print '<td><a href="fiche.php?id='.$result[$i][THELIA_id].'">'.img_picto("Modifier",'view').' Voir fiche</a></td>';
+         }
+    		else
+         {
+            print '<td><a href="fiche.php?action=import&id='.$result[$i][THELIA_id].'">'.img_picto("Importer",'filenew').' Importer</a></td>';
+         }
+    		
+    		print '</tr>'."\n";
     		$i++;
   		}
 		print "</table></p>";
@@ -112,5 +117,5 @@ else {
 print "</TABLE>";
 
 
-llxFooter('$Date: 2010/01/01 19:18:34 $ - $Revision: 1.2 $');
+llxFooter('$Date: 2010/02/08 00:50:30 $ - $Revision: 1.3 $');
 ?>

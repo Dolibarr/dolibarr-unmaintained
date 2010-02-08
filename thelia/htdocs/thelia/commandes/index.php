@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: index.php,v 1.2 2010/01/01 19:18:34 jfefe Exp $
+ * $Id: index.php,v 1.3 2010/02/08 00:50:30 jfefe Exp $
  */
 
 require("./pre.inc.php");
@@ -77,7 +77,7 @@ elseif (!($err = $client->getError()) )
 		print '<td>'.$langs->trans("Amount").'</td>';
 		print '<td align="center">Paiement</td>';
 		print '<td align="center">Statut</td>';
-		print '<TD align="center">Importer</TD>';
+		print '<TD align="center">Actions</TD>';
   		print "</TR>\n";
 
 		while ($i < $num) {
@@ -92,9 +92,16 @@ elseif (!($err = $client->getError()) )
     		print "<TD>".$tot."</TD>\n";
          print '<TD align="center">'.' '.$TheliaOrder->convert_paiement($result[$i][paiement])."</TD>\n";
          print '<TD align="center">'.$TheliaOrder->convert_statut($result[$i][statut])."</TD>\n";
-    		if ($ordid) $lib = "modifier";
-    		else $lib = "<u>importer</u>";
-    		print '<TD align="center"><a href="fiche.php?action=import&orderid='.$result[$i][id].'">'.$lib."</a></TD>\n";
+         
+         if ($ordid) 
+         {  
+            print '<td><a href="fiche.php?orderid='.$result[$i][id].'">'.img_picto("Modifier",'view').' Voir fiche</a></td>';
+         }
+         else
+         {
+            print '<td><a href="fiche.php?action=import&orderid='.$result[$i][id].'">'.img_picto("Importer",'filenew').' Importer</a></td>';
+         }
+
     		print "</TR>\n";
     		$i++;
   		}
@@ -111,5 +118,5 @@ else {
 print "</TABLE>";
 
 
-llxFooter('$Date: 2010/01/01 19:18:34 $ - $Revision: 1.2 $');
+llxFooter('$Date: 2010/02/08 00:50:30 $ - $Revision: 1.3 $');
 ?>

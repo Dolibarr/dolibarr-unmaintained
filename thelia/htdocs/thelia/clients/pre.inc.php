@@ -18,17 +18,18 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: pre.inc.php,v 1.2 2010/01/01 19:18:34 jfefe Exp $
+ * $Id: pre.inc.php,v 1.3 2010/02/08 00:50:30 jfefe Exp $
  */
  
 /**
         \file       htdocs/thelia_ws/clients/pre.inc.php
 		\brief      Fichier gestionnaire du menu de gauche
-		\version    $Revision: 1.2 $
+		\version    $Revision: 1.3 $
 */
 
-require("../../main.inc.php");
-require("./thelia_customer.class.php");
+require_once("../../main.inc.php");
+require_once(DOL_DOCUMENT_ROOT."/thelia/clients/thelia_customer.class.php");
+
 
 function llxHeader($head = "", $urlp = "")
 {
@@ -37,14 +38,6 @@ function llxHeader($head = "", $urlp = "")
 	
 	top_menu($head);
 	
-	$menu = new Menu();
-   
-   $menu->add(DOL_URL_ROOT."/thelia_ws/index.php", $langs->trans("TheliaShop"));
-   $menu->add_submenu(DOL_URL_ROOT."/thelia_ws/produits/index.php", $langs->trans("Products"));
-   $menu->add_submenu(DOL_URL_ROOT."/thelia_ws/produits/OSCvente.php", $langs->trans("AddProd"));
-   $menu->add_submenu(DOL_URL_ROOT."/thelia_ws/produits/categories.php", $langs->trans("Categories"));
-   $menu->add_submenu(DOL_URL_ROOT."/thelia_ws/clients/index.php", $langs->trans("Clients"));
-   $menu->add_submenu(DOL_URL_ROOT."/thelia_ws/commandes/index.php", $langs->trans("Commandes"));
 	
 	left_menu($menu->liste);
 }

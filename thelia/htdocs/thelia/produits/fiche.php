@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: fiche.php,v 1.2 2010/01/01 19:18:34 jfefe Exp $
+ * $Id: fiche.php,v 1.3 2010/02/08 00:50:30 jfefe Exp $
  */
 
 require("./pre.inc.php");
@@ -32,7 +32,7 @@ llxHeader();
 
 
 
-/* action Import cr�ation de l'objet product de dolibarr
+/* action Import : création de l'objet product de dolibarr
 *
 */
 
@@ -40,21 +40,23 @@ if (($_GET["action"] == 'import' ) && ( $_GET["id"] != '' ) && ($user->rights->p
 {
    $thelia_prod = new Thelia_product($db, $_GET['id']);
    $result = $thelia_prod->fetch($_GET['id']);
-   
+  
    if ( !$result )
    {
-      $product = new Product($db);
+      
+      dol_syslog("Thelia_product::fetch failed :".$_GET['id'].' '.$thelia_prod->error);
       if ($_error == 1)
       {
          print '<br>erreur 1</br>';
          // exit;
       }
-      $product = $thelia_prod->thelia2dolibarr($_GET['id']);
-      
+
    }
    else
    {
-      print "<p>erreur $thelia_prod->fetch</p>";
+      $doli_prod = new Product($db);
+      $doli_prod = $thelia_prod->thelia2dolibarr($_GET['id']);
+      //var_dump($product);
    }
    
    /* utilisation de la table de transco*/
@@ -65,7 +67,7 @@ if (($_GET["action"] == 'import' ) && ( $_GET["id"] != '' ) && ($user->rights->p
    else
    {
       
-      $id = $product->create($user);
+      $id = $doli_prod->create($user);
       
       if ($id > 0)
       {
@@ -76,14 +78,11 @@ if (($_GET["action"] == 'import' ) && ( $_GET["id"] != '' ) && ($user->rights->p
          //    $prod->add_photo_web($conf->produit->dir_output,$thelia_prod->thelia_image);
          
          
-         print '<div class="ok">Création réussie de la référence : <a href="../../product/fiche.php?id='.$id.'">'.$product->ref.'</a></div>';
+         print '<div class="ok">Création réussie de la référence : <a href="../../product/fiche.php?id='.$id.'">'.$prod->ref.'</a></div>';
          
         
          print "\n<div class=\"tabsAction\">\n";
-         
-         
-         print '<a class="butAction" href="index.php">'.$langs->trans("Retour").'</a>';
-         
+         print '<a class="butAction" href="index.php">'.$langs->trans("Retour").'</a>'; 
          print "\n</div><br>\n";
          //       $id_entrepot = THELIA_ENTREPOT;
          //       $id = $product->create_stock($user, $id_entrepot,$thelia_prod->thelia_stock);
@@ -91,9 +90,9 @@ if (($_GET["action"] == 'import' ) && ( $_GET["id"] != '' ) && ($user->rights->p
       }
       else
       {
-         print "<p class='error'>On a une erreur".$id.$prod->error."</p>";
+         print '<p class="error">Erreur lors de la création du produit :  '.$product->error.'</p>';
          
-	if ($id == -3)
+         if ($id == -3)
          {
             $_error = 1;
             $_GET["action"] = "create";
@@ -122,10 +121,7 @@ if (($_GET["action"] == 'import' ) && ( $_GET["id"] != '' ) && ($user->rights->p
             }
             else print '<br>update impossible $id : '.$product_control->error().' </br>';
          }
-         if ($id == -1)
-         {
-            print '<p>erreur'.$product->error().'</p>';
-         }
+  
          print '<p><a class="butAction" href="index.php">'.$langs->trans("Retour").'</a></p>';
       }
    }
@@ -180,8 +176,8 @@ if ($action == '' && !$cancel) {
          print '<tr><td>'.$langs->trans("Label").'</td><td>'.$thelia_prod->thelia_titre.'</td></tr>';
          
          // Prix 
-         print '<tr><td>'.$langs->trans("SellingPrice").'</td><td>'.price2num($thelia_prod->thelia_prix).'</td></tr>';
-         print '<tr><td>'.$langs->trans("SellingPrice").' 2</td><td>'.price2num($thelia_prod->thelia_prix2).'</td>';
+         print '<tr><td>'.$langs->trans("SellingPrice").'</td><td>'.price($thelia_prod->thelia_prix).'</td></tr>';
+         print '<tr><td>'.$langs->trans("SellingPrice").' 2</td><td>'.price($thelia_prod->thelia_prix2).'</td>';
          print '</tr>';
          
          // TVA 
@@ -189,7 +185,7 @@ if ($action == '' && !$cancel) {
          
          // Statut
          print '<tr><td>'.$langs->trans("Status").'</td><td>';
-         print $product->getLibStatut(2);
+         print $thelia_prod->getStatut($thelia_prod->thelia_statut);
          print '</td></tr>';
          
          // Description
@@ -234,5 +230,5 @@ if ($action == '' && !$cancel) {
 
 }
 
-llxFooter('$Date: 2010/01/01 19:18:34 $ - $Revision: 1.2 $');
+llxFooter('$Date: 2010/02/08 00:50:30 $ - $Revision: 1.3 $');
 ?>

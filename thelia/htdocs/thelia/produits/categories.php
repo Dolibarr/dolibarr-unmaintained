@@ -17,14 +17,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: categories.php,v 1.2 2010/01/01 19:18:34 jfefe Exp $
+ * $Id: categories.php,v 1.3 2010/02/08 00:50:30 jfefe Exp $
  */
 
 /**
     	\file       dev/skeletons/skeleton_page.php
 		\ingroup    core
 		\brief      Example of a php page
-		\version    $Revision: 1.2 $
+		\version    $Revision: 1.3 $
 */
 
 require("./pre.inc.php");
@@ -360,5 +360,5 @@ elseif ( !($err = $client->getError()) )
 
 // End of page
 $db->close();
-llxFooter('$Date: 2010/01/01 19:18:34 $ - $Revision: 1.2 $');
+llxFooter('$Date: 2010/02/08 00:50:30 $ - $Revision: 1.3 $');
 ?>

@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: THELIAvente.php,v 1.2 2010/01/01 19:18:34 jfefe Exp $
+ * $Id: THELIAvente.php,v 1.3 2010/02/08 00:50:30 jfefe Exp $
  */
 
 require("./pre.inc.php");
@@ -165,5 +165,5 @@ if ($_GET["action"] == 'vendre' )
  		print '<a class="tabAction" href="OSCvente.php?action=liste">'.$langs->trans("Liste").'</a>';
 	print "\n</div>\n";
 
-llxFooter('$Date: 2010/01/01 19:18:34 $ - $Revision: 1.2 $');
+llxFooter('$Date: 2010/02/08 00:50:30 $ - $Revision: 1.3 $');
 ?>

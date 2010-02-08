@@ -13,10 +13,13 @@ define("DB_SERVER_PASSWORD", "");
 define("DB_DATABASE",        "");
 
 
+// Full path on filesystem to THELIA admin
+define('THELIA_URLADMIN', '/var/www/shopping/admin/');
+
 /* constantes utiles */
 define("THELIA_LANGUAGE_ID",1);
 
-// URL of OSC web site
-define(THELIA_URL, 'http://myoscwebsite/');
+// URL of THELIA web site
+define('THELIA_URL', 'http://url_thelia/');
 
 ?>

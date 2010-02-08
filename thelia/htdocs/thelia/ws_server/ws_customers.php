@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: ws_customers.php,v 1.2 2010/01/01 19:22:53 jfefe Exp $
+ * $Id: ws_customers.php,v 1.3 2010/02/08 00:50:30 jfefe Exp $
  */
 
 set_magic_quotes_runtime(0);

@@ -21,13 +21,13 @@
         \file       htdocs/includes/triggers/interface_modThelia_Theliasynchro.class.php
         \ingroup    phenix
         \brief      Fichier de gestion des triggers phenix
-		\version	$Id: interface_modThelia_Theliasynchro.class.php,v 1.1 2010/01/01 19:20:25 jfefe Exp $
+		\version	$Id: interface_modThelia_Theliasynchro.class.php,v 1.2 2010/02/08 00:50:30 jfefe Exp $
 */
 
-include_once(DOL_DOCUMENT_ROOT.'/thelia_ws/produits/thelia_product.class.php');
-include_once(DOL_DOCUMENT_ROOT.'/thelia_ws/produits/thelia_categories.class.php');
-include_once(DOL_DOCUMENT_ROOT.'/thelia_ws/commandes/thelia_order.class.php');
-include_once(DOL_DOCUMENT_ROOT.'/thelia_ws/clients/thelia_customer.class.php');
+include_once(DOL_DOCUMENT_ROOT.'/thelia/produits/thelia_product.class.php');
+include_once(DOL_DOCUMENT_ROOT.'/thelia/produits/thelia_categories.class.php');
+include_once(DOL_DOCUMENT_ROOT.'/thelia/commandes/thelia_order.class.php');
+include_once(DOL_DOCUMENT_ROOT.'/thelia/clients/thelia_customer.class.php');
 
 /**
         \class      InterfaceTheliasynchro

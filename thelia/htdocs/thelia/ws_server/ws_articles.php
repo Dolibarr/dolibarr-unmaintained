@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: ws_articles.php,v 1.2 2010/01/01 19:22:53 jfefe Exp $
+ * $Id: ws_articles.php,v 1.3 2010/02/08 00:50:30 jfefe Exp $
  */
 
 set_magic_quotes_runtime(0);
@@ -50,7 +50,7 @@ $s->wsdl->addComplexType(
       'rubrique'=>array('name'=>'rubrique','type'=>'xsd:string', 'use'=>'optionnal'),
       'nouveaute'=>array('name'=>'nouveaute','type'=>'xsd:string', 'use'=>'optionnal'),
       'perso'=>array('name'=>'perso','type'=>'xsd:string', 'use'=>'optionnal'),
-      'stock'=>array('name'=>'stock','type'=>'xsd:string', 'use'=>'optionnal'),               
+      'stock'=>array('name'=>'stock','type'=>'xsd:string', 'use'=>'optionnal'),
       'status'=>array('name'=>'status','type'=>'xsd:string', 'use'=>'optionnal'),
       'garantie'=>array('name'=>'garantie','type'=>'xsd:string', 'use'=>'optionnal'),
       'poids'=>array('name'=>'poids','type'=>'xsd:string', 'use'=>'optionnal'),
@@ -60,7 +60,7 @@ $s->wsdl->addComplexType(
 
    )
 );
-   
+
 $s->wsdl->addComplexType(
    'produits',
    'complexType',
@@ -72,8 +72,8 @@ $s->wsdl->addComplexType(
       array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:produit[]')
    ),
    'tns:produit'
-   ); 
- 
+   );
+
 $s->wsdl->addComplexType(
    'rubrique',
    'complexType',
@@ -88,7 +88,7 @@ $s->wsdl->addComplexType(
       'description'=>array('name'=>'description','type'=>'xsd:string', 'use'=>'optionnal'),
       'ligne'=>array('name'=>'ligne','type'=>'xsd:int', 'use'=>'optionnal')
    )
-);   
+);
 $s->wsdl->addComplexType(
    'rubriques',
    'complexType',
@@ -100,25 +100,25 @@ $s->wsdl->addComplexType(
       array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:rubrique[]')
    ),
    'tns:rubrique'
-); 
+);
 
 // Register a method available for clients
 $s->register('get_article', array(), array(
-   'id'=>'xsd:int', 
-   'ref'=>'xsd:string', 
-   'datemodif'=>'xsd:string', 
-   'prix'=>'xsd:string', 
-   'ecotaxe'=>'xsd:string', 
-   'promo'=>'xsd:string', 
-   'prix2'=>'xsd:string', 
+   'id'=>'xsd:int',
+   'ref'=>'xsd:string',
+   'datemodif'=>'xsd:string',
+   'prix'=>'xsd:string',
+   'ecotaxe'=>'xsd:string',
+   'promo'=>'xsd:string',
+   'prix2'=>'xsd:string',
    'rubrique'=>'xsd:string',
-   'nouveaute'=>'xsd:string', 
+   'nouveaute'=>'xsd:string',
    'perso'=>'xsd:string',
    'stock'=>'xsd:string',
-   'statut'=>'xsd:int', 
-   'garantie'=>'xsd:int', 
-   'poids'=>'xsd:string', 
-   'tva'=>'xsd:string', 
+   'statut'=>'xsd:int',
+   'garantie'=>'xsd:int',
+   'poids'=>'xsd:string',
+   'tva'=>'xsd:string',
    'titre'=>'xsd:string',
    'description'=>'xsd:string' ), $ns);
 $s->register("get_listearticles", array(), array('produits'=>'tns:produits'), $ns);
@@ -180,11 +180,11 @@ function get_article($id='',$ref='')
    $sql = "SELECT p.id, p.ref, p.prix, p.ecotaxe, p.promo, p.prix2, p.rubrique, p.nouveaute, p.stock, p.ligne as statut, p.poids, p.tva, d.titre ,d.chapo,d.description";
 	$sql .= " FROM produit as p ";
 	$sql .= " JOIN produitdesc as d ON p.id = d.produit ";
-	$sql .= " WHERE d.lang =" . OSC_LANGUAGE_ID;
+	$sql .= " WHERE d.lang =" . THELIA_LANGUAGE_ID;
 	if ($id) $sql.= " AND p.id = ".$id;
 	if ($ref) $sql.= " AND p.ref = '".addslashes($ref)."'";
 	if (!($resquer = mysql_query($sql,$connexion)))  return new soap_fault("Server", "MySQL 3 ".$sql, mysql_error());
-  
+
 	switch (mysql_numrows($resquer)) {
 		case 0 :
 			return new soap_fault("Server", "MySQL 4", "produit inexistant");
@@ -195,9 +195,9 @@ function get_article($id='',$ref='')
 			break;
 		default :
 			return new soap_fault("Server", "MySQL 5", "erreur requete");
-	} 
+	}
 	mysql_close($connexion);
-   
+
 	/* Sends the results to the client */
 	return $res_article;
 }
@@ -211,8 +211,8 @@ function get_listearticles() {
 	//on recherche
    $sql = "SELECT p.id as THELIA_id, p.ref as ref, p.stock as stock, p.promo, p.prix, p.prix2, p.poids, p.nouveaute,p.ligne as status, p.datemodif, d.titre as titre, d.description";
 	$sql .= " FROM produit as p";
-	$sql .= " JOIN produitdesc as d ON p.id = d.produit "; 		 	
-	$sql .= " WHERE d.lang =" . OSC_LANGUAGE_ID;
+	$sql .= " JOIN produitdesc as d ON p.id = d.produit ";
+	$sql .= " WHERE d.lang =" . THELIA_LANGUAGE_ID;
 	if (!($resquer = mysql_query($sql,$connexion)))  return new soap_fault("Server", "MySQL 3 ".$sql, mysql_error());
 	switch ($numrows = mysql_numrows($resquer)) {
 		case 0 :
@@ -224,7 +224,7 @@ function get_listearticles() {
 				$liste_articles[$i] = mysql_fetch_array($resquer, MYSQL_ASSOC);
 				$i++;
 			}
-         
+
 	}
 
 	mysql_close($connexion);
@@ -252,7 +252,7 @@ function get_categorylist($catid)
 
 	$sql = "SELECT r.id, r.parent, rd.titre, rd.description, rd.chapo";
 	$sql .= " FROM rubrique as r, rubriquedesc as rd ";
-	$sql .= " WHERE r.parent = '".$catid."' and r.id = rd.rubrique and rd.lang='" . OSC_LANGUAGE_ID ."' order by classement, rd.titre";
+	$sql .= " WHERE r.parent = '".$catid."' and r.id = rd.rubrique and rd.lang='" . THELIA_LANGUAGE_ID ."' order by classement, rd.titre";
 
 	if (!($resquer = mysql_query($sql,$connexion)))  return new soap_fault("Server", "MySQL gey_categorylist ".$sql, mysql_error());
 
@@ -266,7 +266,7 @@ function get_categorylist($catid)
 			{
 				$liste_cat[$i] =  mysql_fetch_array($resquer, MYSQL_ASSOC);
 				$i++;
-            
+
 			}
 	}
 	mysql_close($connexion);

@@ -16,14 +16,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: thelia_customer.class.php,v 1.2 2010/01/01 19:18:34 jfefe Exp $
+ * $Id: thelia_customer.class.php,v 1.3 2010/02/08 00:50:30 jfefe Exp $
  */
 
 /**
         \file       htdocs/thelia/clients/thelia_customer.class.php
-        \ingroup    thelia2
+        \ingroup    thelia
         \brief      Fichier de la classe des clients issus de Thelia
-        \version    $Revision: 1.2 $
+        \version    $Revision: 1.3 $
 */
 
 
@@ -65,7 +65,7 @@ class Thelia_customer
 	function Thelia_customer($DB, $id=0) {
 
         global $langs;
- 		global $conf;
+         global $conf;
 
         $this->custid = $id ;
 
@@ -112,13 +112,15 @@ class Thelia_customer
 
 		// Call the WebSeclient->fault)rvice and store its result in $obj
 		$obj = $client->call("get_Client",$parameters );
-// Attention c'est un tableau !!
+      // Attention c'est un tableau !!
 
-		if ($client->fault) {
+		if ($client->fault) 
+      {
 			$this->error="Fault detected ".$client->getError();
 			return -1;
 		}
-		elseif (!($err=$client->getError()) ) {
+		elseif (!($err=$client->getError()) ) 
+      {
   			$this->id = $obj[0][id];
          $this->ref = $obj[0][ref];
          $this->raison = $obj[0][raison];
@@ -138,7 +140,7 @@ class Thelia_customer
 			$this->pays = $obj[0][pays];
 			$this->custcodecountry = $obj[0][countries_iso_code_2];
 			$this->custcountry = $obj[0][countries_name];
-  			}
+  		}
   		else {
 		    $this->error = 'Erreur '.$err ;
           
@@ -148,9 +150,9 @@ class Thelia_customer
 	}
 
 /**
-*      \brief      Mise � jour de la table de transition
-*      \param      theliaid      Id du client dans OsC
-*	   \param	   socid	  champ soci�t�.rowid
+*      \brief      Mise à jour de la table de transition
+*      \param      theliaid      Id du client dans Thelia
+*	   \param	   socid	  champ société.rowid
 *      \return     int     <0 si ko, >0 si ok
 */
 	function transcode($theliaid, $socid)
@@ -159,41 +161,38 @@ class Thelia_customer
 		/* suppression et insertion */
 		$sql = "DELETE FROM ".MAIN_DB_PREFIX."thelia_customer WHERE rowid = ".$theliaid.";";
 		$result=$this->db->query($sql);
-        if ($result)
-        {
-//			print "suppression ok ".$sql."  * ".$result;
-		}
-        else
-        {
-//			print "suppression rate ".$sql."  * ".$result;
-            dol_syslog("thelia_customer::transcode echec suppression");
-//            $this->db->rollback();
-//            return -1;
+      if ($result)
+      {
+         dol_syslog("thelia_customer::transcode : suppression ok ".$sql."  * ".$result);
+      }
+      else
+      {
+         dol_syslog("thelia_customer::transcode echec suppression");
+         return -1;
 		}
 		$sql = "INSERT INTO ".MAIN_DB_PREFIX."thelia_customer VALUES (".$theliaid.", ".$this->db->idate(mktime()).", ".$socid.") ;";
-
 		$result=$this->db->query($sql);
-        if ($result)
-        {
-//			print "insertion ok ". $sql."  ". $result;
+      if ($result)
+      {
+         dol_syslog("thelia_customer::transcode Success");
 		}
         else
         {
-//			print "insertion rate ".$sql." , ".$result;
             dol_syslog("thelia_customer::transcode echec insert");
-//            $this->db->rollback();
 //            return -1;
 		}
 	return 0;
      }
-// converti le client thelia en client dolibarr
+     
+     
 
+   // converti l'id dolibarr en fonction du client thelia
 	function get_clientid($thelia_client)
 	{
 		$sql = "SELECT fk_soc";
 		$sql.= " FROM ".MAIN_DB_PREFIX."thelia_customer";
 		$sql.= " WHERE rowid = ".$thelia_client;
-
+     
 		$resql=$this->db->query($sql);
 		$obj = $this->db->fetch_object($resql);
       // test d'erreurs
@@ -201,7 +200,7 @@ class Thelia_customer
 		else return '';
 	}
    
-   // retourne l'id de la commande thelia en fonction de l'id doliabarr
+   // retourne l'id client thelia en fonction de l'id doliabarr
    function get_thelia_clientid($doli_clientid)
    {
       $sql = "SELECT fk_soc";
@@ -215,6 +214,6 @@ class Thelia_customer
       else return 0;
    }
 
-	}
+}
 
 ?>

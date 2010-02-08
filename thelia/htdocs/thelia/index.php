@@ -21,7 +21,7 @@
  \file       htdocs/oscommerce_ws/index.php
  \ingroup    oscommerce2
  \brief      Page accueil zone boutique
- \version    $Id: index.php,v 1.2 2010/01/01 19:18:35 jfefe Exp $
+ \version    $Id: index.php,v 1.3 2010/02/08 00:50:30 jfefe Exp $
  */
 
 require("./pre.inc.php");
@@ -284,5 +284,5 @@ else {
 print '</tr></table>';
 
 
-llxFooter('$Date: 2010/01/01 19:18:35 $ - $Revision: 1.2 $');
+llxFooter('$Date: 2010/02/08 00:50:30 $ - $Revision: 1.3 $');
 ?>

@@ -21,7 +21,7 @@
  *   	\file       admin/thelia_setup.php
  *		\ingroup    thelia
  *		\brief      Configuration du module thelia
- *		\version    $Id: thelia_setup.php,v 1.1 2010/01/01 19:20:24 jfefe Exp $
+ *		\version    $Id: thelia_setup.php,v 1.2 2010/02/08 00:50:30 jfefe Exp $
  *		\author		Put author name here
  *		\remarks	Put here some comments
  */
@@ -118,5 +118,5 @@ print '</table></form>';
 
 // End of page
 $db->close();
-llxFooter('$Date: 2010/01/01 19:20:24 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2010/02/08 00:50:30 $ - $Revision: 1.2 $');
 ?>

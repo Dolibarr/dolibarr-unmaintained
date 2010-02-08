@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: ws_orders.php,v 1.2 2010/01/01 19:22:53 jfefe Exp $
+ * $Id: ws_orders.php,v 1.3 2010/02/08 00:50:30 jfefe Exp $
  */
 set_magic_quotes_runtime(0);
 //if (function_exists('xdebug_disable')) xdebug_disable();
@@ -288,33 +288,33 @@ $sql .= " ORDER BY c.date desc";
 		}
 		$j = $i--;
 
-if ($orderid > 0)
-{
-	//on recherche les lignes de la commande
-	$sql = "SELECT l.id as lid, l.ref as prod_ref, l.titre as prod_titre, l.prixu as prod_prixu, l.tva as prod_tva, l.quantite as prod_quantite, p.id as prod_id ";
-	$sql .= " FROM venteprod l ";
-   $sql .= " JOIN produit as p ON l.ref=p.ref";
-	$sql .= " WHERE l.commande = ".$orderid;
+      if ($orderid > 0)
+      {
+         //on recherche les lignes de la commande
+         $sql = "SELECT l.id as lid, l.ref as prod_ref, l.titre as prod_titre, l.prixu as prod_prixu, l.tva as prod_tva, l.quantite as prod_quantite, p.id as prod_id ";
+         $sql .= " FROM venteprod l ";
+         $sql .= " JOIN produit as p ON l.ref=p.ref";
+         $sql .= " WHERE l.commande = ".$orderid;
 
 
-	if (!($resquer = mysql_query($sql,$connexion)))  return new soap_fault("Server", "MySQL 3 ".$sql, mysql_error());
+         if (!($resquer = mysql_query($sql,$connexion)))  return new soap_fault("Server", "MySQL 4 ".$sql, mysql_error());
 
-		switch ($numrows = mysql_numrows($resquer)) {
-		case 0 :
-			return new soap_fault("Server", "MySQL 5", "commande sans articles");
-			break;
-		default :
+            switch ($numrows = mysql_numrows($resquer)) {
+            case 0 :
+               return new soap_fault("Server", "MySQL 5", "commande sans articles");
+               break;
+            default :
 
-			while ( $i < $numrows)  {
-				$result[$j + $i] =  mysql_fetch_array($resquer, MYSQL_ASSOC);
-				$i++;
-			}
-			break;
-		}
-}
-mysql_close($connexion);
- /* Sends the results to the client */
-return $result;
+               while ( $i < $numrows)  {
+                  $result[$j + $i] =  mysql_fetch_array($resquer, MYSQL_ASSOC);
+                  $i++;
+               }
+               break;
+            }
+      }
+      mysql_close($connexion);
+      /* Sends the results to the client */
+      return $result;
 }
 
 
