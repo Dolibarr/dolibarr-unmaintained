@@ -25,7 +25,7 @@
  *      \file       htdocs/includes/modules/modVariantPro.class.php
  *      \ingroup    product
  *      \brief      Description and activation file for module VariantPro
- *		\version	$Id: modVariantPro.class.php,v 1.1 2010/02/23 14:16:05 hregis Exp $
+ *		\version	$Id: modVariantPro.class.php,v 1.2 2010/02/23 15:03:47 hregis Exp $
  */
 include_once(DOL_DOCUMENT_ROOT ."/includes/modules/DolibarrModules.class.php");
 
@@ -83,7 +83,7 @@ class modVariantPro extends DolibarrModules
 		$this->requiredby = array();	// List of modules id to disable if this one is disabled
 		$this->phpmin = array(4,3);					// Minimum version of PHP required by module
 		$this->need_dolibarr_version = array(2,8);	// Minimum version of Dolibarr required by module
-		$this->langfiles = array("variantpro");
+		$this->langfiles = array("@variantpro");
 
 		// Constants
 		// List of particular constants to add when module is enabled

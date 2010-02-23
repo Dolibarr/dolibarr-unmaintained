@@ -1,0 +1,5 @@
+# Dolibarr language file - fr_FR - variantpro
+CHARSET=UTF-8
+
+Module4000Name = Déclinaisons Pro
+Module4000Desc = Gestion avancée des déclinaisons de produits

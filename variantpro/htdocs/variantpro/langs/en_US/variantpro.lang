@@ -1,0 +1,5 @@
+# Dolibarr language file - en_US - variantpro
+CHARSET=UTF-8
+
+Module4000Name = Variants Pro
+Module4000Desc = Advanced management of product variations
