@@ -25,7 +25,7 @@
  *      \file       htdocs/includes/modules/modVariantPro.class.php
  *      \ingroup    product
  *      \brief      Description and activation file for module VariantPro
- *		\version	$Id: modVariantPro.class.php,v 1.2 2010/02/23 15:03:47 hregis Exp $
+ *		\version	$Id: modVariantPro.class.php,v 1.3 2010/02/23 15:20:48 hregis Exp $
  */
 include_once(DOL_DOCUMENT_ROOT ."/includes/modules/DolibarrModules.class.php");
 
@@ -64,7 +64,7 @@ class modVariantPro extends DolibarrModules
 		// Key used in llx_const table to save module status enabled/disabled (where MYMODULE is value of property name of module in uppercase)
 		$this->const_name = 'MAIN_MODULE_'.strtoupper($this->name);
 		// Where to store the module in setup page (0=common,1=interface,2=others,3=very specific)
-		$this->special = 0;
+		$this->special = 2;
 		// Name of png file (without png) used for this module.
 		// Png file must be in theme/yourtheme/img directory under name object_pictovalue.png.
 		$this->picto='product';
