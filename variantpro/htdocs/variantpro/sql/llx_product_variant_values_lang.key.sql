@@ -15,12 +15,12 @@
 -- along with this program; if not, write to the Free Software
 -- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 --
--- $Id: llx_product_variant_combination.key.sql,v 1.1 2010/02/23 10:48:47 hregis Exp $
+-- $Id: llx_product_variant_values_lang.key.sql,v 1.1 2010/02/23 14:16:05 hregis Exp $
 -- ============================================================================
 
 
-ALTER TABLE llx_product_variant_combination ADD INDEX idx_product_variant_values_fk_product (fk_product, fk_product_variant_values);
+ALTER TABLE llx_product_variant_values_lang ADD UNIQUE INDEX uk_product_variant_values_lang (fk_product_variant_values, lang);
 
 
-ALTER TABLE llx_product_variant_combination ADD CONSTRAINT fk_product_variant_combination_fk_product FOREIGN KEY (fk_product) REFERENCES llx_product (rowid);
-ALTER TABLE llx_product_variant_combination ADD CONSTRAINT fk_product_variant_combination_fk_product_variant_values FOREIGN KEY (fk_product_variant_values) REFERENCES llx_product_variant_values (rowid);
+ALTER TABLE llx_product_variant_values_lang ADD CONSTRAINT fk_product_variant_values_lang_fk_product_variant_values FOREIGN KEY (fk_product_variant_values) REFERENCES llx_product_variant_values (rowid);
+

@@ -17,30 +17,30 @@
  */
 
 /**    
- * 		\defgroup   product     Module variantplus
+ * 		\defgroup   product     Module variantpro
  *      \brief      Advanced management of product variations
  */
 
 /**
- *      \file       htdocs/includes/modules/modVariantPlus.class.php
+ *      \file       htdocs/includes/modules/modVariantPro.class.php
  *      \ingroup    product
- *      \brief      Description and activation file for module MultiCompany
- *		\version	$Id: modVariantPlus.class.php,v 1.1 2010/02/23 11:35:39 hregis Exp $
+ *      \brief      Description and activation file for module VariantPro
+ *		\version	$Id: modVariantPro.class.php,v 1.1 2010/02/23 14:16:05 hregis Exp $
  */
 include_once(DOL_DOCUMENT_ROOT ."/includes/modules/DolibarrModules.class.php");
 
 
 /**     
- * 		\class      modVariantPlus
- *      \brief      Description and activation class for module VariantPlus
+ * 		\class      modVariantPro
+ *      \brief      Description and activation class for module VariantPro
  */
-class modVariantPlus extends DolibarrModules
+class modVariantPro extends DolibarrModules
 {
    /**
     *   \brief      Constructor. Define names, constants, directories, boxes, permissions
     *   \param      DB      Database handler
     */
-	function modVariantPlus($DB)
+	function modVariantPro($DB)
 	{
 		$this->db = $DB;
 
@@ -48,7 +48,7 @@ class modVariantPlus extends DolibarrModules
 		// Use here a free id (See in Home -> System information -> Dolibarr for list of used modules id).
 		$this->numero = 4000;
 		// Key text used to identify module (for permissions, menus, etc...)
-		$this->rights_class = 'variantplus';
+		$this->rights_class = 'variantpro';
 
 		// Family can be 'crm','financial','hr','projects','products','ecm','technic','other'
 		// It is used to group modules in module setup page
@@ -70,26 +70,26 @@ class modVariantPlus extends DolibarrModules
 		$this->picto='product';
 
 		// Data directories to create when module is enabled.
-		$this->dirs = array('/variantplus/temp');
+		$this->dirs = array('/variantpro/temp');
 
 		// Relative path to module style sheet if exists. Example: '/mymodule/mycss.css'.
 		$this->style_sheet = '';
 
 		// Config pages. Put here list of php page names stored in admmin directory used to setup module.
-		$this->config_page_url = array("variantplus.php");
+		$this->config_page_url = array("variantpro.php");
 
 		// Dependencies
 		$this->depends = array("modProduit");		// List of modules id that must be enabled if this module is enabled
 		$this->requiredby = array();	// List of modules id to disable if this one is disabled
 		$this->phpmin = array(4,3);					// Minimum version of PHP required by module
 		$this->need_dolibarr_version = array(2,8);	// Minimum version of Dolibarr required by module
-		$this->langfiles = array("variantplus");
+		$this->langfiles = array("variantpro");
 
 		// Constants
 		// List of particular constants to add when module is enabled
 		//Example: $this->const=array(0=>array('MODULE_MY_NEW_CONST1','chaine','myvalue','This is a constant to add',0),
 		//                            1=>array('MODULE_MY_NEW_CONST2','chaine','myvalue','This is another constant to add',0) );
-		$this->const=array(1=>array('MAIN_MODULE_VARIANTPLUS_NEEDSMARTY',"chaine",1,'Need smarty',0,0));
+		$this->const=array(1=>array('MAIN_MODULE_VARIANTPRO_NEEDSMARTY',"chaine",1,'Need smarty',0,0));
 
 		// Boxes
 		$this->boxes = array();			// List of boxes
@@ -140,7 +140,7 @@ class modVariantPlus extends DolibarrModules
 	 */
 	function load_tables()
 	{
-		return $this->_load_tables('/variantplus/sql/');
+		return $this->_load_tables('/variantpro/sql/');
 	}
 
 }

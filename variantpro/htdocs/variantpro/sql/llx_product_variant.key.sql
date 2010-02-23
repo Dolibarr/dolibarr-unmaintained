@@ -15,13 +15,9 @@
 -- along with this program; if not, write to the Free Software
 -- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 --
--- $Id: llx_product_variant_lang.sql,v 1.1 2010/02/23 10:48:47 hregis Exp $
+-- $Id: llx_product_variant.key.sql,v 1.1 2010/02/23 14:16:05 hregis Exp $
 -- ============================================================================
 
-create table llx_product_variant_lang
-(
-  rowid					integer AUTO_INCREMENT PRIMARY KEY,
-  fk_product_variant	integer			DEFAULT 0 NOT NULL,
-  lang					varchar(5)		NOT NULL,
-  label					varchar(64)		NOT NULL
-)type=innodb;
+
+ALTER TABLE llx_product_variant ADD UNIQUE INDEX uk_product_variant_ref (ref, entity);
+

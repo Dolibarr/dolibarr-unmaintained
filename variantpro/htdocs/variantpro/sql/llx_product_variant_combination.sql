@@ -15,14 +15,11 @@
 -- along with this program; if not, write to the Free Software
 -- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 --
--- $Id: llx_product_variant_values.sql,v 1.1 2010/02/23 10:48:47 hregis Exp $
+-- $Id: llx_product_variant_combination.sql,v 1.1 2010/02/23 14:16:05 hregis Exp $
 -- ============================================================================
 
-create table llx_product_variant_values
+create table llx_product_variant_combination
 (
-  rowid					integer AUTO_INCREMENT PRIMARY KEY,
-  tms					timestamp,
-  fk_product_variant	integer NOT NULL,
-  active				tinyint DEFAULT 1 NOT NULL,
-  rang					integer DEFAULT 0
+  fk_product					integer PRIMARY KEY,
+  fk_product_variant_values		integer	DEFAULT 0 NOT NULL
 )type=innodb;

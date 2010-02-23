@@ -15,15 +15,12 @@
 -- along with this program; if not, write to the Free Software
 -- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 --
--- $Id: llx_product_variant.sql,v 1.1 2010/02/23 10:48:47 hregis Exp $
+-- $Id: llx_product_variant_combination.key.sql,v 1.1 2010/02/23 14:16:05 hregis Exp $
 -- ============================================================================
 
-create table llx_product_variant
-(
-  rowid				integer AUTO_INCREMENT PRIMARY KEY,
-  tms				timestamp,
-  ref				varchar(64) NOT NULL,
-  entity			integer DEFAULT 1 NOT NULL, -- multi company id
-  active			tinyint DEFAULT 1 NOT NULL,
-  rang				integer DEFAULT 0
-)type=innodb;
+
+ALTER TABLE llx_product_variant_combination ADD INDEX idx_product_variant_values_fk_product (fk_product, fk_product_variant_values);
+
+
+ALTER TABLE llx_product_variant_combination ADD CONSTRAINT fk_product_variant_combination_fk_product FOREIGN KEY (fk_product) REFERENCES llx_product (rowid);
+ALTER TABLE llx_product_variant_combination ADD CONSTRAINT fk_product_variant_combination_fk_product_variant_values FOREIGN KEY (fk_product_variant_values) REFERENCES llx_product_variant_values (rowid);
