@@ -25,7 +25,7 @@
  *		\file       htdocs/includes/modules/modComposition.class.php
  *		\ingroup    composition
  *		\brief      Description and activation file for module Composition
- *		\version	$Id: modComposition.class.php,v 1.2 2010/03/08 13:01:54 hregis Exp $
+ *		\version	$Id: modComposition.class.php,v 1.3 2010/03/08 13:02:23 hregis Exp $
  */
 
 include_once(DOL_DOCUMENT_ROOT ."/includes/modules/DolibarrModules.class.php");
@@ -43,6 +43,8 @@ class modComposition extends DolibarrModules
 	 */
 	function modComposition($DB)
 	{
+		global $conf;
+		
 		$this->db = $DB;
 
 		// Id for module (must be unique).
