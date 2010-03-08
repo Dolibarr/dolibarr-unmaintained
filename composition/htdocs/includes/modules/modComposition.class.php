@@ -25,7 +25,7 @@
  *		\file       htdocs/includes/modules/modComposition.class.php
  *		\ingroup    composition
  *		\brief      Description and activation file for module Composition
- *		\version	$Id: modComposition.class.php,v 1.1 2008/12/07 22:35:38 eldy Exp $
+ *		\version	$Id: modComposition.class.php,v 1.2 2010/03/08 13:01:54 hregis Exp $
  */
 
 include_once(DOL_DOCUMENT_ROOT ."/includes/modules/DolibarrModules.class.php");
@@ -89,7 +89,10 @@ class modComposition extends DolibarrModules
 		$this->langfiles = array("@composition");
 
 		// Constants
-		$this->const = array(array(0=>'MAIN_NEED_SMARTY',1=>'chaine',2=>1));			// List of parameters
+		// List of particular constants to add when module is enabled
+		//Example: $this->const=array(0=>array('MODULE_MY_NEW_CONST1','chaine','myvalue','This is a constant to add',0),
+		//                            1=>array('MODULE_MY_NEW_CONST2','chaine','myvalue','This is another constant to add',0) );
+		$this->const=array(1=>array('MAIN_MODULE_COMPOSITION_NEEDSMARTY',"chaine",1,'Need smarty',0,$conf->entity));
 
 		// New pages on tabs
 		$this->tabs = array('product:ComposedProducts:@composition:/composition/show_composition.php?id=__ID__');
