@@ -25,7 +25,7 @@
  *		\file       htdocs/includes/modules/modComposition.class.php
  *		\ingroup    composition
  *		\brief      Description and activation file for module Composition
- *		\version	$Id: modComposition.class.php,v 1.4 2010/03/09 15:48:56 cdelambert Exp $
+ *		\version	$Id: modComposition.class.php,v 1.5 2010/03/09 19:33:33 hregis Exp $
  */
 
 include_once(DOL_DOCUMENT_ROOT ."/includes/modules/DolibarrModules.class.php");
@@ -71,11 +71,7 @@ class modComposition extends DolibarrModules
 		$this->picto='product';
 
 		// Data directories to create when module is enabled.
-		$this->dirs = array();
-		$this->dirs[0] = '/composition';
-		$this->dirs[1] = '/composition/temp';
-		$this->dirs[2] = '/smarty/templates/temp';
-		$this->dirs[3] = '/smarty/cache/temp';
+		$this->dirs = array("/composition/temp");
 		
 		// Relative path to module style sheet if exists. Example: '/Composition/mycss.css'.
 		$this->style_sheet = '';
@@ -87,7 +83,7 @@ class modComposition extends DolibarrModules
 		$this->depends = array("modSociete","modProduit");		// List of modules id that must be enabled if this module is enabled
 		$this->requiredby = array();	// List of modules id to disable if this one is disabled
 		$this->phpmin = array(4,1);					// Minimum version of PHP required by module
-		$this->need_dolibarr_version = array(2,4);	// Minimum version of Dolibarr required by module
+		$this->need_dolibarr_version = array(2,8);	// Minimum version of Dolibarr required by module
 		$this->langfiles = array("@composition");
 
 		// Constants
