@@ -23,7 +23,7 @@
         \file       htdocs/product_composition/product.class.php
         \ingroup    product
         \brief      *complete here*
-		\version    $Id: service_product.class.php,v 1.1 2008/12/07 22:35:37 eldy Exp $
+		\version    $Id: service_product.class.php,v 1.2 2010/03/09 15:48:56 cdelambert Exp $
 		\author		Patrick Raguin
 */
 
@@ -545,7 +545,7 @@ class service_product
 			}
 			else
 			{
-				$price = price($product->price).' '.$langs->trans($this->dao->price_base_type);
+				$price = price($this->dao->price).' '.$langs->trans($this->dao->price_base_type);
 			}
 			
 			$data["product_price"] = array(

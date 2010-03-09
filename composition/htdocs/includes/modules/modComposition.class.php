@@ -25,7 +25,7 @@
  *		\file       htdocs/includes/modules/modComposition.class.php
  *		\ingroup    composition
  *		\brief      Description and activation file for module Composition
- *		\version	$Id: modComposition.class.php,v 1.3 2010/03/08 13:02:23 hregis Exp $
+ *		\version	$Id: modComposition.class.php,v 1.4 2010/03/09 15:48:56 cdelambert Exp $
  */
 
 include_once(DOL_DOCUMENT_ROOT ."/includes/modules/DolibarrModules.class.php");
@@ -49,7 +49,7 @@ class modComposition extends DolibarrModules
 
 		// Id for module (must be unique).
 		// Use here a free id (See in Home -> System information -> Dolibarr for list of used module id).
-		$this->numero = 2600;
+		$this->numero = 1500;
 		// Key text used to identify module (for permission, menus, etc...)
 		$this->rights_class = 'composition';
 
@@ -72,10 +72,10 @@ class modComposition extends DolibarrModules
 
 		// Data directories to create when module is enabled.
 		$this->dirs = array();
-		$this->dirs[0] = DOL_DATA_ROOT.'/composition';
-		$this->dirs[1] = DOL_DATA_ROOT.'/composition/temp';
-		$this->dirs[2] = DOL_DATA_ROOT.'/smarty/templates/temp';
-		$this->dirs[3] = DOL_DATA_ROOT.'/smarty/cache/temp';
+		$this->dirs[0] = '/composition';
+		$this->dirs[1] = '/composition/temp';
+		$this->dirs[2] = '/smarty/templates/temp';
+		$this->dirs[3] = '/smarty/cache/temp';
 		
 		// Relative path to module style sheet if exists. Example: '/Composition/mycss.css'.
 		$this->style_sheet = '';
@@ -185,8 +185,8 @@ class modComposition extends DolibarrModules
 
 		$result=$this->load_tables();
 
-		$sql[] = "REPLACE INTO `".MAIN_DB_PREFIX."c_type_contact` ( `rowid` , `element` , `source` , `code` , `libelle` , `active` ) VALUES ('2601', 'Composition_entries', 'external', 'CUSTOMER', 'Contact client suivi document', '1')";
-		$sql[] = "REPLACE INTO `".MAIN_DB_PREFIX."c_type_contact` ( `rowid` , `element` , `source` , `code` , `libelle` , `active` ) VALUES ('2602', 'Composition_entries', 'internal', 'AUTHOR', 'Redacteur document', '1')";
+		$sql[] = "REPLACE INTO `".MAIN_DB_PREFIX."c_type_contact` ( `rowid` , `element` , `source` , `code` , `libelle` , `active` ) VALUES ('1501', 'Composition_entries', 'external', 'CUSTOMER', 'Contact client suivi document', '1')";
+		$sql[] = "REPLACE INTO `".MAIN_DB_PREFIX."c_type_contact` ( `rowid` , `element` , `source` , `code` , `libelle` , `active` ) VALUES ('1502', 'Composition_entries', 'internal', 'AUTHOR', 'Redacteur document', '1')";
 
 		return $this->_init($sql);
 	}

@@ -131,7 +131,7 @@
 </table>
 </form>
 
-{else}
+{elseif !isset($deleted)}
 <div class="tabsAction">
 <a class="butAction" href="show_composition.php?id={$id}&action=add">{$newCompo}</a>
 </div>

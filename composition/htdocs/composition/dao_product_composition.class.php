@@ -25,7 +25,7 @@
         \file       htdocs/product_composition/dao_product_composition.class.php
         \ingroup    product_composition
         \brief      This file is an example for a class file
-		\version    $Id: dao_product_composition.class.php,v 1.1 2008/12/07 22:35:37 eldy Exp $
+		\version    $Id: dao_product_composition.class.php,v 1.2 2010/03/09 15:48:56 cdelambert Exp $
 		\author		Patrick Raguin
 */
 
@@ -306,7 +306,7 @@ class dao_product_composition // extends CommonObject
    		global $langs;
     	
         $sql = "SELECT";
-	   	$sql.= " t.rowid	    , ";
+	   	$sql.= " t.rowid,";
 		$sql.= " t.fk_product_composition,";
 		$sql.= " t.fk_product,";
 		$sql.= " t.qte,";

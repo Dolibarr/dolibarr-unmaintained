@@ -51,7 +51,7 @@ $langs->load("products");
 $langs->load("other");
 
 // inclusion de Smarty
-require_once('../../external-libs/smarty/libs/Smarty.class.php');
+require_once(DOL_DOCUMENT_ROOT.'/includes/smarty/libs/Smarty.class.php');
 
 //Start of user code UserCode htdocs/product_composition/pre.inc.php
 function llxHeader($langs, $head = "", $title="", $help_url='')

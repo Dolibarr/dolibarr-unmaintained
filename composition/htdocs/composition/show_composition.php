@@ -23,7 +23,7 @@
    \file       htdocs/composition/show_composition.php
    \ingroup    
    \brief      * to complete *
-   \version    $Id: show_composition.php,v 1.1 2008/12/07 22:35:38 eldy Exp $
+   \version    $Id: show_composition.php,v 1.2 2010/03/09 15:48:56 cdelambert Exp $
 */
 
 require("./pre.inc.php");
@@ -35,11 +35,11 @@ llxHeader("","",$langs->trans("CardProduct".$product->type));
 $oSmarty = new Smarty();
 
 $oSmarty->template_dir = './templates' ;
-$oSmarty->compile_dir = $dolibarr_smarty_cache;
+$oSmarty->compile_dir = $dolibarr_smarty_compile;
 
 //$oSmarty->debugging = true;
 
-//Récupération des infos sur le produit
+//Rï¿½cupï¿½ration des infos sur le produit
 $product = new Product($db);
 $product->fetch($_GET['id']);
 
@@ -48,7 +48,7 @@ $head=product_prepare_head($product, $user);
 $titre=$langs->trans("CardProduct".$product->type);
 dolibarr_fiche_head($head, 'tabComposedProducts', $titre);
 
-//Vérification des autorisations
+//Vï¿½rification des autorisations
 if (!$user->rights->produit->lire) accessforbidden();
 
 
@@ -59,7 +59,7 @@ $service_product = new service_product($db) ;
 
 
 /* ******************************************
- * Mise à jour composition
+ * Mise ï¿½ jour composition
  ********************************************/
 
 if ($_POST["action"] == 'update')
@@ -88,7 +88,7 @@ if ($_GET["action"] == 'edit')
 	$oSmarty->assign('button_cancel',$langs->trans("Cancel")) ;
 	$oSmarty->assign('id_compo',$_GET['compo_product']) ;
 
-	//Liste des produits pour la liste déroulante
+	//Liste des produits pour la liste dï¿½roulante
 	$attributsEdit = $service->getAttributesEdit($_GET['compo_product']);
 	$oSmarty->assign("attributsEdit",$attributsEdit) ;
 	
@@ -125,7 +125,7 @@ if ($_GET["action"] == 'add')
 	$attributsAdd = $service->getAttributesAdd();
 	$oSmarty->assign("attributsAdd",$attributsAdd) ;
 	
-	//Liste des produits pour la liste déroulante
+	//Liste des produits pour la liste dï¿½roulante
 	$oSmarty->assign("liste_products","") ;
 	
 	//Liste etat_stock
@@ -215,6 +215,6 @@ $oSmarty->display("show_composition.tpl") ;
 
 //End of user code
 
-llxFooter('$Date: 2008/12/07 22:35:38 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2010/03/09 15:48:56 $ - $Revision: 1.2 $');
 
 ?>

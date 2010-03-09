@@ -2,13 +2,11 @@
 addCompo=Ajouter composition
 newCompo=Nouvelle composition
 ComposedProductsAbility=Prise en charges des compositions
-qte=QuantitŽ
+qte=Quantitï¿½
 total_price=Prix total %s
-FactoryPrice=Cožt de revient %s
-FactoryPriceAll=Cožt de revient total %s
+FactoryPrice=Coï¿½t de revient %s
+FactoryPriceAll=Coï¿½t de revient total %s
 listeComposition=Liste des compositions
 ComposedProducts=Composition de produits
 StockManaged=Gestion des stocks
 etatStock=Gestion des stocks
-FactoryPriceCalculated=Calcul dans le cožt de revient
-UnitPriceIsBasedFromCUMPOrSellingPrice=Le prix unitaire est basŽ sur le CUMP ou s'il est nul sur le prix de vente du produit
