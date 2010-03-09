@@ -1,6 +1,4 @@
 <?php
-//Start of user code fichier htdocs/composition/show_composition.php
-
 /* Copyright (C) 2008 Samuel  Bouchet <samuel.bouchet@auguria.net>
  * Copyright (C) 2008 Patrick Raguin  <patrick.raguin@auguria.net>
  *
@@ -20,26 +18,33 @@
  */
  
 /**
-   \file       htdocs/composition/show_composition.php
-   \ingroup    
-   \brief      * to complete *
-   \version    $Id: show_composition.php,v 1.2 2010/03/09 15:48:56 cdelambert Exp $
-*/
+ *    \file       htdocs/composition/show_composition.php
+ *    \ingroup
+ *    \brief      * to complete *
+ *    \version    $Id: show_composition.php,v 1.3 2010/03/09 19:28:38 hregis Exp $
+ */
 
-require("./pre.inc.php");
+require("../main.inc.php");
+
+require_once(DOL_DOCUMENT_ROOT."/composition/service_product.class.php");
+require_once(DOL_DOCUMENT_ROOT."/product.class.php");
+require_once(DOL_DOCUMENT_ROOT."/composition/dao_product_composition.class.php");
+require_once(DOL_DOCUMENT_ROOT."/composition/service_product_composition.class.php");
+require_once(DOL_DOCUMENT_ROOT."/lib/product.lib.php");
+require_once(DOL_DOCUMENT_ROOT."/composition/lib/composition.lib.php");
+
+$langs->load("bills");
+$langs->load("products");
+$langs->load("other");
+
 
 llxHeader("","",$langs->trans("CardProduct".$product->type));
 
-
-// Instanciation d'un l'objet Smarty
-$oSmarty = new Smarty();
-
-$oSmarty->template_dir = './templates' ;
-$oSmarty->compile_dir = $dolibarr_smarty_compile;
+$smarty->template_dir = './templates' ;
 
 //$oSmarty->debugging = true;
 
-//R�cup�ration des infos sur le produit
+//Recuperation des infos sur le produit
 $product = new Product($db);
 $product->fetch($_GET['id']);
 
@@ -48,7 +53,7 @@ $head=product_prepare_head($product, $user);
 $titre=$langs->trans("CardProduct".$product->type);
 dolibarr_fiche_head($head, 'tabComposedProducts', $titre);
 
-//V�rification des autorisations
+//Verification des autorisations
 if (!$user->rights->produit->lire) accessforbidden();
 
 
@@ -59,7 +64,7 @@ $service_product = new service_product($db) ;
 
 
 /* ******************************************
- * Mise � jour composition
+ * Mise a jour composition
  ********************************************/
 
 if ($_POST["action"] == 'update')
@@ -84,13 +89,13 @@ if ($_POST["action"] == 'update')
  ********************************************/
 if ($_GET["action"] == 'edit')
 {
-	$oSmarty->assign('button_edit',$langs->trans("Save")) ;
-	$oSmarty->assign('button_cancel',$langs->trans("Cancel")) ;
-	$oSmarty->assign('id_compo',$_GET['compo_product']) ;
+	$smarty->assign('button_edit',$langs->trans("Save")) ;
+	$smarty->assign('button_cancel',$langs->trans("Cancel")) ;
+	$smarty->assign('id_compo',$_GET['compo_product']) ;
 
-	//Liste des produits pour la liste d�roulante
+	//Liste des produits pour la liste deroulante
 	$attributsEdit = $service->getAttributesEdit($_GET['compo_product']);
-	$oSmarty->assign("attributsEdit",$attributsEdit) ;
+	$smarty->assign("attributsEdit",$attributsEdit) ;
 	
 	//Liste etat_stock
 }
@@ -119,17 +124,17 @@ if ($_POST["action"] == 'create')
  ********************************************/
 if ($_GET["action"] == 'add')
 {
-	$oSmarty->assign("button_add",$langs->trans("addCompo"));
-	$oSmarty->assign('button_cancel',$langs->trans("Cancel")) ;
+	$smarty->assign("button_add",$langs->trans("addCompo"));
+	$smarty->assign('button_cancel',$langs->trans("Cancel")) ;
 	
 	$attributsAdd = $service->getAttributesAdd();
-	$oSmarty->assign("attributsAdd",$attributsAdd) ;
+	$smarty->assign("attributsAdd",$attributsAdd) ;
 	
-	//Liste des produits pour la liste d�roulante
-	$oSmarty->assign("liste_products","") ;
+	//Liste des produits pour la liste deroulante
+	$smarty->assign("liste_products","") ;
 	
 	//Liste etat_stock
-	//$oSmarty->assign("liste_etatStock",$service->getListEtatStock());
+	//$smarty->assign("liste_etatStock",$service->getListEtatStock());
 
 }
 
@@ -139,7 +144,7 @@ if ($_GET["action"] == 'add')
  ********************************************/
 if ($_GET["action"] == 'delete')
 {
-	$oSmarty->assign('delete_form',$service->confirmDeleteForm()) ;
+	$smarty->assign('delete_form',$service->confirmDeleteForm()) ;
 }
 /* ***********
  * Suppression
@@ -150,11 +155,11 @@ if (($_POST["action"] == 'confirm_delete')&&($_POST["confirm"] == 'yes'))
 	
 	if($deleted==0){
 	
-		$oSmarty->assign('deleted',$langs->trans("deleted",$langs->trans("product"))) ;
-		$oSmarty->assign('deleted_ok',$langs->trans("ok")) ;
-		$oSmarty->assign('deleted_ok_link',DOL_URL_ROOT.'/composition/show_composition.php?id='.$_GET['id']) ;
+		$smarty->assign('deleted',$langs->trans("deleted",$langs->trans("product"))) ;
+		$smarty->assign('deleted_ok',$langs->trans("ok")) ;
+		$smarty->assign('deleted_ok_link',DOL_URL_ROOT.'/composition/show_composition.php?id='.$_GET['id']) ;
 	} else {
-		$oSmarty->assign('errors',$service->getErrors()) ;
+		$smarty->assign('errors',$service->getErrors()) ;
 	}
 	
 	
@@ -166,55 +171,55 @@ if (($_POST["action"] == 'confirm_delete')&&($_POST["confirm"] == 'yes'))
 		/* ******************************************
 		 * Affichage informations sur le produit
 		 ********************************************/		
-		$oSmarty->assign('data',$service_product->getAttributesShowLight($_GET['id'])) ;
+		$smarty->assign('data',$service_product->getAttributesShowLight($_GET['id'])) ;
 	
 		//Modification et suppression
 		if ($user->rights->produit->creer)
 		{
-			$oSmarty->assign("img_edit",img_edit());
-			$oSmarty->assign("img_delete",img_delete());
+			$smarty->assign("img_edit",img_edit());
+			$smarty->assign("img_delete",img_delete());
 		}
 		
 		/* ******************************************
 		 * Liste des compositions
 		 ********************************************/
-		$oSmarty->assign("fields",$service->getListDisplayedFields()) ;
-		$oSmarty->assign("listesCompo",$service->getCompoProductsDisplay($_GET['id'])) ;
+		$smarty->assign("fields",$service->getListDisplayedFields()) ;
+		$smarty->assign("listesCompo",$service->getCompoProductsDisplay($_GET['id'])) ;
 		
 		//cout de revient total
 		$factory_price_all['label'] = $langs->trans('FactoryPriceAll');
 		$factory_price_all['value'] = $service->getFactoryPriceAll($_GET['id']);
-		$oSmarty->assign("factory_price_all",$factory_price_all);
+		$smarty->assign("factory_price_all",$factory_price_all);
 
 		//cout de revient
 		$factory_price['label'] = $langs->trans('FactoryPrice');
 		$factory_price['value'] = $service->getFactoryPrice($_GET['id']);
-		$oSmarty->assign("factory_price",$factory_price);		
+		$smarty->assign("factory_price",$factory_price);		
 		
 		// variables pour le template
-		$oSmarty->assign("listeTitle",$langs->trans("listeComposition"));
-		$oSmarty->assign("addProduct",$langs->trans("newCompo"));
-		$oSmarty->assign("product",$langs->trans("product"));
-		$oSmarty->assign("qte",$langs->trans("qte"));
-		$oSmarty->assign("etatStock",$langs->trans("etatStock"));
-		$oSmarty->assign("link",DOL_URL_ROOT.'/product/fiche.php?id=');
+		$smarty->assign("listeTitle",$langs->trans("listeComposition"));
+		$smarty->assign("addProduct",$langs->trans("newCompo"));
+		$smarty->assign("product",$langs->trans("product"));
+		$smarty->assign("qte",$langs->trans("qte"));
+		$smarty->assign("etatStock",$langs->trans("etatStock"));
+		$smarty->assign("link",DOL_URL_ROOT.'/product/fiche.php?id=');
 
-		$oSmarty->assign("newCompo",$langs->trans("newCompo"));
-		$oSmarty->assign("id",$_GET['id']);
+		$smarty->assign("newCompo",$langs->trans("newCompo"));
+		$smarty->assign("id",$_GET['id']);
 		
 		//Liste des erreurs
-		$oSmarty->assign("errors",$errors);
+		$smarty->assign("errors",$errors);
 		
 
 	}
 }
 
-$oSmarty->assign('missing',$langs->trans('not_found', $langs->trans('product'))) ;
+$smarty->assign('missing',$langs->trans('not_found', $langs->trans('product'))) ;
 
-$oSmarty->display("show_composition.tpl") ;
+$smarty->display("show_composition.tpl") ;
 
 //End of user code
 
-llxFooter('$Date: 2010/03/09 15:48:56 $ - $Revision: 1.2 $');
+llxFooter('$Date: 2010/03/09 19:28:38 $ - $Revision: 1.3 $');
 
 ?>

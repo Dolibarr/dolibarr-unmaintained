@@ -45,7 +45,7 @@ function getfieldToKeyFieldArray($query){
 		} else {
 			$tmp = $field ;
 		}
-		// on récupère la partie gauche du point pour avoir la table
+		// on recupere la partie gauche du point pour avoir la table
 		$tmp = explode(".",$tmp) ;
 		
 		$table = trim($tmp[0]) ;
