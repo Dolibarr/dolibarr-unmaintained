@@ -23,7 +23,7 @@
         \file       htdocs/product_composition/product_composition.class.php
         \ingroup    product_composition
         \brief      *complete here*
-		\version    $Id: service_product_composition.class.php,v 1.2 2010/03/08 22:33:24 eldy Exp $
+		\version    $Id: service_product_composition.class.php,v 1.3 2010/03/15 10:56:25 cdelambert Exp $
 		\author		Patrick Raguin
 */
 
@@ -155,7 +155,7 @@ class service_product_composition
 
 		$dao_product->id;
 
-		//Récupère la liste des produits (le dernier 0 correspond aux matières premières)
+		//Rï¿½cupï¿½re la liste des produits (le dernier 0 correspond aux matiï¿½res premiï¿½res)
 		ob_start();
 		$html->select_produits('','product','',20,0,-1,0);
 		$input = ob_get_contents();
@@ -168,7 +168,7 @@ class service_product_composition
 				"input" => $input
 			);
 
-		//Qté
+		//Qtï¿½
 		$data[] = array(
 				"attribute" => "qte",
 				"type" => "INT",
@@ -256,14 +256,14 @@ class service_product_composition
      */
 	public function getCompoProductsDisplay($product)
 	{
-		//Liste des élements qui composent l'article
+		//Liste des ï¿½lements qui composent l'article
 
 
 		global $langs ;
 
 		$liste = array();
 
-		//Récupère le rowid des sous produits
+		//Rï¿½cupï¿½re le rowid des sous produits
 		$res = dao_product_composition::select($this->db,'fk_product = '.$product);
 
 		if(($res)&&($this->db->num_rows() > 0))
@@ -271,14 +271,14 @@ class service_product_composition
 			while($item = $this->db->fetch_object($res))
 			{
 
-				//récupère les informations des sous-produits ainsi que le cump
+				//rï¿½cupï¿½re les informations des sous-produits ainsi que le cump
 				$rowid = $item->rowid;
 				$where = 'rowid = '.$item->fk_product_composition;
 
 				$sql = "SELECT p.rowid, p.label, p.price, p.price_ttc, p.tva_tx, p.pmp";
 				$sql.= " FROM ".MAIN_DB_PREFIX."product p";
 				$sql.= " WHERE p.rowid = ".$item->fk_product_composition;
-				$sql.= " ORDER BY s.date_valo DESC";
+				$sql.= " ORDER BY p.tms DESC";
 				$sql.= " LIMIT 1";
 
 				$all = dao_product_composition::selectQuery($this->db,$sql);
@@ -294,14 +294,14 @@ class service_product_composition
 					{
 
 						//Calcul le cout unitaire et ttc
-						//à partir du cump
+						//ï¿½ partir du cump
 						if($item->price_pmp != 0)
 						{
 							$price = $item->price_pmp;
 							$price_ttc = $item->price_pmp * (1 +($item->tva_tx / 100));
 
 						}
-						//à partir du prix de vente
+						//ï¿½ partir du prix de vente
 						else
 						{
 							$price = $item->price;

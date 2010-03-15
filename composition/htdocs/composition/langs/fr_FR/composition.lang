@@ -2,10 +2,10 @@
 addCompo=Ajouter composition
 newCompo=Nouvelle composition
 ComposedProductsAbility=Prise en charges des compositions
-qte=Quantit�
+qte=Quantité
 total_price=Prix total %s
-FactoryPrice=Co�t de revient %s
-FactoryPriceAll=Co�t de revient total %s
+FactoryPrice=Coût de revient %s
+FactoryPriceAll=Coût de revient total %s
 listeComposition=Liste des compositions
 ComposedProducts=Composition de produits
 StockManaged=Gestion des stocks
