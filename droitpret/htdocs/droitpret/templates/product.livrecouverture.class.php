@@ -17,10 +17,10 @@
  */
 
 /**
-   \file       htdocs/droitpret/templates/product.livre.class.php
+   \file       htdocs/product/templates/product.livre.class.php
    \ingroup    produit
    \brief      Fichier de la classe des produits specifiques de type livre
-   \version    $Id: product.livrecouverture.class.php,v 1.2 2010/03/16 18:28:36 eldy Exp $
+   \version    $Id: product.livrecouverture.class.php,v 1.1 2010/03/16 18:26:05 eldy Exp $
 */
 
 require_once(DOL_DOCUMENT_ROOT.'/product/templates/product.livre.class.php');

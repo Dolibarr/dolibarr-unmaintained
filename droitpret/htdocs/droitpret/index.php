@@ -16,14 +16,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: index.php,v 1.2 2010/03/16 18:28:36 eldy Exp $
+ * $Id: index.php,v 1.1 2010/03/16 18:26:05 eldy Exp $
  */
 
 /**
-	    \file       htdocs/droitpret.class.php
+	    \file       htdocs/compta/dons/index.php
 		\ingroup    don
 		\brief      Page accueil espace don
-		\version    $Revision: 1.2 $
+		\version    $Revision: 1.1 $
 */
 
 require("./pre.inc.php");
@@ -43,8 +43,8 @@ if($_GET['action'] && $_GET['action'] == 'create')
 	if($dated < $datef)
 	{
 		$droitpret = new DroitPret($db,$dated,$datef);
-		$droitpret->CreateNewRapport();
-		$mesg = $droitpret->EnvoiMail();
+		$droitpret->CreateNewRapport();	
+		$mesg = $droitpret->EnvoiMail();	
 	}
 	else
 	{
@@ -53,8 +53,8 @@ if($_GET['action'] && $_GET['action'] == 'create')
 
 
 
-
-
+	
+	
 }
 
 
@@ -62,7 +62,7 @@ if($_GET['action'] && $_GET['action'] == 'create')
 /*
  * Affichage
  */
-
+ 
 llxHeader();
 
 print_fiche_titre($langs->trans("DroitPretArea"));

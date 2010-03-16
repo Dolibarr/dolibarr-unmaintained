@@ -18,10 +18,10 @@
  */
 
 /**
- *	\file       htdocs/droitpret/templates/product.livre.class.php
+ *	\file       htdocs/product/templates/product.livre.class.php
  *	\ingroup    produit
  *	\brief      Fichier de la classe des produits specifiques de type livre
- *	\version    $Id: product.livre.class.php,v 1.2 2010/03/16 18:28:36 eldy Exp $
+ *	\version    $Id: product.livre.class.php,v 1.1 2010/03/16 18:26:05 eldy Exp $
  */
 
 require_once(DOL_DOCUMENT_ROOT.'/product/templates/product.livrecontrat.class.php');
@@ -248,8 +248,8 @@ class ProductLivre extends Product
 
 		return $result;
 	}
-
-
+	
+	
 	/**
 	 *    \brief      Mise a jour des donnees dans la base
 	 *    \param      datas        Tableau de donnees
@@ -315,7 +315,7 @@ class ProductLivre extends Product
 			$this->_setErrNo("UpdateCanvas",1281);
 			return -1;
 		}
-
+		 
 	}
 
 	/**
@@ -385,7 +385,7 @@ class ProductLivre extends Product
 	function assign_smarty_values(&$smarty, $action='')
 	{
 		global $conf,$langs;
-
+		
 		if ($action =='edit' or $action == 'create')
 		{
 			$this->GetAvailableFormat();
@@ -402,7 +402,7 @@ class ProductLivre extends Product
 			$smarty->assign('class_normal_ref', 'normal');
 			$smarty->assign('class_focus_ref',  'focus');
 		}
-
+		
 		$picto='title.png';
 		if (empty($conf->browser->firefox)) $picto='title.gif';
 		$smarty->assign('title_picto', img_picto('',$picto));
@@ -543,7 +543,7 @@ class ProductLivre extends Product
 			{
 				$datas = array();
 				$obj = $this->db->fetch_object($resql);
-
+				
 				$datas["id"]        = $obj->rowid;
 				$datas["ref"]       = $obj->ref;
 				$datas["titre"]     = $obj->label;
@@ -555,9 +555,9 @@ class ProductLivre extends Product
 				$datas["pages"]     = $obj->pages;
 				$datas["prix"]      = price($obj->price);
 				$datas["valo"]      = 0;
-
+				
 				array_push($this->list_datas,$datas);
-
+				
 				$i++;
 			}
 			$this->db->free($resql);
@@ -571,9 +571,9 @@ class ProductLivre extends Product
 	function GetAvailableFormat()
 	{
 		global $conf;
-
+		
 		$this->available_formats = array();
-
+		
 		$sql = "SELECT";
 		$sql.= " rowid";
 		$sql.= ", ".$this->db->decrypt('value')." as value";

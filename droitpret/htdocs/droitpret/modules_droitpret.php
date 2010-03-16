@@ -18,10 +18,10 @@
  */
 
 /**
-        \file       htdocs/droitpret/modules_droipret.php
+        \file       htdocs/product/droitpret/modules_droipret.php
         \ingroup    droitpret
         \brief      Fichier contenant la classe m�re de generation des exports de droits de prets
-        \version    $Id: modules_droitpret.php,v 1.2 2010/03/16 18:28:36 eldy Exp $
+        \version    $Id: modules_droitpret.php,v 1.1 2010/03/16 18:26:05 eldy Exp $
 */
 
 

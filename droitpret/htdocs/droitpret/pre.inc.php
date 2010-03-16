@@ -17,10 +17,10 @@
  */
 
 /**
-	    \file       htdocs/droitpret/pre.inc.php
+	    \file       htdocs/compta/droitpret/pre.inc.php
         \ingroup    pret
 		\brief      Fichier gestionnaire du menu de gauche de l'espace droitpret
-		\version    $Id: pre.inc.php,v 1.2 2010/03/16 18:28:36 eldy Exp $
+		\version    $Id: pre.inc.php,v 1.1 2010/03/16 18:26:05 eldy Exp $
 */
 
 require("../../main.inc.php");
