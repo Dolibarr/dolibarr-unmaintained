@@ -15,11 +15,11 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: THELIAvente.php,v 1.3 2010/02/08 00:50:30 jfefe Exp $
+ * $Id: THELIAvente.php,v 1.4 2010/03/22 15:30:59 hregis Exp $
  */
 
 require("./pre.inc.php");
-require_once(DOL_DOCUMENT_ROOT."/product.class.php");
+require_once(DOL_DOCUMENT_ROOT."/product/product.class.php");
 require_once(DOL_DOCUMENT_ROOT."/thelia_ws/includes/configure.php");
 
 llxHeader();
@@ -165,5 +165,5 @@ if ($_GET["action"] == 'vendre' )
  		print '<a class="tabAction" href="OSCvente.php?action=liste">'.$langs->trans("Liste").'</a>';
 	print "\n</div>\n";
 
-llxFooter('$Date: 2010/02/08 00:50:30 $ - $Revision: 1.3 $');
+llxFooter('$Date: 2010/03/22 15:30:59 $ - $Revision: 1.4 $');
 ?>

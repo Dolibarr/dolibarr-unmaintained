@@ -17,20 +17,20 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: thelia_categories.class.php,v 1.3 2010/02/08 00:50:30 jfefe Exp $
+ * $Id: thelia_categories.class.php,v 1.4 2010/03/22 15:30:59 hregis Exp $
  */
 
 /**
         \file       thelia_ws/thelia_categories.class.class.php
         \ingroup    core
         \brief      Example for class
-        \version    $Revision: 1.3 $
+        \version    $Revision: 1.4 $
 */
 
 // Put here all includes required by your script
 //require_once(DOL_DOCUMENT_ROOT."/societe.class.php");
 //require_once(DOL_DOCUMENT_ROOT."/contact.class.php");
-//require_once(DOL_DOCUMENT_ROOT."/product.class.php");
+//require_once(DOL_DOCUMENT_ROOT."/product/product.class.php");
 
 
 

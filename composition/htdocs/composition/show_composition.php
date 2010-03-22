@@ -21,13 +21,13 @@
  *    \file       htdocs/composition/show_composition.php
  *    \ingroup
  *    \brief      * to complete *
- *    \version    $Id: show_composition.php,v 1.3 2010/03/09 19:28:38 hregis Exp $
+ *    \version    $Id: show_composition.php,v 1.4 2010/03/22 15:30:59 hregis Exp $
  */
 
 require("../main.inc.php");
 
 require_once(DOL_DOCUMENT_ROOT."/composition/service_product.class.php");
-require_once(DOL_DOCUMENT_ROOT."/product.class.php");
+require_once(DOL_DOCUMENT_ROOT."/product/product.class.php");
 require_once(DOL_DOCUMENT_ROOT."/composition/dao_product_composition.class.php");
 require_once(DOL_DOCUMENT_ROOT."/composition/service_product_composition.class.php");
 require_once(DOL_DOCUMENT_ROOT."/lib/product.lib.php");
@@ -220,6 +220,6 @@ $smarty->display("show_composition.tpl") ;
 
 //End of user code
 
-llxFooter('$Date: 2010/03/09 19:28:38 $ - $Revision: 1.3 $');
+llxFooter('$Date: 2010/03/22 15:30:59 $ - $Revision: 1.4 $');
 
 ?>
