@@ -22,7 +22,7 @@
  *	\file       htdocs/droitpret/templates/product.livre.class.php
  *	\ingroup    produit
  *	\brief      Fichier de la classe des produits specifiques de type livre
- *	\version    $Id: product.livre.class.php,v 1.1 2010/03/22 11:49:14 hregis Exp $
+ *	\version    $Id: product.livre.class.php,v 1.2 2010/03/22 16:58:13 hregis Exp $
  */
 
 require_once(DOL_DOCUMENT_ROOT.'/product/canvas/livrecontrat/product.livrecontrat.class.php');
@@ -120,13 +120,13 @@ class ProductLivre extends Product
 
 			$result = $this->db->query($sql) ;
 			if ($result)
-	  {
-	  	$this->errno = 0;
-	  }
-	  else
-	  {
-	  	$this->_setErrNo("Create",1282);
-	  }
+			{
+				$this->errno = 0;
+			}
+			else
+			{
+				$this->_setErrNo("Create",1282);
+			}
 		}
 		// Creation du contrat associe
 		if ( $this->errno === 0 )
@@ -146,9 +146,9 @@ class ProductLivre extends Product
 			$contrat_id = $this->contrat->Create($user, $this->id, $datas);
 
 			if ($contrat_id > 0)
-	  {
-	  	$this->add_subproduct($this->contrat->id);
-	  }
+			{
+				$this->add_subproduct($this->contrat->id);
+			}
 		}
 		// Creation du produit couverture
 		if ( $this->errno === 0 )
@@ -168,9 +168,9 @@ class ProductLivre extends Product
 			$this->couverture_id = $this->couverture->create($user);
 
 			if ($this->couverture_id > 0)
-	  {
-	  	$this->add_subproduct($this->couverture_id);
-	  }
+			{
+				$this->add_subproduct($this->couverture_id);
+			}
 		}
 
 		if ( $this->errno === 0 )
@@ -223,26 +223,26 @@ class ProductLivre extends Product
 			$result = $this->db->query($sql) ;
 
 			if ( $result )
-	  {
-	  	$result = $this->db->fetch_array();
-
-	  	$this->isbn               = $result["isbn"];
-	  	$this->ean                = $result["ean"];
-	  	$this->pages              = $result["pages"];
-	  	$this->format             = $result["format"];
-	  	$this->px_feuillet        = $result["px_feuillet"];
-	  	$this->px_reliure         = $result["px_reliure"];
-	  	$this->px_revient         = $result["px_revient"];
-	  	$this->px_couverture      = $result["px_couverture"];
-	  	$this->couverture_id      = $result["fk_couverture"];
-	  	$this->auteur             = stripslashes($result["nom"]);
-	  	$this->auteur_id          = $result["socid"];
-
-	  	$this->db->free();
-	  }
-
-	  $this->contrat = new ProductLivreContrat($this->db);
-	  $this->contrat->FetchCanvas($result["fk_contrat"]);
+			{
+				$result = $this->db->fetch_array();
+				
+				$this->isbn               = $result["isbn"];
+				$this->ean                = $result["ean"];
+				$this->pages              = $result["pages"];
+				$this->format             = $result["format"];
+				$this->px_feuillet        = $result["px_feuillet"];
+				$this->px_reliure         = $result["px_reliure"];
+				$this->px_revient         = $result["px_revient"];
+				$this->px_couverture      = $result["px_couverture"];
+				$this->couverture_id      = $result["fk_couverture"];
+				$this->auteur             = stripslashes($result["nom"]);
+				$this->auteur_id          = $result["socid"];
+				
+				$this->db->free();
+			}
+			
+			$this->contrat = new ProductLivreContrat($this->db);
+			$this->contrat->FetchCanvas($result["fk_contrat"]);
 		}
 
 		if ($action =='edit' or $action == 'create')
@@ -250,7 +250,6 @@ class ProductLivre extends Product
 
 		return $result;
 	}
-
 
 	/**
 	 *    \brief      Mise a jour des donnees dans la base
@@ -321,12 +320,12 @@ class ProductLivre extends Product
 	}
 
 	/**
-	 \brief      Calcule le prix de revient d'un livre
-	 \param      pages     Nombre de pages
-	 \param      couv      Prix de la couverture
-	 \param      feuil     Prix d'un feuillet
-	 \param      price_ht  Prix public HT
-	 \param      taux      Taux du contrat
+	 * 	 \brief      Calcule le prix de revient d'un livre
+	 * 	 \param      pages     Nombre de pages
+	 * 	 \param      couv      Prix de la couverture
+	 * 	 \param      feuil     Prix d'un feuillet
+	 * 	 \param      price_ht  Prix public HT
+	 * 	 \param      taux      Taux du contrat
 	 */
 	function _calculate_prix_revient($pages, $couv, $feuil, $price_ht, $reliure, $taux)
 	{
@@ -490,13 +489,13 @@ class ProductLivre extends Product
 		}
 	}
 
-	/*
-	 * Fetch Datas Liste
-	 *
-	 *
+	/**
+	 * 	\brief	Fetch datas list
 	 */
 	function LoadListDatas($limit, $offset, $sortfield, $sortorder)
 	{
+		global $conf;
+		
 		$sql = 'SELECT p.rowid, p.ref, p.label, pl.px_feuillet as price';
 		$sql.= ', p.duration, p.envente as statut';
 		$sql.= ', pl.pages';
@@ -508,7 +507,8 @@ class ProductLivre extends Product
 		$sql.= ', '.MAIN_DB_PREFIX.'product_cnv_livre as pl';
 		$sql.= ' LEFT JOIN '.MAIN_DB_PREFIX.'product_stock as sc ON sc.fk_product = pl.rowid AND sc.fk_entrepot = 1';
 		$sql.= ' LEFT JOIN '.MAIN_DB_PREFIX.'product_stock as se ON se.fk_product = pl.rowid AND se.fk_entrepot = 2';
-		$sql .= " WHERE p.rowid=pl.rowid ";
+		$sql.= " WHERE p.rowid = pl.rowid ";
+		$sql.= " AND p.entity = ".$conf->entity;
 
 		if ($sall)
 		{
@@ -577,12 +577,10 @@ class ProductLivre extends Product
 
 		$this->available_formats = array();
 
-		$sql = "SELECT";
-		$sql.= " rowid";
-		$sql.= ", ".$this->db->decrypt('value')." as value";
+		$sql = "SELECT rowid, ".$this->db->decrypt('value')." as value";
 		$sql.= " FROM ".MAIN_DB_PREFIX."const";
-		$sql.= " WHERE ".$this->db->decrypt('name');
-		$sql.= " LIKE 'EDITEUR_LIVRE_FORMAT_%'";
+		$sql.= " WHERE ".$this->db->decrypt('name')." LIKE 'EDITEUR_LIVRE_FORMAT_%'";
+		$sql.= " AND entity = ".$conf->entity;
 
 		$resql = $this->db->query($sql);
 
@@ -598,9 +596,13 @@ class ProductLivre extends Product
 
 	function GetAvailableAuteurs()
 	{
+		global $conf;
+		
 		$this->available_auteurs = array();
 
-		$sql = "SELECT rowid, nom FROM ".MAIN_DB_PREFIX."societe ";
+		$sql = "SELECT rowid, nom";
+		$sql.= " FROM ".MAIN_DB_PREFIX."societe ";
+		$sql.= " AND entity = ".$conf->entity;
 
 		$resql = $this->db->query($sql);
 
