@@ -1,6 +1,7 @@
 <?php
 /* Copyright (C) 2006-2007 Rodolphe Quiedeville <rodolphe@quiedeville.org>
- * Copyright (C) 2006-2007 Auguria SARL <info@auguria.org>
+ * Copyright (C) 2006-2007 Auguria SARL         <info@auguria.org>
+ * Copyright (C) 2010      Regis Houssin        <regis@dolibarr.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,13 +19,13 @@
  */
 
 /**
- *	\file       htdocs/product/templates/product.livre.class.php
+ *	\file       htdocs/droitpret/templates/product.livre.class.php
  *	\ingroup    produit
  *	\brief      Fichier de la classe des produits specifiques de type livre
- *	\version    $Id: product.livre.class.php,v 1.1 2010/03/16 18:26:05 eldy Exp $
+ *	\version    $Id: product.livre.class.php,v 1.1 2010/03/22 11:49:14 hregis Exp $
  */
 
-require_once(DOL_DOCUMENT_ROOT.'/product/templates/product.livrecontrat.class.php');
+require_once(DOL_DOCUMENT_ROOT.'/product/canvas/livrecontrat/product.livrecontrat.class.php');
 
 
 /**
@@ -46,10 +47,11 @@ class ProductLivre extends Product
 		$this->db = $DB;
 		$this->id = $id ;
 		$this->user = $user;
+		$this->module = "droitpret";
+		$this->active = PRODUCT_SPECIAL_LIVRE;
 		$this->canvas = "livre";
 		$this->name = "livre";
 		$this->description = "Gestion des livres";
-		$this->active = PRODUIT_SPECIAL_LIVRE;
 		$this->menu_new = 'NewBook';
 		$this->menu_add = 1;
 		$this->menu_clear = 1;
@@ -248,8 +250,8 @@ class ProductLivre extends Product
 
 		return $result;
 	}
-	
-	
+
+
 	/**
 	 *    \brief      Mise a jour des donnees dans la base
 	 *    \param      datas        Tableau de donnees
@@ -315,7 +317,7 @@ class ProductLivre extends Product
 			$this->_setErrNo("UpdateCanvas",1281);
 			return -1;
 		}
-		 
+
 	}
 
 	/**
@@ -385,7 +387,7 @@ class ProductLivre extends Product
 	function assign_smarty_values(&$smarty, $action='')
 	{
 		global $conf,$langs;
-		
+
 		if ($action =='edit' or $action == 'create')
 		{
 			$this->GetAvailableFormat();
@@ -402,7 +404,7 @@ class ProductLivre extends Product
 			$smarty->assign('class_normal_ref', 'normal');
 			$smarty->assign('class_focus_ref',  'focus');
 		}
-		
+
 		$picto='title.png';
 		if (empty($conf->browser->firefox)) $picto='title.gif';
 		$smarty->assign('title_picto', img_picto('',$picto));
@@ -495,14 +497,15 @@ class ProductLivre extends Product
 	 */
 	function LoadListDatas($limit, $offset, $sortfield, $sortorder)
 	{
-		$sql = 'SELECT p.rowid, p.ref, p.label, pl.px_feuillet as price, ';
-		$sql.= ' p.duration, p.envente as statut, p.stock_loc';
-		$sql.= ',pl.pages';
-		$sql.= ',SUM(fd.qty) as ventes';
-		$sql.= ",sc.reel as casier, se.reel as entrepot";
+		$sql = 'SELECT p.rowid, p.ref, p.label, pl.px_feuillet as price';
+		$sql.= ', p.duration, p.envente as statut';
+		$sql.= ', pl.pages';
+		$sql.= ', SUM(fd.qty) as ventes';
+		$sql.= ', sc.location';
+		$sql.= ", sc.reel as casier, se.reel as entrepot";
 		$sql.= " FROM ".MAIN_DB_PREFIX."product as p";
 		$sql.= ' LEFT JOIN '.MAIN_DB_PREFIX.'facturedet as fd ON fd.fk_product = p.rowid';
-		$sql.= ','.MAIN_DB_PREFIX.'product_cnv_livre as pl';
+		$sql.= ', '.MAIN_DB_PREFIX.'product_cnv_livre as pl';
 		$sql.= ' LEFT JOIN '.MAIN_DB_PREFIX.'product_stock as sc ON sc.fk_product = pl.rowid AND sc.fk_entrepot = 1';
 		$sql.= ' LEFT JOIN '.MAIN_DB_PREFIX.'product_stock as se ON se.fk_product = pl.rowid AND se.fk_entrepot = 2';
 		$sql .= " WHERE p.rowid=pl.rowid ";
@@ -543,7 +546,7 @@ class ProductLivre extends Product
 			{
 				$datas = array();
 				$obj = $this->db->fetch_object($resql);
-				
+
 				$datas["id"]        = $obj->rowid;
 				$datas["ref"]       = $obj->ref;
 				$datas["titre"]     = $obj->label;
@@ -555,9 +558,9 @@ class ProductLivre extends Product
 				$datas["pages"]     = $obj->pages;
 				$datas["prix"]      = price($obj->price);
 				$datas["valo"]      = 0;
-				
+
 				array_push($this->list_datas,$datas);
-				
+
 				$i++;
 			}
 			$this->db->free($resql);
@@ -571,9 +574,9 @@ class ProductLivre extends Product
 	function GetAvailableFormat()
 	{
 		global $conf;
-		
+
 		$this->available_formats = array();
-		
+
 		$sql = "SELECT";
 		$sql.= " rowid";
 		$sql.= ", ".$this->db->decrypt('value')." as value";

@@ -1,5 +1,6 @@
 <?php
-/* Copyright (C) 2007 Patrick Raguin <patrick.raguin@gmail.com>
+/* Copyright (C) 2007 Patrick Raguin  <patrick.raguin@gmail.com>
+ * Copyright (C) 2010 Regis Houssin   <regis@dolibarr.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,13 +18,13 @@
  */
 
 /**
-	    \file       htdocs/compta/droitpret/pre.inc.php
-        \ingroup    pret
-		\brief      Fichier gestionnaire du menu de gauche de l'espace droitpret
-		\version    $Id: pre.inc.php,v 1.1 2010/03/16 18:26:05 eldy Exp $
-*/
+ *     \file       htdocs/droitpret/pre.inc.php
+ *     \ingroup    pret
+ *     \brief      Fichier gestionnaire du menu de gauche de l'espace droitpret
+ *     \version    $Id: pre.inc.php,v 1.3 2010/03/22 11:49:14 hregis Exp $
+ */
 
-require("../../main.inc.php");
+require("../main.inc.php");
 
 function llxHeader($head = "", $title="", $help_url='')
 {
@@ -35,18 +36,21 @@ function llxHeader($head = "", $title="", $help_url='')
 
 
 	// Produit specifique
-	$dir = DOL_DOCUMENT_ROOT . "/droitpret/templates/";
+	$dir = DOL_DOCUMENT_ROOT . "/product/canvas/";
 	if(is_dir($dir) && ! empty($conf->droitpret->enabled))
 	{
 		if ($handle = opendir($dir))
 		{
+			require_once(DOL_DOCUMENT_ROOT . "/product.class.php");
+			
 			while (($file = readdir($handle))!==false)
 			{
-				if (substr($file, strlen($file) -10) == '.class.php' && substr($file,0,8) == 'product.')
+				if (file_exists($dir.$file.'/product.'.$file.'.class.php'))
 				{
-					$parts = explode('.',$file);
-					$classname = 'Product'.ucfirst($parts[1]);
-					require_once($dir.$file);
+					$classfile = $dir.$file.'/product.'.$file.'.class.php';
+					$classname = 'Product'.ucfirst($file);
+
+					require_once($classfile);
 					$module = new $classname();
 
 					if ($module->active === '1' && $module->menu_add === 1)

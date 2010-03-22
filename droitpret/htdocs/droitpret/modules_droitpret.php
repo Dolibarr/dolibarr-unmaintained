@@ -1,5 +1,6 @@
 <?php
 /* Copyright (C) 2007 Patrick Raguin  <patrick.raguin@gmail.com>
+ * Copyright (C) 2010 Regis Houssin   <regis@dolibarr.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,17 +19,17 @@
  */
 
 /**
-        \file       htdocs/product/droitpret/modules_droipret.php
-        \ingroup    droitpret
-        \brief      Fichier contenant la classe m�re de generation des exports de droits de prets
-        \version    $Id: modules_droitpret.php,v 1.1 2010/03/16 18:26:05 eldy Exp $
-*/
+ *      \file       htdocs/droitpret/modules_droipret.php
+ *      \ingroup    droitpret
+ *      \brief      Fichier contenant la classe mere de generation des exports de droits de prets
+ *      \version    $Id: modules_droitpret.php,v 1.3 2010/03/22 11:49:14 hregis Exp $
+ */
 
 
 /**
-   \class      ModeleDroitPret
-   \brief      Classe m�re des mod�les de format d'export de droits de pr�ts
-*/
+ *  \class      ModeleDroitPret
+ *  \brief      Classe mere des modeles de format d'export de droits de prets
+ */
 
 class ModeleDroitPret
 {
@@ -42,7 +43,7 @@ class ModeleDroitPret
     }
 
     /**
-     *      \brief      Charge en memoire et renvoie la liste des mod�les actifs
+     *      \brief      Charge en memoire et renvoie la liste des modeles actifs
      *      \param      db      Handler de base
      */
     function liste_rapport($db)
@@ -72,13 +73,7 @@ class ModeleDroitPret
 
         return $liste;
     }
-
-
-
-
-
-
+    
 }
-
 
 ?>

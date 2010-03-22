@@ -1,6 +1,7 @@
 <?php
 /* Copyright (C) 2006-2007 Rodolphe Quiedeville <rodolphe@quiedeville.org>
- * Copyright (C) 2006-2007 Auguria SARL <info@auguria.org>
+ * Copyright (C) 2006-2007 Auguria SARL         <info@auguria.org>
+ * Copyright (C) 2010      Regis Houssin        <regis@dolibarr.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,18 +19,18 @@
  */
 
 /**
-   \file       htdocs/product/templates/product.livre.class.php
-   \ingroup    produit
-   \brief      Fichier de la classe des produits specifiques de type livre
-   \version    $Id: product.livrecontrat.class.php,v 1.1 2010/03/16 18:26:05 eldy Exp $
-*/
+ *   \file       htdocs/product/canvas/livrecontrat/product.livrecontrat.class.php
+ *   \ingroup    droitpret
+ *   \brief      Fichier de la classe des produits specifiques de type livrecontrat
+ *   \version    $Id: product.livrecontrat.class.php,v 1.1 2010/03/22 11:49:14 hregis Exp $
+ */
 
-require_once(DOL_DOCUMENT_ROOT.'/product/templates/product.livre.class.php');
+require_once(DOL_DOCUMENT_ROOT.'/product/canvas/livre/product.livre.class.php');
 
 /**
-   \class      ProductLivreContrat
-   \brief      Classe permettant la gestion des livres, cette classe surcharge la classe produit
-*/
+ *  \class      ProductLivreContrat
+ *  \brief      Classe permettant la gestion des livres, cette classe surcharge la classe produit
+ */
 
 class ProductLivreContrat extends Product
 {
@@ -42,10 +43,11 @@ class ProductLivreContrat extends Product
   {
     $this->db = $DB;
     $this->id = $id ;
+    $this->module = "droitpret";
+    $this->active = PRODUCT_SPECIAL_LIVRECONTRAT;
     $this->canvas = "livrecontrat";
     $this->name = "livrecontrat";
     $this->description = "Gestion des contrats des livres";
-    $this->active = PRODUIT_SPECIAL_LIVRECONTRAT;
     $this->menu_new = '';
     $this->menu_add = 0;
     $this->menu_clear = 1;

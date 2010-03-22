@@ -1,5 +1,6 @@
 <?php
 /* Copyright (C) 2006 Rodolphe Quiedeville <rodolphe@quiedeville.org>
+ * Copyright (C) 2010 Regis Houssin        <regis@dolibarr.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,18 +18,18 @@
  */
 
 /**
-   \file       htdocs/product/templates/product.livre.class.php
-   \ingroup    produit
-   \brief      Fichier de la classe des produits specifiques de type livre
-   \version    $Id: product.livrecouverture.class.php,v 1.1 2010/03/16 18:26:05 eldy Exp $
-*/
+ *  \file       htdocs/droitpret/templates/product.livre.class.php
+ *  \ingroup    produit
+ *  \brief      Fichier de la classe des produits specifiques de type livre
+ *  \version    $Id: product.livrecouverture.class.php,v 1.1 2010/03/22 11:49:15 hregis Exp $
+ */
 
-require_once(DOL_DOCUMENT_ROOT.'/product/templates/product.livre.class.php');
+require_once(DOL_DOCUMENT_ROOT.'/product/canvas/livre/product.livre.class.php');
 
 /**
-   \class      ProductLivreCouverture
-   \brief      Classe permettant la gestion des livres, cette classe surcharge la classe produit
-*/
+ *  \class      ProductLivreCouverture
+ *  \brief      Classe permettant la gestion des livres, cette classe surcharge la classe produit
+ */
 
 class ProductLivreCouverture extends Product
 {
@@ -41,10 +42,11 @@ class ProductLivreCouverture extends Product
   {
     $this->db = $DB;
     $this->id = $id ;
+    $this->module = "droitpret";
+    $this->active = PRODUCT_SPECIAL_LIVRECOUVERTURE;
     $this->canvas = "livrecouverture";
     $this->name = "livrecouverture";
     $this->description = "Gestion des couvertures des livres";
-    $this->active = PRODUIT_SPECIAL_LIVRECOUVERTURE;
     $this->menu_new = '';
     $this->menu_add = 0;
     $this->menu_clear = 1;

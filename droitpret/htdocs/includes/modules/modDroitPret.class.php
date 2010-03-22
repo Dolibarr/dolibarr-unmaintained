@@ -1,6 +1,6 @@
 <?php
 /* Copyright (C) 2007      Patrick Raguin    <patrick.raguin@gmail.com>
- * Copyright (C) 2005-2009 Regis Houssin     <regis@dolibarr.fr>
+ * Copyright (C) 2005-2010 Regis Houssin     <regis@dolibarr.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
 
 /**
  *	\defgroup   DroitPret     Module droitpret
- *	\version	$Id: modDroitPret.class.php,v 1.1 2010/03/16 18:26:05 eldy Exp $
+ *	\version	$Id: modDroitPret.class.php,v 1.2 2010/03/22 11:49:15 hregis Exp $
  *	\brief      Module pour gerer le suivi des droits de prets
  */
 
@@ -124,6 +124,8 @@ class modDroitPret  extends DolibarrModules
 	function init()
 	{
 		$sql = array();
+		
+		$result=$this->load_tables();
 
 		return $this->_init($sql);
 	}
@@ -137,6 +139,16 @@ class modDroitPret  extends DolibarrModules
 		$sql = array();
 
 		return $this->_remove($sql);
+	}
+	
+	/**
+	 *		\brief		Create tables and keys required by module
+	 *					This function is called by this->init.
+	 * 		\return		int		<=0 if KO, >0 if OK
+	 */
+	function load_tables()
+	{
+		return $this->_load_tables('/droitpret/sql/');
 	}
 }
 ?>

@@ -15,34 +15,22 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: livre-create.tpl,v 1.1 2010/03/16 18:26:05 eldy Exp $
+ * $Id: livrecouverture-edit.tpl,v 1.1 2010/03/22 11:49:14 hregis Exp $
  *}
  
-<!-- BEGIN SMARTY TEMPLATE -->
-
-<table width="100%" border="0" class="notopnoleftnoright" style="margin-bottom: 2px;">
-<tr>
-	<td class="nobordernopadding" width="40" align="left" valign="middle">
-		{$title_picto}
-	</td>
-	<td class="nobordernopadding" valign="middle">
-    	<div class="titre">{$title_text}</div>
-	</td>
-</tr>
-</table>
+ <!-- BEGIN SMARTY TEMPLATE -->
 
 <form id="evolForm" action="fiche.php" method="post">
-<input type="hidden" name="action" value="add">
-<input type="hidden" name="type" value="0">
-<input type="hidden" name="canvas" value="livre">
-<input type="hidden" name="price_base_type" value="TTC">
+<input type="hidden" name="action" value="update">
+<input type="hidden" name="id" value="{$prod_id}">
+<input type="hidden" name="canvas" value="{$prod_canvas}">
 
 <table class="border" width="100%">
  <tr>
-   <td width="15%">Référence</td>
+   <td width="15%">Réf.</td>
    <td colspan="2">
     <input name="ref" size="20" value="{$prod_ref}"
-     class="{$class_normal_ref}" onfocus="this.className='{$class_focus_ref}';" onblur="this.className='{$class_normal_ref}';">
+     class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">
   </td>
  </tr>
 
@@ -66,15 +54,21 @@
     {$prod_isbn}
   </td>
   <td width="15%">ISBN-13</td>
-  <td width="35%"><i>sera calculé</i>
+  <td width="35%">978-
+    <input name="isbn13" size="13" maxlength="12" class="normal" 
+     onfocus="this.className='focus';" onblur="this.className='normal';" value="{$prod_isbn}">
   </td>
  </tr>
 
  <tr>
   <td width="15%">EAN</td>
-  <td colspan="3" width="85%"><i>sera calculé</i></td>
+  <td width="35%">
+    <input class="normal" name="ean" size="16" maxlength="15" value="{$prod_ean}"
+     onfocus="this.className='focus';" onblur="this.className='normal';">
+  </td>
+  <td>Code barre</td>
+  <td>{$prod_ean}</td>
  </tr>
-
  <tr>
   <td>Pages</td>
   <td>
@@ -83,45 +77,40 @@
   </td>
   <td>Format</td>
   <td>
-
-   <select class="flat" name="format">
-    {html_options values=$livre_available_formats output=$livre_available_formats selected="$prod_format"}
-   </select>
-
+  <input name="format" size="8" maxlength="7" value="{$prod_format}"
+   class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">
 </td>
  </tr>
 <tr>
  <td>Prix au feuillet</td>
  <td>
   <input name="px_feuillet" type="text" size="7" maxlength="6" value="{$prod_pxfeuil}"
-   class="normal" onfocus="this.className='focus';" onblur="this.className='normal';"> HT
+   class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">
  </td>
  <td>Prix couverture</td>
  <td>
   <input name="px_couverture" type="text" size="7" maxlength="6" value="{$prod_pxcouv}"
-   class="normal" onfocus="this.className='focus';" onblur="this.className='normal';"> HT
+   class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">
  </td>
 </tr>
 <tr>
  <td>Prix de revient</td>
- <td><i>sera calculé</i></td>
- <td>Prix reliure</td>
- <td>
-  <input name="px_reliure" type="text" size="7" maxlength="6" value="{$prod_pxreliure}"
-   class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">
- </td>
+ <td colspan="3">{$prod_pxrevient}</td>
 </tr>
+</table>
 
+<br>
+
+<table class="border" width="100%">
  <tr>
-  <td>Prix de vente</td>
-  <td>
-   <input name="price" type="text" size="7" maxlength="6" value="{$prod_price}"
-    class="normal" onfocus="this.className='focus';" onblur="this.className='normal';"> TTC
-  </td>
-  <td>Taux TVA</td>
-  <td>
+  <td width="15%">Prix de vente</td>
+  <td width="35%">{$prod_pxvente}</td>
+  <td width="15%">Taux TVA</td>
+  <td width="35%">
    <select class="flat" name="tva_tx">
-    {html_options values=$tva_taux_value output=$tva_taux_libelle selected="5.5"}
+    <option value="0">0%</option>
+    <option value="5.5">5.5%</option>
+    <option value="19.6" selected="true">19.6%</option>
    </select>
   </td>
  </tr>
@@ -131,97 +120,93 @@
 
 <table class="border" width="100%">
  <tr>
-  <td width="15%">Seuil stock</td>
+ <td width="15%">Stock</td>
+ <td width="35%"><b>{$prod_stock_dispo}</b></td>
+  <td width="15%">Seuil d'alerte stock</td>
   <td width="35%">
    <input name="seuil_stock_alerte" size="4" value="{$prod_seuil_stock_alerte}"
      class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">
   </td>
+</tr>
+
+<tr>
   <td width="15%">Emplacement Stock</td>
-  <td width="35%">
-   <input name="stock_loc" size="8" value="{$prod_stock_loc}"
+  <td width="85%" colspan="3">
+   <input name="stock_loc" size="8" value=""
      class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">
   </td>
  </tr>
  <tr>
   <td>Statut</td>
-  <td>
+  <td colspan="3">
    <select class="flat" name="statut">
     <option value="1" selected="true">En vente</option>
     <option value="0">Hors vente</option>
    </select>
   </td>
-  <td>Poids</td>
-  <td>
-   <input name="weight" size="5" value="{$prod_weight}"
-     class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">g
-   <input name="weight_units" type="hidden" value="-3">
-  </td>
  </tr>
 </table>
 
 <br>
 
 <table class="border" width="100%">
- <tr>
-  <td>Auteur / Editeur</td>
-  <td>
-   <select class="flat" name="auteur">
-    {html_options options=$livre_available_auteurs selected=$livre_auteur_id}
-   </select>
-  </td>
-  <td>Saisi par</td>
-  <td>
-    {$user}
-  </td>
- </tr>
 <tr>
  <td width="15%">Durée du contrat :</td>
  <td width="35%">
-  <input name="contrat_duree" type="text" size="7" maxlength="6" value="{$livre_contrat_duree}"
+  <input name="contrat_duree" type="text" size="7" maxlength="6" value="{$prod_contrat_duree}"
    class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">
  </td>
  <td width="15%">Date d'application</td>
- <td width="35%">{html_select_date field_order='DMY' start_year='-10' reverse_years=True all_extra='class="flat"'}</td>
+ <td width="35%">
+  <input name="contrat_date_app" type="text" size="7" maxlength="6" value="{$prod_contrat_date_app}"
+   class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">
+ </td>
 </tr>
 
 <tr>
  <td>Taux conclu</td>
  <td>
-  <input name="contrat_taux" type="text" size="7" maxlength="6" value="{$livre_contrat_taux}"
+  <input name="contrat_taux" type="text" size="7" maxlength="6" value="{$prod_contrat_taux}"
    class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">%
  </td>
  <td>Quantité achetée</td>
  <td>
-  <input name="contrat_quant" type="text" size="7" maxlength="6" value="{$livre_contrat_quant}"
+  <input name="contrat_quant" type="text" size="7" maxlength="6" value="{$prod_contrat_quant}"
    class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">
  </td>
 </tr>
-</table>
 
-<br>
-
-<table class="border" width="100%">
  <tr>
-  <td width="15%" valign="top">Description</td>
-  <td width="85%" colspan="3">
+  <td valign="top">Description</td>
+  <td colspan="3">
     <textarea name="desc" rows="6" cols="70"></textarea>
   </td>
  </tr>
 
  <tr>
-  <td width="15%" valign="top">Note (non visible sur les factures, propals...)
+  <td valign="top">Note (non visible sur les factures, propals...)
   </td>
-  <td width="85%" colspan="3">
+  <td colspan="3">
    <textarea name="note" rows="4" cols="70"></textarea>
   </td>
  </tr>
  <tr>
   <td colspan="4" align="center">
-   <input type="submit" class="button" value="Créer">
+   <input type="submit" class="button" value="Enregistrer">&nbsp;
+   <input type="submit" class="button" name="cancel" value="Annuler">
   </td>
  </tr>
 
 </table>
 </form>
+<!-- CUT HERE -->
+
+
+
+
+
+
+
+
 
 <!-- END SMARTY TEMPLATE -->

@@ -1,6 +1,7 @@
 <?php
 /* Copyright (C) 2001-2002 Rodolphe Quiedeville <rodolphe@quiedeville.org>
  * Copyright (C) 2004-2006 Laurent Destailleur  <eldy@users.sourceforge.net>
+ * Copyright (C) 2010      Regis Houssin        <regis@dolibarr.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,19 +17,19 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: index.php,v 1.1 2010/03/16 18:26:05 eldy Exp $
+ * $Id: index.php,v 1.3 2010/03/22 11:49:14 hregis Exp $
  */
 
 /**
-	    \file       htdocs/compta/dons/index.php
-		\ingroup    don
-		\brief      Page accueil espace don
-		\version    $Revision: 1.1 $
-*/
+ *     \file       htdocs/droitpret/index.php
+ *     \ingroup    droitpret
+ *     \brief      Page accueil droitpret
+ *     \version    $Revision: 1.3 $
+ */
 
 require("./pre.inc.php");
-require_once(DOL_DOCUMENT_ROOT ."/product/droitpret/droitpret.class.php");
-require_once(DOL_DOCUMENT_ROOT ."/product/droitpret/modules_droitpret.php");
+require_once(DOL_DOCUMENT_ROOT ."/droitpret/droitpret.class.php");
+require_once(DOL_DOCUMENT_ROOT ."/droitpret/modules_droitpret.php");
 
 
 global $conf;
@@ -43,26 +44,20 @@ if($_GET['action'] && $_GET['action'] == 'create')
 	if($dated < $datef)
 	{
 		$droitpret = new DroitPret($db,$dated,$datef);
-		$droitpret->CreateNewRapport();	
-		$mesg = $droitpret->EnvoiMail();	
+		$droitpret->CreateNewRapport();
+		$mesg = $droitpret->EnvoiMail();
 	}
 	else
 	{
 		$mesg='<div class="error">'.$langs->trans("ErrorDate").'</div>';
 	}
-
-
-
-	
-	
 }
-
 
 
 /*
  * Affichage
  */
- 
+
 llxHeader();
 
 print_fiche_titre($langs->trans("DroitPretArea"));
@@ -83,17 +78,17 @@ print '<input type="hidden" name="token" value="'.$_SESSION['newtoken'].'">';
 
 
 print '<table class="border" width="100%">';
-print '<tr><td>Date de début de période</td><td>';
+print '<tr><td>Date de dÃ©but de pÃ©riode</td><td>';
 
 
 $html->select_date($lastRapport,'d',1,1,'',"dated");
 print '</td></tr>';
-print '<tr><td>Date de fin de période</td><td>';
+print '<tr><td>Date de fin de pÃ©riode</td><td>';
 $html->select_date('','f',1,1,'',"datef");
 print '</td></tr>';
 print '</table>';
 
-print '<br><center><input type="submit" class="button" value="Générer"></center>';
+print '<br><center><input type="submit" class="button" value="GÃ©nÃ©rer"></center>';
 
 print '</form>';
 
@@ -101,8 +96,8 @@ print '</form>';
 print '<table width="100%" class="noborder">';
 print '<tr class="liste_titre"><td>Document</td>';
 print '<td>Date du rapport</td>';
-print '<td>Début période</td>';
-print '<td>Fin période</td>';
+print '<td>DÃ©but pÃ©riode</td>';
+print '<td>Fin pÃ©riode</td>';
 print '<td>Nb factures</td>';
 print '</tr>';
 
@@ -128,8 +123,6 @@ if ($resql)
 		$i++;
 	}
 }
-
-
 
 print '</table>';
 

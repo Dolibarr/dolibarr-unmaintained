@@ -1,6 +1,6 @@
 <?php
-
 /* Copyright (C) 2007 Patrick Raguin  <patrick.raguin@gmail.com>
+ * Copyright (C) 2010 Regis Houssin   <regis@dolibarr.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,17 +18,17 @@
  */
 
 /**
-        \file       htdocs/product/droitpret/droitpret.class.php
-        \ingroup    pret
-        \brief      Fichier de la classe ddes droits de pr�ts
-        \version    $Id: droitpret.class.php,v 1.1 2010/03/16 18:26:05 eldy Exp $
-*/
+ *     \file       htdocs/droitpret/droitpret.class.php
+ *     \ingroup    droitpret
+ *     \brief      Fichier de la classe ddes droits de prets
+ *     \version    $Id: droitpret.class.php,v 1.3 2010/03/22 11:49:14 hregis Exp $
+ */
 
 
 /**
-        \class 		DroitPret
-        \brief 		Classe permettant la gestion des droits de prets
-*/
+ *    \class 		DroitPret
+ *    \brief 		Classe permettant la gestion des droits de prets
+ */
 
 class DroitPret
 {
