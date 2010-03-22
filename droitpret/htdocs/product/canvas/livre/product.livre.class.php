@@ -22,7 +22,7 @@
  *	\file       htdocs/droitpret/templates/product.livre.class.php
  *	\ingroup    produit
  *	\brief      Fichier de la classe des produits specifiques de type livre
- *	\version    $Id: product.livre.class.php,v 1.2 2010/03/22 16:58:13 hregis Exp $
+ *	\version    $Id: product.livre.class.php,v 1.3 2010/03/22 19:57:15 hregis Exp $
  */
 
 require_once(DOL_DOCUMENT_ROOT.'/product/canvas/livrecontrat/product.livrecontrat.class.php');
@@ -77,7 +77,7 @@ class ProductLivre extends Product
 		$this->onglets[1][1] = 'Editeur1';
 	}
 
-	function GetListeTitre()
+	function getTitle()
 	{
 		return 'Livres';
 	}
