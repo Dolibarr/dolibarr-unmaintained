@@ -21,7 +21,7 @@
  *     \file       htdocs/droitpret/pre.inc.php
  *     \ingroup    pret
  *     \brief      Fichier gestionnaire du menu de gauche de l'espace droitpret
- *     \version    $Id: pre.inc.php,v 1.4 2010/03/22 15:30:59 hregis Exp $
+ *     \version    $Id: pre.inc.php,v 1.5 2010/03/23 07:57:27 hregis Exp $
  */
 
 require("../main.inc.php");
@@ -56,7 +56,7 @@ function llxHeader($head = "", $title="", $help_url='')
 					if ($module->active === '1' && $module->menu_add === 1)
 					{
 						$module->PersonnalizeMenu($menu);
-						$langs->load("products_".$module->canvas);
+						$langs->load("@droitpret");
 						for ($j = 0 ; $j < sizeof($module->menus) ; $j++)
 						{
 							$menu->add_submenu($module->menus[$j][0], $langs->trans($module->menus[$j][1]));

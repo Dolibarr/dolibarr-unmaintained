@@ -1,0 +1,9 @@
+# Dolibarr language file - fr_FR - droitpret
+CHARSET=UTF-8
+
+NewBook=Nouveau livre
+ListCover=Couvertures
+ListContract=Contrats
+Book=Livre
+Books=Livres
+BookList=Liste livres
