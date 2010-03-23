@@ -21,7 +21,7 @@
  *   	\file       htdocs/admin/droitpret.php
  *		\ingroup    pret
  *		\brief      Page d'administration/configuration du module DroitPret
- *		\version    $Id: droitpret.php,v 1.1 2010/03/22 11:49:14 hregis Exp $
+ *		\version    $Id: droitpret.php,v 1.1 2010/03/23 07:34:05 hregis Exp $
  */
 
 require("../main.inc.php");

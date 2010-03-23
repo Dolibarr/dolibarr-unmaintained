@@ -22,7 +22,7 @@
  *	\file       htdocs/droitpret/templates/product.livre.class.php
  *	\ingroup    produit
  *	\brief      Fichier de la classe des produits specifiques de type livre
- *	\version    $Id: product.livre.class.php,v 1.3 2010/03/22 19:57:15 hregis Exp $
+ *	\version    $Id: product.livre.class.php,v 1.4 2010/03/23 07:34:04 hregis Exp $
  */
 
 require_once(DOL_DOCUMENT_ROOT.'/product/canvas/livrecontrat/product.livrecontrat.class.php');
@@ -215,8 +215,10 @@ class ProductLivre extends Product
 		if ($result >= 0)
 		{
 			$sql = "SELECT l.rowid,l.isbn,l.ean,l.pages,l.fk_couverture,l.format,l.fk_contrat";
-			$sql.= ",l.px_feuillet,l.px_revient,l.px_couverture,l.px_reliure, s.nom, s.rowid as socid";
-			$sql.= " FROM ".MAIN_DB_PREFIX."product_cnv_livre as l LEFT JOIN ".MAIN_DB_PREFIX."societe as s ON s.rowid = l.fk_auteur";
+			$sql.= ",l.px_feuillet,l.px_revient,l.px_couverture,l.px_reliure";
+			$sql.= ", s.nom, s.rowid as socid";
+			$sql.= " FROM ".MAIN_DB_PREFIX."product_cnv_livre as l";
+			$sql.= " LEFT JOIN ".MAIN_DB_PREFIX."societe as s ON s.rowid = l.fk_auteur";
 			if ($id) $sql.= " WHERE l.rowid = '".$id."'";
 			if ($ref) $sql.= " WHERE l.ref = '".addslashes($ref)."'";
 
