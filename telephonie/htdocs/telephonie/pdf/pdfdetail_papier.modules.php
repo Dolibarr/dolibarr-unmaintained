@@ -16,12 +16,12 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  * or see http://www.gnu.org/
  *
- * $Id: pdfdetail_papier.modules.php,v 1.1 2009/10/20 16:19:30 eldy Exp $
+ * $Id: pdfdetail_papier.modules.php,v 1.2 2010/03/26 15:45:40 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/pdf/pdfdetail_papier.modules.php,v $
  *
  * Génère un PDF de la première page de résumé et un tableur des communications
  */
-require_once DOL_DOCUMENT_ROOT."/facture.class.php";
+require_once DOL_DOCUMENT_ROOT."/compta/facture/facture.class.php";
 require_once DOL_DOCUMENT_ROOT."/telephonie/facturetel.class.php";
 require_once DOL_DOCUMENT_ROOT."/telephonie/pdf/pdfdetail_standard.modeles.php";
 require_once DOL_DOCUMENT_ROOT."/telephonie/pdf/xlsdetail_nodet.modules.php";

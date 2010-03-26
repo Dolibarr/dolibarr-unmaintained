@@ -21,7 +21,7 @@
 require ("../../master.inc.php");
 
 require_once (DOL_DOCUMENT_ROOT."/telephonie/lignetel.class.php");
-require_once DOL_DOCUMENT_ROOT."/facture.class.php";
+require_once DOL_DOCUMENT_ROOT."/compta/facture/facture.class.php";
 require_once DOL_DOCUMENT_ROOT."/telephonie/facturetel.class.php";
 require_once DOL_DOCUMENT_ROOT."/telephonie/pdfdetail_ibreizh.modules.php";
 

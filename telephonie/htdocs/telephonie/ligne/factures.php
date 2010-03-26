@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: factures.php,v 1.1 2009/10/20 16:19:22 eldy Exp $
+ * $Id: factures.php,v 1.2 2010/03/26 15:45:40 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/ligne/factures.php,v $
  *
  */
@@ -24,7 +24,7 @@ require("./pre.inc.php");
 
 $mesg = '';
 
-require_once DOL_DOCUMENT_ROOT."/facture.class.php";
+require_once DOL_DOCUMENT_ROOT."/compta/facture/facture.class.php";
 
 llxHeader("","","Fiche Ligne");
 
@@ -215,5 +215,5 @@ else
 
 $db->close();
 
-llxFooter("<em>Derni&egrave;re modification $Date: 2009/10/20 16:19:22 $ r&eacute;vision $Revision: 1.1 $</em>");
+llxFooter("<em>Derni&egrave;re modification $Date: 2010/03/26 15:45:40 $ r&eacute;vision $Revision: 1.2 $</em>");
 ?>

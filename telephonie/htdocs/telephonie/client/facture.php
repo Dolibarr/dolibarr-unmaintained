@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: facture.php,v 1.1 2009/10/20 16:19:27 eldy Exp $
+ * $Id: facture.php,v 1.2 2010/03/26 15:45:40 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/client/facture.php,v $
  */
 
@@ -25,7 +25,7 @@
    \file       htdocs/telephonie/client/facture.php
    \ingroup    telephonie/facture
    \brief      Page de visualisation d'une facture
-   \version    $Revision: 1.1 $
+   \version    $Revision: 1.2 $
 */
 require("./pre.inc.php");
 
@@ -36,7 +36,7 @@ $langs->load("bills");
 
 $warning_delay=31*24*60*60; // Delai affichage warning retard (si retard paiement facture > delai)
 
-require_once DOL_DOCUMENT_ROOT."/facture.class.php";
+require_once DOL_DOCUMENT_ROOT."/compta/facture/facture.class.php";
 require_once DOL_DOCUMENT_ROOT."/paiement.class.php";
 require_once DOL_DOCUMENT_ROOT."/lib/CMailFile.class.php";
 include_once DOL_DOCUMENT_ROOT."/contact.class.php";
@@ -728,5 +728,5 @@ if ($_GET["facid"] > 0)
 
 $db->close();
 
-llxFooter('$Date: 2009/10/20 16:19:27 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2010/03/26 15:45:40 $ - $Revision: 1.2 $');
 ?>
