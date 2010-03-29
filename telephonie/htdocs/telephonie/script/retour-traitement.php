@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: retour-traitement.php,v 1.1 2009/10/20 16:19:23 eldy Exp $
+ * $Id: retour-traitement.php,v 1.2 2010/03/29 20:53:24 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/script/retour-traitement.php,v $
  *
  * Script de traitement des retour de commande
@@ -27,7 +27,7 @@ require_once (DOL_DOCUMENT_ROOT."/telephonie/lignetel.class.php");
 require_once (DOL_DOCUMENT_ROOT."/telephonie/facturetel.class.php");
 require_once (DOL_DOCUMENT_ROOT."/telephonie/telephonie-tarif.class.php");
 require_once (DOL_DOCUMENT_ROOT."/telephonie/communication.class.php");
-require_once (DOL_DOCUMENT_ROOT."/societe.class.php");
+require_once (DOL_DOCUMENT_ROOT."/societe/societe.class.php");
 require_once (DOL_DOCUMENT_ROOT."/telephonie/dolibarrmail.class.php");
 
 if ($verbose) dol_syslog("retour-traitement");

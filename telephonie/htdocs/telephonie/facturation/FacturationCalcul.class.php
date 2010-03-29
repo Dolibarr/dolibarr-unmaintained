@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: FacturationCalcul.class.php,v 1.1 2009/10/20 16:19:21 eldy Exp $
+ * $Id: FacturationCalcul.class.php,v 1.2 2010/03/29 20:53:25 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/facturation/FacturationCalcul.class.php,v $
  *
  *
@@ -30,9 +30,9 @@
    \file       htdocs/telephonie/script/facturation-calcul.php
    \ingroup    telephonie
    \brief      Calcul des factures
-   \version    $Revision: 1.1 $
+   \version    $Revision: 1.2 $
 */
-require_once (DOL_DOCUMENT_ROOT."/societe.class.php");
+require_once (DOL_DOCUMENT_ROOT."/societe/societe.class.php");
 require_once (DOL_DOCUMENT_ROOT."/telephonie/lignetel.class.php");
 require_once (DOL_DOCUMENT_ROOT."/telephonie/facturetel.class.php");
 require_once (DOL_DOCUMENT_ROOT."/telephonie/communication.class.php");

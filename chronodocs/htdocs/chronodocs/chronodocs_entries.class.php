@@ -21,14 +21,14 @@
         \file       chronodocs/chronodocs_entries.class.php
         \ingroup    chronodocs
         \brief      CRUD class file for chronodocs entries (Create/Read/Update/Delete)
-		\version    $Id: chronodocs_entries.class.php,v 1.4 2010/03/29 16:41:26 grandoc Exp $
+		\version    $Id: chronodocs_entries.class.php,v 1.5 2010/03/29 20:53:25 grandoc Exp $
 		\author	Raphael Bertrand (Resultic) <raphael.bertrand@resultic.fr>
 		\remarks	Initialy built by build_class_from_table on 2008-08-18 17:28
 */
 
 // Put here all includes required by your class file
 require_once(DOL_DOCUMENT_ROOT."/core/commonobject.class.php");
-require_once(DOL_DOCUMENT_ROOT."/societe.class.php");
+require_once(DOL_DOCUMENT_ROOT."/societe/societe.class.php");
 require_once(DOL_DOCUMENT_ROOT."/chronodocs/chronodocs_types.class.php");
 //require_once(DOL_DOCUMENT_ROOT."/chronodocs/chronodocs_propfields.class.php");
 require_once(DOL_DOCUMENT_ROOT."/chronodocs/chronodocs_propvalues.class.php");
