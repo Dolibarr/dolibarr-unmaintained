@@ -21,13 +21,13 @@
         \file       dev/skeletons/chronodocs_propvalues.class.php
         \ingroup    mymodule othermodule1 othermodule2
         \brief      This file is an example for a CRUD class file (Create/Read/Update/Delete)
-		\version    $Id: chronodocs_propvalues.class.php,v 1.2 2008/11/02 00:13:03 raphael_bertrand Exp $
+		\version    $Id: chronodocs_propvalues.class.php,v 1.3 2010/03/29 16:41:26 grandoc Exp $
 		\author		Put author name here
 		\remarks	Initialy built by build_class_from_table on 2008-09-03 17:35
 */
 
 // Put here all includes required by your class file
-//require_once(DOL_DOCUMENT_ROOT."/commonobject.class.php");
+//require_once(DOL_DOCUMENT_ROOT."/core/commonobject.class.php");
 //require_once(DOL_DOCUMENT_ROOT."/chronodocs/chronodocs_types.class.php");
 //require_once(DOL_DOCUMENT_ROOT."/chronodocs/chronodocs_entries.class.php");
 require_once(DOL_DOCUMENT_ROOT."/chronodocs/chronodocs_propfields.class.php");
