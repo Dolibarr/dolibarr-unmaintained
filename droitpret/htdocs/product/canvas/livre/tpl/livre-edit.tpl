@@ -15,15 +15,24 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: livrecouverture-edit.tpl,v 1.1 2010/03/22 11:49:14 hregis Exp $
+ * $Id: livre-edit.tpl,v 1.1 2010/03/30 13:26:24 hregis Exp $
  *}
  
- <!-- BEGIN SMARTY TEMPLATE -->
+<!-- BEGIN SMARTY TEMPLATE -->
 
 <form id="evolForm" action="fiche.php" method="post">
 <input type="hidden" name="action" value="update">
 <input type="hidden" name="id" value="{$prod_id}">
 <input type="hidden" name="canvas" value="{$prod_canvas}">
+<input type="hidden" name="price_base_type" value="TTC">
+
+<table width="100%" border="0" class="notopnoleftnoright">
+<tr>
+	<td class="notopnoleftnoright" valign="middle">
+    	<div class="titre">Éditer Livre</div>
+	</td>
+</tr>
+</table>
 
 <table class="border" width="100%">
  <tr>
@@ -77,9 +86,18 @@
   </td>
   <td>Format</td>
   <td>
-  <input name="format" size="8" maxlength="7" value="{$prod_format}"
-   class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">
-</td>
+   <select class="flat" name="format">
+    {html_options values=$livre_available_formats output=$livre_available_formats selected="$prod_format"}
+   </select>
+  </td>
+ </tr>
+ <tr>
+  <td>Poids</td>
+  <td colspan="3">
+   <input name="weight" size="5" value="{$prod_weight}"
+     class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">g
+   <input name="weight_units" type="hidden" value="-3">
+  </td>
  </tr>
 <tr>
  <td>Prix au feuillet</td>
@@ -95,7 +113,12 @@
 </tr>
 <tr>
  <td>Prix de revient</td>
- <td colspan="3">{$prod_pxrevient}</td>
+ <td>{$prod_pxrevient}</td>
+ <td>Prix reliure</td>
+ <td>
+  <input name="px_reliure" type="text" size="7" maxlength="6" value="{$prod_pxreliure}"
+   class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">
+ </td>
 </tr>
 </table>
 
@@ -104,13 +127,11 @@
 <table class="border" width="100%">
  <tr>
   <td width="15%">Prix de vente</td>
-  <td width="35%">{$prod_pxvente}</td>
+  <td width="35%">{$prod_pxvente} TTC</td>
   <td width="15%">Taux TVA</td>
   <td width="35%">
    <select class="flat" name="tva_tx">
-    <option value="0">0%</option>
-    <option value="5.5">5.5%</option>
-    <option value="19.6" selected="true">19.6%</option>
+    {html_options values=$tva_taux_value output=$tva_taux_libelle selected="$prod_tva_tx"}
    </select>
   </td>
  </tr>
@@ -120,7 +141,7 @@
 
 <table class="border" width="100%">
  <tr>
- <td width="15%">Stock</td>
+ <td width="15%">Stock disponible</td>
  <td width="35%"><b>{$prod_stock_dispo}</b></td>
   <td width="15%">Seuil d'alerte stock</td>
   <td width="35%">
@@ -132,7 +153,7 @@
 <tr>
   <td width="15%">Emplacement Stock</td>
   <td width="85%" colspan="3">
-   <input name="stock_loc" size="8" value=""
+   <input name="stock_loc" size="8" value="{$prod_stock_loc}"
      class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">
   </td>
  </tr>
@@ -140,8 +161,7 @@
   <td>Statut</td>
   <td colspan="3">
    <select class="flat" name="statut">
-    <option value="1" selected="true">En vente</option>
-    <option value="0">Hors vente</option>
+    {html_options values=$prod_statuts_id output=$prod_statuts_value selected="$prod_statut_id"}
    </select>
   </td>
  </tr>
@@ -150,31 +170,75 @@
 <br>
 
 <table class="border" width="100%">
+
+{if $livre_contrat_locked eq '0'}
+<tr>
+ <td>Auteur / Editeur</td>
+ <td>
+   <select class="flat" name="auteur">
+    {html_options options=$livre_available_auteurs selected=$livre_auteur_id}
+   </select>
+ </td>
+ <td>Saisi par</td><td>{$livre_contrat_user_fullname}</td>
+</tr>
 <tr>
  <td width="15%">Durée du contrat :</td>
  <td width="35%">
-  <input name="contrat_duree" type="text" size="7" maxlength="6" value="{$prod_contrat_duree}"
+  <input name="contrat_duree" type="text" size="7" maxlength="6" value="{$livre_contrat_duree}"
    class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">
  </td>
  <td width="15%">Date d'application</td>
  <td width="35%">
-  <input name="contrat_date_app" type="text" size="7" maxlength="6" value="{$prod_contrat_date_app}"
-   class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">
+  {html_select_date field_order='DMY' start_year='-10' time=$livre_contrat_date_app reverse_years=True all_extra='class="flat"'}
  </td>
 </tr>
-
 <tr>
  <td>Taux conclu</td>
  <td>
-  <input name="contrat_taux" type="text" size="7" maxlength="6" value="{$prod_contrat_taux}"
+  <input name="contrat_taux" type="text" size="7" maxlength="6" value="{$livre_contrat_taux}"
    class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">%
  </td>
  <td>Quantité achetée</td>
  <td>
-  <input name="contrat_quant" type="text" size="7" maxlength="6" value="{$prod_contrat_quant}"
+  <input name="contrat_quant" type="text" size="7" maxlength="6" value="{$livre_contrat_quant}"
    class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">
  </td>
 </tr>
+<tr>
+ <td>Validation du contrat</td>
+ <td>
+  <input type="checkbox" name="locked" value="locked" />
+ </td>
+ <td colspan="2">En cochant la case vous interdisez toute modifications</td>
+
+</tr>
+
+{else}
+<tr>
+ <td>Auteur / Editeur</td>
+ <td>{$livre_auteur}</td>
+ <td>Saisi par</td><td>{$livre_contrat_user_fullname}</td>
+</tr>
+<tr>
+ <td width="15%">Durée du contrat : </td>
+ <td width="35%">{$livre_contrat_duree}</td>
+ <td width="15%">Date d'application</td>
+ <td width="35%">{$livre_contrat_date_app|date_format:"%d %B %Y"}</td>
+</tr>
+<tr>
+ <td>Taux conclu</td>
+ <td>{$livre_contrat_taux} %</td>
+ <td>Quantité achetée</td>
+ <td>{$livre_contrat_quant}</td>
+</tr>
+{/if}
+
+</table>
+
+<br>
+
+<table class="border" width="100%">
+
 
  <tr>
   <td valign="top">Description</td>
@@ -199,14 +263,5 @@
 
 </table>
 </form>
-<!-- CUT HERE -->
-
-
-
-
-
-
-
-
 
 <!-- END SMARTY TEMPLATE -->
