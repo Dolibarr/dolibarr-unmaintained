@@ -1,5 +1,5 @@
 # Dolibarr language file - en_US - speedfinder
-CHARSET = UTF-8
+CHARSET= UTF-8
 SpeedfinderSetup=Speedfinder tools integration setup
 
 SFinderParamWidth=Width (in pixels) for the displayed result list

@@ -4,8 +4,8 @@ Chronodocs=Chronodocs
 ChronodocCard=Fiche Chronodoc
 ChronodocType=Type de chronodoc
 NewChronodoc=Nouveau chronodoc
-AddChronodoc=Créer un chronodoc
-AddChronodocType=Créer un type de chronodoc
+AddChronodoc=Crï¿½er un chronodoc
+AddChronodocType=Crï¿½er un type de chronodoc
 ListOfChronodocs=Liste des chronodocs
 ListOfChronodocsTypes=Liste des types de chronodocs
 ShowChronodoc=Afficher le chronodoc
@@ -21,48 +21,48 @@ DeleteChronodoc=Supprimer le chronodoc
 DeleteChronodocType=Supprimer le type de chronodoc
 ConfirmDeleteChronodoc=Voulez vous vraiment supprimer ce chronodoc ?
 ConfirmDeleteChronodocType=Voulez vous vraiment supprimer ce type de chronodoc ?
-ConfirmEditChronodocsTypeRef=Voulez vous vraiment éditer le type de chronodoc (cela regenerera la reference sauf si vous la changez)?
+ConfirmEditChronodocsTypeRef=Voulez vous vraiment ï¿½diter le type de chronodoc (cela regenerera la reference sauf si vous la changez)?
 DateU=Date MAJ
 NbChronodocs=Nb Chronodocs
-OtherPropfields=Autres propriétés
-SetDateCreate=Définir la date de création
-SetTitle=Définir le titre
-SetDescription=Définir la description
-SetFile=Définir le fichier de référence
-Desc_Chronodocs_propfields=Les propriété supplémentaires des chronodocs permettent de définir des valeurs personnalisées qui pourront servir dans la génération des documents via rtfparser. <br>Pour qu'une propriété soit remplacée par une valeur saisie, il faut que sa ref soit du type #P_XXXXX# (où XXXXX est libre sans #). <br> Les propriétés automatiques suivantes peuvent aussi être utilisées (sans saisie de valeur dans la fiche document): 
-Propfield_R_SOCIETE=Nom de la société client
-Propfield_R_SOC_ADR=Adresse de la société client
-Propfield_R_SOC_CP=CP de la société client
-Propfield_R_SOC_VILLE=Ville de la société client
-Propfield_R_SOC_PAYS=Pays de la société client
+OtherPropfields=Autres propriï¿½tï¿½s
+SetDateCreate=Dï¿½finir la date de crï¿½ation
+SetTitle=Dï¿½finir le titre
+SetDescription=Dï¿½finir la description
+SetFile=Dï¿½finir le fichier de rï¿½fï¿½rence
+Desc_Chronodocs_propfields=Les propriï¿½tï¿½ supplï¿½mentaires des chronodocs permettent de dï¿½finir des valeurs personnalisï¿½es qui pourront servir dans la gï¿½nï¿½ration des documents via rtfparser. <br>Pour qu'une propriï¿½tï¿½ soit remplacï¿½e par une valeur saisie, il faut que sa ref soit du type #P_XXXXX# (oï¿½ XXXXX est libre sans #). <br> Les propriï¿½tï¿½s automatiques suivantes peuvent aussi ï¿½tre utilisï¿½es (sans saisie de valeur dans la fiche document): 
+Propfield_R_SOCIETE=Nom de la sociï¿½tï¿½ client
+Propfield_R_SOC_ADR=Adresse de la sociï¿½tï¿½ client
+Propfield_R_SOC_CP=CP de la sociï¿½tï¿½ client
+Propfield_R_SOC_VILLE=Ville de la sociï¿½tï¿½ client
+Propfield_R_SOC_PAYS=Pays de la sociï¿½tï¿½ client
 Propfield_R_TITRE_NOTE=Titre du chronodoc 
-Propfield_R_REDACTEUR=Nom complet du contact rédacteur 
-Propfield_R_REDAC_NOM=Nom du contact rédacteur 
-Propfield_R_REDAC_PNOM=Prénom du contact rédacteur 
-Propfield_R_REDAC_CIV=Civilité du contact rédacteur 
-Propfield_R_REDAC_EMAIL=Email du contact rédacteur 
+Propfield_R_REDACTEUR=Nom complet du contact rï¿½dacteur 
+Propfield_R_REDAC_NOM=Nom du contact rï¿½dacteur 
+Propfield_R_REDAC_PNOM=Prï¿½nom du contact rï¿½dacteur 
+Propfield_R_REDAC_CIV=Civilitï¿½ du contact rï¿½dacteur 
+Propfield_R_REDAC_EMAIL=Email du contact rï¿½dacteur 
 Propfield_R_CUSTOMER=Nom complet du contact client
 Propfield_R_CUST_NOM=Nom du contact client
-Propfield_R_CUST_PNOM=Prénom du contact client
-Propfield_R_CUST_CIV=Civilité du contact client
+Propfield_R_CUST_PNOM=Prï¿½nom du contact client
+Propfield_R_CUST_CIV=Civilitï¿½ du contact client
 Propfield_R_CUST_EMAIL=Email du contact client
-Propfield_R_TRIGRAMME=1ère lettre pré/nom+dernière lettre nom rédacteur 
-Propfield_R_DT_REDAC=Date de rédaction 
-Propfield_R_NUM_CHRONO=Référence du chronodoc
+Propfield_R_TRIGRAMME=1ï¿½re lettre prï¿½/nom+derniï¿½re lettre nom rï¿½dacteur 
+Propfield_R_DT_REDAC=Date de rï¿½daction 
+Propfield_R_NUM_CHRONO=Rï¿½fï¿½rence du chronodoc
 
-# Modele numérotation
-ChronodocsNumberingModules=Modules de numérotation de chronodocs
-Error_CHRONODOCS_ADDON_NotDefined=ERREUR: Modele générateur reference chronodoc non defini (CHRONODOCS_ADDON).
-ChronodocSpecificMaskCodes=Vous pouvez aussi utiliser le filtre {ttt} pour modifier dynamiquement le masque en utilisant les n premières lettres de la référence du type de chronodoc défini. Cela équivaut alors à avoir autant de masques différents que de types de chronodocs utilisés. Les compteurs se comportent alors comme s'il s'agissait d'objets de type différent (Propale et Commande par exemple). Exemple de filtre: {tt}{yyyy}{0000@1}-{cccc0000}
+# Modele numï¿½rotation
+ChronodocsNumberingModules=Modules de numï¿½rotation de chronodocs
+Error_CHRONODOCS_ADDON_NotDefined=ERREUR: Modele gï¿½nï¿½rateur reference chronodoc non defini (CHRONODOCS_ADDON).
+ChronodocSpecificMaskCodes=Vous pouvez aussi utiliser le filtre {ttt} pour modifier dynamiquement le masque en utilisant les n premiï¿½res lettres de la rï¿½fï¿½rence du type de chronodoc dï¿½fini. Cela ï¿½quivaut alors ï¿½ avoir autant de masques diffï¿½rents que de types de chronodocs utilisï¿½s. Les compteurs se comportent alors comme s'il s'agissait d'objets de type diffï¿½rent (Propale et Commande par exemple). Exemple de filtre: {tt}{yyyy}{0000@1}-{cccc0000}
 
 # Admin chronodocs
 ChronodocsSetup=Configuration des chronodocs
 
 # Modele document
 TemplateChronodocs=Modeles de documents
-Error_CHRONODOCS_ADDON_TEMPLATE_NotDefined=ERREUR: Modele générateur document chronodoc non defini (CHRONODOCS_ADDON_TEMPLATE).
-TPLWrapperDescription=Générateur de document par recopie simple du fichier défini pour le type de document du Chronodoc.
-TPL_RTFParserDescription=Générateur de document effectuant une recopie d'un RTF (ou autre format texte) en remplacant les balises des propriétés personnalisées par leur valeurs.
+Error_CHRONODOCS_ADDON_TEMPLATE_NotDefined=ERREUR: Modele gï¿½nï¿½rateur document chronodoc non defini (CHRONODOCS_ADDON_TEMPLATE).
+TPLWrapperDescription=Gï¿½nï¿½rateur de document par recopie simple du fichier dï¿½fini pour le type de document du Chronodoc.
+TPL_RTFParserDescription=Gï¿½nï¿½rateur de document effectuant une recopie d'un RTF (ou autre format texte) en remplacant les balises des propriï¿½tï¿½s personnalisï¿½es par leur valeurs.
 
 ##### Types de contacts #####
 TypeContact_chronodocs_internal_INTERREPFOLL=Contact interne de suivi du chronodoc

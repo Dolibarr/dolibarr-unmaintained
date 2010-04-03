@@ -1,20 +1,20 @@
 # Dolibarr language file - ca_ES - speedfinder 
-CHARSET = UTF-8
-SpeedfinderSetup = Eines de configuració per integrar un Speedfinder de contacte
+CHARSET= UTF-8
+SpeedfinderSetup= Eines de configuració per integrar un Speedfinder de contacte
 
 SFinderParamWidth=Width (in pixels) for the displayed result list
 SFinderParamWidthHelp=in pixels
-SFinderParamHeight = Altura (en píxels) a la llista de resultats
+SFinderParamHeight= Altura (en píxels) a la llista de resultats
 SFinderParamHeightHelp=in pixels
-SFinderParamScroll = Mostra barres de desplaçament en la llista de resultats
+SFinderParamScroll= Mostra barres de desplaçament en la llista de resultats
 SFinderParamScrollHelp=automatic=if needed, always=every time, never=no scrollbars
 SFinderParamPhoneSepar=Separator betweeen each phone
 SFinderParamPhoneSeparHelp=Character between each phone number in the displayed result list
-SFinderParamPopup = Mostra un enllaç per obrir en una finestra emergent autònoma
+SFinderParamPopup= Mostra un enllaç per obrir en una finestra emergent autònoma
 SFinderParamPopupHelp=To open a speedfinder window separetely from Dolibarr
-SFinderParamPopupW = Ample (en píxels) de la finestra emergent
+SFinderParamPopupW= Ample (en píxels) de la finestra emergent
 SFinderParamPopupWHelp=in pixels
-SFinderParamPopupH = Alt (en píxels) de la finestra emergent
+SFinderParamPopupH= Alt (en píxels) de la finestra emergent
 SFinderParamPopupHHelp=in pixels
 SFinderParamAutoFocus=Autofocus
 SFinderParamAutoFocusHelp=on speedfinder selection, the cursor is focus automatically iune the search text box
@@ -24,13 +24,13 @@ SFinderParamSizeText=Size of the TextBox
 SFinderParamSizeTextHelp=Width in characters for the search text box
 SFinderParamNbCar=Minimal number of character
 SFinderParamNbCarHelp=Set between 1 and 5, the number of character to  begin the automatic search
-SFinderSetupHelp = <u>Nota: </u> Per facilitar la cerca a les fitxes de Contactes, recordeu no escriure signes de puntuació en els números telefònics, res de "." (punt), ni de " " (espai) ... <br />Exemple correcte: 0468123456 <br /> "SpeedFinder" és un mòdul Dolibarr Opensource editat per %s
+SFinderSetupHelp= <u>Nota: </u> Per facilitar la cerca a les fitxes de Contactes, recordeu no escriure signes de puntuació en els números telefònics, res de "." (punt), ni de " " (espai) ... <br />Exemple correcte: 0468123456 <br /> "SpeedFinder" és un mòdul Dolibarr Opensource editat per %s
 
-SFinderSubTitle = SpeedFinder
-SFinderSubTitleHelp = Introduïu parcialment un número de telèfon per trobar l'empresa o el contacte associat en menys de 2 segons.
-SFinderSearch = Cerca ràpida
-SFinderPhone = Telèfon
-SFinderEmpty = Cap suggeriment
+SFinderSubTitle= SpeedFinder
+SFinderSubTitleHelp= Introduïu parcialment un número de telèfon per trobar l'empresa o el contacte associat en menys de 2 segons.
+SFinderSearch= Cerca ràpida
+SFinderPhone= Telèfon
+SFinderEmpty= Cap suggeriment
 SFinderSearchLabel=Enter a phone number or a name
 SFinderSearchLimit=(type at least %s character%s)
 

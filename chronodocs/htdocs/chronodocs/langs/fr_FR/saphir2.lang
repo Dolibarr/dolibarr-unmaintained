@@ -1,6 +1,6 @@
 # Dolibarr language file - fr_FR - saphir2
-# Modele numérotation
+# Modele numï¿½rotation
 Saphir2NumRefModelDesc1=Generic number model
 Saphir2NumRefModelError=Failed to activate
 UseGlobalClientRef=Utiliser le compteur client partage
-UseGlobalClientRefHelp=Partager la valeur du compteur chrono du filtre {cccc000} avec les autres types d'objet Dolibarr.<br> Nota: Si vous définissez la constante administrateur ALLOWONLYREFCLIENT à 1, vous pouvez aussi utiliser des masques sans filtre {000}  si vous utilisez le filtre {ccc000} (sauf pour les factures). Dans ce cas, ajoutez le filtre {@1} si vous souhaitez une remise à zéro (Exemple: PR{yyyy}{cccc0000}{@1})
+UseGlobalClientRefHelp=Partager la valeur du compteur chrono du filtre {cccc000} avec les autres types d'objet Dolibarr.<br> Nota: Si vous dï¿½finissez la constante administrateur ALLOWONLYREFCLIENT ï¿½ 1, vous pouvez aussi utiliser des masques sans filtre {000}  si vous utilisez le filtre {ccc000} (sauf pour les factures). Dans ce cas, ajoutez le filtre {@1} si vous souhaitez une remise ï¿½ zï¿½ro (Exemple: PR{yyyy}{cccc0000}{@1})

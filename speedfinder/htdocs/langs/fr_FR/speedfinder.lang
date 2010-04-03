@@ -1,5 +1,5 @@
 # Dolibarr language file - fr_FR - speedfinder
-CHARSET = UTF-8
+CHARSET= UTF-8
 SpeedfinderSetup=Outils de configuration pour intégrer un Speedfinder de contact
 
 SFinderParamWidth=Largeur de la liste de résultats

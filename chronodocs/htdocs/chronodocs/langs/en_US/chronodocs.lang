@@ -29,7 +29,7 @@ SetDateCreate=Set Create Date
 SetTitle=Set Title
 SetDescription=Set Brief
 SetFile=Set Sample File 
-Desc_Chronodocs_propfields=Les propriété supplémentaires des chronodocs permettent de définir des valeurs personnalisées qui pourront servir dans la génération des documents via rtfparser. <br>Pour qu'une propriété soit remplacée par une valeur saisie, il faut que sa ref soit du type #P_XXXXX# (où XXXXX est libre sans #).
+Desc_Chronodocs_propfields=Les propriï¿½tï¿½ supplï¿½mentaires des chronodocs permettent de dï¿½finir des valeurs personnalisï¿½es qui pourront servir dans la gï¿½nï¿½ration des documents via rtfparser. <br>Pour qu'une propriï¿½tï¿½ soit remplacï¿½e par une valeur saisie, il faut que sa ref soit du type #P_XXXXX# (oï¿½ XXXXX est libre sans #).
 Propfield_R_SOCIETE=Customer Company's name
 Propfield_R_SOC_ADR=Customer Company's Adress
 Propfield_R_SOC_CP=Customer Company's Postal code
@@ -47,11 +47,11 @@ Propfield_R_CUST_PNOM=Custumer contact's Firstname
 Propfield_R_CUST_CIV=Custumer contact's Civility
 Propfield_R_CUST_EMAIL=Custumer contact's Email
 Propfield_R_TRIGRAMME=Custumer contact's 1st letter of 1st/name+last letter of name
-Propfield_R_DT_REDAC=Date de rédaction 
-Propfield_R_NUM_CHRONO=Référence du chronodoc
+Propfield_R_DT_REDAC=Date de rï¿½daction 
+Propfield_R_NUM_CHRONO=Rï¿½fï¿½rence du chronodoc
 
-# Modele numérotation
-ChronodocsNumberingModules=Modules de numérotation de chronodocs
+# Modele numï¿½rotation
+ChronodocsNumberingModules=Modules de numï¿½rotation de chronodocs
 Error_CHRONODOCS_ADDON_NotDefined=Error: CHRONODOCS_ADDON Not Defined.
 ChronodocSpecificMaskCodes=You alse can use {ttt} filter in order to dynamicaly change mask using the n fisrt chars of chronodoc type ref.
 
