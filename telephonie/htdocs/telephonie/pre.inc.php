@@ -15,13 +15,18 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: pre.inc.php,v 1.1 2009/10/20 16:19:24 eldy Exp $
+ * $Id: pre.inc.php,v 1.2 2010/04/03 14:38:53 eldy Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/pre.inc.php,v $
  *
  */
 require("../main.inc.php");
 require(DOL_DOCUMENT_ROOT."/telephonie/lignetel.class.php");
 $user->getrights('telephonie');
+
+
+$yesno[0]="no";
+$yesno[1]="yes";
+
 
 function llxHeader($head = "", $title="") {
   global $user;
@@ -53,7 +58,7 @@ function llxHeader($head = "", $title="") {
 
   $menu->add(DOL_URL_ROOT."/telephonie/ligne/index.php", "Lignes");
 
-  if ($user->rights->telephonie->ligne_commander)    
+  if ($user->rights->telephonie->ligne_commander)
     $menu->add(DOL_URL_ROOT."/telephonie/ligne/commande/", "Commandes");
 
   if ($user->rights->telephonie->facture->lire)
