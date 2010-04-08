@@ -21,7 +21,7 @@
         \file       dev/skeletons/chronodocs_propvalues.class.php
         \ingroup    mymodule othermodule1 othermodule2
         \brief      This file is an example for a CRUD class file (Create/Read/Update/Delete)
-		\version    $Id: chronodocs_propvalues.class.php,v 1.3 2010/03/29 16:41:26 grandoc Exp $
+		\version    $Id: chronodocs_propvalues.class.php,v 1.4 2010/04/08 14:02:02 hregis Exp $
 		\author		Put author name here
 		\remarks	Initialy built by build_class_from_table on 2008-09-03 17:35
 */
@@ -122,7 +122,7 @@ class Chronodocs_propvalues // extends CommonObject
 	            // want this action call a trigger.
 	            
 	            //// Call triggers
-	            //include_once(DOL_DOCUMENT_ROOT . "/interfaces.class.php");
+	            //include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
 	            //$interface=new Interfaces($this->db);
 	            //$result=$interface->run_triggers('MYOBJECT_CREATE',$this,$user,$langs,$conf);
 	            //if ($result < 0) { $error++; $this->errors=$interface->errors; }
@@ -243,7 +243,7 @@ class Chronodocs_propvalues // extends CommonObject
 	            // want this action call a trigger.
 				
 	            //// Call triggers
-	            //include_once(DOL_DOCUMENT_ROOT . "/interfaces.class.php");
+	            //include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
 	            //$interface=new Interfaces($this->db);
 	            //$result=$interface->run_triggers('MYOBJECT_MODIFY',$this,$user,$langs,$conf);
 	            //if ($result < 0) { $error++; $this->errors=$interface->errors; }
@@ -298,7 +298,7 @@ class Chronodocs_propvalues // extends CommonObject
 		        // want this action call a trigger.
 				
 		        //// Call triggers
-		        //include_once(DOL_DOCUMENT_ROOT . "/interfaces.class.php");
+		        //include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
 		        //$interface=new Interfaces($this->db);
 		        //$result=$interface->run_triggers('MYOBJECT_DELETE',$this,$user,$langs,$conf);
 		        //if ($result < 0) { $error++; $this->errors=$interface->errors; }

@@ -17,14 +17,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: thelia_categories.class.php,v 1.5 2010/03/29 20:53:25 grandoc Exp $
+ * $Id: thelia_categories.class.php,v 1.6 2010/04/08 14:02:02 hregis Exp $
  */
 
 /**
         \file       thelia_ws/thelia_categories.class.class.php
         \ingroup    core
         \brief      Example for class
-        \version    $Revision: 1.5 $
+        \version    $Revision: 1.6 $
 */
 
 // Put here all includes required by your script
@@ -95,7 +95,7 @@ class Thelia_Categorie
             }
 
             // Appel des triggers
-            include_once(DOL_DOCUMENT_ROOT . "/interfaces.class.php");
+            include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
             $interface=new Interfaces($this->db);
             $result=$interface->run_triggers('MYOBJECT_CREATE',$this,$user,$langs,$conf);
             if ($result < 0) { $error++; $this->errors=$interface->errors; }
@@ -145,7 +145,7 @@ class Thelia_Categorie
 		if (! $notrigger)
 		{
             // Appel des triggers
-            include_once(DOL_DOCUMENT_ROOT . "/interfaces.class.php");
+            include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
             $interface=new Interfaces($this->db);
             $result=$interface->run_triggers('THELIACATEGORIE_MODIFY',$this,$user,$langs,$conf);
             if ($result < 0) { $error++; $this->errors=$interface->errors; }
@@ -291,7 +291,7 @@ class Thelia_Categorie
 		}
 
         // Appel des triggers
-        include_once(DOL_DOCUMENT_ROOT . "/interfaces.class.php");
+        include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
         $interface=new Interfaces($this->db);
         $result=$interface->run_triggers('THELIA_CATEGORIE_DELETE',$this,$user,$langs,$conf);
         if ($result < 0) { $error++; $this->errors=$interface->errors; }

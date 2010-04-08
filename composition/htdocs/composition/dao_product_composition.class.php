@@ -25,7 +25,7 @@
         \file       htdocs/product_composition/dao_product_composition.class.php
         \ingroup    product_composition
         \brief      This file is an example for a class file
-		\version    $Id: dao_product_composition.class.php,v 1.2 2010/03/09 15:48:56 cdelambert Exp $
+		\version    $Id: dao_product_composition.class.php,v 1.3 2010/04/08 14:02:02 hregis Exp $
 		\author		Patrick Raguin
 */
 
@@ -126,7 +126,7 @@ class dao_product_composition // extends CommonObject
         {
     
             // Appel des triggers
-            /*include_once(DOL_DOCUMENT_ROOT . "/interfaces.class.php");
+            /*include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
             $interface=new Interfaces($this->db);
             $result=$interface->run_triggers('MYOBJECT_CREATE',$this,$user,$langs,$conf);
             if ($result < 0) { $error++; $this->errors=$interface->errors; }
@@ -184,7 +184,7 @@ class dao_product_composition // extends CommonObject
 		if (! $notrigger)
 		{
             // Appel des triggers
-            /*include_once(DOL_DOCUMENT_ROOT . "/interfaces.class.php");
+            /*include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
             $interface=new Interfaces($this->db);
             $result=$interface->run_triggers('MYOBJECT_MODIFY',$this,$user,$langs,$conf);
             if ($result < 0) { $error++; $this->errors=$interface->errors; }
@@ -270,7 +270,7 @@ class dao_product_composition // extends CommonObject
 		}
 	
         // Appel des triggers
-        /*include_once(DOL_DOCUMENT_ROOT . "/interfaces.class.php");
+        /*include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
         $interface=new Interfaces($this->db);
         $result=$interface->run_triggers('MYOBJECT_DELETE',$this,$user,$langs,$conf);
         if ($result < 0) { $error++; $this->errors=$interface->errors; }
