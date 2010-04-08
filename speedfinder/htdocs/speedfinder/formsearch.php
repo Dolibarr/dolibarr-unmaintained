@@ -8,7 +8,7 @@
     	\file       htdocs/speedfinder/formsearch.php
 		\ingroup    speedfinder
 		\brief      Main speedfinder area page
-		\version    $Id: formsearch.php,v 1.1 2009/11/30 22:37:40 hregis Exp $
+		\version    $Id: formsearch.php,v 1.2 2010/04/08 08:46:14 grandoc Exp $
 		\author		Marc STUDER
 */
 
@@ -55,7 +55,7 @@ $SEARCH_NBCAR=empty($conf->global->SFINDER_NBCAR)?2:$conf->global->SFINDER_NBCAR
 
 <?php
 	if ($SEARCH_AUTOFOCUS==1) { ?>
-    <script language="JavaScript">
+    <script type="text/javascript">
 	// selectionne automatiquement la textbox a l'affichage de l'ecran
 	document.fSFinder.txtSpeedSearch.focus();
     </script>
