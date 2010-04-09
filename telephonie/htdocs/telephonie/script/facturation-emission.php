@@ -15,12 +15,12 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: facturation-emission.php,v 1.3 2010/03/29 20:53:24 grandoc Exp $
+ * $Id: facturation-emission.php,v 1.4 2010/04/09 07:55:41 hregis Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/script/facturation-emission.php,v $
  *
  *
  * Script de facturation
- * Emets les factures compta en partant des factures téléphonique
+ * Emets les factures compta en partant des factures tï¿½lï¿½phonique
  *
  */
 
@@ -28,7 +28,7 @@
    \file       htdocs/telephonie/script/facturation-emission.php
    \ingroup    telephonie
    \brief      Emission des factures
-   \version    $Revision: 1.3 $
+   \version    $Revision: 1.4 $
 */
 
 
@@ -57,7 +57,7 @@ require_once (DOL_DOCUMENT_ROOT."/telephonie/telephonie.contrat.class.php");
 $error = 0;
 
 $datetime = time();
-$datetimeprev = $datetime; // Date du prélèvement
+$datetimeprev = $datetime; // Date du prï¿½lï¿½vement
 
 $date = strftime("%d%h%Y%Hh%Mm%S",$datetime);
 
@@ -166,7 +166,7 @@ if (!$error)
  */
 if (!$error)
 { 
-  dol_syslog("Nombre de contrats à facturer ".sizeof($contrats));
+  dol_syslog("Nombre de contrats ï¿½ facturer ".sizeof($contrats));
   
   $xcli = 0;
   $xclis = sizeof($contrats);
@@ -175,8 +175,8 @@ if (!$error)
     {
       $xcli++;
       
-      /* Lecture des factures téléphoniques du contrat */
-      dol_syslog($xcli."/".$xclis." Contrat à facturer id=".$contrat." (".memory_get_usage() .")");
+      /* Lecture des factures tï¿½lï¿½phoniques du contrat */
+      dol_syslog($xcli."/".$xclis." Contrat ï¿½ facturer id=".$contrat." (".memory_get_usage() .")");
 
       $sql = "SELECT f.rowid, s.rowid as socid";    
       $sql .= " FROM ".MAIN_DB_PREFIX."telephonie_facture as f";
@@ -212,7 +212,7 @@ if (!$error)
 	    }            
 	  $db->free();
 	  
-	  dol_syslog("Contrat $contrat : $i factures trouvées à générer");
+	  dol_syslog("Contrat $contrat : $i factures trouvï¿½es ï¿½ gï¿½nï¿½rer");
 
 	  $factures_prev = array();
 	  $factures_a_mailer = array();
@@ -275,7 +275,7 @@ function facture_contrat($db, $user, $contrat_id, $factel_ids, $datetime, &$fact
 	}
     }
 
-  /* Lecture de la société */
+  /* Lecture de la sociï¿½tï¿½ */
  
   if (!$error)
     {
@@ -297,7 +297,7 @@ function facture_contrat($db, $user, $contrat_id, $factel_ids, $datetime, &$fact
    */	      
   if (!$error)
     {
-      if ($verbose) dol_syslog("Création facture pour $soc->nom");
+      if ($verbose) dol_syslog("Crï¿½ation facture pour $soc->nom");
 
       $fac = new Facture($db, $soc->id);
       $cancel_facture = 1;
@@ -313,20 +313,20 @@ function facture_contrat($db, $user, $contrat_id, $factel_ids, $datetime, &$fact
 	}
       else
 	{
-	  dol_syslog("Erreur création objet facture erreur : $facid");
+	  dol_syslog("Erreur crï¿½ation objet facture erreur : $facid");
 	  $error = 16;
 	}		  
     }
   
   /*
-   * Lecture des différentes lignes rattachées
+   * Lecture des diffï¿½rentes lignes rattachï¿½es
    *
    */
   if (!$error)
     {	  	      
       foreach ($factel_ids as $factel_id)
 	{
-	  /* Lecture de la facture téléphonique */
+	  /* Lecture de la facture tï¿½lï¿½phonique */
 	  
 	  $factel = new FactureTel($db);
 	  if ($factel->fetch($factel_id) == 0)
@@ -335,7 +335,7 @@ function facture_contrat($db, $user, $contrat_id, $factel_ids, $datetime, &$fact
 	    }
 	  else
 	    {
-	      dol_syslog("ERREUR lecture facture téléphonique $factel_id");
+	      dol_syslog("ERREUR lecture facture tï¿½lï¿½phonique $factel_id");
 	      $error = 17;
 	    }
 	  
@@ -356,7 +356,7 @@ function facture_contrat($db, $user, $contrat_id, $factel_ids, $datetime, &$fact
 	    {	      
 	      $cancel_facture = 0;
 	      
-	      /* Création du lien entre les factures */
+	      /* Crï¿½ation du lien entre les factures */
 	      
 	      if ($factel->affect_num_facture_compta($facid) == 0)
 		{
@@ -380,7 +380,7 @@ function facture_contrat($db, $user, $contrat_id, $factel_ids, $datetime, &$fact
 
 	      $dm = mktime (1,1,1,strftime("%m",$datetime), -1, strftime("%Y",$datetime));
 
-	      $libelle .= "Communications téléphoniques de la ligne $ligne->numero";
+	      $libelle .= "Communications tï¿½lï¿½phoniques de la ligne $ligne->numero";
 	      $libelle .= " mois de ".strftime("%B %Y",$dm);
 	      if (trim($soca->ville))
 		{
@@ -481,7 +481,7 @@ function facture_contrat($db, $user, $contrat_id, $factel_ids, $datetime, &$fact
 	  while ($row = $db->fetch_row($resql))
 	    {
 	      $result = $fac->addline($facid,
-				      "Frais pour prélèvement rejeté du ".strftime("%d/%m/%Y",$row[1]),
+				      "Frais pour prï¿½lï¿½vement rejetï¿½ du ".strftime("%d/%m/%Y",$row[1]),
 				      15,
 				      1,
 				      '0',
@@ -682,7 +682,7 @@ function facture_contrat($db, $user, $contrat_id, $factel_ids, $datetime, &$fact
 
   /**************************************/
   /*                                    */
-  /* Factures détaillées                */
+  /* Factures dï¿½taillï¿½es                */
   /*                                    */
   /**************************************/
 
@@ -690,7 +690,7 @@ function facture_contrat($db, $user, $contrat_id, $factel_ids, $datetime, &$fact
     {
       foreach ($factel_ids as $factel_id)
 	{
-	  /* Lecture de la facture téléphonique */
+	  /* Lecture de la facture tï¿½lï¿½phonique */
 	  
 	  $factel = new FactureTel($db);
 	  if ($factel->fetch($factel_id) == 0)
@@ -699,7 +699,7 @@ function facture_contrat($db, $user, $contrat_id, $factel_ids, $datetime, &$fact
 	    }
 	  else
 	    {
-	      dol_syslog("ERREUR lecture facture téléphonique $factel_id");
+	      dol_syslog("ERREUR lecture facture tï¿½lï¿½phonique $factel_id");
 	      $error = 17;
 	    }
 	  
@@ -716,13 +716,13 @@ function facture_contrat($db, $user, $contrat_id, $factel_ids, $datetime, &$fact
 	      $error = 18;
 	    }
 
-	  /* Facture détaillée standard */
+	  /* Facture detaillee standard */
 
 	  if (!$error)
 	    {
 	      $facok = 0;
 	      
-	      // Différents modèles de factures détaillées
+	      // Differents modeles de factures detaillees
 	      
 	      $modele = "standard";
 	      if (strlen($ligne->pdfdetail) > 0)
@@ -731,9 +731,9 @@ function facture_contrat($db, $user, $contrat_id, $factel_ids, $datetime, &$fact
 		}
 	      
 	      require_once (DOL_DOCUMENT_ROOT."/telephonie/pdf/pdfdetail_".$modele.".modules.php");
-	      $class = "pdfdetail_".$modele;
+	      $classname = "pdfdetail_".$modele;
 	      
-	      $facdet = new $class($db, $ligne, $year, $month, $factel);
+	      $facdet = new $classname($db, $ligne, $year, $month, $factel);
 	      
 	      if ($facdet->write_pdf_file($factel, $factel->ligne) == 0)
 		{
@@ -741,17 +741,17 @@ function facture_contrat($db, $user, $contrat_id, $factel_ids, $datetime, &$fact
 		}
 	      else
 		{
-		  dol_syslog("ERREUR lors de Génération du pdf détaillé");
+		  dol_syslog("ERREUR lors de Generation du pdf detaille");
 		  $error = 19;
 		} 
 	    }
 
-	  /* Factures détaillées autres */
+	  /* Factures detaillees autres */
 
 	  if (!$error)
 	    {
-	      // Recherche des factures détaillées
-	      // et copie dans le répertoire de la facture
+	      // Recherche des factures detaillees
+	      // et copie dans le repertoire de la facture
 	      // ID facture telephonique $factel_id
 	      $fdefacid = substr('0000'.$factel_id, -4);
 	      $fdedir = DOL_DATA_ROOT.'/telephonie/facture/';
@@ -784,7 +784,7 @@ function facture_contrat($db, $user, $contrat_id, $factel_ids, $datetime, &$fact
   
   if (!$error && !$cancel_facture && $valid_ok == 1)
     {
-      if ($verbose) dol_syslog("Génération du pdf facture : $facid");
+      if ($verbose) dol_syslog("Gï¿½nï¿½ration du pdf facture : $facid");
       
       $fac->fetch($facid);
       $fac->fetch_client();
@@ -794,16 +794,16 @@ function facture_contrat($db, $user, $contrat_id, $factel_ids, $datetime, &$fact
       
       if ($fac->client->bank_account->verif() && $ligne->mode_paiement == 'pre')
 	{
-	  $message .= "Cette facture sera prélevée sur votre compte bancaire numéro : ";
+	  $message .= "Cette facture sera prï¿½levï¿½e sur votre compte bancaire numï¿½ro : ";
 	  $message .= $fac->client->bank_account->number."\n";
 	}
       
-      if ($verbose) dol_syslog("Création du pdf facture : $facid");
+      if ($verbose) dol_syslog("Crï¿½ation du pdf facture : $facid");
       
       if (! facture_pdf_create($db, $facid, $message))
 	{
 	  $error = 1;
-	  print "- ERREUR de génération du pdf de la facture\n";
+	  print "- ERREUR de gï¿½nï¿½ration du pdf de la facture\n";
 	}
     }
   
@@ -901,7 +901,7 @@ function _emails($db, $user, $contrat_id, $factures_a_mailer)
 	      $sendto = substr($sendto,0,strlen($sendto) - 1);
 
 
-	      dol_syslog("[EM] Envoi email à ".html_entity_decode($sendto) );
+	      dol_syslog("[EM] Envoi email ï¿½ ".html_entity_decode($sendto) );
 
 	      $subject = ereg_replace("#FACREF#",$fact->ref,TELEPHONIE_MAIL_FACTURATION_SUJET);
 	      $subject = ereg_replace("#CONTRAT#",$contrat->ref, $subject);
@@ -909,9 +909,9 @@ function _emails($db, $user, $contrat_id, $factures_a_mailer)
 	      $from = TELEPHONIE_EMAIL_FACTURATION_EMAIL;
 	      
 	      $message = "Bonjour,\n\n";
-	      $message .= "Veuillez trouver ci-joint notre facture numéro $fact->ref du ".strftime("%d/%m/%Y",$fact->date).".";
+	      $message .= "Veuillez trouver ci-joint notre facture numï¿½ro $fact->ref du ".strftime("%d/%m/%Y",$fact->date).".";
 
-	      $message .= "\nEgalement joint à ce mail le détails de vos communications.\n\n";
+	      $message .= "\nEgalement joint ï¿½ ce mail le dï¿½tails de vos communications.\n\n";
 
 	      $message .= TELEPHONIE_MAIL_FACTURATION_SIGNATURE;
 	      
@@ -930,7 +930,7 @@ function _emails($db, $user, $contrat_id, $factures_a_mailer)
 	      $facfile = FAC_OUTPUTDIR . "/" . $fact->ref . "/" . $fact->ref . ".pdf";
 
 	      /*
-	       * Joint le fichier commercial supplémentaire
+	       * Joint le fichier commercial supplï¿½mentaire
 	       */
 	      //array_push($arr_file, "/home/www/dolibarr/documents/hp65152.pdf");
 	      //array_push($arr_mime, "application/pdf");
@@ -947,7 +947,7 @@ function _emails($db, $user, $contrat_id, $factures_a_mailer)
 
 	      $handle=opendir(FAC_OUTPUTDIR . "/" . $fact->ref . "/");
 	      /*
-	       * Joint les détails
+	       * Joint les dï¿½tails
 	       *
 	       */
 	      while (($file = readdir($handle))!==false)
@@ -978,7 +978,7 @@ function _emails($db, $user, $contrat_id, $factures_a_mailer)
 		    $sendtox = $emails[$kj];
 			  
 		    $actioncode=9;
-		    $actionmsg="Envoyée à $sendtox";
+		    $actionmsg="Envoyï¿½e ï¿½ $sendtox";
 		    $actionmsg2="Envoi Facture par mail";
 		    
 		    $sql = "INSERT INTO ".MAIN_DB_PREFIX."actioncomm (datea,fk_action,fk_soc,note,fk_facture, fk_contact,fk_user_author, label, percent) VALUES (now(), '$actioncode' ,'$fact->socid' ,'$actionmsg','$fact->id','$sendtoid','$user->id', '$actionmsg2',100);";
@@ -998,7 +998,7 @@ function _emails($db, $user, $contrat_id, $factures_a_mailer)
 	    }
 	  else
 	    {
-	      dol_syslog("Aucun email trouvé");
+	      dol_syslog("Aucun email trouvï¿½");
 	    }
 	}
     }
@@ -1010,6 +1010,6 @@ function _emails($db, $user, $contrat_id, $factures_a_mailer)
 
 $db->close();
 
-dol_syslog("Conso mémoire ".memory_get_usage() );
+dol_syslog("Conso mï¿½moire ".memory_get_usage() );
 
 ?>

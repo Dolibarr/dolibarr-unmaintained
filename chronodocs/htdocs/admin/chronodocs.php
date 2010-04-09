@@ -25,7 +25,7 @@
     	\file       htdocs/admin/chronodocs.php
 		\ingroup    chronodocs
 		\brief      Page d'administration/configuration du module chronodocs (partialy from fichinter code)
-		\version    $Id: chronodocs.php,v 1.1 2008/09/10 09:35:00 raphael_bertrand Exp $
+		\version    $Id: chronodocs.php,v 1.2 2010/04/09 07:55:41 hregis Exp $
 */
 
 require("./pre.inc.php");
@@ -180,7 +180,7 @@ if ($handle)
         if (eregi('^(mod_chronodocs_(.*))\.php$',$file,$reg))
         {
             $file = $reg[1];
-            $className = $reg[2];
+            $classname = $reg[2];
 
             require_once($dir.$file.".php");
 
@@ -195,13 +195,13 @@ if ($handle)
             print '<td nowrap="nowrap">'.$module->getExample()."</td>\n";
 
             print '<td align="center">';
-            if ($conf->global->CHRONODOCS_ADDON == $className)
+            if ($conf->global->CHRONODOCS_ADDON == $classname)
             {
                 print img_tick($langs->trans("Activated"));
             }
             else
             {
-                print '<a href="'.$_SERVER["PHP_SELF"].'?action=setmod&amp;value='.$className.'" alt="'.$langs->trans("Default").'">'.$langs->trans("Default").'</a>';
+                print '<a href="'.$_SERVER["PHP_SELF"].'?action=setmod&amp;value='.$classname.'" alt="'.$langs->trans("Default").'">'.$langs->trans("Default").'</a>';
             }
             print '</td>';
 
@@ -380,5 +380,5 @@ print '<br>';
 
 $db->close();
 
-llxFooter('$Date: 2008/09/10 09:35:00 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2010/04/09 07:55:41 $ - $Revision: 1.2 $');
 ?>

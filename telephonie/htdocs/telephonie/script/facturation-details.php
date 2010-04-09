@@ -15,13 +15,13 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: facturation-details.php,v 1.1 2009/10/20 16:19:23 eldy Exp $
+ * $Id: facturation-details.php,v 1.2 2010/04/09 07:55:41 hregis Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/script/facturation-details.php,v $
  *
  *
- * Génération des factures détaillées
+ * Gï¿½nï¿½ration des factures dï¿½taillï¿½es
  *
- * Génère les factures détaillées du dernier mois.
+ * Gï¿½nï¿½re les factures dï¿½taillï¿½es du dernier mois.
  *
  *
  */
@@ -59,11 +59,11 @@ else
   $error++;
 }
 
-dol_syslog("Génère les factures détaillées pour : ".$date);
+dol_syslog("Gï¿½nï¿½re les factures dï¿½taillï¿½es pour : ".$date);
 
 /*
- * Lectures de différentes factures
- * Basé sur le dernier mois de facturation
+ * Lectures de diffï¿½rentes factures
+ * Basï¿½ sur le dernier mois de facturation
  */
 
 if (!$error)
@@ -91,7 +91,7 @@ if (!$error)
 	  $i++;
 	}            
       $db->free($resql);
-      dol_syslog("$i lignes trouvées");
+      dol_syslog("$i lignes trouvees");
     }
   else
     {
@@ -113,7 +113,7 @@ if (!$error && sizeof($factures))
     {
       $error = 0;
 
-      /* Creation des factures détaillée */
+      /* Creation des factures detaillee */
 	  
       $factel = new FactureTel($db);
       if ($factel->fetch($facid) == 0)
@@ -122,14 +122,14 @@ if (!$error && sizeof($factures))
 	  
 	  if ($objligne->fetch($factel->ligne) == 1)    
 	    {	      
-	      // Différents modèles de factures détaillées
+	      // Differents modeles de factures detaillees
 	      
 	      $modele = "standard";
 	      
 	      require_once (DOL_DOCUMENT_ROOT."/telephonie/pdf/pdfdetail_".$modele.".modules.php");
-	      $class = "pdfdetail_".$modele;
+	      $classname = "pdfdetail_".$modele;
 	      	      
-	      $facdet = new $class($db, $ligne, $year, $month, $factel);
+	      $facdet = new $classname($db, $ligne, $year, $month, $factel);
 	      
 	      if ($facdet->write_pdf_file($factel, $factel->ligne) == 0)
 		{
@@ -137,15 +137,15 @@ if (!$error && sizeof($factures))
 		}
 	      else
 		{
-		  dol_syslog("ERREUR lors de Génération du pdf détaillé");
+		  dol_syslog("ERREUR lors de Generation du pdf detaille");
 		  $error = 19;
 		}
 	    }
 	}
     }
 
-   dol_syslog(sizeof($factures)." factures traitées");
-   dol_syslog($facok." factures générées");
+   dol_syslog(sizeof($factures)." factures traitees");
+   dol_syslog($facok." factures generees");
 }
 
 $db->close();
