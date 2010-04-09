@@ -23,13 +23,13 @@
  \file       htdocs/telephonie/client/new.php
  \ingroup    telephonie
  \brief      Creation d'un nouveau client
- \version    $Id: new.php,v 1.1 2009/10/20 16:19:27 eldy Exp $
+ \version    $Id: new.php,v 1.2 2010/04/09 06:47:23 grandoc Exp $
  */
 
 require("pre.inc.php");
 require_once(DOL_DOCUMENT_ROOT."/lib/functions2.lib.php");
 require_once(DOL_DOCUMENT_ROOT.'/contact.class.php');
-require_once(DOL_DOCUMENT_ROOT.'/companybankaccount.class.php');
+require_once(DOL_DOCUMENT_ROOT.'/societe/companybankaccount.class.php');
 require_once(DOL_DOCUMENT_ROOT."/telephonie/lignetel.class.php");
 require_once(DOL_DOCUMENT_ROOT."/telephonie/telephonie.contrat.class.php");
 
@@ -859,6 +859,6 @@ if ($user->rights->telephonie->ligne->creer)
 $db->close();
 
 
-llxFooter('$Date: 2009/10/20 16:19:27 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2010/04/09 06:47:23 $ - $Revision: 1.2 $');
 ?>
 
