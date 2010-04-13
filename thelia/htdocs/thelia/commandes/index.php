@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: index.php,v 1.3 2010/02/08 00:50:30 jfefe Exp $
+ * $Id: index.php,v 1.4 2010/04/13 14:05:43 grandoc Exp $
  */
 
 require("./pre.inc.php");
@@ -45,7 +45,7 @@ require_once("../includes/configure.php");
 $parameters = array("orderid"=>"0");
 
 // Set the WebService URL
-$client = new nusoap_client(THELIA_WS_URL."ws_orders.php");
+$client = new soapclient_nusoap(THELIA_WS_URL."ws_orders.php");
 if ($client)
 {
 	$client->soap_defencoding='UTF-8';
@@ -118,5 +118,5 @@ else {
 print "</TABLE>";
 
 
-llxFooter('$Date: 2010/02/08 00:50:30 $ - $Revision: 1.3 $');
+llxFooter('$Date: 2010/04/13 14:05:43 $ - $Revision: 1.4 $');
 ?>

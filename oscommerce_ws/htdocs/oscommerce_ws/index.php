@@ -21,7 +21,7 @@
  *	\file       htdocs/oscommerce_ws/index.php
  *	\ingroup    oscommerce2
  *	\brief      Page accueil zone boutique
- *	\version    $Id: index.php,v 1.1 2010/04/13 13:41:13 grandoc Exp $
+ *	\version    $Id: index.php,v 1.2 2010/04/13 14:05:42 grandoc Exp $
  */
 
 require("./pre.inc.php");	// Use pre.inc.php as menus not defined in module
@@ -58,7 +58,7 @@ $parameters = array();
 
 // Set the WebService URL
 //print OSCWS_DIR."ws_orders.php"; exit;
-$client = new nusoap_client(OSCWS_DIR."ws_orders.php");
+$client = new soapclient_nusoap(OSCWS_DIR."ws_orders.php");
 if ($client)
 {
 	$client->soap_defencoding='UTF-8';
@@ -273,5 +273,5 @@ else {
 print '</tr></table>';
 
 
-llxFooter('$Date: 2010/04/13 13:41:13 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2010/04/13 14:05:42 $ - $Revision: 1.2 $');
 ?>

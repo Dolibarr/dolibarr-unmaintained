@@ -15,14 +15,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: osc_product.class.php,v 1.1 2010/04/13 13:41:12 grandoc Exp $
+ * $Id: osc_product.class.php,v 1.2 2010/04/13 14:05:42 grandoc Exp $
  */
 
 /**
         \file       htdocs/oscommerce_ws/produits/osc_product.class.php
         \ingroup    oscommerce_ws/produits/
         \brief      Fichier de la classe des produits issus de OSC
-        \version    $Revision: 1.1 $
+        \version    $Revision: 1.2 $
 */
 
 
@@ -93,7 +93,7 @@ class Osc_product
 		$parameters = array("id"=>$id,"ref"=>$ref);
 
 		// Set the WebService URL
-		$client = new nusoap_client(OSCWS_DIR."/ws_articles.php");
+		$client = new soapclient_nusoap(OSCWS_DIR."/ws_articles.php");
 	    if ($client)
 		{
 			$client->soap_defencoding='UTF-8';

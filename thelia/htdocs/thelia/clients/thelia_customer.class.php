@@ -16,14 +16,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: thelia_customer.class.php,v 1.3 2010/02/08 00:50:30 jfefe Exp $
+ * $Id: thelia_customer.class.php,v 1.4 2010/04/13 14:05:42 grandoc Exp $
  */
 
 /**
         \file       htdocs/thelia/clients/thelia_customer.class.php
         \ingroup    thelia
         \brief      Fichier de la classe des clients issus de Thelia
-        \version    $Revision: 1.3 $
+        \version    $Revision: 1.4 $
 */
 
 
@@ -104,7 +104,7 @@ class Thelia_customer
 		$parameters = array("custid"=>$id);
 
 		// Set the WebService URL
-		$client = new nusoap_client(THELIA_WS_URL."/ws_customers.php");
+		$client = new soapclient_nusoap(THELIA_WS_URL."/ws_customers.php");
 	    if ($client)
 		{
 			$client->soap_defencoding='UTF-8';

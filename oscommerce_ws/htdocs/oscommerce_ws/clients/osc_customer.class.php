@@ -15,14 +15,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: osc_customer.class.php,v 1.1 2010/04/13 13:41:12 grandoc Exp $
+ * $Id: osc_customer.class.php,v 1.2 2010/04/13 14:05:40 grandoc Exp $
  */
 
 /**
         \file       htdocs/oscommerce_ws/clients/osc_customer.class.php
         \ingroup    oscommerce2
         \brief      Fichier de la classe des clients issus de OsCommerce
-        \version    $Revision: 1.1 $
+        \version    $Revision: 1.2 $
 */
 
 
@@ -98,7 +98,7 @@ class Osc_customer
 		$parameters = array("custid"=>$id);
 
 		// Set the WebService URL
-		$client = new nusoap_client(OSCWS_DIR."/ws_customers.php");
+		$client = new soapclient_nusoap(OSCWS_DIR."/ws_customers.php");
 	    if ($client)
 		{
 			$client->soap_defencoding='UTF-8';

@@ -15,14 +15,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: osc_order.class.php,v 1.1 2010/04/13 13:41:13 grandoc Exp $
+ * $Id: osc_order.class.php,v 1.2 2010/04/13 14:05:42 grandoc Exp $
  */
 
 /**
         \file       htdocs/oscommerce_ws/commandes/osc_order.class.php
         \ingroup    oscommerce_ws/orders
         \brief      Fichier de la classe des commandes issus de OsCommerce
-        \version    $Revision: 1.1 $
+        \version    $Revision: 1.2 $
 */
 
 
@@ -97,7 +97,7 @@ class Osc_order
 		$parameters = array("orderid"=>$id);
 
 		// Set the WebService URL
-		$client = new nusoap_client(OSCWS_DIR."/ws_orders.php");
+		$client = new soapclient_nusoap(OSCWS_DIR."/ws_orders.php");
 	    if ($client)
 		{
 			$client->soap_defencoding='UTF-8';

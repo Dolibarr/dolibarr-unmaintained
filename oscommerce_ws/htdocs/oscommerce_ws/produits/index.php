@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: index.php,v 1.1 2010/04/13 13:41:12 grandoc Exp $
+ * $Id: index.php,v 1.2 2010/04/13 14:05:42 grandoc Exp $
  */
 
 require("./pre.inc.php");
@@ -42,7 +42,7 @@ require_once("../includes/configure.php");
 $parameters = array();
 
 // Set the WebService URL
-$client = new nusoap_client(OSCWS_DIR."ws_articles.php");
+$client = new soapclient_nusoap(OSCWS_DIR."ws_articles.php");
 if ($client)
 {
 	$client->soap_defencoding='UTF-8';
@@ -106,5 +106,5 @@ else {
 print "</TABLE>";
 
 
-llxFooter('$Date: 2010/04/13 13:41:12 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2010/04/13 14:05:42 $ - $Revision: 1.2 $');
 ?>

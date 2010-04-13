@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: OSCvente.php,v 1.1 2010/04/13 13:41:12 grandoc Exp $
+ * $Id: OSCvente.php,v 1.2 2010/04/13 14:05:42 grandoc Exp $
  */
 
 require("./pre.inc.php");
@@ -103,7 +103,7 @@ if ($_GET["action"] == 'vendre' )
 		$parameters = array("prod"=>$prod);
 
 		// Set the WebService URL
-		$client = new nusoap_client(OSCWS_DIR."ws_articles.php");
+		$client = new soapclient_nusoap(OSCWS_DIR."ws_articles.php");
 		if ($client)
 		{
 			$client->soap_defencoding='UTF-8';
@@ -165,5 +165,5 @@ if ($_GET["action"] == 'vendre' )
  		print '<a class="tabAction" href="OSCvente.php?action=liste">'.$langs->trans("Liste").'</a>';
 	print "\n</div>\n";
 
-llxFooter('$Date: 2010/04/13 13:41:12 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2010/04/13 14:05:42 $ - $Revision: 1.2 $');
 ?>

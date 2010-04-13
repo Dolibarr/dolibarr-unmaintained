@@ -16,14 +16,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: thelia_product.class.php,v 1.3 2010/02/08 00:50:30 jfefe Exp $
+ * $Id: thelia_product.class.php,v 1.4 2010/04/13 14:05:42 grandoc Exp $
  */
 
 /**
         \file       htdocs/thelia_ws/produits/thelia_product.class.php
         \ingroup    thelia_ws/produits/
         \brief      Fichier de la classe des produits issus de OSC
-        \version    $Revision: 1.3 $
+        \version    $Revision: 1.4 $
 */
 
 require_once(DOL_DOCUMENT_ROOT."/thelia/produits/thelia_categories.class.php");
@@ -96,7 +96,7 @@ class Thelia_product
 		$parameters = array("id"=>$id,"ref"=>$ref);
 
 		// Set the WebService URL
-		$client = new nusoap_client(THELIA_WS_URL."/ws_articles.php");
+		$client = new soapclient_nusoap(THELIA_WS_URL."/ws_articles.php");
 	    if ($client)
 		{
 			$client->soap_defencoding='UTF-8';
