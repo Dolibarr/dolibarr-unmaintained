@@ -21,7 +21,7 @@
         \file       chronodocs/chronodocs_types.class.php
         \ingroup    chronodocs
         \brief      CRUD class file for chronodocs types (Create/Read/Update/Delete)
-		\version    $Id: chronodocs_types.class.php,v 1.4 2010/04/08 14:02:02 hregis Exp $
+		\version    $Id: chronodocs_types.class.php,v 1.5 2010/04/21 16:29:48 hregis Exp $
 		\author	Raphael Bertrand (Resultic) <raphael.bertrand@resultic.fr>
 		\remarks	Initialy built by build_class_from_table on 2008-08-18 17:28
 */
@@ -147,9 +147,9 @@ class Chronodocs_types  extends CommonObject
 	            // want this action call a trigger.
 	            
 	            //// Call triggers
-	            //include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
+	            //include_once(DOL_DOCUMENT_ROOT . "/workflow/class/interfaces.class.php");
 	            //$interface=new Interfaces($this->db);
-	            //$result=$interface->run_triggers('MYOBJECT_CREATE',$this,$user,$langs,$conf);
+	            //$result=$interface->call_workflow('MYOBJECT_CREATE',$this,$user,$langs,$conf);
 	            //if ($result < 0) { $error++; $this->errors=$interface->errors; }
 	            //// End call triggers
 			}
@@ -292,9 +292,9 @@ class Chronodocs_types  extends CommonObject
 	            // want this action call a trigger.
 				
 	            //// Call triggers
-	            //include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
+	            //include_once(DOL_DOCUMENT_ROOT . "/workflow/class/interfaces.class.php");
 	            //$interface=new Interfaces($this->db);
-	            //$result=$interface->run_triggers('MYOBJECT_MODIFY',$this,$user,$langs,$conf);
+	            //$result=$interface->call_workflow('MYOBJECT_MODIFY',$this,$user,$langs,$conf);
 	            //if ($result < 0) { $error++; $this->errors=$interface->errors; }
 	            //// End call triggers
 	    	}
@@ -347,9 +347,9 @@ class Chronodocs_types  extends CommonObject
 		        // want this action call a trigger.
 				
 		        //// Call triggers
-		        //include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
+		        //include_once(DOL_DOCUMENT_ROOT . "/workflow/class/interfaces.class.php");
 		        //$interface=new Interfaces($this->db);
-		        //$result=$interface->run_triggers('MYOBJECT_DELETE',$this,$user,$langs,$conf);
+		        //$result=$interface->call_workflow('MYOBJECT_DELETE',$this,$user,$langs,$conf);
 		        //if ($result < 0) { $error++; $this->errors=$interface->errors; }
 		        //// End call triggers
 			}	
@@ -513,9 +513,9 @@ class Chronodocs_types  extends CommonObject
 	            // want this action call a trigger.
 				
 	            //// Call triggers
-	            //include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
+	            //include_once(DOL_DOCUMENT_ROOT . "/workflow/class/interfaces.class.php");
 	            //$interface=new Interfaces($this->db);
-	            //$result=$interface->run_triggers('MYOBJECT_MODIFY',$this,$user,$langs,$conf);
+	            //$result=$interface->call_workflow('MYOBJECT_MODIFY',$this,$user,$langs,$conf);
 	            //if ($result < 0) { $error++; $this->errors=$interface->errors; }
 	            //// End call triggers
 	    	}
@@ -585,9 +585,9 @@ class Chronodocs_types  extends CommonObject
 	            // want this action call a trigger.
 				
 	            //// Call triggers
-	            //include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
+	            //include_once(DOL_DOCUMENT_ROOT . "/workflow/class/interfaces.class.php");
 	            //$interface=new Interfaces($this->db);
-	            //$result=$interface->run_triggers('MYOBJECT_MODIFY',$this,$user,$langs,$conf);
+	            //$result=$interface->call_workflow('MYOBJECT_MODIFY',$this,$user,$langs,$conf);
 	            //if ($result < 0) { $error++; $this->errors=$interface->errors; }
 	            //// End call triggers
 	    	}
@@ -657,9 +657,9 @@ class Chronodocs_types  extends CommonObject
 	            // want this action call a trigger.
 				
 	            //// Call triggers
-	            //include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
+	            //include_once(DOL_DOCUMENT_ROOT . "/workflow/class/interfaces.class.php");
 	            //$interface=new Interfaces($this->db);
-	            //$result=$interface->run_triggers('MYOBJECT_MODIFY',$this,$user,$langs,$conf);
+	            //$result=$interface->call_workflow('MYOBJECT_MODIFY',$this,$user,$langs,$conf);
 	            //if ($result < 0) { $error++; $this->errors=$interface->errors; }
 	            //// End call triggers
 	    	}
@@ -729,9 +729,9 @@ class Chronodocs_types  extends CommonObject
 	            // want this action call a trigger.
 				
 	            //// Call triggers
-	            //include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
+	            //include_once(DOL_DOCUMENT_ROOT . "/workflow/class/interfaces.class.php");
 	            //$interface=new Interfaces($this->db);
-	            //$result=$interface->run_triggers('MYOBJECT_MODIFY',$this,$user,$langs,$conf);
+	            //$result=$interface->call_workflow('MYOBJECT_MODIFY',$this,$user,$langs,$conf);
 	            //if ($result < 0) { $error++; $this->errors=$interface->errors; }
 	            //// End call triggers
 	    	}
@@ -799,9 +799,9 @@ class Chronodocs_types  extends CommonObject
 	            // want this action call a trigger.
 				
 	            //// Call triggers
-	            //include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
+	            //include_once(DOL_DOCUMENT_ROOT . "/workflow/class/interfaces.class.php");
 	            //$interface=new Interfaces($this->db);
-	            //$result=$interface->run_triggers('MYOBJECT_MODIFY',$this,$user,$langs,$conf);
+	            //$result=$interface->call_workflow('MYOBJECT_MODIFY',$this,$user,$langs,$conf);
 	            //if ($result < 0) { $error++; $this->errors=$interface->errors; }
 	            //// End call triggers
 	    	}

@@ -17,14 +17,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: thelia_categories.class.php,v 1.6 2010/04/08 14:02:02 hregis Exp $
+ * $Id: thelia_categories.class.php,v 1.7 2010/04/21 16:29:48 hregis Exp $
  */
 
 /**
         \file       thelia_ws/thelia_categories.class.class.php
         \ingroup    core
         \brief      Example for class
-        \version    $Revision: 1.6 $
+        \version    $Revision: 1.7 $
 */
 
 // Put here all includes required by your script
@@ -95,9 +95,9 @@ class Thelia_Categorie
             }
 
             // Appel des triggers
-            include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
+            include_once(DOL_DOCUMENT_ROOT . "/workflow/class/interfaces.class.php");
             $interface=new Interfaces($this->db);
-            $result=$interface->run_triggers('MYOBJECT_CREATE',$this,$user,$langs,$conf);
+            $result=$interface->call_workflow('MYOBJECT_CREATE',$this,$user,$langs,$conf);
             if ($result < 0) { $error++; $this->errors=$interface->errors; }
             // Fin appel triggers
 
@@ -145,9 +145,9 @@ class Thelia_Categorie
 		if (! $notrigger)
 		{
             // Appel des triggers
-            include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
+            include_once(DOL_DOCUMENT_ROOT . "/workflow/class/interfaces.class.php");
             $interface=new Interfaces($this->db);
-            $result=$interface->run_triggers('THELIACATEGORIE_MODIFY',$this,$user,$langs,$conf);
+            $result=$interface->call_workflow('THELIACATEGORIE_MODIFY',$this,$user,$langs,$conf);
             if ($result < 0) { $error++; $this->errors=$interface->errors; }
             // Fin appel triggers
     	}
@@ -291,9 +291,9 @@ class Thelia_Categorie
 		}
 
         // Appel des triggers
-        include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
+        include_once(DOL_DOCUMENT_ROOT . "/workflow/class/interfaces.class.php");
         $interface=new Interfaces($this->db);
-        $result=$interface->run_triggers('THELIA_CATEGORIE_DELETE',$this,$user,$langs,$conf);
+        $result=$interface->call_workflow('THELIA_CATEGORIE_DELETE',$this,$user,$langs,$conf);
         if ($result < 0) { $error++; $this->errors=$interface->errors; }
         // Fin appel triggers
 

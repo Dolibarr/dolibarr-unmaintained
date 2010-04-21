@@ -21,7 +21,7 @@
         \file       dev/skeletons/chronodocs_propvalues.class.php
         \ingroup    mymodule othermodule1 othermodule2
         \brief      This file is an example for a CRUD class file (Create/Read/Update/Delete)
-		\version    $Id: chronodocs_propvalues.class.php,v 1.4 2010/04/08 14:02:02 hregis Exp $
+		\version    $Id: chronodocs_propvalues.class.php,v 1.5 2010/04/21 16:29:48 hregis Exp $
 		\author		Put author name here
 		\remarks	Initialy built by build_class_from_table on 2008-09-03 17:35
 */
@@ -122,9 +122,9 @@ class Chronodocs_propvalues // extends CommonObject
 	            // want this action call a trigger.
 	            
 	            //// Call triggers
-	            //include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
+	            //include_once(DOL_DOCUMENT_ROOT . "/workflow/class/interfaces.class.php");
 	            //$interface=new Interfaces($this->db);
-	            //$result=$interface->run_triggers('MYOBJECT_CREATE',$this,$user,$langs,$conf);
+	            //$result=$interface->call_workflow('MYOBJECT_CREATE',$this,$user,$langs,$conf);
 	            //if ($result < 0) { $error++; $this->errors=$interface->errors; }
 	            //// End call triggers
 			}
@@ -243,9 +243,9 @@ class Chronodocs_propvalues // extends CommonObject
 	            // want this action call a trigger.
 				
 	            //// Call triggers
-	            //include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
+	            //include_once(DOL_DOCUMENT_ROOT . "/workflow/class/interfaces.class.php");
 	            //$interface=new Interfaces($this->db);
-	            //$result=$interface->run_triggers('MYOBJECT_MODIFY',$this,$user,$langs,$conf);
+	            //$result=$interface->call_workflow('MYOBJECT_MODIFY',$this,$user,$langs,$conf);
 	            //if ($result < 0) { $error++; $this->errors=$interface->errors; }
 	            //// End call triggers
 	    	}
@@ -298,9 +298,9 @@ class Chronodocs_propvalues // extends CommonObject
 		        // want this action call a trigger.
 				
 		        //// Call triggers
-		        //include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
+		        //include_once(DOL_DOCUMENT_ROOT . "/workflow/class/interfaces.class.php");
 		        //$interface=new Interfaces($this->db);
-		        //$result=$interface->run_triggers('MYOBJECT_DELETE',$this,$user,$langs,$conf);
+		        //$result=$interface->call_workflow('MYOBJECT_DELETE',$this,$user,$langs,$conf);
 		        //if ($result < 0) { $error++; $this->errors=$interface->errors; }
 		        //// End call triggers
 			}	
