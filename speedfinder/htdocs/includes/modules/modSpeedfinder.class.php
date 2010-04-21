@@ -9,7 +9,7 @@
         \file       htdocs/includes/modules/modSpeedfinder.class.php
         \ingroup    speedfinder
         \brief      Description and activation file for module Speedfinder
-		\version	$Id: modSpeedfinder.class.php,v 1.2 2009/11/30 22:37:41 hregis Exp $
+		\version	$Id: modSpeedfinder.class.php,v 1.3 2010/04/21 05:33:41 hregis Exp $
 */
 
 include_once(DOL_DOCUMENT_ROOT ."/includes/modules/DolibarrModules.class.php");
@@ -40,7 +40,7 @@ class modSpeedfinder extends DolibarrModules
 		// It is used to group modules in module setup page 
 		$this->family = "crm";		
 		// Module label (no space allowed), used if translation string 'ModuleXXXName' not found (where XXX is value of numeric property 'numero' of module)
-		$this->name = eregi_replace('^mod','',get_class($this));
+		$this->name = preg_replace('/^mod/i','',get_class($this));
 		// Module description used if translation string 'ModuleXXXDesc' not found (XXX is value MyModule)
 		$this->description = "Search engine in AJAX to find a contact from a part of a name or phone number";
 		// Possible values for version are: 'development', 'experimental', 'dolibarr' or version

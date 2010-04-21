@@ -27,7 +27,7 @@
  *	\file       htdocs/includes/modules/modChronodocs.class.php
  *	\ingroup    chronodocs
  *	\brief      Description and activation file for module Chronodocs
- *	\version	$Id: modChronodocs.class.php,v 1.7 2008/12/07 19:21:14 eldy Exp $
+ *	\version	$Id: modChronodocs.class.php,v 1.8 2010/04/21 05:33:41 hregis Exp $
  */
 
 include_once(DOL_DOCUMENT_ROOT ."/includes/modules/DolibarrModules.class.php");
@@ -57,7 +57,7 @@ class modChronodocs extends DolibarrModules
 		// It is used to group modules in module setup page
 		$this->family = "ecm";
 		// Module label (no space allowed), used if translation string 'ModuleXXXName' not found (where XXX is value of numeric property 'numero' of module)
-		$this->name = eregi_replace('^mod','',get_class($this));
+		$this->name = preg_replace('/^mod/i','',get_class($this));
 		// Module description used if translation string 'ModuleXXXDesc' not found (where XXX is value of numeric property 'numero' of module)
 		$this->description = "Module de gestion de documents a numero chrono";
 		// Possible values for version are: 'development', 'experimental', 'dolibarr' or version

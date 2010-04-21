@@ -26,7 +26,7 @@
  \file       htdocs/includes/modules/modTelephonie.class.php
  \ingroup    telephonie
  \brief      Fichier de description et activation du module de Telephonie
-	\version	$Id: modTelephonie.class.php,v 1.1 2009/10/20 16:19:32 eldy Exp $
+	\version	$Id: modTelephonie.class.php,v 1.2 2010/04/21 05:33:41 hregis Exp $
  */
 
 include_once(DOL_DOCUMENT_ROOT."/includes/modules/DolibarrModules.class.php");
@@ -52,7 +52,7 @@ class modTelephonie extends DolibarrModules
 
 		$this->family = "other";
 		// Module label (no space allowed), used if translation string 'ModuleXXXName' not found (where XXX is value of numeric property 'numero' of module)
-		$this->name = eregi_replace('^mod','',get_class($this));
+		$this->name = preg_replace('/^mod/i','',get_class($this));
 		$this->description = "Gestion de la Telephonie";
 
 		// Possible values for version are: 'development', 'experimental', 'dolibarr' or version

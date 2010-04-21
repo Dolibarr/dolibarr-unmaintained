@@ -20,7 +20,7 @@
 /**
  *	\defgroup   energie     Module energy
  * 	\brief      Module pour le suivi de la consommation d'energie
- *	\version	$Id: modEnergie.class.php,v 1.2 2010/02/01 11:09:10 hregis Exp $
+ *	\version	$Id: modEnergie.class.php,v 1.3 2010/04/21 05:33:41 hregis Exp $
  */
 
 /**
@@ -51,7 +51,7 @@ class modEnergie extends DolibarrModules
 
 		$this->family = "other";
 		// Module label (no space allowed), used if translation string 'ModuleXXXName' not found (where XXX is value of numeric property 'numero' of module)
-		$this->name = eregi_replace('^mod','',get_class($this));
+		$this->name = preg_replace('/^mod/i','',get_class($this));
 		$this->description = "Suivi de la consommation des energies";
 
 		// Possible values for version are: 'development', 'experimental', 'dolibarr' or version
