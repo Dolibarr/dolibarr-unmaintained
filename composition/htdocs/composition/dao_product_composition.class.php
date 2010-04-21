@@ -25,7 +25,7 @@
         \file       htdocs/product_composition/dao_product_composition.class.php
         \ingroup    product_composition
         \brief      This file is an example for a class file
-		\version    $Id: dao_product_composition.class.php,v 1.4 2010/04/21 16:29:48 hregis Exp $
+		\version    $Id: dao_product_composition.class.php,v 1.5 2010/04/21 22:14:17 hregis Exp $
 		\author		Patrick Raguin
 */
 
@@ -126,9 +126,9 @@ class dao_product_composition // extends CommonObject
         {
     
             // Appel des triggers
-            /*include_once(DOL_DOCUMENT_ROOT . "/workflow/class/interfaces.class.php");
+            /*include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
             $interface=new Interfaces($this->db);
-            $result=$interface->call_workflow('MYOBJECT_CREATE',$this,$user,$langs,$conf);
+            $result=$interface->run_triggers('MYOBJECT_CREATE',$this,$user,$langs,$conf);
             if ($result < 0) { $error++; $this->errors=$interface->errors; }
             */
             // Fin appel triggers
@@ -184,9 +184,9 @@ class dao_product_composition // extends CommonObject
 		if (! $notrigger)
 		{
             // Appel des triggers
-            /*include_once(DOL_DOCUMENT_ROOT . "/workflow/class/interfaces.class.php");
+            /*include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
             $interface=new Interfaces($this->db);
-            $result=$interface->call_workflow('MYOBJECT_MODIFY',$this,$user,$langs,$conf);
+            $result=$interface->run_triggers('MYOBJECT_MODIFY',$this,$user,$langs,$conf);
             if ($result < 0) { $error++; $this->errors=$interface->errors; }
             */
             // Fin appel triggers
@@ -270,9 +270,9 @@ class dao_product_composition // extends CommonObject
 		}
 	
         // Appel des triggers
-        /*include_once(DOL_DOCUMENT_ROOT . "/workflow/class/interfaces.class.php");
+        /*include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
         $interface=new Interfaces($this->db);
-        $result=$interface->call_workflow('MYOBJECT_DELETE',$this,$user,$langs,$conf);
+        $result=$interface->run_triggers('MYOBJECT_DELETE',$this,$user,$langs,$conf);
         if ($result < 0) { $error++; $this->errors=$interface->errors; }
         */
         // Fin appel triggers

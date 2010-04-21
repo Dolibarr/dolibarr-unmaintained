@@ -16,14 +16,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: osc_categories.class.php,v 1.2 2010/04/21 16:29:48 hregis Exp $
+ * $Id: osc_categories.class.php,v 1.3 2010/04/21 22:14:17 hregis Exp $
  */
 
 /**
         \file       dev/skeletons/Osc_Categorie.class.class.php
         \ingroup    core
         \brief      Example for class
-        \version    $Revision: 1.2 $
+        \version    $Revision: 1.3 $
 */
 
 // Put here all includes required by your script
@@ -94,9 +94,9 @@ class Osc_Categorie
             }
 
             // Appel des triggers
-            include_once(DOL_DOCUMENT_ROOT . "/workflow/class/interfaces.class.php");
+            include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
             $interface=new Interfaces($this->db);
-            $result=$interface->call_workflow('MYOBJECT_CREATE',$this,$user,$langs,$conf);
+            $result=$interface->run_triggers('MYOBJECT_CREATE',$this,$user,$langs,$conf);
             if ($result < 0) { $error++; $this->errors=$interface->errors; }
             // Fin appel triggers
 
@@ -144,9 +144,9 @@ class Osc_Categorie
 		if (! $notrigger)
 		{
             // Appel des triggers
-            include_once(DOL_DOCUMENT_ROOT . "/workflow/class/interfaces.class.php");
+            include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
             $interface=new Interfaces($this->db);
-            $result=$interface->call_workflow('MYOBJECT_MODIFY',$this,$user,$langs,$conf);
+            $result=$interface->run_triggers('MYOBJECT_MODIFY',$this,$user,$langs,$conf);
             if ($result < 0) { $error++; $this->errors=$interface->errors; }
             // Fin appel triggers
     	}
@@ -289,9 +289,9 @@ class Osc_Categorie
 		}
 
         // Appel des triggers
-        include_once(DOL_DOCUMENT_ROOT . "/workflow/class/interfaces.class.php");
+        include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
         $interface=new Interfaces($this->db);
-        $result=$interface->call_workflow('MYOBJECT_DELETE',$this,$user,$langs,$conf);
+        $result=$interface->run_triggers('MYOBJECT_DELETE',$this,$user,$langs,$conf);
         if ($result < 0) { $error++; $this->errors=$interface->errors; }
         // Fin appel triggers
 
