@@ -22,15 +22,15 @@
  * 	\brief		Gestion du retour du systeme de Cyberpaiement
  * 				Cette page est appellee par le serveur de la BPLC lors de
  * 				l'utilisation au systeme RSTS.
- * 	\version	$Id: bplc.php,v 1.1 2010/01/12 10:26:24 eldy Exp $
+ * 	\version	$Id: bplc.php,v 1.2 2010/04/25 13:03:29 grandoc Exp $
  */
 
 define("NOLOGIN",1);	// This means this output page does not require to be logged.
 
 require("../../main.inc.php");
-require_once(DOL_DOCUMENT_ROOT ."/don.class.php");
+require_once(DOL_DOCUMENT_ROOT ."/compta/dons/class/don.class.php");
 require_once(DOL_DOCUMENT_ROOT."/public/bplc/retourbplc.class.php");
-require_once(DOL_DOCUMENT_ROOT."/don.class.php");
+require_once(DOL_DOCUMENT_ROOT."/compta/dons/class/don.class.php");
 
 // Security check
 if (empty($conf->bplc->enabled)) accessforbidden('',1,1,1);
