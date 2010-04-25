@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: envoi-emails-speciaux.php,v 1.4 2010/04/25 08:51:22 grandoc Exp $
+ * $Id: envoi-emails-speciaux.php,v 1.5 2010/04/25 14:46:44 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/script/envoi-emails-speciaux.php,v $
  *
  *
@@ -26,12 +26,12 @@
 
 require ("../../master.inc.php");
 
-require_once (DOL_DOCUMENT_ROOT."/compta/prelevement/bon-prelevement.class.php");
+require_once (DOL_DOCUMENT_ROOT."/compta/prelevement/class/bon-prelevement.class.php");
 require_once (DOL_DOCUMENT_ROOT."/telephonie/lignetel.class.php");
 require_once (DOL_DOCUMENT_ROOT."/telephonie/facturetel.class.php");
 require_once (DOL_DOCUMENT_ROOT."/telephonie/telephonie-tarif.class.php");
 require_once (DOL_DOCUMENT_ROOT."/telephonie/communication.class.php");
-require_once (DOL_DOCUMENT_ROOT."/compta/facture/facture.class.php");
+require_once (DOL_DOCUMENT_ROOT."/compta/facture/class/facture.class.php");
 require_once (DOL_DOCUMENT_ROOT."/societe/societe.class.php");
 require_once (DOL_DOCUMENT_ROOT."/compta/paiement/class/paiement.class.php");
 require_once (DOL_DOCUMENT_ROOT."/contrat/contrat.class.php");

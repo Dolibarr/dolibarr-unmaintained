@@ -16,12 +16,12 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  * or see http://www.gnu.org/
  *
- * $Id: pdfdetail_standard.modules.php,v 1.2 2010/03/26 15:45:39 grandoc Exp $
+ * $Id: pdfdetail_standard.modules.php,v 1.3 2010/04/25 14:46:44 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/pdf/pdfdetail_standard.modules.php,v $
  *
  */
 
-require_once DOL_DOCUMENT_ROOT."/compta/facture/facture.class.php";
+require_once DOL_DOCUMENT_ROOT."/compta/facture/class/facture.class.php";
 require_once DOL_DOCUMENT_ROOT."/telephonie/facturetel.class.php";
 require_once DOL_DOCUMENT_ROOT."/telephonie/pdf/pdfdetail_standard.modeles.php";
 
