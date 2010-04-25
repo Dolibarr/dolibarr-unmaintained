@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: FacturationEmission.class.php,v 1.4 2010/04/09 07:55:41 hregis Exp $
+ * $Id: FacturationEmission.class.php,v 1.5 2010/04/25 08:51:22 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/facturation/FacturationEmission.class.php,v $
  *
  *
@@ -28,12 +28,12 @@
    \file       htdocs/telephonie/script/facturation-emission.php
    \ingroup    telephonie
    \brief      Emission des factures
-   \version    $Revision: 1.4 $
+   \version    $Revision: 1.5 $
 */
 
 require_once (DOL_DOCUMENT_ROOT."/compta/facture/facture.class.php");
 require_once (DOL_DOCUMENT_ROOT."/societe/societe.class.php");
-require_once (DOL_DOCUMENT_ROOT."/paiement.class.php");
+require_once (DOL_DOCUMENT_ROOT."/compta/paiement/class/paiement.class.php");
 require_once (DOL_DOCUMENT_ROOT."/telephonie/dolibarrmail.class.php");
 require_once (DOL_DOCUMENT_ROOT."/telephonie/lignetel.class.php");
 require_once (DOL_DOCUMENT_ROOT."/telephonie/facturetel.class.php");
