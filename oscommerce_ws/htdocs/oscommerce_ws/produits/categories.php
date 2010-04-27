@@ -16,18 +16,18 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: categories.php,v 1.2 2010/04/13 14:05:42 grandoc Exp $
+ * $Id: categories.php,v 1.3 2010/04/27 14:48:28 grandoc Exp $
  */
 
 /**
     	\file       dev/skeletons/skeleton_page.php
 		\ingroup    core
 		\brief      Example of a php page
-		\version    $Revision: 1.2 $
+		\version    $Revision: 1.3 $
 */
 
 require("./pre.inc.php");
-require_once(DOL_DOCUMENT_ROOT."/categories/categorie.class.php");
+require_once(DOL_DOCUMENT_ROOT."/categories/class/categorie.class.php");
 require("osc_categories.class.php");
 //require_once(DOL_DOCUMENT_ROOT."/../dev/skeletons/skeleton_class.class.php");
 
@@ -356,5 +356,5 @@ elseif ( !($err = $client->getError()) )
 
 // End of page
 $db->close();
-llxFooter('$Date: 2010/04/13 14:05:42 $ - $Revision: 1.2 $');
+llxFooter('$Date: 2010/04/27 14:48:28 $ - $Revision: 1.3 $');
 ?>
