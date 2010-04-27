@@ -16,20 +16,20 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: thelia_order.class.php,v 1.4 2010/04/13 14:05:43 grandoc Exp $
+ * $Id: thelia_order.class.php,v 1.5 2010/04/27 08:14:07 grandoc Exp $
  */
 
 /**
         \file       htdocs/thelia/commandes/thelia_order.class.php
         \ingroup    thelia/orders
         \brief      Fichier de la classe des commandes issus de Thelia
-        \version    $Revision: 1.4 $
+        \version    $Revision: 1.5 $
 */
 
 
 require_once(DOL_DOCUMENT_ROOT."/thelia/clients/thelia_customer.class.php");
 require_once(DOL_DOCUMENT_ROOT."/thelia/produits/thelia_product.class.php");
-require_once(DOL_DOCUMENT_ROOT."/commande/commande.class.php");
+require_once(DOL_DOCUMENT_ROOT."/commande/class/commande.class.php");
 require_once(DOL_DOCUMENT_ROOT."/thelia/includes/configure.php");
 
 

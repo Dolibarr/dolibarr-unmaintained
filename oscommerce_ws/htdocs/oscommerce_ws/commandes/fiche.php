@@ -15,11 +15,11 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: fiche.php,v 1.1 2010/04/13 13:41:13 grandoc Exp $
+ * $Id: fiche.php,v 1.2 2010/04/27 08:14:07 grandoc Exp $
  */
 
 require("./pre.inc.php");
-require_once(DOL_DOCUMENT_ROOT."/commande/commande.class.php");
+require_once(DOL_DOCUMENT_ROOT."/commande/class/commande.class.php");
 require_once("../includes/configure.php");
 require_once("../clients/osc_customer.class.php");
 require_once("../produits/osc_product.class.php");
@@ -216,5 +216,5 @@ if ($action == '' && !$cancel) {
 
     }
 
-llxFooter('$Date: 2010/04/13 13:41:13 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2010/04/27 08:14:07 $ - $Revision: 1.2 $');
 ?>

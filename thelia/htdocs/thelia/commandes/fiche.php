@@ -16,11 +16,11 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: fiche.php,v 1.4 2010/03/29 20:53:24 grandoc Exp $
+ * $Id: fiche.php,v 1.5 2010/04/27 08:14:07 grandoc Exp $
  */
  
 require_once("./pre.inc.php");
-require_once(DOL_DOCUMENT_ROOT."/commande/commande.class.php");
+require_once(DOL_DOCUMENT_ROOT."/commande/class/commande.class.php");
 require_once(DOL_DOCUMENT_ROOT."/societe/societe.class.php");
 require_once("../includes/configure.php");
 require_once("../clients/thelia_customer.class.php");
@@ -302,5 +302,5 @@ if ($action == '' && !$cancel) {
  
     }
 
-llxFooter('$Date: 2010/03/29 20:53:24 $ - $Revision: 1.4 $');
+llxFooter('$Date: 2010/04/27 08:14:07 $ - $Revision: 1.5 $');
 ?>

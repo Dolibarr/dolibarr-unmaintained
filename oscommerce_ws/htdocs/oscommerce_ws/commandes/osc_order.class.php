@@ -15,20 +15,20 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: osc_order.class.php,v 1.2 2010/04/13 14:05:42 grandoc Exp $
+ * $Id: osc_order.class.php,v 1.3 2010/04/27 08:14:07 grandoc Exp $
  */
 
 /**
         \file       htdocs/oscommerce_ws/commandes/osc_order.class.php
         \ingroup    oscommerce_ws/orders
         \brief      Fichier de la classe des commandes issus de OsCommerce
-        \version    $Revision: 1.2 $
+        \version    $Revision: 1.3 $
 */
 
 
 require("../clients/osc_customer.class.php");
 require("../produits/osc_product.class.php");
-require_once(DOL_DOCUMENT_ROOT."/commande/commande.class.php");
+require_once(DOL_DOCUMENT_ROOT."/commande/class/commande.class.php");
 require_once("../includes/configure.php");
 
 
