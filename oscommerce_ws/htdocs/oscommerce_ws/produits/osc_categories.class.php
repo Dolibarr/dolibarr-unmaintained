@@ -16,19 +16,19 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: osc_categories.class.php,v 1.3 2010/04/21 22:14:17 hregis Exp $
+ * $Id: osc_categories.class.php,v 1.4 2010/04/28 07:56:22 grandoc Exp $
  */
 
 /**
         \file       dev/skeletons/Osc_Categorie.class.class.php
         \ingroup    core
         \brief      Example for class
-        \version    $Revision: 1.3 $
+        \version    $Revision: 1.4 $
 */
 
 // Put here all includes required by your script
 //require_once(DOL_DOCUMENT_ROOT."/societe/societe.class.php");
-//require_once(DOL_DOCUMENT_ROOT."/contact/contact.class.php");
+//require_once(DOL_DOCUMENT_ROOT."/contact/class/contact.class.php");
 //require_once(DOL_DOCUMENT_ROOT."/product/product.class.php");
 
 

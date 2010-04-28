@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: facture.php,v 1.5 2010/04/25 14:46:44 grandoc Exp $
+ * $Id: facture.php,v 1.6 2010/04/28 07:56:22 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/client/facture.php,v $
  */
 
@@ -25,7 +25,7 @@
    \file       htdocs/telephonie/client/facture.php
    \ingroup    telephonie/facture
    \brief      Page de visualisation d'une facture
-   \version    $Revision: 1.5 $
+   \version    $Revision: 1.6 $
 */
 require("./pre.inc.php");
 
@@ -39,13 +39,13 @@ $warning_delay=31*24*60*60; // Delai affichage warning retard (si retard paiemen
 require_once DOL_DOCUMENT_ROOT."/compta/facture/class/facture.class.php";
 require_once DOL_DOCUMENT_ROOT."/compta/paiement/class/paiement.class.php";
 require_once DOL_DOCUMENT_ROOT."/lib/CMailFile.class.php";
-include_once DOL_DOCUMENT_ROOT."/contact.class.php";
+include_once DOL_DOCUMENT_ROOT."/contact/class/contact.class.php";
 include_once DOL_DOCUMENT_ROOT."/comm/action/actioncomm.class.php";
 
 if ($_GET["socid"]) { $socid=$_GET["socid"]; }
 if (isset($_GET["msg"])) { $msg=urldecode($_GET["msg"]); }
 
-// Sï¿½curitï¿½ accï¿½s client
+// Sécurité accès client
 if ($user->societe_id > 0)
 {
     $action = '';
@@ -728,5 +728,5 @@ if ($_GET["facid"] > 0)
 
 $db->close();
 
-llxFooter('$Date: 2010/04/25 14:46:44 $ - $Revision: 1.5 $');
+llxFooter('$Date: 2010/04/28 07:56:22 $ - $Revision: 1.6 $');
 ?>

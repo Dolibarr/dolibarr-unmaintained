@@ -23,11 +23,11 @@
      	\file       htdocs/chronodocs/index.php
 		\brief      Page accueil espace fiches chronodocs
 		\ingroup    chronodocs
-		\version    $Id: index.php,v 1.2 2008/11/02 00:13:03 raphael_bertrand Exp $
+		\version    $Id: index.php,v 1.3 2010/04/28 07:56:22 grandoc Exp $
 */
 
 require("./pre.inc.php");
-require_once(DOL_DOCUMENT_ROOT."/contact.class.php");
+require_once(DOL_DOCUMENT_ROOT."/contact/class/contact.class.php");
 require_once(DOL_DOCUMENT_ROOT."/chronodocs/chronodocs_entries.class.php");
 require_once(DOL_DOCUMENT_ROOT."/chronodocs/chronodocs_types.class.php");
 require_once(DOL_DOCUMENT_ROOT."/lib/date.lib.php");
@@ -180,5 +180,5 @@ else
 
 $db->close();
 
-llxFooter('$Date: 2008/11/02 00:13:03 $ - $Revision: 1.2 $');
+llxFooter('$Date: 2010/04/28 07:56:22 $ - $Revision: 1.3 $');
 ?>

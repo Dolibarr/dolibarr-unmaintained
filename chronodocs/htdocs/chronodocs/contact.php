@@ -22,14 +22,14 @@
         \file       htdocs/chronodocs/contact.php
         \ingroup    chronodocs
         \brief      Onglet de gestion des contacts de chronodoc
-        \version    $Id: contact.php,v 1.2 2008/11/02 00:13:03 raphael_bertrand Exp $
+        \version    $Id: contact.php,v 1.3 2010/04/28 07:56:22 grandoc Exp $
 */
 
 require ("./pre.inc.php");
 require_once(DOL_DOCUMENT_ROOT."/chronodocs/chronodocs_entries.class.php");
 require_once(DOL_DOCUMENT_ROOT."/chronodocs/chronodocs_types.class.php");
 require_once(DOL_DOCUMENT_ROOT."/lib/chronodocs.lib.php");
-require_once(DOL_DOCUMENT_ROOT."/contact.class.php");
+require_once(DOL_DOCUMENT_ROOT."/contact/class/contact.class.php");
 
 $langs->load("chronodocs");
 $langs->load("sendings");
@@ -375,5 +375,5 @@ if ($id > 0)
 
 $db->close();
 
-llxFooter('$Date: 2008/11/02 00:13:03 $');
+llxFooter('$Date: 2010/04/28 07:56:22 $');
 ?>
