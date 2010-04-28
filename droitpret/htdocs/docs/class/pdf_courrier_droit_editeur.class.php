@@ -20,7 +20,7 @@
  \file       	docs/class/courrier-droit-editeur.class.php
  \ingroup    	editeurs
  \brief      	Classe de generation des courriers pour les editeurs
- \version		$Id: pdf_courrier_droit_editeur.class.php,v 1.1 2010/04/14 22:12:08 eldy Exp $
+ \version		$Id: pdf_courrier_droit_editeur.class.php,v 1.2 2010/04/28 21:38:23 grandoc Exp $
  */
 
 require_once(DOL_DOCUMENT_ROOT.'/includes/fpdf/fpdfi/fpdi_protection.php');
@@ -66,7 +66,7 @@ class pdf_courrier_droit_editeur
 		dol_syslog("pdf_courrier_droit_editeur::Generate ", LOG_DEBUG );
 
 		require_once(FPDF_PATH.'fpdf.php');
-		require_once(DOL_DOCUMENT_ROOT."/product/product.class.php");
+		require_once(DOL_DOCUMENT_ROOT."/product/class/product.class.php");
 		require_once(DOL_DOCUMENT_ROOT."/product/canvas/livre/product.livre.class.php");
 		$error = 0;
 		$year = strftime("%Y", time());

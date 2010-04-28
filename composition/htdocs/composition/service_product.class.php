@@ -20,10 +20,10 @@
  */
 
 /**
-        \file       htdocs/product_composition/product.class.php
+        \file       htdocs/product_composition/class/product.class.php
         \ingroup    product
         \brief      *complete here*
-		\version    $Id: service_product.class.php,v 1.2 2010/03/09 15:48:56 cdelambert Exp $
+		\version    $Id: service_product.class.php,v 1.3 2010/04/28 21:38:23 grandoc Exp $
 		\author		Patrick Raguin
 */
 

@@ -21,7 +21,7 @@
  *     \file       htdocs/droitpret/pre.inc.php
  *     \ingroup    pret
  *     \brief      Fichier gestionnaire du menu de gauche de l'espace droitpret
- *     \version    $Id: pre.inc.php,v 1.5 2010/03/23 07:57:27 hregis Exp $
+ *     \version    $Id: pre.inc.php,v 1.6 2010/04/28 21:38:23 grandoc Exp $
  */
 
 require("../main.inc.php");
@@ -41,7 +41,7 @@ function llxHeader($head = "", $title="", $help_url='')
 	{
 		if ($handle = opendir($dir))
 		{
-			require_once(DOL_DOCUMENT_ROOT . "/product/product.class.php");
+			require_once(DOL_DOCUMENT_ROOT . "/product/class/product.class.php");
 			
 			while (($file = readdir($handle))!==false)
 			{

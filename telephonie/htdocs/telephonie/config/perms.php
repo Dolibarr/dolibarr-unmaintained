@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: perms.php,v 1.1 2009/10/20 16:19:29 eldy Exp $
+ * $Id: perms.php,v 1.2 2010/04/28 21:38:23 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/config/perms.php,v $
  */
 
@@ -23,11 +23,11 @@
     \file       htdocs/telephonie/config/xdsl.php
     \ingroup    telephonie
     \brief      Page configuration telephonie
-    \version    $Revision: 1.1 $
+    \version    $Revision: 1.2 $
 */
 
 require("./pre.inc.php");
-require_once(DOL_DOCUMENT_ROOT.'/fourn/fournisseur.class.php');
+require_once(DOL_DOCUMENT_ROOT.'/fourn/class/fournisseur.class.php');
 require_once(DOL_DOCUMENT_ROOT.'/telephonie/adsl/fournisseurxdsl.class.php');
 
 $langs->load("admin");

@@ -15,11 +15,11 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: fiche.php,v 1.4 2010/03/22 15:30:59 hregis Exp $
+ * $Id: fiche.php,v 1.5 2010/04/28 21:38:23 grandoc Exp $
  */
 
 require("./pre.inc.php");
-require_once(DOL_DOCUMENT_ROOT."/product/product.class.php");
+require_once(DOL_DOCUMENT_ROOT."/product/class/product.class.php");
 require_once(DOL_DOCUMENT_ROOT."/lib/product.lib.php");
 
 require_once("../includes/configure.php");
@@ -230,5 +230,5 @@ if ($action == '' && !$cancel) {
 
 }
 
-llxFooter('$Date: 2010/03/22 15:30:59 $ - $Revision: 1.4 $');
+llxFooter('$Date: 2010/04/28 21:38:23 $ - $Revision: 1.5 $');
 ?>
