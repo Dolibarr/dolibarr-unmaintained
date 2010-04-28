@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: remises.php,v 1.1 2009/10/20 16:19:22 eldy Exp $
+ * $Id: remises.php,v 1.2 2010/04/28 07:41:31 eldy Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/ligne/remises.php,v $
  *
  */
@@ -37,8 +37,8 @@ if ($cancel == $langs->trans("Cancel"))
 
 if ($_GET["id"])
 {
-  $ligne = new LigneTel($db);  
-  $result = $ligne->fetch_by_id($_GET["id"]);  
+  $ligne = new LigneTel($db);
+  $result = $ligne->fetch_by_id($_GET["id"]);
 }
 
 if ($result == 1)
@@ -53,27 +53,27 @@ if (!$client_comm->perm_read)
 }
 
 if ($result == 1 && $client_comm->perm_read)
-{ 
+{
   if ($_GET["action"] <> 'edit' && $_GET["action"] <> 're-edit')
     {
       $h=0;
       $head[$h][0] = DOL_URL_ROOT."/telephonie/ligne/fiche.php?id=".$ligne->id;
       $head[$h][1] = $langs->trans("Ligne");
       $h++;
-      
+
       $head[$h][0] = DOL_URL_ROOT."/telephonie/ligne/remises.php?id=".$ligne->id;
       $head[$h][1] = $langs->trans('Discounts');
       $hselected=$h;
       $h++;
-      
+
       dol_fiche_head($head, $hselected, 'Ligne : '.$ligne->numero);
-      
+
       print_fiche_titre('Fiche Ligne', $mesg);
-      
+
       print '<table class="border" width="100%">';
 
       print '<tr><td width="20%">Num�ro</td><td colspan="2">'.dol_print_phone($ligne->numero,0,0,true).'</td></tr>';
-	      	     
+
       $client = new Societe($db, $ligne->client_id);
       $client->fetch($ligne->client_id);
 
@@ -88,21 +88,21 @@ if ($result == 1 && $client_comm->perm_read)
 
       if ($ligne->user_creat)
 	{
-	  print '<tr><td width="20%">Cr�� par</td><td colspan="2">';
+	  print '<tr><td width="20%">Cree par</td><td colspan="2">';
 
-	  $cuser = new User($db, $ligne->user_creat);
-	  $cuser->fetch();
+	  $cuser = new User($db);
+	  $cuser->fetch($ligne->user_creat);
 
 	  print $cuser->fullname;
 	  print '</td></tr>';
 	}
       if ($ligne->user_commande)
 	{
-	  print '<tr><td width="20%">Command� par</td><td colspan="2">';
+	  print '<tr><td width="20%">Commande par</td><td colspan="2">';
 
-	  $couser = new User($db, $ligne->user_commande);
-	  $couser->fetch();
-		  
+	  $couser = new User($db);
+	  $couser->fetch($ligne->user_commande);
+
 	  print $couser->fullname;
 	  print '</td></tr>';
 	}
@@ -118,7 +118,7 @@ if ($result == 1 && $client_comm->perm_read)
       print '</tr>';
 
       /* historique */
-	     
+
       $sql = "SELECT ".$db->pdate("r.tms").", r.remise, r.fk_user, r.comment, u.name, u.firstname";
       $sql .= " FROM ".MAIN_DB_PREFIX."telephonie_societe_ligne_remise as r";
       $sql .= ",".MAIN_DB_PREFIX."user as u";
@@ -149,12 +149,12 @@ if ($result == 1 && $client_comm->perm_read)
 	{
 	  print $sql;
 	}
-	  
+
       print "</table>";
     }
 }
 
 $db->close();
 
-llxFooter("<em>Derni&egrave;re modification $Date: 2009/10/20 16:19:22 $ r&eacute;vision $Revision: 1.1 $</em>");
+llxFooter("<em>Derni&egrave;re modification $Date: 2010/04/28 07:41:31 $ r&eacute;vision $Revision: 1.2 $</em>");
 ?>

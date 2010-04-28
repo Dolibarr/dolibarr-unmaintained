@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: history.php,v 1.1 2009/10/20 16:19:22 eldy Exp $
+ * $Id: history.php,v 1.2 2010/04/28 07:41:31 eldy Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/ligne/history.php,v $
  *
  */
@@ -60,7 +60,7 @@ llxHeader("","","Historique Ligne");
 
 
       if ($result == 1 && $client_comm->perm_read)
-	{ 
+	{
 	  if ($_GET["action"] <> 'edit' && $_GET["action"] <> 're-edit')
 	    {
 
@@ -88,7 +88,7 @@ llxHeader("","","Historique Ligne");
 	      $head[$h][0] = DOL_URL_ROOT."/telephonie/ligne/conso.php?id=".$ligne->id;
 	      $head[$h][1] = $langs->trans('Conso');
 	      $h++;
-	      
+
 	      $head[$h][0] = DOL_URL_ROOT."/telephonie/ligne/stat.php?id=".$ligne->id;
 	      $head[$h][1] = $langs->trans('Stats');
 	      $h++;
@@ -96,11 +96,11 @@ llxHeader("","","Historique Ligne");
 	      dol_fiche_head($head, $hselected, 'Ligne : '.$ligne->numero);
 
 	      print_fiche_titre('Fiche Ligne', $mesg);
-      
+
 	      print '<table class="border" width="100%" cellspacing="0" cellpadding="4">';
 
 	      print '<tr><td width="20%">Num�ro</td><td colspan="3">'.dol_print_phone($ligne->numero,0,0,true).'</td></tr>';
-	      	     
+
 	      $client = new Societe($db, $ligne->client_id);
 	      $client->fetch($ligne->client_id);
 
@@ -115,21 +115,21 @@ llxHeader("","","Historique Ligne");
 
 	      if ($ligne->user_creat)
 		{
-		  print '<tr><td width="20%">Cr�� par</td><td colspan="3">';
+		  print '<tr><td width="20%">Cree par</td><td colspan="3">';
 
-		  $cuser = new User($db, $ligne->user_creat);
-		  $cuser->fetch();
+		  $cuser = new User($db);
+		  $cuser->fetch($ligne->user_creat);
 
 		  print $cuser->fullname;
 		  print '</td></tr>';
 		}
 	      if ($ligne->user_commande)
 		{
-		  print '<tr><td width="20%">Command� par</td><td colspan="3">';
+		  print '<tr><td width="20%">Commande par</td><td colspan="3">';
 
-		  $couser = new User($db, $ligne->user_commande);
-		  $couser->fetch();
-		  
+		  $couser = new User($db);
+		  $couser->fetch($ligne->user_commande);
+
 		  print $couser->fullname;
 		  print '</td></tr>';
 		}
@@ -142,7 +142,7 @@ llxHeader("","","Historique Ligne");
 	      print '</tr>';
 
 	      /* historique */
-	      $ff = array();     
+	      $ff = array();
 	      $sql = "SELECT rowid, nom FROM ".MAIN_DB_PREFIX."telephonie_fournisseur";
 	      $sql .= "  WHERE commande_active = 1 ORDER BY nom ";
 
@@ -199,7 +199,7 @@ llxHeader("","","Historique Ligne");
 		{
 		  print $sql;
 		}
-	  
+
 	      print "</table>";
 	    }
 
@@ -214,7 +214,7 @@ llxHeader("","","Historique Ligne");
 	  $sql .= " FROM ".MAIN_DB_PREFIX."telephonie_commande_retour";
 	  $sql .= " WHERE cli = ".$ligne->numero;
 	  $sql .= " ORDER BY rowid DESC " . $db->plimit($conf->liste_limit+1, $offset);
-	  
+
 	  $resql = $db->query($sql);
 	  if ($resql)
 	    {
@@ -223,11 +223,11 @@ llxHeader("","","Historique Ligne");
 	      print '<td align="center">Date MeS</td><td>R�sil</td></td><td>Commentaire</td><td align="center">D.T. / Fichier</td>';
 	      print "</tr>\n";
 	      $var=True;
-	      
+
 	      while ($obj = $db->fetch_object($resql))
 		{
 		  $var=!$var;
-		  
+
 		  print "<tr $bc[$var]>";
 		  print '<td>('.$obj->fk_fournisseur.") ".$obj->mode."</td>\n";
 		  print '<td>'.$obj->situation."</td>\n";
@@ -247,11 +247,11 @@ llxHeader("","","Historique Ligne");
 	      print "</table>";
 	      $db->free($resql);
 	    }
-	  else 
+	  else
 	    {
 	      print $db->error() . ' ' . $sql;
 	    }
-	  
+
 	  /*
 	   *
 	   *
@@ -267,5 +267,5 @@ else
 
 $db->close();
 
-llxFooter("<em>Derni&egrave;re modification $Date: 2009/10/20 16:19:22 $ r&eacute;vision $Revision: 1.1 $</em>");
+llxFooter("<em>Derni&egrave;re modification $Date: 2010/04/28 07:41:31 $ r&eacute;vision $Revision: 1.2 $</em>");
 ?>

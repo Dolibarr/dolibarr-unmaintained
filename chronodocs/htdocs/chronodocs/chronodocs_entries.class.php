@@ -21,7 +21,7 @@
         \file       chronodocs/chronodocs_entries.class.php
         \ingroup    chronodocs
         \brief      CRUD class file for chronodocs entries (Create/Read/Update/Delete)
-		\version    $Id: chronodocs_entries.class.php,v 1.9 2010/04/21 22:14:17 hregis Exp $
+		\version    $Id: chronodocs_entries.class.php,v 1.10 2010/04/28 07:41:30 eldy Exp $
 		\author	Raphael Bertrand (Resultic) <raphael.bertrand@resultic.fr>
 		\remarks	Initialy built by build_class_from_table on 2008-08-18 17:28
 */
@@ -46,13 +46,13 @@ class Chronodocs_entries  extends CommonObject
 	var $errors=array();				//!< To return several error codes (or messages)
 	var $element='chronodocs_entries';			//!< Id that identify managed objects
 	var $table_element='chronodocs_entries';	//!< Name of table without prefix where object is stored
-    
+
     var $id;
-	
+
 	var $client=null;				// Objet societe client (a charger par fetch_client)
 	var $chronodocs_type=null;		// Objet chronodocs_types (a charger par fetch_chronodocs_type)
 	var $propvalues=null;			// Objet contenant les objets chronodocs_propvalues correspondants (a charger par fetch_chronodocs_propvalues)
-    
+
 	var $ref;
 	var $title;
 	var $filename;				//not already used because docs are stocked only in directory
@@ -67,20 +67,20 @@ class Chronodocs_entries  extends CommonObject
 	var $fk_user_c;
 	var $fk_user_u;
 
-    
 
-	
+
+
  /**
      *      \brief      Constructor
      *      \param      DB      Database handler
      */
-    function Chronodocs_entries($DB) 
+    function Chronodocs_entries($DB)
     {
         $this->db = $DB;
         return 1;
     }
 
-	
+
     /**
      *      \brief      Create in database
      *      \param      user        	User that create
@@ -91,9 +91,9 @@ class Chronodocs_entries  extends CommonObject
     {
     	global $conf, $langs;
 		$error=0;
-    	
+
 		// Clean parameters
-        
+
 		if (isset($this->ref)) $this->ref=trim($this->ref);
 		if (isset($this->title)) $this->title=trim($this->title);
 		if (isset($this->filename)) $this->filename=trim($this->filename);
@@ -112,10 +112,10 @@ class Chronodocs_entries  extends CommonObject
 
 		// Check parameters
 		// Put here code to add control on parameters values
-		
+
         // Insert request
 		$sql = "INSERT INTO ".MAIN_DB_PREFIX."chronodocs_entries(";
-		
+
 		$sql.= "ref,";
 		$sql.= "title,";
 		$sql.= "filename,";
@@ -130,9 +130,9 @@ class Chronodocs_entries  extends CommonObject
 		$sql.= "fk_user_c,";
 		$sql.= "fk_user_u";
 
-		
+
         $sql.= ") VALUES (";
-        
+
 		$sql.= " ".(! isset($this->ref)?'NULL':"'".addslashes($this->ref)."'").",";
 		$sql.= " ".(! isset($this->title)?'NULL':"'".addslashes($this->title)."'").",";
 		$sql.= " ".(! isset($this->filename)?'NULL':"'".addslashes($this->filename)."'").",";
@@ -147,24 +147,24 @@ class Chronodocs_entries  extends CommonObject
 		$sql.= " ".(! isset($this->fk_user_c)?'NULL':"'".$this->fk_user_c."'").",";
 		$sql.= " ".(! isset($this->fk_user_u)?'NULL':"'".$this->fk_user_u."'")."";
 
-        
+
 		$sql.= ")";
 
 		$this->db->begin();
-		
+
 	   	dolibarr_syslog(get_class($this)."::create sql=".$sql, LOG_DEBUG);
         $resql=$this->db->query($sql);
     	if (! $resql) { $error++; $this->errors[]="Error ".$this->db->lasterror(); }
-        
+
 		if (! $error)
         {
             $this->id = $this->db->last_insert_id(MAIN_DB_PREFIX."chronodocs_entries");
-    
+
 			if (! $notrigger)
 			{
 	            // Uncomment this and change MYOBJECT to your own tag if you
 	            // want this action call a trigger.
-	            
+
 	            //// Call triggers
 	            //include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
 	            //$interface=new Interfaces($this->db);
@@ -181,7 +181,7 @@ class Chronodocs_entries  extends CommonObject
 			{
 	            dolibarr_syslog(get_class($this)."::create ".$errmsg, LOG_ERR);
 	            $this->error.=($this->error?', '.$errmsg:$errmsg);
-			}	
+			}
 			$this->db->rollback();
 			return -1*$error;
 		}
@@ -192,7 +192,7 @@ class Chronodocs_entries  extends CommonObject
 		}
     }
 
-    
+
     /**
      *    \brief      Load object in memory from database
      *    \param      id          id object
@@ -203,7 +203,7 @@ class Chronodocs_entries  extends CommonObject
     	global $langs;
         $sql = "SELECT";
 		$sql.= " t.rowid,";
-		
+
 		$sql.= " t.ref,";
 		$sql.= " t.title,";
 		$sql.= " t.filename,";
@@ -218,10 +218,10 @@ class Chronodocs_entries  extends CommonObject
 		$sql.= " t.fk_user_c,";
 		$sql.= " t.fk_user_u";
 
-		
+
         $sql.= " FROM ".MAIN_DB_PREFIX."chronodocs_entries as t";
         $sql.= " WHERE t.rowid = ".$id;
-    
+
     	dolibarr_syslog(get_class($this)."::fetch sql=".$sql, LOG_DEBUG);
         $resql=$this->db->query($sql);
         if ($resql)
@@ -229,9 +229,9 @@ class Chronodocs_entries  extends CommonObject
             if ($this->db->num_rows($resql))
             {
                 $obj = $this->db->fetch_object($resql);
-    
+
                 $this->id    = $obj->rowid;
-                
+
 				$this->ref = $obj->ref;
 				$this->title = $obj->title;
 				$this->filename = $obj->filename;
@@ -246,10 +246,10 @@ class Chronodocs_entries  extends CommonObject
 				$this->fk_user_c = $obj->fk_user_c;
 				$this->fk_user_u = $obj->fk_user_u;
 
-                
+
             }
             $this->db->free($resql);
-            
+
             return 1;
         }
         else
@@ -259,7 +259,7 @@ class Chronodocs_entries  extends CommonObject
             return -1;
         }
     }
-    
+
 
     /**
      *      \brief      Update database
@@ -272,9 +272,9 @@ class Chronodocs_entries  extends CommonObject
     {
     	global $conf, $langs;
 		$error=0;
-    	
+
 		// Clean parameters
-        
+
 		if (isset($this->ref)) $this->ref=trim($this->ref);
 		if (isset($this->title)) $this->title=trim($this->title);
 		if (isset($this->filename)) $this->filename=trim($this->filename);
@@ -296,7 +296,7 @@ class Chronodocs_entries  extends CommonObject
 
         // Update request
         $sql = "UPDATE ".MAIN_DB_PREFIX."chronodocs_entries SET";
-        
+
 		$sql.= " ref=".(isset($this->ref)?"'".addslashes($this->ref)."'":"null").",";
 		$sql.= " title=".(isset($this->title)?"'".addslashes($this->title)."'":"null").",";
 		$sql.= " filename=".(isset($this->filename)?"'".addslashes($this->filename)."'":"null").",";
@@ -311,22 +311,22 @@ class Chronodocs_entries  extends CommonObject
 		$sql.= " fk_user_c=".(isset($this->fk_user_c)?$this->fk_user_c:"null").",";
 		$sql.= " fk_user_u=".(isset($this->fk_user_u)?$this->fk_user_u:"null")."";
 
-        
+
         $sql.= " WHERE rowid=".$this->id;
 
 		$this->db->begin();
-        
+
 		dolibarr_syslog(get_class($this)."::update sql=".$sql, LOG_DEBUG);
         $resql = $this->db->query($sql);
     	if (! $resql) { $error++; $this->errors[]="Error ".$this->db->lasterror(); }
-        
+
 		if (! $error)
 		{
 			if (! $notrigger)
 			{
 	            // Uncomment this and change MYOBJECT to your own tag if you
 	            // want this action call a trigger.
-				
+
 	            //// Call triggers
 	            //include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
 	            //$interface=new Interfaces($this->db);
@@ -335,7 +335,7 @@ class Chronodocs_entries  extends CommonObject
 	            //// End call triggers
 	    	}
 		}
-		
+
         // Commit or rollback
 		if ($error)
 		{
@@ -343,7 +343,7 @@ class Chronodocs_entries  extends CommonObject
 			{
 	            dolibarr_syslog(get_class($this)."::update ".$errmsg, LOG_ERR);
 	            $this->error.=($this->error?', '.$errmsg:$errmsg);
-			}	
+			}
 			$this->db->rollback();
 			return -1*$error;
 		}
@@ -351,10 +351,10 @@ class Chronodocs_entries  extends CommonObject
 		{
 			$this->db->commit();
 			return 1;
-		}		
+		}
     }
-  
-  
+
+
  	/**
 	*   \brief      Delete object in database
     *	\param      user        	User that delete
@@ -365,32 +365,32 @@ class Chronodocs_entries  extends CommonObject
 	{
 		global $conf, $langs;
 		$error=0;
-		
+
 		$sql = "DELETE FROM ".MAIN_DB_PREFIX."chronodocs_entries";
 		$sql.= " WHERE rowid=".$this->id;
-	
+
 		$this->db->begin();
-		
+
 		dolibarr_syslog(get_class($this)."::delete sql=".$sql);
 		$resql = $this->db->query($sql);
     	if (! $resql) { $error++; $this->errors[]="Error ".$this->db->lasterror(); }
-		
+
 		if (! $error)
 		{
 			if (! $notrigger)
 			{
 				// Uncomment this and change MYOBJECT to your own tag if you
 		        // want this action call a trigger.
-				
+
 		        //// Call triggers
 		        //include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
 		        //$interface=new Interfaces($this->db);
 		        //$result=$interface->run_triggers('MYOBJECT_DELETE',$this,$user,$langs,$conf);
 		        //if ($result < 0) { $error++; $this->errors=$interface->errors; }
 		        //// End call triggers
-			}	
+			}
 		}
-		
+
 		// Delete files
 		if(! $error)
 		{
@@ -405,7 +405,7 @@ class Chronodocs_entries  extends CommonObject
 					}
 				}
 		}
-		
+
         // Commit or rollback
 		if ($error)
 		{
@@ -413,7 +413,7 @@ class Chronodocs_entries  extends CommonObject
 			{
 	            dolibarr_syslog(get_class($this)."::delete ".$errmsg, LOG_ERR);
 	            $this->error.=($this->error?', '.$errmsg:$errmsg);
-			}	
+			}
 			$this->db->rollback();
 			return -1*$error;
 		}
@@ -424,7 +424,7 @@ class Chronodocs_entries  extends CommonObject
 		}
 	}
 
-  
+
 	/**
 	 *		\brief		Initialise object with example values
 	 *		\remarks	id must be 0 if object instance is a specimen.
@@ -432,7 +432,7 @@ class Chronodocs_entries  extends CommonObject
 	function initAsSpecimen()
 	{
 		$this->id=0;
-		
+
 		$this->ref='';
 		$this->title='';
 		$this->filename='';
@@ -446,14 +446,14 @@ class Chronodocs_entries  extends CommonObject
 		$this->fk_status='';
 		$this->fk_user_c='';
 		$this->fk_user_u='';
-		
+
 	}
-	
+
 	function fetch_chronodocs_type()
 	{
 		if(empty($this->fk_chronodocs_type))
 			return "NOTSET";
-			
+
 		$chronodocs_type=new Chronodocs_types($this->db);
 		$result=$chronodocs_type->fetch($this->fk_chronodocs_type);
 		$this->chronodocs_type=$chronodocs_type;
@@ -464,7 +464,7 @@ class Chronodocs_entries  extends CommonObject
     {
     	global $conf, $langs;
 		$error=0;
-    	
+
 		// Clean and fetch parameters
 		$this->brief=trim($newbrief);
 
@@ -477,27 +477,27 @@ class Chronodocs_entries  extends CommonObject
 
         // Update request
         $sql = "UPDATE ".MAIN_DB_PREFIX."chronodocs_entries SET";
-        
+
 		$sql.= " brief=".(isset($this->brief)?"'".addslashes($this->brief)."'":"null").",";
 		$sql.= " date_u=".(strval($this->date_u)!='' ? "'".$this->db->idate($this->date_u)."'" : 'null').",";
 		$sql.= " fk_user_u=".(isset($this->fk_user_u)?$this->fk_user_u:"null")."";
 
-        
+
         $sql.= " WHERE rowid=".$this->id;
 
 		$this->db->begin();
-        
+
 		dolibarr_syslog(get_class($this)."::set_brief sql=".$sql, LOG_DEBUG);
         $resql = $this->db->query($sql);
     	if (! $resql) { $error++; $this->errors[]="Error ".$this->db->lasterror(); }
-        
+
 		if (! $error)
 		{
 			if (! $notrigger)
 			{
 	            // Uncomment this and change MYOBJECT to your own tag if you
 	            // want this action call a trigger.
-				
+
 	            //// Call triggers
 	            //include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
 	            //$interface=new Interfaces($this->db);
@@ -506,7 +506,7 @@ class Chronodocs_entries  extends CommonObject
 	            //// End call triggers
 	    	}
 		}
-		
+
         // Commit or rollback
 		if ($error)
 		{
@@ -514,7 +514,7 @@ class Chronodocs_entries  extends CommonObject
 			{
 	            dolibarr_syslog(get_class($this)."::set_brief ".$errmsg, LOG_ERR);
 	            $this->error.=($this->error?', '.$errmsg:$errmsg);
-			}	
+			}
 			$this->db->rollback();
 			return -1*$error;
 		}
@@ -522,7 +522,7 @@ class Chronodocs_entries  extends CommonObject
 		{
 			$this->db->commit();
 			return 1;
-		}		
+		}
     }
 
  /**
@@ -536,7 +536,7 @@ class Chronodocs_entries  extends CommonObject
     {
     	global $conf, $langs;
 		$error=0;
-    	
+
 		// Clean and fetch parameters
 		$this->date_c=trim($new_date_c);
 
@@ -549,27 +549,27 @@ class Chronodocs_entries  extends CommonObject
 
         // Update request
         $sql = "UPDATE ".MAIN_DB_PREFIX."chronodocs_entries SET";
-        
+
 		$sql.= " date_c=".(strval($this->date_c)!='' ? "'".$this->db->idate($this->date_c)."'" : 'null').",";
 		$sql.= " date_u=".(strval($this->date_u)!='' ? "'".$this->db->idate($this->date_u)."'" : 'null').",";
 		$sql.= " fk_user_u=".(isset($this->fk_user_u)?$this->fk_user_u:"null")."";
 
-        
+
         $sql.= " WHERE rowid=".$this->id;
 
 		$this->db->begin();
-        
+
 		dolibarr_syslog(get_class($this)."::set_date_c sql=".$sql, LOG_DEBUG);
         $resql = $this->db->query($sql);
     	if (! $resql) { $error++; $this->errors[]="Error ".$this->db->lasterror(); }
-        
+
 		if (! $error)
 		{
 			if (! $notrigger)
 			{
 	            // Uncomment this and change MYOBJECT to your own tag if you
 	            // want this action call a trigger.
-				
+
 	            //// Call triggers
 	            //include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
 	            //$interface=new Interfaces($this->db);
@@ -578,7 +578,7 @@ class Chronodocs_entries  extends CommonObject
 	            //// End call triggers
 	    	}
 		}
-		
+
         // Commit or rollback
 		if ($error)
 		{
@@ -586,7 +586,7 @@ class Chronodocs_entries  extends CommonObject
 			{
 	            dolibarr_syslog(get_class($this)."::set_date_c ".$errmsg, LOG_ERR);
 	            $this->error.=($this->error?', '.$errmsg:$errmsg);
-			}	
+			}
 			$this->db->rollback();
 			return -1*$error;
 		}
@@ -594,9 +594,9 @@ class Chronodocs_entries  extends CommonObject
 		{
 			$this->db->commit();
 			return 1;
-		}		
+		}
     }
-	
+
  /**
      *      \brief      Update title
      *      \param      user        	User that modify
@@ -608,7 +608,7 @@ class Chronodocs_entries  extends CommonObject
     {
     	global $conf, $langs;
 		$error=0;
-    	
+
 		// Clean and fetch parameters
 		$this->title=trim($newtitle);
 
@@ -621,27 +621,27 @@ class Chronodocs_entries  extends CommonObject
 
         // Update request
         $sql = "UPDATE ".MAIN_DB_PREFIX."chronodocs_entries SET";
-        
+
 		$sql.= " title=".(isset($this->title)?"'".addslashes($this->title)."'":"null").",";
 		$sql.= " date_u=".(strval($this->date_u)!='' ? "'".$this->db->idate($this->date_u)."'" : 'null').",";
 		$sql.= " fk_user_u=".(isset($this->fk_user_u)?$this->fk_user_u:"null")."";
 
-        
+
         $sql.= " WHERE rowid=".$this->id;
 
 		$this->db->begin();
-        
+
 		dolibarr_syslog(get_class($this)."::set_title sql=".$sql, LOG_DEBUG);
         $resql = $this->db->query($sql);
     	if (! $resql) { $error++; $this->errors[]="Error ".$this->db->lasterror(); }
-        
+
 		if (! $error)
 		{
 			if (! $notrigger)
 			{
 	            // Uncomment this and change MYOBJECT to your own tag if you
 	            // want this action call a trigger.
-				
+
 	            //// Call triggers
 	            //include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
 	            //$interface=new Interfaces($this->db);
@@ -650,7 +650,7 @@ class Chronodocs_entries  extends CommonObject
 	            //// End call triggers
 	    	}
 		}
-		
+
         // Commit or rollback
 		if ($error)
 		{
@@ -658,7 +658,7 @@ class Chronodocs_entries  extends CommonObject
 			{
 	            dolibarr_syslog(get_class($this)."::set_title ".$errmsg, LOG_ERR);
 	            $this->error.=($this->error?', '.$errmsg:$errmsg);
-			}	
+			}
 			$this->db->rollback();
 			return -1*$error;
 		}
@@ -666,9 +666,9 @@ class Chronodocs_entries  extends CommonObject
 		{
 			$this->db->commit();
 			return 1;
-		}		
+		}
     }
-	
+
  /**
      *      \brief      Update ref
      *      \param      user        	User that modify
@@ -681,7 +681,7 @@ class Chronodocs_entries  extends CommonObject
     {
     	global $conf, $langs;
 		$error=0;
-    	
+
 		// Clean and fetch parameters
 		$this->ref=trim($newref);
 
@@ -694,27 +694,27 @@ class Chronodocs_entries  extends CommonObject
 
         // Update request
         $sql = "UPDATE ".MAIN_DB_PREFIX."chronodocs_entries SET";
-        
+
 		$sql.= " ref=".(isset($this->ref)?"'".addslashes($this->ref)."'":"null").",";
 		$sql.= " date_u=".(strval($this->date_u)!='' ? "'".$this->db->idate($this->date_u)."'" : 'null').",";
 		$sql.= " fk_user_u=".(isset($this->fk_user_u)?$this->fk_user_u:"null")."";
 
-        
+
         $sql.= " WHERE rowid=".$this->id;
 
 		$this->db->begin();
-        
+
 		dolibarr_syslog(get_class($this)."::set_ref sql=".$sql, LOG_DEBUG);
         $resql = $this->db->query($sql);
     	if (! $resql) { $error++; $this->errors[]="Error ".$this->db->lasterror(); }
-        
+
 		if (! $error)
 		{
 			if (! $notrigger)
 			{
 	            // Uncomment this and change MYOBJECT to your own tag if you
 	            // want this action call a trigger.
-				
+
 	            //// Call triggers
 	            //include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
 	            //$interface=new Interfaces($this->db);
@@ -723,7 +723,7 @@ class Chronodocs_entries  extends CommonObject
 	            //// End call triggers
 	    	}
 		}
-		
+
         // Commit or rollback
 		if ($error)
 		{
@@ -731,7 +731,7 @@ class Chronodocs_entries  extends CommonObject
 			{
 	            dolibarr_syslog(get_class($this)."::set_ref ".$errmsg, LOG_ERR);
 	            $this->error.=($this->error?', '.$errmsg:$errmsg);
-			}	
+			}
 			$this->db->rollback();
 			return -1*$error;
 		}
@@ -739,9 +739,9 @@ class Chronodocs_entries  extends CommonObject
 		{
 			$this->db->commit();
 			return 1;
-		}		
+		}
     }
-	
+
  /**
      *      \brief      Update set_date_u with now value
      *      \param      user        	User that modify
@@ -752,10 +752,10 @@ class Chronodocs_entries  extends CommonObject
 	{
     	global $conf, $langs;
 		$error=0;
-    	
+
 		// Clean and fetch parameters
 		// Put here code to clean parameters values
-		
+
         //Overwrite date_u to now
         $this->date_u=time();
 		$this->fk_user_u=trim($user->id);
@@ -765,26 +765,26 @@ class Chronodocs_entries  extends CommonObject
 
         // Update request
         $sql = "UPDATE ".MAIN_DB_PREFIX."chronodocs_entries SET";
-        
+
 		$sql.= " date_u=".(strval($this->date_u)!='' ? "'".$this->db->idate($this->date_u)."'" : 'null').",";
 		$sql.= " fk_user_u=".(isset($this->fk_user_u)?$this->fk_user_u:"null")."";
 
-        
+
         $sql.= " WHERE rowid=".$this->id;
 
 		$this->db->begin();
-        
+
 		dolibarr_syslog(get_class($this)."::set_date_u sql=".$sql, LOG_DEBUG);
         $resql = $this->db->query($sql);
     	if (! $resql) { $error++; $this->errors[]="Error ".$this->db->lasterror(); }
-        
+
 		if (! $error)
 		{
 			if (! $notrigger)
 			{
 	            // Uncomment this and change MYOBJECT to your own tag if you
 	            // want this action call a trigger.
-				
+
 	            //// Call triggers
 	            //include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
 	            //$interface=new Interfaces($this->db);
@@ -793,7 +793,7 @@ class Chronodocs_entries  extends CommonObject
 	            //// End call triggers
 	    	}
 		}
-		
+
         // Commit or rollback
 		if ($error)
 		{
@@ -801,7 +801,7 @@ class Chronodocs_entries  extends CommonObject
 			{
 	            dolibarr_syslog(get_class($this)."::set_date_u ".$errmsg, LOG_ERR);
 	            $this->error.=($this->error?', '.$errmsg:$errmsg);
-			}	
+			}
 			$this->db->rollback();
 			return -1*$error;
 		}
@@ -809,9 +809,9 @@ class Chronodocs_entries  extends CommonObject
 		{
 			$this->db->commit();
 			return 1;
-		}		
+		}
 	}
-	
+
 	/**
 	 *      \brief      Information sur l'objet entr�e chronodoc
 	 *      \param      id      id du chronodoc
@@ -820,12 +820,12 @@ class Chronodocs_entries  extends CommonObject
 	{
 		if(empty($id))
 			$id=$this->id;
-			
+
 		$sql = "SELECT c.rowid, c.ref, ".$this->db->pdate("date_c")." as date_c, ".$this->db->pdate("date_u")." as date_u,";
 		$sql.= " fk_user_c, fk_user_u";
 		$sql.= " FROM ".MAIN_DB_PREFIX."chronodocs_entries as c";
 		$sql.= " WHERE c.rowid = ".$id;
-		
+
 		dolibarr_syslog(get_class($this)."::info sql=".$sql, LOG_DEBUG);
 		$result=$this->db->query($sql);
 		if ($result)
@@ -837,14 +837,14 @@ class Chronodocs_entries  extends CommonObject
 				$this->id = $obj->rowid;
 
 				if ($obj->fk_user_c) {
-					$cuser = new User($this->db, $obj->fk_user_c);
-					$cuser->fetch();
+					$cuser = new User($this->db);
+					$cuser->fetch($obj->fk_user_c);
 					$this->user_creation     = $cuser;
 				}
 
 				if ($obj->fk_user_u) {
-					$muser = new User($this->db, $obj->fk_user_u);
-					$muser->fetch();
+					$muser = new User($this->db);
+					$muser->fetch($obj->fk_user_u);
 					$this->user_modification = $muser;
 				}
 				$this->ref			     = $obj->ref;
@@ -860,9 +860,9 @@ class Chronodocs_entries  extends CommonObject
 			dolibarr_print_error($this->db);
 		}
 	}
-	
+
 	/**
-	 *      \brief      Get a array of object giving data (nom,socid,ref,dp,date_u,fichid,title,fk_chronodocs_type + socid,fk_user)  on chronodoc found whith given search parametters 
+	 *      \brief      Get a array of object giving data (nom,socid,ref,dp,date_u,fichid,title,fk_chronodocs_type + socid,fk_user)  on chronodoc found whith given search parametters
 	 *      \param      limit      max result size
 	 *      \param      offset (default: 0)
 	 *      \param      sortfield (default: f.date_c)
@@ -878,9 +878,9 @@ class Chronodocs_entries  extends CommonObject
 	function get_list($limit,$offset="0",$sortfield="f.date_c",$sortorder="DESC",$socid=0,$search_ref="",$search_societe="",$search_title="",$year=0,$month=0,$fk_chronodocs_type=0)
 	{
 		global $user, $conf, $langs, $db;
-		
+
 		$tab_objp=array();
-		
+
 		$sql = "SELECT s.nom,s.rowid as socid, f.ref,".$db->pdate("f.date_c")." as dp,".$db->pdate("f.date_u")." as date_u, f.rowid as fichid, f.title, f.fk_chronodocs_type";
 		//if (!$user->rights->societe->client->voir && !$socid) $sql .= ", sc.socid, sc.fk_user";
 		$sql.= " FROM ".MAIN_DB_PREFIX."societe as s, ".MAIN_DB_PREFIX."chronodocs_entries as f ";
@@ -902,7 +902,7 @@ class Chronodocs_entries  extends CommonObject
 		}
 		if ($year > 0)
 			$sql .= " AND date_format(f.date_c, '%Y') = $year";
-			
+
 		if (!empty($search_ref))
 		{
 			$sql .= " AND f.ref LIKE '%".addslashes($search_ref)."%'";
@@ -911,17 +911,17 @@ class Chronodocs_entries  extends CommonObject
 		{
 			$sql .= " AND s.nom LIKE '%".addslashes($search_societe)."%'";
 		}
-		
+
 		if (!empty($search_title))
 		{
 			$sql .= " AND f.title LIKE '%".addslashes($search_title)."%'";
 		}
-		
+
 		if ($fk_chronodocs_type > 0)
 		{
 		$sql .= " AND f.fk_chronodocs_type = " . $fk_chronodocs_type;
 		}
-		
+
 		$sql.= " ORDER BY $sortfield $sortorder ";
 		$sql.= $db->plimit( $limit + 1 ,$offset);
 
@@ -933,45 +933,45 @@ class Chronodocs_entries  extends CommonObject
 			while ($i < min($num, $limit))
 			{
 				$objp = $db->fetch_object($result);
-				if($objp) 
+				if($objp)
 					$tab_objp[]= $objp;
 				$i++;
 			}
 			$db->free($result);
-			
+
 			return $tab_objp;
 		}
 		else
 		{
-			
+
 			return 0;
 		}
 	}
-	
+
 	/**
 	 *      \brief      Nb de chronodoc
 	 *      \param      socid  si non nul, restreint � la soc donn�e(defaut: 0)
 	 *      \param      fk_chronodocs_type  si non nul, id du type de chronodoc (defaut: 0)
-	 */	
+	 */
 	function get_nb_chronodocs($socid=0,$fk_chronodocs_type=0)
 	{
 		$where="";
-		
+
 		$sql = "SELECT COUNT(*) as nbchronodocs";
 		$sql.= " FROM ".MAIN_DB_PREFIX."chronodocs_entries";
 		if(!empty($fk_chronodocs_type))
 			$where.= " fk_chronodocs_type = ".$fk_chronodocs_type;
-			
+
 		if(!empty($socid))
 		{
 			if(!empty($where))
 				$where.= " AND ";
-				
+
 			$where.= " socid = ".$socid;
 		}
 		if(!empty($where))
 			$sql.=" WHERE ".$where;
-			
+
 		dolibarr_syslog(get_class($this)."::get_nb_chronodocs sql=".$sql, LOG_DEBUG);
 		$result=$this->db->query($sql);
 		if ($result)
@@ -979,12 +979,12 @@ class Chronodocs_entries  extends CommonObject
 			if ($this->db->num_rows($result))
 			{
 				$obj = $this->db->fetch_object($result);
-				
+
 				$nbchronodocs = $obj->nbchronodocs;
 			}
 
 			$this->db->free($result);
-			
+
 			return $nbchronodocs;
 		}
 		else
@@ -992,7 +992,7 @@ class Chronodocs_entries  extends CommonObject
 			dolibarr_print_error($this->db);
 		}
 	}
-	
+
 	/**
     *		\brief      Fetch propfields data object list in $this->propfields
     *		\param      fk_status          If set, restrict to given Status
@@ -1008,6 +1008,6 @@ class Chronodocs_entries  extends CommonObject
 		else
 			return -1;
 	}
-	
+
 }
 ?>

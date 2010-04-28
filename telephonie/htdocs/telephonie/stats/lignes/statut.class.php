@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: statut.class.php,v 1.1 2009/10/20 16:19:27 eldy Exp $
+ * $Id: statut.class.php,v 1.2 2010/04/28 07:41:31 eldy Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/stats/lignes/statut.class.php,v $
  *
  */
@@ -42,8 +42,8 @@ class GraphLignesStatut extends GraphPie {
 
     if ($commercial_id > 0)
       {
-	$cuser = new User($this->db, $commercial_id);
-	$cuser->fetch();
+	$cuser = new User($this->db);
+	$cuser->fetch($commercial_id);
 	$this->titre = "Statuts des lignes de ".$cuser->fullname;
       }
 
@@ -58,16 +58,16 @@ class GraphLignesStatut extends GraphPie {
       }
 
     $sql .= " GROUP BY statut ASC";
-    
+
 
     $statuts[-1] = "Attente";
     $statuts[1] = "A commander";
-    $statuts[2] = "Commandée";
-    $statuts[3] = "Activée";
-    $statuts[4] = "A résilier";
+    $statuts[2] = "Commandï¿½e";
+    $statuts[3] = "Activï¿½e";
+    $statuts[4] = "A rï¿½silier";
     $statuts[5] = "Resil en cours";
-    $statuts[6] = "Resiliée";
-    $statuts[7] = "Rejetée";
+    $statuts[6] = "Resiliï¿½e";
+    $statuts[7] = "Rejetï¿½e";
 
 
     $colors_def[2] = 'blue';
@@ -83,26 +83,26 @@ class GraphLignesStatut extends GraphPie {
 	$i = 0;
 	$datas = array();
 	$labels = array();
-	
+
 	while ($i < $num)
 	  {
 	    $row = $this->db->fetch_row();
-	    
+
 	    $datas[$i] = $row[1];
 	    $labels[$i] = $statuts[$row[0]];
-	    array_push($this->colors, $colors_def[$row[0]]);    
+	    array_push($this->colors, $colors_def[$row[0]]);
 	    $i++;
 	  }
-	
+
 	$this->db->free();
       }
-    else 
+    else
       {
 	print $this->db->error() . ' ' . $sql;
       }
 
-  
+
     $this->GraphDraw($this->file, $datas, $labels);
   }
-}   
+}
 ?>

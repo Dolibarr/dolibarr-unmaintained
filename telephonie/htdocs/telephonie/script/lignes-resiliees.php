@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: lignes-resiliees.php,v 1.1 2009/10/20 16:19:23 eldy Exp $
+ * $Id: lignes-resiliees.php,v 1.2 2010/04/28 07:41:32 eldy Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/script/lignes-resiliees.php,v $
  *
  * Calcul des commissions des distributeurs
@@ -34,7 +34,7 @@ $datel = time() - (3600 * 24 * 7);
 
 /********************************************************
  *
- * Verification des données
+ * Verification des donnï¿½es
  *
  *
  *********************************************************/
@@ -45,9 +45,9 @@ $sql = "SELECT fk_ligne, ".$db->pdate("tms");
 $sql .= " FROM ".MAIN_DB_PREFIX."telephonie_societe_ligne_statut";
 $sql .= " WHERE statut = 6";
 $sql .= " AND tms >= '".strftime("%Y-%m-%d",$datel)."';";
-  
+
 $resql = $db->query($sql);
-  
+
 if ( $resql )
 {
   $num = $db->num_rows($resql);
@@ -73,7 +73,7 @@ $lca = substr(str_repeat(" ",10)."CA Moyen", -10);
 $lres = substr(str_repeat(" ",10)."Date Resil", -10);
 
 $message ="Bonjour,\n\n";
-$message .= "Veuillez trouver ci-joint la liste des lignes résiliées ces 7 derniers jours avec le chiffre d'affaire moyen.\n\n";
+$message .= "Veuillez trouver ci-joint la liste des lignes rï¿½siliï¿½es ces 7 derniers jours avec le chiffre d'affaire moyen.\n\n";
 
 $message .= "$llig $lsoc $lca $lres\n";
 $message .= str_repeat("-",73)."\n";
@@ -89,7 +89,7 @@ foreach ($lignes as $lid)
   $sql .= " WHERE fk_ligne = ".$ligne->id;
 
   $resql = $db->query($sql);
-  
+
   if ( $resql )
     {
       while ($row = $db->fetch_row($resql))
@@ -133,27 +133,27 @@ foreach ($lignes as $lid)
 
 
 $message .="\n--\n";
-$message .= "Ceci est un message automatique envoyé par dolibarr auquel vous ne pouvez pas répondre\n";
+$message .= "Ceci est un message automatique envoyï¿½ par dolibarr auquel vous ne pouvez pas rï¿½pondre\n";
 
 $users = array(1, 32);
 
 foreach ($users as $xuser)
 {
-  $cuser = new User($db, $xuser);
-  $cuser->fetch();
+  $cuser = new User($db);
+  $cuser->fetch($xuser);
 
-  $subject ="Liste des lignes résiliées";
+  $subject ="Liste des lignes resiliees";
   $sendto = $cuser->prenom . " ".$cuser->nom . " <".$cuser->email.">";
   $from = "noreply@noreply.null";
   $message = wordwrap( $message, 76 );
-  
+
   $mailfile = new CMailFile($subject,
 			    $sendto,
 			    $from,
 			    $message, array(), array(), array());
   if ( $mailfile->sendfile() )
     {
-      
+
     }
 }
 ?>

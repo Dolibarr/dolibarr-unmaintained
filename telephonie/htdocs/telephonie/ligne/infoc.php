@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: infoc.php,v 1.1 2009/10/20 16:19:22 eldy Exp $
+ * $Id: infoc.php,v 1.2 2010/04/28 07:41:31 eldy Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/ligne/infoc.php,v $
  *
  */
@@ -23,7 +23,7 @@
 /**	        \file       htdocs/telephonie/ligne/infoc.php
 	        \ingroup    telephonie
 	        \brief      Lignes telephonie
-	        \version    $Revision: 1.1 $
+	        \version    $Revision: 1.2 $
 */
 
 require("./pre.inc.php");
@@ -78,29 +78,29 @@ if ($_GET["id"] or $_GET["numero"])
 	  $result = $ligne->fetch($_GET["numero"]);
 	}
     }
-  
+
   if ($result == 1)
     {
       $client_comm = new Societe($db);
       $client_comm->fetch($ligne->client_comm_id, $user);
     }
-  
+
   if (!$client_comm->perm_read)
     {
       print "Lecture non authoris�e";
     }
-  
-  
+
+
   if ($result == 1 && $client_comm->perm_read)
-    { 
+    {
       if ($_GET["action"] <> 'edit' && $_GET["action"] <> 're-edit')
 	{
-	  
+
 	  $h=0;
 	  $head[$h][0] = DOL_URL_ROOT."/telephonie/ligne/fiche.php?id=".$ligne->id;
 	  $head[$h][1] = $langs->trans("Ligne");
 	  $h++;
-	  
+
 	  if ($user->rights->telephonie->facture->lire)
 	    {
 	      $head[$h][0] = DOL_URL_ROOT."/telephonie/ligne/factures.php?id=".$ligne->id;
@@ -112,109 +112,109 @@ if ($_GET["id"] or $_GET["numero"])
 	  $head[$h][1] = $langs->trans('Infos');
 	  $hselected = $h;
 	  $h++;
-	  
+
 	  $head[$h][0] = DOL_URL_ROOT."/telephonie/ligne/history.php?id=".$ligne->id;
 	  $head[$h][1] = $langs->trans('Historique');
 	  $h++;
-	  
+
 	  $head[$h][0] = DOL_URL_ROOT."/telephonie/ligne/conso.php?id=".$ligne->id;
 	  $head[$h][1] = $langs->trans('Conso');
 	  $h++;
-	  
+
 	  $head[$h][0] = DOL_URL_ROOT."/telephonie/ligne/stat.php?id=".$ligne->id;
 	  $head[$h][1] = $langs->trans('Stats');
 	  $h++;
-	  
+
 	  dol_fiche_head($head, $hselected, 'Ligne : '.$ligne->numero);
-	  
+
 	  print_fiche_titre('Informations compl�mentaires', $mesg);
-	  
+
 	  print '<table class="border" width="100%" cellspacing="0" cellpadding="4">';
-	  
+
 	  print '<tr><td width="20%">Num�ro</td><td>'.dol_print_phone($ligne->numero,0,0,true).'</td>';
 	  print '<td>Factur�e : '.$ligne->facturable.'</td></tr>';
-	  
+
 	  $client = new Societe($db, $ligne->client_id);
 	  $client->fetch($ligne->client_id);
-	  
+
 	  print '<tr><td width="20%">Client</td><td colspan="2">'.$client->nom.'</td></tr>';
-	  
+
 	  $client_facture = new Societe($db);
 	  $client_facture->fetch($ligne->client_facture_id);
-	  
-	  
+
+
 	  print '<tr><td width="20%">Remise LMN</td><td colspan="2">'.$ligne->remise.'&nbsp;%</td></tr>';
 
-	  $cuser = new User($db, $ligne->user_creat);
+	  $cuser = new User($db);
 	  if ($ligne->user_creat)
 	    {
-	      $cuser->fetch();
+	      $cuser->fetch($ligne->user_creat);
 	    }
 
 	  print '<tr><td width="20%">Ligne creee par</td><td colspan="2">'.$cuser->fullname.'</td></tr>';
 
-	  
+
 	  print '<tr><td width="20%">Code analytique</td><td colspan="2">'.$ligne->code_analytique.'&nbsp;</td></tr>';
 
 	  print '<tr><td width="20%">Modele de facture utilise</td><td colspan="2">'.$ligne->pdfdetail.'</td></tr>';
 
-	  
+
 	  print "</table>";
 	}
-      
-      
+
+
       if ($_GET["action"] == 'edit' || $action == 're-edit')
 	{
 	  print_fiche_titre('Edition des informations complementaires de la ligne', $mesg);
-	  
+
 	  print "<form action=\"infoc.php?id=$ligne->id\" method=\"post\">\n";
 	  print '<input type="hidden" name="token" value="'.$_SESSION['newtoken'].'">';
 	  print '<input type="hidden" name="action" value="update">';
-	  
+
 	  print '<table class="border" width="100%" cellspacing="0" cellpadding="4">';
-	  
+
 	  print '<tr><td width="20%">Numero</td><td>'.$ligne->numero.'</td></tr>';
-	  
+
 	  $client = new Societe($db, $ligne->client_id);
 	  $client->fetch($ligne->client_id);
-	  
+
 	  print '<tr><td width="20%">Client</td><td colspan="2">'.$client->nom;
 	  print '</td></tr>';
-	  
+
 	  print '<tr><td width="20%">Remise LMN</td><td>'.$ligne->remise.' %</td></tr>';
-	  
+
 	  print '<tr><td width="20%">Code Analytique</td><td><input name="code_ana" size="13" maxlength="12" value="'.$ligne->code_analytique.'">&nbsp;</td></tr>';
-	  
+
 	  print '<tr><td>&nbsp;</td><td><input type="submit" value="Mettre a jour">';
 	  print '<a href="infoc.php?id='.$ligne->id.'">Annuler</a></td></tr>';
 	  print '</table>';
-	  print '</form>';	  
+	  print '</form>';
 	}
-      
+
       /*
        *
        *
        *
        */
-      
+
       print '</div>';
-      
+
       /* ************************************************************************** */
-      /*                                                                            */ 
-      /* Barre d'action                                                             */ 
-      /*                                                                            */ 
+      /*                                                                            */
+      /* Barre d'action                                                             */
+      /*                                                                            */
       /* ************************************************************************** */
-      
+
       print "<br><div class=\"tabsAction\">\n";
-      
+
       if ($_GET["action"] == '')
 	{
 	  print "<a class=\"butAction\" href=\"infoc.php?action=edit&amp;id=$ligne->id\">".$langs->trans("Modify")."</a>";
 	}
-      
+
       print "</div>";
     }
-  
+
 }
 else
 {
@@ -223,5 +223,5 @@ else
 
 $db->close();
 
-llxFooter("<em>Derni&egrave;re modification $Date: 2009/10/20 16:19:22 $ r&eacute;vision $Revision: 1.1 $</em>");
+llxFooter("<em>Derni&egrave;re modification $Date: 2010/04/28 07:41:31 $ r&eacute;vision $Revision: 1.2 $</em>");
 ?>

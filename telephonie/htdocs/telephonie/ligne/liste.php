@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: liste.php,v 1.1 2009/10/20 16:19:22 eldy Exp $
+ * $Id: liste.php,v 1.2 2010/04/28 07:41:31 eldy Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/ligne/liste.php,v $
  *
  */
@@ -31,7 +31,7 @@ llxHeader('','Telephonie - Ligne - Liste');
 /*
  * S�curit� acc�s client
  */
-if ($user->societe_id > 0) 
+if ($user->societe_id > 0)
 {
   $action = '';
   $socid = $user->societe_id;
@@ -123,24 +123,24 @@ if ($result)
 {
   $num = $db->num_rows();
   $i = 0;
-  
+
   $urladd= "&amp;statut=".$_GET["statut"];
 
   $titre = "Lignes";
 
   if ($_GET["commercial_suiv"])
     {
-      $cuser = new User($db, $_GET["commercial_suiv"]);
-      $cuser->fetch();
+      $cuser = new User($db);
+      $cuser->fetch($_GET["commercial_suiv"]);
       $titre = "Lignes suivies par ".$cuser->fullname;
-      $urladd .= "&amp;commercial_suiv=". $_GET["commercial_suiv"]; 
+      $urladd .= "&amp;commercial_suiv=". $_GET["commercial_suiv"];
     }
 
   if ($_GET["commercial_sign"])
     {
-      $cuser = new User($db, $_GET["commercial_sign"]);
-      $cuser->fetch();
-      $titre = "Lignes sign�es par ".$cuser->fullname;
+      $cuser = new User($db);
+      $cuser->fetch($_GET["commercial_sign"]);
+      $titre = "Lignes signees par ".$cuser->fullname;
       $urladd .= "&amp;commercial_sign=". $_GET["commercial_sign"];
     }
 
@@ -162,7 +162,7 @@ if ($result)
 
   print '<tr class="liste_titre">';
   print '<form action="liste.php" method="GET">';
-  print '<td><input type="text" name="search_ligne" value="'. $_GET["search_ligne"].'" size="10"></td>'; 
+  print '<td><input type="text" name="search_ligne" value="'. $_GET["search_ligne"].'" size="10"></td>';
   print '<td><input type="text" name="search_client" value="'. $_GET["search_client"].'" size="10"></td>';
   //print '<td><input type="text" name="search_client_facture" value="'. $_GET["search_client_facture"].'" size="10"></td>';
 
@@ -182,15 +182,15 @@ if ($result)
 
   while ($i < min($num,$conf->liste_limit))
     {
-      $obj = $db->fetch_object();	
+      $obj = $db->fetch_object();
       $var=!$var;
 
       print "<tr $bc[$var]><td>";
 
       print '<img src="./graph'.$obj->statut.'.png">&nbsp;';
-      
+
       print '<a href="'.DOL_URL_ROOT.'/telephonie/ligne/fiche.php?id='.$obj->rowid.'">';
-      print img_file();      
+      print img_file();
       print '</a>&nbsp;';
 
       print '<a href="fiche.php?id='.$obj->rowid.'">'.dol_print_phone($obj->ligne,0,0,true)."</a></td>\n";
@@ -208,12 +208,12 @@ if ($result)
   print "</table>";
   $db->free();
 }
-else 
+else
 {
   print $db->error() . ' ' . $sql;
 }
 
 $db->close();
 
-llxFooter("<em>Derni&egrave;re modification $Date: 2009/10/20 16:19:22 $ r&eacute;vision $Revision: 1.1 $</em>");
+llxFooter("<em>Derni&egrave;re modification $Date: 2010/04/28 07:41:31 $ r&eacute;vision $Revision: 1.2 $</em>");
 ?>
