@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: facturation-details.php,v 1.2 2010/04/09 07:55:41 hregis Exp $
+ * $Id: facturation-details.php,v 1.3 2010/04/28 09:20:14 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/script/facturation-details.php,v $
  *
  *
@@ -32,7 +32,7 @@ require_once (DOL_DOCUMENT_ROOT."/telephonie/lignetel.class.php");
 require_once (DOL_DOCUMENT_ROOT."/telephonie/facturetel.class.php");
 require_once (DOL_DOCUMENT_ROOT."/telephonie/telephonie-tarif.class.php");
 require_once (DOL_DOCUMENT_ROOT."/telephonie/communication.class.php");
-require_once (DOL_DOCUMENT_ROOT."/contrat/contrat.class.php");
+require_once (DOL_DOCUMENT_ROOT."/contrat/class/contrat.class.php");
 
 $error = 0;
 
