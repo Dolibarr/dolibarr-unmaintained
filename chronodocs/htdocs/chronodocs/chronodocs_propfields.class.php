@@ -22,13 +22,13 @@
         \file       chronodocs/chronodocs_propfields.class.php
         \ingroup    chronodocs
         \brief       CRUD class file for chronodocs propfields (Create/Read/Update/Delete)
-	\version    $Id: chronodocs_propfields.class.php,v 1.7 2010/04/28 12:39:06 hregis Exp $
+	\version    $Id: chronodocs_propfields.class.php,v 1.8 2010/04/28 14:36:40 hregis Exp $
 	\author	Raphael Bertrand (Resultic) <raphael.bertrand@resultic.fr>
 	\remarks	Initialy built by build_class_from_table on 2008-09-03 17:35
 */
 
 // Put here all includes required by your class file
-//require_once(DOL_DOCUMENT_ROOT."/core/commonobject.class.php");
+//require_once(DOL_DOCUMENT_ROOT."//core/class/commonobject.class.php");
 //require_once(DOL_DOCUMENT_ROOT."/chronodocs/chronodocs_types.class.php");
 //require_once(DOL_DOCUMENT_ROOT."/chronodocs/chronodocs_entries.class.php");
 //require_once(DOL_DOCUMENT_ROOT."/lib/chronodocs.lib.php");
