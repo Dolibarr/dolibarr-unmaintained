@@ -16,14 +16,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: osc_categories.class.php,v 1.4 2010/04/28 07:56:22 grandoc Exp $
+ * $Id: osc_categories.class.php,v 1.5 2010/04/28 12:39:06 hregis Exp $
  */
 
 /**
         \file       dev/skeletons/Osc_Categorie.class.class.php
         \ingroup    core
         \brief      Example for class
-        \version    $Revision: 1.4 $
+        \version    $Revision: 1.5 $
 */
 
 // Put here all includes required by your script
@@ -94,7 +94,7 @@ class Osc_Categorie
             }
 
             // Appel des triggers
-            include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
+            include_once(DOL_DOCUMENT_ROOT . "/core/class/interfaces.class.php");
             $interface=new Interfaces($this->db);
             $result=$interface->run_triggers('MYOBJECT_CREATE',$this,$user,$langs,$conf);
             if ($result < 0) { $error++; $this->errors=$interface->errors; }
@@ -144,7 +144,7 @@ class Osc_Categorie
 		if (! $notrigger)
 		{
             // Appel des triggers
-            include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
+            include_once(DOL_DOCUMENT_ROOT . "/core/class/interfaces.class.php");
             $interface=new Interfaces($this->db);
             $result=$interface->run_triggers('MYOBJECT_MODIFY',$this,$user,$langs,$conf);
             if ($result < 0) { $error++; $this->errors=$interface->errors; }
@@ -289,7 +289,7 @@ class Osc_Categorie
 		}
 
         // Appel des triggers
-        include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
+        include_once(DOL_DOCUMENT_ROOT . "/core/class/interfaces.class.php");
         $interface=new Interfaces($this->db);
         $result=$interface->run_triggers('MYOBJECT_DELETE',$this,$user,$langs,$conf);
         if ($result < 0) { $error++; $this->errors=$interface->errors; }

@@ -22,7 +22,7 @@
         \file       chronodocs/chronodocs_propfields.class.php
         \ingroup    chronodocs
         \brief       CRUD class file for chronodocs propfields (Create/Read/Update/Delete)
-	\version    $Id: chronodocs_propfields.class.php,v 1.6 2010/04/21 22:14:17 hregis Exp $
+	\version    $Id: chronodocs_propfields.class.php,v 1.7 2010/04/28 12:39:06 hregis Exp $
 	\author	Raphael Bertrand (Resultic) <raphael.bertrand@resultic.fr>
 	\remarks	Initialy built by build_class_from_table on 2008-09-03 17:35
 */
@@ -130,7 +130,7 @@ class Chronodocs_propfields // extends CommonObject
 	            // want this action call a trigger.
 	            
 	            //// Call triggers
-	            //include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
+	            //include_once(DOL_DOCUMENT_ROOT . "/core/class/interfaces.class.php");
 	            //$interface=new Interfaces($this->db);
 	            //$result=$interface->run_triggers('MYOBJECT_CREATE',$this,$user,$langs,$conf);
 	            //if ($result < 0) { $error++; $this->errors=$interface->errors; }
@@ -259,7 +259,7 @@ class Chronodocs_propfields // extends CommonObject
 	            // want this action call a trigger.
 				
 	            //// Call triggers
-	            //include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
+	            //include_once(DOL_DOCUMENT_ROOT . "/core/class/interfaces.class.php");
 	            //$interface=new Interfaces($this->db);
 	            //$result=$interface->run_triggers('MYOBJECT_MODIFY',$this,$user,$langs,$conf);
 	            //if ($result < 0) { $error++; $this->errors=$interface->errors; }
@@ -314,7 +314,7 @@ class Chronodocs_propfields // extends CommonObject
 		        // want this action call a trigger.
 				
 		        //// Call triggers
-		        //include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
+		        //include_once(DOL_DOCUMENT_ROOT . "/core/class/interfaces.class.php");
 		        //$interface=new Interfaces($this->db);
 		        //$result=$interface->run_triggers('MYOBJECT_DELETE',$this,$user,$langs,$conf);
 		        //if ($result < 0) { $error++; $this->errors=$interface->errors; }
@@ -444,7 +444,7 @@ class Chronodocs_propfields // extends CommonObject
 		        // want this action call a trigger.
 				
 		        //// Call triggers
-		        //include_once(DOL_DOCUMENT_ROOT . "/core/interfaces.class.php");
+		        //include_once(DOL_DOCUMENT_ROOT . "/core/class/interfaces.class.php");
 		        //$interface=new Interfaces($this->db);
 		        //$result=$interface->run_triggers('MYOBJECT_DELETE',$this,$user,$langs,$conf);
 		        //if ($result < 0) { $error++; $this->errors=$interface->errors; }
