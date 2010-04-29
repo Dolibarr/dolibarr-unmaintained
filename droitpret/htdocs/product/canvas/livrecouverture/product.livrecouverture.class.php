@@ -18,10 +18,10 @@
  */
 
 /**
- *  \file       htdocs/droitpret/templates/product.livre.class.php
+ *  \file       htdocs/product/canvas/livrecouverture/product.livrecouverture.class.php
  *  \ingroup    produit
  *  \brief      Fichier de la classe des produits specifiques de type livre
- *  \version    $Id: product.livrecouverture.class.php,v 1.1 2010/03/22 11:49:15 hregis Exp $
+ *  \version    $Id: product.livrecouverture.class.php,v 1.2 2010/04/29 09:08:44 hregis Exp $
  */
 
 require_once(DOL_DOCUMENT_ROOT.'/product/canvas/livre/product.livre.class.php');

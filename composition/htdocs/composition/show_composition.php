@@ -21,7 +21,7 @@
  *    \file       htdocs/composition/show_composition.php
  *    \ingroup
  *    \brief      * to complete *
- *    \version    $Id: show_composition.php,v 1.5 2010/04/28 21:38:23 grandoc Exp $
+ *    \version    $Id: show_composition.php,v 1.6 2010/04/29 09:08:44 hregis Exp $
  */
 
 require("../main.inc.php");
@@ -40,7 +40,7 @@ $langs->load("other");
 
 llxHeader("","",$langs->trans("CardProduct".$product->type));
 
-$smarty->template_dir = './templates' ;
+$smarty->template_dir = './tpl' ;
 
 //$oSmarty->debugging = true;
 
@@ -220,6 +220,6 @@ $smarty->display("show_composition.tpl") ;
 
 //End of user code
 
-llxFooter('$Date: 2010/04/28 21:38:23 $ - $Revision: 1.5 $');
+llxFooter('$Date: 2010/04/29 09:08:44 $ - $Revision: 1.6 $');
 
 ?>
