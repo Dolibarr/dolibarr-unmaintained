@@ -16,11 +16,11 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: fiche.php,v 1.4 2010/03/29 20:53:25 grandoc Exp $
+ * $Id: fiche.php,v 1.5 2010/04/29 14:54:33 grandoc Exp $
  */
 
 require_once("./pre.inc.php");
-require_once(DOL_DOCUMENT_ROOT."/societe/societe.class.php");
+require_once(DOL_DOCUMENT_ROOT."/societe/class/societe.class.php");
 require_once("../includes/configure.php");
 
 
@@ -179,5 +179,5 @@ if ($action == '' && !$cancel) {
 
 
 
-llxFooter('$Date: 2010/03/29 20:53:25 $ - $Revision: 1.4 $');
+llxFooter('$Date: 2010/04/29 14:54:33 $ - $Revision: 1.5 $');
 ?>

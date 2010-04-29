@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: recalcul-facture.php,v 1.2 2010/03/29 20:53:24 grandoc Exp $
+ * $Id: recalcul-facture.php,v 1.3 2010/04/29 14:54:33 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/script/tools/recalcul-facture.php,v $
  *
  *
@@ -28,7 +28,7 @@
 
 require ("../../../master.inc.php");
 
-require_once (DOL_DOCUMENT_ROOT."/societe/societe.class.php");
+require_once (DOL_DOCUMENT_ROOT."/societe/class/societe.class.php");
 require_once (DOL_DOCUMENT_ROOT."/telephonie/lignetel.class.php");
 require_once (DOL_DOCUMENT_ROOT."/telephonie/facturetel.class.php");
 require_once (DOL_DOCUMENT_ROOT."/telephonie/telephonie-tarif.class.php");

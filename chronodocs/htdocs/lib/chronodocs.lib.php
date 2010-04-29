@@ -18,7 +18,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  * or see http://www.gnu.org/
  *
- * $Id: chronodocs.lib.php,v 1.3 2010/03/29 20:53:25 grandoc Exp $
+ * $Id: chronodocs.lib.php,v 1.4 2010/04/29 14:54:33 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/chronodocs/htdocs/lib/Attic/chronodocs.lib.php,v $
  */
 
@@ -26,7 +26,7 @@
    \file       htdocs/lib/chronodocs.lib.php
    \brief      Ensemble de fonctions de base pour le module chronodocs
    \ingroup    chronodocs
-   \version    $Revision: 1.3 $
+   \version    $Revision: 1.4 $
    
    Ensemble de fonctions de base de dolibarr sous forme d'include
 */
@@ -198,7 +198,7 @@ global $langs, $conf, $user;
 		
 			
 		//recuperation donnees societe client
-		require_once(DOL_DOCUMENT_ROOT."/societe/societe.class.php");
+		require_once(DOL_DOCUMENT_ROOT."/societe/class/societe.class.php");
 		$chronodoc->fetch_client();
 		
 		// Recherche valeurs de remplacement à utiliser via proprietes du chronodoc

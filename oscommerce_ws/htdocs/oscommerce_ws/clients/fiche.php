@@ -16,11 +16,11 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: fiche.php,v 1.1 2010/04/13 13:41:12 grandoc Exp $
+ * $Id: fiche.php,v 1.2 2010/04/29 14:54:32 grandoc Exp $
  */
 
 require("./pre.inc.php");
-require_once(DOL_DOCUMENT_ROOT."/societe/societe.class.php");
+require_once(DOL_DOCUMENT_ROOT."/societe/class/societe.class.php");
 require_once("../includes/configure.php");
 
 
@@ -171,5 +171,5 @@ if (($_GET["action"] == 'import' ) && ( $_GET["custid"] != '' ) && ($user->right
 
 }
 
-llxFooter('$Date: 2010/04/13 13:41:12 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2010/04/29 14:54:32 $ - $Revision: 1.2 $');
 ?>

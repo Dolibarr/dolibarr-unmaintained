@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: envoi-emails-speciaux.php,v 1.6 2010/04/28 09:20:09 grandoc Exp $
+ * $Id: envoi-emails-speciaux.php,v 1.7 2010/04/29 14:54:33 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/script/envoi-emails-speciaux.php,v $
  *
  *
@@ -32,7 +32,7 @@ require_once (DOL_DOCUMENT_ROOT."/telephonie/facturetel.class.php");
 require_once (DOL_DOCUMENT_ROOT."/telephonie/telephonie-tarif.class.php");
 require_once (DOL_DOCUMENT_ROOT."/telephonie/communication.class.php");
 require_once (DOL_DOCUMENT_ROOT."/compta/facture/class/facture.class.php");
-require_once (DOL_DOCUMENT_ROOT."/societe/societe.class.php");
+require_once (DOL_DOCUMENT_ROOT."/societe/class/societe.class.php");
 require_once (DOL_DOCUMENT_ROOT."/compta/paiement/class/paiement.class.php");
 require_once (DOL_DOCUMENT_ROOT."/contrat/class/contrat.class.php");
 require_once (DOL_DOCUMENT_ROOT."/telephonie/pdfdetail_ibreizh.modules.php");
