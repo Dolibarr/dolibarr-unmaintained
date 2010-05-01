@@ -27,7 +27,7 @@
         \brief      Classe de gestion des documents de chronodoc
         \author	Raphael Bertrand (Resultic) <raphael.bertrand@resultic.fr>
         \remarks	Initialy built from FormFile.class.php and htdocs/document.php
-        \version    $Id: files.class.php,v 1.2 2008/11/02 00:22:21 raphael_bertrand Exp $
+        \version    $Id: files.class.php,v 1.3 2010/05/01 14:29:56 eldy Exp $
 */
 
 require_once(DOL_DOCUMENT_ROOT."/html.formfile.class.php");
@@ -42,7 +42,7 @@ class ChronodocsFiles extends FormFile
 {
 	//var $db;		//Already in FormFile
 	//var $error; 	//Already in FormFile
-	var $urlDocumentPage; 
+	var $urlDocumentPage;
 
 
 	/**
@@ -54,11 +54,11 @@ class ChronodocsFiles extends FormFile
 		$this->db = $DB;
 		$this->urlDocumentPage=DOL_URL_ROOT.'/chronodocs/document.php';
 		$this->dir_output=DOL_DATA_ROOT."/chronodocs";
-		
-		
+
+
 		return 1;
 	}
-	
+
 	/**
 	 *      \brief      Affiche la cartouche de la liste des documents d'une propale, facture...
 	 *      \param      modulepart          propal=propal, facture=facture, ...
@@ -80,11 +80,11 @@ class ChronodocsFiles extends FormFile
 	{
 		// filedir = conf->...dir_ouput."/".get_exdir(id)
 		include_once(DOL_DOCUMENT_ROOT.'/lib/files.lib.php');
-		
+
 		global $langs,$bc,$conf;
-		
+
 		dolibarr_syslog(get_class($this)."::show_documents filename=$filename filedir=$filedir");
-		
+
 		$var=true;
 
 		if ($iconPDF == 1)
@@ -124,10 +124,10 @@ class ChronodocsFiles extends FormFile
 				$headershown=1;
 
 				$html = new Form($db);
-				 
+
 				print '<form action="'.$urlsource.'#builddoc" method="post">';
 				print '<input type="hidden" name="action" value="builddoc">';
-				 
+
 				print_titre($langs->trans("Documents"));
 				print '<table class="border" width="100%">';
 
@@ -174,7 +174,7 @@ class ChronodocsFiles extends FormFile
 		foreach($file_list as $i => $file)
 		{
 			$var=!$var;
-			
+
 			// Défini chemin relatif par rapport au module pour lien download
 			$relativepath=$file["name"];								// Cas general
 			if ($filename) $relativepath=$filename."/".$file["name"];	// Cas propal, facture...
@@ -225,7 +225,7 @@ class ChronodocsFiles extends FormFile
 
 		return ($i?$i:$headershown);
 	}
-	
+
 	/**
 	 *      \brief      Show list of documents in a directory
 	 *      \param      filearray			Array of files loaded by dol_dir_list function
@@ -242,9 +242,9 @@ class ChronodocsFiles extends FormFile
 		global $user, $conf, $langs;
 		global $bc;
 		global $sortfield, $sortorder;
-		 
+
 		 dolibarr_syslog(get_class($this)."::list_of_documents relativepath=".($relativepath?$relativepath:'autodefined'));
-		 
+
 		// Affiche liste des documents existant
 		print_titre($langs->trans("AttachedFiles"));
 
@@ -303,15 +303,15 @@ class ChronodocsFiles extends FormFile
 	\brief      Get Dir list for object
 	\param     chronodocs object (can be null if other params until path -included- given)
 	\param     delallowed 	boolean giving read access (optional)
-	\param     modulepart 	string (optional) 
-	\param     filter        	Regex for filter(optional) 
+	\param     modulepart 	string (optional)
+	\param     filter        	Regex for filter(optional)
 	\param     exludefilter  	Regex for exclude filter (example: '\.meta$') (optional)
-	\param     path 	string (optional) 
-	\param     sortcriteria	Sort criteria ("name","date","size") (optional) 
-	\param     sortorder	Sort order (SORT_ASC, SORT_DESC) (optional) 
-	\param     mode		0=Return array with only keys needed, 1=Force all keys to be loaded (optional) 
-	\return     array		Array of array('name'=>xxx,'date'=>yyy,'size'=>zzz) (optional) 
-	*/	
+	\param     path 	string (optional)
+	\param     sortcriteria	Sort criteria ("name","date","size") (optional)
+	\param     sortorder	Sort order (SORT_ASC, SORT_DESC) (optional)
+	\param     mode		0=Return array with only keys needed, 1=Force all keys to be loaded (optional)
+	\return     array		Array of array('name'=>xxx,'date'=>yyy,'size'=>zzz) (optional)
+	*/
 	function get_filelist($user,$chronodocs,$readallowed='',$modulepart='',$filter='',$excludefilter='',$path='',$sortcriteria="name", $sortorder=SORT_ASC, $mode=1)
 	{
 		dolibarr_syslog(get_class($this)."::get_filelist");
@@ -322,10 +322,10 @@ class ChronodocsFiles extends FormFile
 				if(empty($modulepart) || $modulepart=='chronodocs_entries')
 				{
 					$path = $this->dir_output . "/" . dol_string_nospecial($chronodocs->ref);
-					
+
 					if(empty($modulepart))
 						$excludefilter='\.meta$';
-						
+
 					$mode=1;
 				}
 				else if($modulepart=='chronodocs_types')
@@ -340,21 +340,23 @@ class ChronodocsFiles extends FormFile
 		}
 		else return array();
 	}
-	
-	
+
+
 	/*
 	\brief      Wrapper to allow upload of data files
 	\param     chronodocs object (can be null if other params given and no set_date_u needed)
 	\param     delallowed (optional) boolean giving read access
-	\param     upload_dir string (optional) 
-	\param     dest_file string (optional) 
-	*/	
+	\param     upload_dir string (optional)
+	\param     dest_file string (optional)
+	*/
 	function process_action_sendit($user,$chronodocs,$writeallowed='',$upload_dir='',$dest_file='')
 	{
 		global $conf,$langs;
-		
+
+		require_once DOL_DOCUMENT_ROOT.'/lib/files.lib.php';
+
 		dolibarr_syslog(get_class($this)."::process_action_sendit");
-		
+
 		if($writeallowed || (empty($writeallowed) && $user->rights->chronodocs->entries->write))
 		{
 			if(empty($upload_dir))
@@ -389,7 +391,7 @@ class ChronodocsFiles extends FormFile
 				$mesg = '<div class="error">'.$langs->trans("ErrorFileNotUploaded").'</div>';
 				// print_r($_FILES);
 			}
-			
+
 		}
 		else
 		{
@@ -397,7 +399,7 @@ class ChronodocsFiles extends FormFile
 			$mesg = '<div class="error">'.$langs->trans("ErrorFileNotUploaded").'</div>';
 			// print_r($_FILES);
 		}
-		
+
 		return $mesg;
 	}
 
@@ -405,13 +407,13 @@ class ChronodocsFiles extends FormFile
 	\brief      Wrapper to allow deletion of data files
 	\param     chronodocs object
 	\param     delallowed (optional) boolean giving read access
-	\param     upload_dir string (optional) 
-	\param     original_file string (optional) 
+	\param     upload_dir string (optional)
+	\param     original_file string (optional)
 	*/
 	function process_action_delete($user,$chronodocs,$delallowed='',$upload_dir='',$original_file='')
 	{
 		global $conf,$langs;
-		
+
 		dolibarr_syslog(get_class($this)."::process_action_delete");
 
 		if($delallowed || (empty($delallowed) && $user->rights->chronodocs->entries->delete))
@@ -434,7 +436,7 @@ class ChronodocsFiles extends FormFile
 			$mesg = '<div class="error">'.$langs->trans("Error").'</div>';
 			// print_r($_FILES);
 		}
-		
+
 		return $mesg;
 	}
 
@@ -442,13 +444,13 @@ class ChronodocsFiles extends FormFile
 	\brief      Wrapper to allow download of data files
 	\param     chronodocs object
 	\param     readallowed (optional) boolean giving read access
-	\param     dir_output string (optional) 
-	\param     original_file string (optional) 
+	\param     dir_output string (optional)
+	\param     original_file string (optional)
 	*/
 	function process_actions_file($user,$object,$readallowed='',$dir_output='',$original_file='')
 	{
 		global $conf,$langs;
-		
+
 		dolibarr_syslog(get_class($this)."::process_actions_file");
 
 		$default_modulepart='chronodocs_entries';
@@ -485,12 +487,12 @@ class ChronodocsFiles extends FormFile
 
 			$encoding='ISO-8859-1';				// By default
 			$sqlprotectagainstexternals='';
-			
+
 			if ($modulepart && $modulepart!=$default_modulepart)
 			{ // si on n'est pas dans le module par défaut
 				$accessallowed=0;
 			    // On fait une verification des droits et on definit le repertoire concerne
-				
+
 			    // Wrapping pour les types de documents
 			    if ($modulepart == 'chronodocs_types')
 			    {
@@ -508,7 +510,7 @@ class ChronodocsFiles extends FormFile
 			else
 			{
 				$modulepart = $default_modulepart;
-				
+
 				// Wrapping pour les chronodocs
 				$user->getrights('chronodocs');
 				if ($user->rights->chronodocs->entries->read)
@@ -519,7 +521,7 @@ class ChronodocsFiles extends FormFile
 				}
 			    $original_file=$dir_output.'/'.$original_file;
 			}
-			
+
 			// Basic protection (against external users only)
 			if ($user->societe_id > 0)
 			{
@@ -535,16 +537,16 @@ class ChronodocsFiles extends FormFile
 					}
 				}
 			}
-			
+
 			// Security:
 			// Limite acces si droits non corrects
 			if (! $accessallowed)
 			{
 			    accessforbidden();
 			}
-			
+
 			// Security:
-			// On interdit les remontees de repertoire ainsi que les pipe dans 
+			// On interdit les remontees de repertoire ainsi que les pipe dans
 			// les noms de fichiers.
 			if (eregi('\.\.',$original_file) || eregi('[<>|]',$original_file))
 			{
@@ -553,21 +555,21 @@ class ChronodocsFiles extends FormFile
 				dolibarr_print_error(0,$langs->trans("ErrorFileNameInvalid",$_GET["file"]));
 				exit;
 			}
-			
-			
+
+
 			if ($action == 'remove_file')
 			{
 				/*
 				 * Suppression fichier
 				 */
-				clearstatcache(); 
+				clearstatcache();
 				$filename = basename($original_file);
-				
+
 				dolibarr_syslog("get_class($this).::process_actions_file remove $original_file $filename $urlsource");
 
-				if (! file_exists($original_file)) 
+				if (! file_exists($original_file))
 				{
-				    dolibarr_print_error(0,$langs->trans("ErrorFileDoesNotExists",$_GET["file"])); 
+				    dolibarr_print_error(0,$langs->trans("ErrorFileDoesNotExists",$_GET["file"]));
 				    exit;
 				}
 				unlink($original_file);
@@ -583,30 +585,30 @@ class ChronodocsFiles extends FormFile
 				/*
 				 * Ouvre et renvoi fichier
 				 */
-				clearstatcache(); 
+				clearstatcache();
 				$filename = basename($original_file);
-				
+
 				dolibarr_syslog("document.php download $original_file $filename content-type=$type");
-				
-				if (! file_exists($original_file)) 
+
+				if (! file_exists($original_file))
 				{
-				    dolibarr_print_error(0,$langs->trans("ErrorFileDoesNotExists",$original_file)); 
+				    dolibarr_print_error(0,$langs->trans("ErrorFileDoesNotExists",$original_file));
 				    exit;
 				}
-				
-				
+
+
 				// Les drois sont ok et fichier trouve, on l'envoie
-				
+
 				if ($encoding)   header('Content-Encoding: '.$encoding);
 				if ($type)       header('Content-Type: '.$type);
 				if ($attachment) header('Content-Disposition: attachment; filename="'.$filename.'"');
-				
+
 				// Ajout directives pour resoudre bug IE
 				header('Cache-Control: Public, must-revalidate');
 				header('Pragma: public');
-				 
+
 				readfile($original_file);
-				
+
 				return;
 			}
 

@@ -23,7 +23,7 @@
  \file       htdocs/chronodocs/types.php
  \brief      Fichier fiche type de chronodoc
  \ingroup    chronodocs
- \version    $Id: types.php,v 1.3 2008/11/02 00:22:22 raphael_bertrand Exp $
+ \version    $Id: types.php,v 1.4 2010/05/01 14:30:11 eldy Exp $
  */
 
 require("./pre.inc.php");
@@ -60,15 +60,15 @@ if (! empty($_POST['socid_id']))
 if ($user->societe_id) $socid=$user->societe_id;
 $result = restrictedArea($user, 'chronodocs', 0, 'chronodocs_types','types');
 
-if ((in_array($_POST["action"],array('create','add','update')) 
+if ((in_array($_POST["action"],array('create','add','update'))
 	 || eregi("(set.*)|(edit.*)|(del_.*)",$_POST["action"])
 	 )&& !$user->rights->chronodocs->types->write
 	) accessforbidden();
 
-if (in_array($_POST["action"],array('delete')) 
+if (in_array($_POST["action"],array('delete'))
 	&& !$user->rights->chronodocs->types->delete
 	) accessforbidden();
-	
+
 
 /*
  * Traitements des actions
@@ -84,7 +84,7 @@ if ($_POST["action"] == 'add')
 	$chronodocstype = new Chronodocs_types($db);
 
 	$chronodocstype->ref = $_POST["ref"];
-	$chronodocstype->title = $_POST["title"];		
+	$chronodocstype->title = $_POST["title"];
 	$chronodocstype->brief = $_POST["brief"];
 	$chronodocstype->filename = $_POST["filename"];
 	$chronodocstype->date_c = time();
@@ -116,10 +116,10 @@ if ($_POST["action"] == 'update')
 	$chronodocstype->brief = $_POST["brief"];
 	$chronodocstype->date_u = time();
 	$chronodocstype->fk_user_u = $user->id;
-	
+
 	if(!empty($chronodocstype->ref))
 		$chronodocstype->update($user);
-		
+
 	$_GET["id"]=$_POST["id"];      // Force raffraichissement sur fiche venant d'etre mise a jour
 }
 /*
@@ -150,10 +150,12 @@ Mise a jour du fichier
 */
 if ($_POST["action"] == 'setfile')
 {
+	require_once DOL_DOCUMENT_ROOT.'/lib/files.lib.php';
+
 	$chronodocstype = new Chronodocs_types($db);
 	$chronodocstype->fetch($_GET['id']);
 	$upload_dir=DOL_DATA_ROOT."/chronodocs/types";
-	
+
 	if (! is_dir($upload_dir)) create_exdir($upload_dir);
 	if (is_dir($upload_dir))
 	{
@@ -163,17 +165,17 @@ if ($_POST["action"] == 'setfile')
 				accessforbidden();
 		  // Delete old file
 			$result=dol_delete_file($upload_dir . "/" .$chronodocstype->filename);
-			if ($result) 
+			if ($result)
 				$result=$chronodocstype->set_filename($user,'null');
 			else
 			{
 				$result=-1;
 				$chronodocstype->error="dol_delete_file: Unable to Unlink".$upload_dir . "/" .$chronodocstype->filename;
 			}
-			if ($result < 0) 
+			if ($result < 0)
 				dolibarr_print_error($db,$chronodocstype->error);
 		}
-	
+
 		//$filename=$_FILES['userfile']['name'];
 		$filename=dol_string_nospecial($chronodocstype->ref.".".$_FILES['userfile']['name']);
 		if (dol_move_uploaded_file($_FILES['userfile']['tmp_name'], $upload_dir . "/" . $filename,0) > 0)
@@ -197,7 +199,7 @@ if ($_POST["action"] == 'setfile')
 		// print_r($_FILES);
 	}
 }
-	
+
 /*
 Mise a jour d'une propriete
 */
@@ -206,7 +208,7 @@ if ($_POST['action'] == 'set_propfield')
 
 	$chronodocstype = new Chronodocs_types($db);
 	$chronodocstype->fetch($_GET['id']);
-	
+
 	$propfield = new Chronodocs_propfields($db);
 	$result=$propfield->fetch($_POST['propid']);
 	if ($result < 0) dolibarr_print_error($db,$propfield->error);
@@ -215,7 +217,7 @@ if ($_POST['action'] == 'set_propfield')
 		$propfield->ref=$_POST['propfield_ref'];
 		$propfield->title=$_POST['propfield_title'];
 		$propfield->brief=$_POST['propfield_brief'];
-		
+
 		$result=$propfield->update($user);
 		if ($result < 0)
 			dolibarr_print_error($db,$propfield->error);
@@ -243,14 +245,14 @@ if ($_POST['action'] == 'add_propfield')
 		$propfield->title=$_POST['propfield_title'];
 		$propfield->brief=$_POST['propfield_brief'];
 		$propfield->fk_status='0';
-			
+
 		if(ereg("#R_([^#]+)#",$propfield->ref))
 		{
 			$auto_propfields_ref=$propfield->liste_auto_propfields();
 			$propfield->title = $auto_propfields_ref[$propfield->ref];
 			if(empty($propfield->title)) $propfield->title="AUTO:".$_POST['propfield_title'];
-		}		
-			
+		}
+
 		$result=$propfield->create($user);
 		if ($result < 0)
 			dolibarr_print_error($db,$propfield->error);
@@ -267,12 +269,12 @@ if ($_GET['action'] == 'del_propfield')
 
 	$chronodocstype = new Chronodocs_types($db);
 	$chronodocstype->fetch($_GET['id']);
-	
+
 	$propfield = new Chronodocs_propfields($db);
 	$result=$propfield->fetch($_GET['propid']);
 	if ($result < 0) dolibarr_print_error($db,$propfield->error);
 	else if(!empty($propfield->fk_type) && !empty($chronodocstype->id) && $propfield->fk_type == $chronodocstype->id)
-	{	
+	{
 		$result=$propfield->clear_values($user);
 		if ($result > 0)
 			$result=$propfield->delete($user);
@@ -286,11 +288,11 @@ if ($_GET['action'] == 'del_propfield')
 if(($_POST["action"] == 'confirm_delete' AND $_POST["confirm"] == 'yes') && ($user->rights->chronodocs->types->delete))
 {
 	$chronodocstype = new Chronodocs_types($db);
-	$chronodocstype->fetch($_GET['id']);	
+	$chronodocstype->fetch($_GET['id']);
 	if (!empty($chronodocstype->id))
 	{
-		$result = $chronodocstype->delete($user);	
-		if ($result < 0) 
+		$result = $chronodocstype->delete($user);
+		if ($result < 0)
 			dolibarr_print_error($db,$chronodocstype->error);
 		else
 		{
@@ -299,7 +301,7 @@ if(($_POST["action"] == 'confirm_delete' AND $_POST["confirm"] == 'yes') && ($us
 		}
 	}
 }
-	
+
 /*
  * View
  */
@@ -319,11 +321,11 @@ if ($_GET["id"] > 0 && $_GET["action"] == 'info' )
 		dolibarr_print_error($db);
 		exit;
 	}
-	
+
 	$head = chronodocs_types_prepare_head($chronodocstype);
 
 	dolibarr_fiche_head($head, 'infos', $langs->trans("ChronodocType"));
-	
+
 	$chronodocstype->info($chronodocs->id);
 
 	print '<table width="100%"><tr><td>';
@@ -345,7 +347,7 @@ if ($_GET["id"] > 0 && $_GET["action"] != 'create' && $_GET["action"] != 'info' 
 		dolibarr_print_error($db);
 		exit;
 	}
-	
+
 	if ($mesg) print $mesg."<br>";
 
 	$head = chronodocs_types_prepare_head($chronodocstype);
@@ -366,8 +368,8 @@ if ($_GET["id"] > 0 && $_GET["action"] != 'create' && $_GET["action"] != 'info' 
 
 	// Ref
 	print '<tr><td width="25%">'.$langs->trans("Ref").'</td><td>'.$chronodocstype->ref.'</td></tr>';
-	
-	// Titre 
+
+	// Titre
 	print '<tr>';
 	if ($_GET['action'] == 'edit_title')
 	{
@@ -387,7 +389,7 @@ if ($_GET["id"] > 0 && $_GET["action"] != 'create' && $_GET["action"] != 'info' 
 		print "<td>".$chronodocstype->title."</td>";
 	}
 	print "</tr>\n";
-	
+
 	// Description
 	print '<tr><td>';
 	print '<table class="nobordernopadding" width="100%"><tr><td>';
@@ -423,17 +425,17 @@ if ($_GET["id"] > 0 && $_GET["action"] != 'create' && $_GET["action"] != 'info' 
 
 	// Statut
 	//print '<tr><td>'.$langs->trans("Status").'</td><td>'.$chronodocstype->getLibStatut(4).'</td></tr>';
-	
+
 	// Fichier
 	print '<tr><td>';
 	print '<table class="nobordernopadding" width="100%"><tr><td>';
 	print $langs->trans("File");
 	print '</td>';
-	if ($_GET['action'] != 'edit_file') 
+	if ($_GET['action'] != 'edit_file')
 	{
 		$urlsource=$_SERVER["PHP_SELF"].'?action=edit_file&amp;id='.$chronodocstype->id;
 		$relativepath=$chronodocstype->filename;
-		if($chronodocstype->filename) 
+		if($chronodocstype->filename)
 			print '<td align="right"><a href="'.$_SERVER["PHP_SELF"].'?action=edit_file&id='.$chronodocstype->id.'">'.img_delete($langs->trans('SetFile'),1).'</a></td>';
 		else
 			print '<td align="right"><a href="'.$_SERVER["PHP_SELF"].'?action=edit_file&id='.$chronodocstype->id.'">'.img_edit($langs->trans('SetFile'),1).'</a></td>';
@@ -453,7 +455,7 @@ if ($_GET["id"] > 0 && $_GET["action"] != 'create' && $_GET["action"] != 'info' 
 		if (eregi('k$',$maxphp)) $maxphp=$maxphp;
 		// Now $max and $maxphp are in Kb
 		if ($maxphp > 0) $max=min($max,$maxphp);
-			
+
 		if ($conf->upload > 0)
 		{
 			print '<input type="hidden" name="max_file_size" value="'.($max*1024).'">';
@@ -461,46 +463,46 @@ if ($_GET["id"] > 0 && $_GET["action"] != 'create' && $_GET["action"] != 'info' 
 		print '<input class="flat" type="file" name="userfile" size="70">';
 		print ' &nbsp; ';
 		print '<input type="submit" class="button" name="sendit" value="'.$langs->trans("Upload").'">';
-			
+
 		if ($addcancel)
 		{
 			print ' &nbsp; ';
 			print '<input type="submit" class="button" name="cancel" value="'.$langs->trans("Cancel").'">';
 		}
-			
+
 		print ' ('.$langs->trans("MaxSize").': '.$max.' '.$langs->trans("Kb");
 		print ' '.info_admin($langs->trans("ThisLimitIsDefinedInSetup",$max,$maxphp),1);
 		print ')';
 		print "</td></tr>";
-		print "</table>";		
-		
+		print "</table>";
+
 		print '</form>';
 		print '<br>';
 	}
 	else
 	{
-		if($chronodocstype->filename) 
+		if($chronodocstype->filename)
 			print '<a href="document.php?action=get_file&chronodocstypeid='.$chronodocstype->id.'&modulepart=chronodocs_types&file='.urlencode($chronodocstype->filename).'">'.$chronodocstype->filename."</a>";
 		else
 			print $langs->trans("NoFile");
 	}
-		
+
 	print '</td></tr>';
-	
+
 	// NbChronodocs
 	print '<tr><td width="25%">'.$langs->trans("NbChronodocs").'</td><td>'.$chronodocstype->get_nb_chronodocs().'</td></tr>';
 
 	print "</table><br>";
-	
+
 		//PROPRIETES supplementaires
 		print $langs->trans("Others")." :<br>";
 		$nb_propfields=$chronodocstype->fetch_chronodocs_propfields();
-		if($nb_propfields > 0 || ($chronodocstype->statut == 0 && $user->rights->chronodocs->types->write) ) 
+		if($nb_propfields > 0 || ($chronodocstype->statut == 0 && $user->rights->chronodocs->types->write) )
 		{
 			//ligne titre
 			$propfield = new Chronodocs_propfields($db);
 			$auto_propfields_ref=$propfield->liste_auto_propfields();
-			$desc_autopropfields="";			
+			$desc_autopropfields="";
 			foreach($auto_propfields_ref as $propfields_ref => $propfields_title)
 				$desc_autopropfields.="<br>".$propfields_ref." - ".$propfields_title;
 			print '<table class="border" width="100%">';
@@ -514,12 +516,12 @@ if ($_GET["id"] > 0 && $_GET["action"] != 'create' && $_GET["action"] != 'info' 
 					print '</td>';
 				}
 			print "</tr>";
-			
+
 			// lignes props
 			if($nb_propfields > 0) // OK et au moins 1 prop
 			{
 				$auto_propfields_index=array();
-				
+
 				for($i=0;$i<$nb_propfields;$i++)
 				{
 					if(!ereg("#R_([^#]+)#",$chronodocstype->propfields[$i]->ref))
@@ -530,7 +532,7 @@ if ($_GET["id"] > 0 && $_GET["action"] != 'create' && $_GET["action"] != 'info' 
 							print '<form name="edit_propfield" action="'.$_SERVER["PHP_SELF"].'?id='.$chronodocstype->id.'" method="post">';
 							print '<input type="hidden" name="action" value="set_propfield">';
 							print '<input type="hidden" name="propid" value="'.$chronodocstype->propfields[$i]->propid.'">';
-							
+
 							print '<td width="25%" align="center">'."<input name=\"propfield_ref\" value=\"".$chronodocstype->propfields[$i]->ref."\" size=\"40\">".'</td>';
 							print '<td width="25%" align="center">'."<input name=\"propfield_title\" value=\"".$chronodocstype->propfields[$i]->title."\" size=\"40\">".'</td>';
 							print '<td align="center">';
@@ -560,7 +562,7 @@ if ($_GET["id"] > 0 && $_GET["action"] != 'create' && $_GET["action"] != 'info' 
 						$auto_propfields_index[]=$i;
 					}
 				}
-				
+
 			}
 			// Nouvelle propriete
 			if ($chronodocstype->statut == 0 && $user->rights->chronodocs->types->write)
@@ -577,9 +579,9 @@ if ($_GET["id"] > 0 && $_GET["action"] != 'create' && $_GET["action"] != 'info' 
 				print '</td>';
 				print '<td colspan="2" align="center"><input type="submit" class="button" value="'.$langs->trans("Create").'"></td>';
 				print "</form>";
-				print "</tr>";	
+				print "</tr>";
 			}
-			
+
 			//proprietes auto
 			if($nb_propfields > 0 && !empty($auto_propfields_index) ) // au moins 1 prop auto
 			{
@@ -594,7 +596,7 @@ if ($_GET["id"] > 0 && $_GET["action"] != 'create' && $_GET["action"] != 'info' 
 							print '<form name="edit_propfield" action="'.$_SERVER["PHP_SELF"].'?id='.$chronodocstype->id.'" method="post">';
 							print '<input type="hidden" name="action" value="set_propfield">';
 							print '<input type="hidden" name="propid" value="'.$chronodocstype->propfields[$i]->propid.'">';
-							
+
 							print '<td width="25%" align="center">'."AUTO: <input name=\"propfield_ref\" value=\"".$chronodocstype->propfields[$i]->ref."\" readonly size=\"30\">".'</td>';
 							print '<td width="25%" align="center">'."<input name=\"propfield_title\" value=\"".$chronodocstype->propfields[$i]->title."\" size=\"40\">".'</td>';
 							print '<td align="center">';
@@ -621,13 +623,13 @@ if ($_GET["id"] > 0 && $_GET["action"] != 'create' && $_GET["action"] != 'info' 
 					}
 				}
 			}
-			
+
 			// Nouvelle propriete auto
 			if ($chronodocstype->statut == 0 && $user->rights->chronodocs->types->write)
 			{
 				$propfield = new Chronodocs_propfields($db);
 				$auto_propfields_ref=$propfield->liste_auto_propfields();
-				
+
 				print '<tr>';
 				$propfield->initAsSpecimen();
 				print '<form name="add_propfield" action="'.$_SERVER["PHP_SELF"].'?id='.$chronodocstype->id.'" method="post">';
@@ -641,14 +643,14 @@ if ($_GET["id"] > 0 && $_GET["action"] != 'create' && $_GET["action"] != 'info' 
 				print '</td>';
 				print '<td colspan="2" align="center"><input type="submit" class="button" value="'.$langs->trans("Create").'"></td>';
 				print "</form>";
-				print "</tr>";	
+				print "</tr>";
 			}
-			
+
 			print "</table><br>";
 		}
 		// fin PROPRIETES supplementaires
 
-	
+
 	print '</div>';
 	print "\n";
 
@@ -668,7 +670,7 @@ if ($_GET["id"] > 0 && $_GET["action"] != 'create' && $_GET["action"] != 'info' 
 			print 'href="'.$_SERVER["PHP_SELF"].'?id='.$chronodocstype->id.'&amp;action=editAll"';
 			print '>'.$langs->trans('Modify').'</a>';
 		}
-	
+
 		// Delete
 		if ($chronodocstype->statut == 0 && $user->rights->chronodocs->types->delete && ($chronodocstype->get_nb_chronodocs()==0) )
 		{
@@ -709,13 +711,13 @@ if ($_GET["action"] == 'create' || $_GET["action"] == 'editAll')
 	$chronodocstype = new Chronodocs_types($db);
 	$chronodocstype->date_c = time();
 	if ($typeid) 	$result=$chronodocstype->fetch($typeid);
-	
-	if ($_GET["action"] == 'editAll' && !empty($chronodocstype->socid)) 
+
+	if ($_GET["action"] == 'editAll' && !empty($chronodocstype->socid))
 	{
 		$_GET["socid"]=$chronodocstype->socid; //get socid from chronodoc instead of url
 	}
-	
-	
+
+
 	print "<form name='chronodocstype' action=\"types.php\" method=\"post\">";
 	if ($_GET["action"] == 'create')
 		{
@@ -727,7 +729,7 @@ if ($_GET["action"] == 'create' || $_GET["action"] == 'editAll')
 			print "<input type=\"hidden\" name=\"id\" value=\"$typeid\">";
 		}
 	print '<table class="border" width="100%">';
-	
+
 	// Ref
 	if($_GET["action"] != 'create' && ($nb_chronodocs=$chronodocstype->get_nb_chronodocs($typeid)) )
 	{
@@ -741,11 +743,11 @@ if ($_GET["action"] == 'create' || $_GET["action"] == 'editAll')
 	{
 		print '<tr><td>'.$langs->trans("Ref")."</td>";
 		print "<td><input name=\"ref\" value=\"".$chronodocstype->ref."\" size=\"32\"></td></tr>\n";
-	}		
+	}
 	// Titre
 	print "<tr><td>".$langs->trans("Title")."</td>";
 	print "<td><input name=\"title\" size=\"74\" value=\"".$chronodocstype->title."\"></td></tr>\n";
-	
+
 	// Description
 	print '<tr><td valign="top">'.$langs->trans("Description").'</td>';
 	print "<td>";
@@ -762,13 +764,13 @@ if ($_GET["action"] == 'create' || $_GET["action"] == 'editAll')
 	}
 
 	print '</td></tr>';
-	
+
 	print '<tr><td colspan="2" align="center">';
 	if ($_GET["action"] == 'create')
 		print '<input type="submit" class="button" value="'.$langs->trans("Create").'">';
 	else
 		print '<input type="submit" class="button" value="'.$langs->trans("Modify").'">';
-		
+
 	print '</td></tr>';
 
 	print '</table>';
@@ -776,7 +778,7 @@ if ($_GET["action"] == 'create' || $_GET["action"] == 'editAll')
 }
 
 
-/* 
+/*
   * Affichage liste types chronodocs
   */
 if (empty($_GET["id"]) &&  (empty($_GET["action"]) || $_GET["action"] != 'create' ))
@@ -790,14 +792,14 @@ if (empty($_GET["id"]) &&  (empty($_GET["action"]) || $_GET["action"] != 'create
 	if (! $sortorder) $sortorder="DESC";
 	if (! $sortfield) $sortfield="f.date_c";
 	if ($page == -1) { $page = 0 ; }
-	
+
 	if (!empty($_GET['search_title']))
 		$search_title = $_GET['search_title'];
 	else
 		$search_title = "";
-		
+
 	if (!empty($_GET['search_ref']))
-		$search_ref = $_GET['search_ref'];  
+		$search_ref = $_GET['search_ref'];
 	else
 		$search_ref = "";
 
@@ -811,8 +813,8 @@ if (empty($_GET["id"]) &&  (empty($_GET["action"]) || $_GET["action"] != 'create
 	$result = $chronodocs_static->get_list($limit,$offset,$sortfield,$sortorder,$search_ref,$search_title);
 	if ($result)
 	{
-	    $num = sizeOf($result);	    
-		
+	    $num = sizeOf($result);
+
 		$urlparam="&amp;socid=$socid";
 	    print_barre_liste($langs->trans("ListOfChronodocsTypes"), $page, "types.php",$urlparam,$sortfield,$sortorder,'',$num);
 
@@ -844,7 +846,7 @@ if (empty($_GET["id"]) &&  (empty($_GET["action"]) || $_GET["action"] != 'create
 
 	    print '</table>';
 	}
-	
+
 	/**
 	 * Barre d'actions
 	 *
@@ -867,5 +869,5 @@ if (empty($_GET["id"]) &&  (empty($_GET["action"]) || $_GET["action"] != 'create
 }
 $db->close();
 
-llxFooter('$Date: 2008/11/02 00:22:22 $ - $Revision: 1.3 $');
+llxFooter('$Date: 2010/05/01 14:30:11 $ - $Revision: 1.4 $');
 ?>
