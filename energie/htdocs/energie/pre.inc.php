@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: pre.inc.php,v 1.1 2009/10/20 16:19:26 eldy Exp $
+ * $Id: pre.inc.php,v 1.2 2010/05/01 21:09:47 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/energie/htdocs/energie/pre.inc.php,v $
  *
  */
@@ -24,12 +24,12 @@
    \file       htdocs/energie/pre.inc.php
    \ingroup    energie
    \brief      Gestionnaire du menu energie
-   \version    $Revision: 1.1 $
+   \version    $Revision: 1.2 $
 */
 
 require("../main.inc.php");
-require("./EnergieCompteur.class.php");
-require("./EnergieGroupe.class.php");
+require("./class/EnergieCompteur.class.php");
+require("./class/EnergieGroupe.class.php");
 
 $langs->load("energy");
 

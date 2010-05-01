@@ -15,13 +15,13 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: EnergieCompteur.class.php,v 1.1 2009/10/20 16:19:26 eldy Exp $
- * $Source: /cvsroot/dolibarr/dolibarrmod/energie/htdocs/energie/Attic/EnergieCompteur.class.php,v $
+ * $Id: EnergieCompteur.class.php,v 1.1 2010/05/01 21:09:47 grandoc Exp $
+ * $Source: /cvsroot/dolibarr/dolibarrmod/energie/htdocs/energie/class/EnergieCompteur.class.php,v $
  *
  */
 
 /**
- \file       htdocs/energie/EnergieCompteur.class.php
+ \file       htdocs/energie/class/EnergieCompteur.class.php
  \ingroup    energie
  \brief      Fichier des classes de compteur
  \version    $Revision: 1.1 $

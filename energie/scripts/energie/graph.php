@@ -15,13 +15,13 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: graph.php,v 1.1 2010/01/12 10:26:24 eldy Exp $
+ * $Id: graph.php,v 1.2 2010/05/01 21:09:47 grandoc Exp $
  */
 
 require_once("../../htdocs/master.inc.php");
 
-require_once(DOL_DOCUMENT_ROOT."/energie/EnergieCompteur.class.php");
-require_once(DOL_DOCUMENT_ROOT."/energie/EnergieGroupe.class.php");
+require_once(DOL_DOCUMENT_ROOT."/energie/class/EnergieCompteur.class.php");
+require_once(DOL_DOCUMENT_ROOT."/energie/class/EnergieGroupe.class.php");
 
 require_once (DOL_DOCUMENT_ROOT."/includes/artichow/BarPlot.class.php");
 require_once (DOL_DOCUMENT_ROOT."/includes/artichow/LinePlot.class.php");

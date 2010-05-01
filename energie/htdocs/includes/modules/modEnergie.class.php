@@ -20,7 +20,7 @@
 /**
  *	\defgroup   energie     Module energy
  * 	\brief      Module pour le suivi de la consommation d'energie
- *	\version	$Id: modEnergie.class.php,v 1.3 2010/04/21 05:33:41 hregis Exp $
+ *	\version	$Id: modEnergie.class.php,v 1.4 2010/05/01 21:09:47 grandoc Exp $
  */
 
 /**
@@ -68,7 +68,7 @@ class modEnergie extends DolibarrModules
 		$this->depends = array();
 
 		// Config pages
-		$this->config_page_url = array("energie.php");
+		$this->config_page_url = array("energie.php@energie");
 
 		// Constantes
 		$this->const = array();
