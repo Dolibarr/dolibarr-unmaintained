@@ -27,10 +27,10 @@
         \brief      Classe de gestion des documents de chronodoc
         \author	Raphael Bertrand (Resultic) <raphael.bertrand@resultic.fr>
         \remarks	Initialy built from FormFile.class.php and htdocs/document.php
-        \version    $Id: files.class.php,v 1.3 2010/05/01 14:29:56 eldy Exp $
+        \version    $Id: files.class.php,v 1.4 2010/05/03 08:43:59 grandoc Exp $
 */
 
-require_once(DOL_DOCUMENT_ROOT."/html.formfile.class.php");
+require_once(DOL_DOCUMENT_ROOT."/core/class/html.formfile.class.php");
 require_once(DOL_DOCUMENT_ROOT."/chronodocs/chronodocs_types.class.php");
 require_once(DOL_DOCUMENT_ROOT."/lib/files.lib.php");
 

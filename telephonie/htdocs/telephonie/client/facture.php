@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: facture.php,v 1.6 2010/04/28 07:56:22 grandoc Exp $
+ * $Id: facture.php,v 1.7 2010/05/03 08:48:12 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/client/facture.php,v $
  */
 
@@ -25,7 +25,7 @@
    \file       htdocs/telephonie/client/facture.php
    \ingroup    telephonie/facture
    \brief      Page de visualisation d'une facture
-   \version    $Revision: 1.6 $
+   \version    $Revision: 1.7 $
 */
 require("./pre.inc.php");
 
@@ -643,7 +643,7 @@ if ($_GET["facid"] > 0)
 	  print_titre($langs->trans("SendBillByMail"));
 
 	  // Cree l'objet formulaire mail
-	  include_once(DOL_DOCUMENT_ROOT."/html.formmail.class.php");
+	  include_once(DOL_DOCUMENT_ROOT."/core/class/html.formmail.class.php");
 	  $formmail = new FormMail($db);
 	  $formmail->fromname = $user->fullname;
 	  $formmail->frommail = $user->email;
@@ -687,8 +687,8 @@ if ($_GET["facid"] > 0)
 	      $liste[$key]=$value;
 	    }
 
-	  // Cr�� l'objet formulaire mail
-	  include_once("../html.formmail.class.php");
+	  // Cree l'objet formulaire mail
+	  include_once("../core/class/html.formmail.class.php");
 	  $formmail = new FormMail($db);
 	  $formmail->fromname = $user->fullname;
 	  $formmail->frommail = $user->email;
@@ -728,5 +728,5 @@ if ($_GET["facid"] > 0)
 
 $db->close();
 
-llxFooter('$Date: 2010/04/28 07:56:22 $ - $Revision: 1.6 $');
+llxFooter('$Date: 2010/05/03 08:48:12 $ - $Revision: 1.7 $');
 ?>
