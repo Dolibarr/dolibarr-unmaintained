@@ -8,14 +8,14 @@
 	    \file       htdocs/admin/speedfinder.php
         \ingroup    google
         \brief      Setup page for speedfinder module
-		\version    $Id: speedfinder.php,v 1.2 2009/11/30 22:37:41 hregis Exp $
+		\version    $Id: speedfinder.php,v 1.3 2010/05/03 08:30:52 grandoc Exp $
 */
 
 $res=@include("./pre.inc.php");
 if (! $res) include("../../../dolibarr/htdocs/admin/pre.inc.php");	// Used on dev env only
 
 require_once(DOL_DOCUMENT_ROOT."/lib/admin.lib.php");
-require_once(DOL_DOCUMENT_ROOT.'/html.formadmin.class.php');
+require_once(DOL_DOCUMENT_ROOT.'/core/class/html.formadmin.class.php');
 
 if (!$user->admin)
     accessforbidden();
@@ -273,5 +273,5 @@ print info_admin($message);
 
 $db->close();
 
-llxFooter('$Date: 2009/11/30 22:37:41 $ - $Revision: 1.2 $');
+llxFooter('$Date: 2010/05/03 08:30:52 $ - $Revision: 1.3 $');
 ?>
