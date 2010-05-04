@@ -21,10 +21,10 @@
  *   	\file       htdocs/admin/droitpret.php
  *		\ingroup    pret
  *		\brief      Page d'administration/configuration du module DroitPret
- *		\version    $Id: droitpret.php,v 1.1 2010/05/04 14:58:57 hregis Exp $
+ *		\version    $Id: droitpret.php,v 1.2 2010/05/04 15:15:29 hregis Exp $
  */
 
-require("../main.inc.php");
+require("../../main.inc.php");
 require_once(DOL_DOCUMENT_ROOT."/lib/admin.lib.php");
 require_once(DOL_DOCUMENT_ROOT."/categories/class/categorie.class.php");
 
