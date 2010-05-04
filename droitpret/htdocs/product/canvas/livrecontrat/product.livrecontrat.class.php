@@ -22,7 +22,7 @@
  *   \file       htdocs/product/canvas/livrecontrat/product.livrecontrat.class.php
  *   \ingroup    droitpret
  *   \brief      Fichier de la classe des produits specifiques de type livrecontrat
- *   \version    $Id: product.livrecontrat.class.php,v 1.2 2010/05/04 14:58:57 hregis Exp $
+ *   \version    $Id: product.livrecontrat.class.php,v 1.3 2010/05/04 15:23:10 hregis Exp $
  */
 
 require_once(DOL_DOCUMENT_ROOT.'/product/canvas/livre/product.livre.class.php');
@@ -39,7 +39,7 @@ class ProductLivreContrat extends Product
    *    \param      DB          Handler acces base de donnees
    *    \param      id          Id produit (0 par defaut)
    */
-  function ProductLivreContrat($DB, $id=0)
+  function ProductLivreContrat($DB=0, $id=0)
   {
     $this->db 			= $DB;
     $this->id 			= $id ;
