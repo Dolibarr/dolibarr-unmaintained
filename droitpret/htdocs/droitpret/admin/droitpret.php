@@ -1,6 +1,6 @@
 <?php
 /* Copyright (C) 2007 Patrick Raguin       <patrick.raguin@gmail.com>
- * Copyright (C) 2009 Regis Houssin        <regis@dolibarr.fr>
+ * Copyright (C) 2010 Regis Houssin        <regis@dolibarr.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
  *   	\file       htdocs/admin/droitpret.php
  *		\ingroup    pret
  *		\brief      Page d'administration/configuration du module DroitPret
- *		\version    $Id: droitpret.php,v 1.2 2010/04/27 14:48:28 grandoc Exp $
+ *		\version    $Id: droitpret.php,v 1.1 2010/05/04 14:58:57 hregis Exp $
  */
 
 require("../main.inc.php");

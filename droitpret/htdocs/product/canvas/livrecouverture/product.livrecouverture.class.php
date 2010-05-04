@@ -21,7 +21,7 @@
  *  \file       htdocs/product/canvas/livrecouverture/product.livrecouverture.class.php
  *  \ingroup    produit
  *  \brief      Fichier de la classe des produits specifiques de type livre
- *  \version    $Id: product.livrecouverture.class.php,v 1.2 2010/04/29 09:08:44 hregis Exp $
+ *  \version    $Id: product.livrecouverture.class.php,v 1.3 2010/05/04 14:58:58 hregis Exp $
  */
 
 require_once(DOL_DOCUMENT_ROOT.'/product/canvas/livre/product.livre.class.php');
@@ -40,19 +40,20 @@ class ProductLivreCouverture extends Product
    */
   function ProductLivreCouverture($DB=0, $id=0)
   {
-    $this->db = $DB;
-    $this->id = $id ;
-    $this->module = "droitpret";
-    $this->active = PRODUCT_SPECIAL_LIVRECOUVERTURE;
-    $this->canvas = "livrecouverture";
-    $this->name = "livrecouverture";
-    $this->description = "Gestion des couvertures des livres";
-    $this->menu_new = '';
-    $this->menu_add = 0;
-    $this->menu_clear = 1;
+    $this->db 			= $DB;
+    $this->id 			= $id ;
+    $this->smarty		= 1;
+    $this->module 		= "droitpret";
+    $this->active 		= PRODUCT_SPECIAL_LIVRECOUVERTURE;
+    $this->canvas 		= "livrecouverture";
+    $this->name 		= "livrecouverture";
+    $this->description 	= "Gestion des couvertures des livres";
+    $this->menu_new 	= '';
+    $this->menu_add 	= 0;
+    $this->menu_clear 	= 1;
 
-    $this->no_button_copy = 1;
-    $this->no_button_edit = 1;
+    $this->no_button_copy 	= 1;
+    $this->no_button_edit 	= 1;
     $this->no_button_delete = 1;
 
   }
@@ -60,10 +61,10 @@ class ProductLivreCouverture extends Product
    *    \brief      Creation
    *    \param      id          Id livre
    */
-  function Create($user,$datas)
+  function create($user,$datas)
   {
     $this->db->begin();
-    $id = parent::Create($user);
+    $id = parent::create($user);
 
     return $this->id;
   }
@@ -80,27 +81,27 @@ class ProductLivreCouverture extends Product
    *    \param      id          Id livre ('' par defaut)
    *    \param      ref         Reference du livre ('' par defaut)
    */
-  function FetchCanvas($id='', $ref='')
+  function fetch($id='', $ref='')
   {
-    $result = $this->fetch($id,$ref);
+  	$result = parent::fetch($id,$ref);
 
     if ($result >= 0)
-      {
-	$sql = "SELECT p.rowid,p.ref,p.label";
-	$sql.= " FROM ".MAIN_DB_PREFIX."product_cnv_livre as pl,".MAIN_DB_PREFIX."product as p";
-	$sql.= " WHERE pl.rowid=p.rowid AND pl.fk_couverture = '".$id."'";
-
-	$result = $this->db->query($sql) ;
-
-	if ( $result )
-	  {
-	    $result = $this->db->fetch_array();
-
-	    $this->livre_id           = $result["rowid"];
-	    $this->livre_ref          = $result["ref"];
-	    $this->livre_label        = stripslashes($result["label"]);
-	    $this->db->free();
-	  }
+    {
+    	$sql = "SELECT p.rowid,p.ref,p.label";
+    	$sql.= " FROM ".MAIN_DB_PREFIX."product_cnv_livre as pl,".MAIN_DB_PREFIX."product as p";
+    	$sql.= " WHERE pl.rowid=p.rowid AND pl.fk_couverture = '".$id."'";
+    	
+    	$result = $this->db->query($sql) ;
+    	
+    	if ( $result )
+    	{
+    		$result = $this->db->fetch_array();
+    		
+    		$this->livre_id           = $result["rowid"];
+    		$this->livre_ref          = $result["ref"];
+    		$this->livre_label        = stripslashes($result["label"]);
+    		$this->db->free();
+    	}
       }
 
     return $result;
@@ -138,9 +139,9 @@ class ProductLivreCouverture extends Product
     $smarty->assign('prod_stock_alert',      $this->seuil_stock_alerte);
 
     if ( ($this->seuil_stock_alerte > $this->stock_dispo) && ($this->status == 1) )
-      {
-	$smarty->assign('smarty_stock_dispo_class', 'class="warning"');
-      }
+    {
+    	$smarty->assign('smarty_stock_dispo_class', 'class="warning"');
+    }
   }
 }
 ?>

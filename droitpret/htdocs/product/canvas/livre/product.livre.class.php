@@ -22,7 +22,7 @@
  *	\file       htdocs/product/canvas/livre/product.livre.class.php
  *	\ingroup    produit
  *	\brief      Fichier de la classe des produits specifiques de type livre
- *	\version    $Id: product.livre.class.php,v 1.5 2010/04/29 09:08:44 hregis Exp $
+ *	\version    $Id: product.livre.class.php,v 1.6 2010/05/04 14:58:57 hregis Exp $
  */
 
 require_once(DOL_DOCUMENT_ROOT.'/product/canvas/livrecontrat/product.livrecontrat.class.php');
@@ -42,19 +42,20 @@ class ProductLivre extends Product
 	 *    \param      DB          Handler acces base de donnees
 	 *    \param      id          Id produit (0 par defaut)
 	 */
-	function ProductLivre($DB=0, $id=0, $user=0)
+	function ProductLivre($DB, $id=0, $user=0)
 	{
-		$this->db = $DB;
-		$this->id = $id ;
-		$this->user = $user;
-		$this->module = "droitpret";
-		$this->active = PRODUCT_SPECIAL_LIVRE;
-		$this->canvas = "livre";
-		$this->name = "livre";
-		$this->description = "Gestion des livres";
-		$this->menu_new = 'NewBook';
-		$this->menu_add = 1;
-		$this->menu_clear = 1;
+		$this->db 			= $DB;
+		$this->id 			= $id ;
+		$this->user 		= $user;
+		$this->smarty		= 0;
+		$this->module 		= "droitpret";
+		$this->active 		= PRODUCT_SPECIAL_LIVRE;
+		$this->canvas 		= "livre";
+		$this->name 		= "livre";
+		$this->description 	= "Gestion des livres";
+		$this->menu_new 	= 'NewBook';
+		$this->menu_add 	= 1;
+		$this->menu_clear 	= 1;
 
 		$this->no_button_copy = 1;
 
@@ -96,11 +97,11 @@ class ProductLivre extends Product
 	 *    \brief      Creation
 	 *    \param      id          Id livre
 	 */
-	function Create($user,$datas)
+	function create($user,$datas)
 	{
 		$this->db->begin();
 
-		$id = parent::Create($user);
+		$id = parent::create($user);
 
 		$this->pages         = abs(trim($datas["pages"]));
 		$this->px_feuillet   = price2num($datas["px_feuillet"]);
@@ -143,7 +144,7 @@ class ProductLivre extends Product
 			$this->contrat->seuil_stock_alerte = $_POST["seuil_stock_alerte"];
 			$this->contrat->canvas             = 'livrecontrat';
 
-			$contrat_id = $this->contrat->Create($user, $this->id, $datas);
+			$contrat_id = $this->contrat->create($user, $this->id, $datas);
 
 			if ($contrat_id > 0)
 			{
@@ -193,9 +194,10 @@ class ProductLivre extends Product
 	/**
 	 *    \brief      Supression
 	 *    \param      id          Id livre
+	 *    TODO uniformiser
 	 */
-	function DeleteCanvas($id)
-	{
+	function deleteCanvas($id)
+	{	
 		$sql = "DELETE FROM ".MAIN_DB_PREFIX."product_cnv_livre ";
 		$sql.= " WHERE rowid = '".$id."';";
 
@@ -208,9 +210,9 @@ class ProductLivre extends Product
 	 *    \param      id          Id livre ('' par defaut)
 	 *    \param      ref         Reference du livre ('' par defaut)
 	 */
-	function FetchCanvas($id='', $ref='', $action='')
+	function fetch($id='', $ref='', $action='')
 	{
-		$result = $this->fetch($id,$ref);
+		$result = parent::fetch($id,$ref);
 
 		if ($result >= 0)
 		{
@@ -244,7 +246,7 @@ class ProductLivre extends Product
 			}
 			
 			$this->contrat = new ProductLivreContrat($this->db);
-			$this->contrat->FetchCanvas($result["fk_contrat"]);
+			$this->contrat->fetch($result["fk_contrat"]);
 		}
 
 		if ($action =='edit' or $action == 'create')
@@ -256,6 +258,7 @@ class ProductLivre extends Product
 	/**
 	 *    \brief      Mise a jour des donnees dans la base
 	 *    \param      datas        Tableau de donnees
+	 *    TODO uniformiser
 	 */
 	function UpdateCanvas($datas)
 	{
@@ -280,14 +283,14 @@ class ProductLivre extends Product
 		$this->px_reliure    = price2num($datas["px_reliure"]);
 		$this->px_couverture = price2num($datas["px_couverture"]);
 
-		$price_ht = $this->price / (1 + ($this->tva_tx / 100));
+		$price_ht 			= $this->price / (1 + ($this->tva_tx / 100));
 
-		$contrat_taux = price2num($datas["contrat_taux"]);
+		$contrat_taux 		= price2num($datas["contrat_taux"]);
 
-		$this->px_revient = $this->_calculate_prix_revient($this->pages, $this->px_couverture, $this->px_feuillet, $price_ht, $this->px_reliure, $contrat_taux);
+		$this->px_revient 	= $this->_calculate_prix_revient($this->pages, $this->px_couverture, $this->px_feuillet, $price_ht, $this->px_reliure, $contrat_taux);
 
-		$this->stock_loc     = trim($datas["stock_loc"]);
-		$format        = trim($datas["format"]);
+		$this->stock_loc	= trim($datas["stock_loc"]);
+		$format 			= trim($datas["format"]);
 
 		$sql = "UPDATE ".MAIN_DB_PREFIX."product_cnv_livre ";
 		$sql.= " SET isbn = '$isbn'";

@@ -19,7 +19,7 @@
 
 /**
  *	\defgroup   DroitPret     Module droitpret
- *	\version	$Id: modDroitPret.class.php,v 1.2 2010/03/22 11:49:15 hregis Exp $
+ *	\version	$Id: modDroitPret.class.php,v 1.3 2010/05/04 14:58:57 hregis Exp $
  *	\brief      Module pour gerer le suivi des droits de prets
  */
 
@@ -61,15 +61,15 @@ class modDroitPret  extends DolibarrModules
 		$this->dirs = array('/smarty/cache/temp','/smarty/templates/temp');
 
 		// Dependances
-		$this->depends = array();
-		$this->requiredby = array();
-		$this->conflictwith = array();
-		$this->needleftmenu = array();
-		$this->needtotopmenu = array();
-		$this->langfiles = array("orders","bills","companies");
+		$this->depends 			= array();
+		$this->requiredby 		= array();
+		$this->conflictwith 	= array();
+		$this->needleftmenu 	= array();
+		$this->needtotopmenu 	= array();
+		$this->langfiles 		= array("droitpret");
 
 		// Config pages
-		$this->config_page_url = array("droitpret.php");
+		$this->config_page_url = array("droitpret.php@droitpret");
 
 		// Constants
 		//Example: $this->const=array(0=>array('MYMODULE_MYNEWCONST1','chaine','myvalue','This is a constant to add',0),
