@@ -22,7 +22,7 @@
  *	\file       htdocs/product/canvas/livre/product.livre.class.php
  *	\ingroup    produit
  *	\brief      Fichier de la classe des produits specifiques de type livre
- *	\version    $Id: product.livre.class.php,v 1.6 2010/05/04 14:58:57 hregis Exp $
+ *	\version    $Id: product.livre.class.php,v 1.7 2010/05/04 15:23:10 hregis Exp $
  */
 
 require_once(DOL_DOCUMENT_ROOT.'/product/canvas/livrecontrat/product.livrecontrat.class.php');
@@ -42,7 +42,7 @@ class ProductLivre extends Product
 	 *    \param      DB          Handler acces base de donnees
 	 *    \param      id          Id produit (0 par defaut)
 	 */
-	function ProductLivre($DB, $id=0, $user=0)
+	function ProductLivre($DB=0, $id=0, $user=0)
 	{
 		$this->db 			= $DB;
 		$this->id 			= $id ;
