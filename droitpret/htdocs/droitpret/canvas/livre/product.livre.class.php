@@ -22,7 +22,7 @@
  *	\file       htdocs/product/canvas/livre/product.livre.class.php
  *	\ingroup    produit
  *	\brief      Fichier de la classe des produits specifiques de type livre
- *	\version    $Id: product.livre.class.php,v 1.4 2010/05/05 09:37:25 hregis Exp $
+ *	\version    $Id: product.livre.class.php,v 1.5 2010/05/05 10:13:05 hregis Exp $
  */
 
 require_once(DOL_DOCUMENT_ROOT.'/droitpret/canvas/livrecontrat/product.livrecontrat.class.php');
@@ -249,8 +249,7 @@ class ProductLivre extends Product
 			$this->contrat->fetch($result["fk_contrat"]);
 		}
 
-		if ($action =='edit' or $action == 'create')
-		$this->GetAvailableAuteurs();
+		if ($action == 'edit' || $action == 'create') $this->GetAvailableAuteurs();
 
 		return $result;
 	}
@@ -607,7 +606,7 @@ class ProductLivre extends Product
 
 		$sql = "SELECT rowid, nom";
 		$sql.= " FROM ".MAIN_DB_PREFIX."societe ";
-		$sql.= " AND entity = ".$conf->entity;
+		$sql.= " WHERE entity = ".$conf->entity;
 
 		$resql = $this->db->query($sql);
 
