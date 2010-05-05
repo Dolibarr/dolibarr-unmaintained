@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: list.tpl,v 1.3 2010/05/05 06:18:06 hregis Exp $
+ * $Id: list.tpl,v 1.1 2010/05/05 08:49:15 hregis Exp $
  *}
  
 <!-- BEGIN SMARTY TEMPLATE -->

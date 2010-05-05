@@ -22,7 +22,7 @@
  *   \file       htdocs/product/canvas/livrecontrat/product.livrecontrat.class.php
  *   \ingroup    droitpret
  *   \brief      Fichier de la classe des produits specifiques de type livrecontrat
- *   \version    $Id: product.livrecontrat.class.php,v 1.5 2010/05/05 06:18:06 hregis Exp $
+ *   \version    $Id: product.livrecontrat.class.php,v 1.1 2010/05/05 08:49:16 hregis Exp $
  */
 
 require_once(DOL_DOCUMENT_ROOT.'/product/canvas/livre/product.livre.class.php');
