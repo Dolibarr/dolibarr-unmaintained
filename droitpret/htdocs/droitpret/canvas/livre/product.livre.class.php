@@ -22,7 +22,7 @@
  *	\file       htdocs/product/canvas/livre/product.livre.class.php
  *	\ingroup    produit
  *	\brief      Fichier de la classe des produits specifiques de type livre
- *	\version    $Id: product.livre.class.php,v 1.3 2010/05/05 09:35:39 hregis Exp $
+ *	\version    $Id: product.livre.class.php,v 1.4 2010/05/05 09:37:25 hregis Exp $
  */
 
 require_once(DOL_DOCUMENT_ROOT.'/droitpret/canvas/livrecontrat/product.livrecontrat.class.php');
@@ -59,17 +59,17 @@ class ProductLivre extends Product
 
 		$this->no_button_copy = 1;
 
-		$this->menus[0][0] = DOL_URL_ROOT."/product/fiche.php?action=create&amp;type=0&amp;canvas=livre@droipret";
+		$this->menus[0][0] = DOL_URL_ROOT."/product/fiche.php?action=create&amp;type=0&amp;canvas=livre@droitpret";
 		$this->menus[0][1] = 'NewBook';
-		$this->menus[1][0] = DOL_URL_ROOT."/product/liste.php?canvas=livre@droipret";
+		$this->menus[1][0] = DOL_URL_ROOT."/product/liste.php?canvas=livre@droitpret";
 		$this->menus[1][1] = 'ListBook';
 		/*
-		 $this->menus[2][0] = DOL_URL_ROOT."/product/liste.php?canvas=livrecontrat@droipret";
+		 $this->menus[2][0] = DOL_URL_ROOT."/product/liste.php?canvas=livrecontrat@droitpret";
 		 $this->menus[2][1] = 'ListContract';
-		 $this->menus[3][0] = DOL_URL_ROOT."/product/liste.php?canvas=livrecouverture@droipret";
+		 $this->menus[3][0] = DOL_URL_ROOT."/product/liste.php?canvas=livrecouverture@droitpret";
 		 $this->menus[3][1] = 'ListCover';
 		 */
-		$this->next_prev_filter = "canvas='livre@droipret'";
+		$this->next_prev_filter = "canvas='livre@droitpret'";
 
 		$this->onglets[0][0] = 'URL';
 		$this->onglets[0][1] = 'Editeur';
