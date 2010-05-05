@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: list.tpl,v 1.3 2010/05/05 09:37:25 hregis Exp $
+ * $Id: list.tpl,v 1.2 2010/05/05 09:35:40 hregis Exp $
  *}
  
 <!-- BEGIN SMARTY TEMPLATE -->
@@ -31,7 +31,7 @@
 </tr>
 </table>
 
-<form action="liste.php?canvas=livre@droitpret" method="post" name="formulaire">
+<form action="liste.php?canvas=livre@droipret" method="post" name="formulaire">
 
 <table class="liste" width="100%">
  <tr class="liste_titre">
@@ -39,19 +39,19 @@
   </td>
 
   <td class="liste_titre">{$langs->trans('Ref')}
-  <a href="liste.php?sortfield=p.ref&amp;sortorder=asc&amp;begin=&amp;envente=&amp;canvas=livre@droitpret&amp;fourn_id=&amp;snom=&amp;sref=">
+  <a href="liste.php?sortfield=p.ref&amp;sortorder=asc&amp;begin=&amp;envente=&amp;canvas=livre@droipret&amp;fourn_id=&amp;snom=&amp;sref=">
   <img src="{$url_root}/theme/{$theme}/img/1downarrow.png" border="0" alt="A-Z" title="A-Z">
   </a>
-  <a href="liste.php?sortfield=p.ref&amp;sortorder=desc&amp;begin=&amp;envente=&amp;canvas=livre@droitpret&amp;fourn_id=&amp;snom=&amp;sref=">
+  <a href="liste.php?sortfield=p.ref&amp;sortorder=desc&amp;begin=&amp;envente=&amp;canvas=livre@droipret&amp;fourn_id=&amp;snom=&amp;sref=">
   <img src="{$url_root}/theme/{$theme}/img/1uparrow.png" border="0" alt="Z-A" title="Z-A">
   </a>
   </td>
 
   <td class="liste_titre">{$langs->trans('Title')}
-  <a href="liste.php?sortfield=p.label&amp;sortorder=asc&amp;canvas=livre@droitpret&amp;fourn_id=&amp;snom=&amp;sref=">
+  <a href="liste.php?sortfield=p.label&amp;sortorder=asc&amp;canvas=livre@droipret&amp;fourn_id=&amp;snom=&amp;sref=">
   <img src="{$url_root}/theme/{$theme}/img/1downarrow.png" border="0" alt="A-Z" title="A-Z">
   </a>
-  <a href="liste.php?sortfield=p.ref&amp;sortorder=desc&amp;begin=&amp;envente=&amp;canvas=livre@droitpret&amp;fourn_id=&amp;snom=&amp;sref=">
+  <a href="liste.php?sortfield=p.ref&amp;sortorder=desc&amp;begin=&amp;envente=&amp;canvas=livre@droipret&amp;fourn_id=&amp;snom=&amp;sref=">
   <img src="{$url_root}/theme/{$theme}/img/1uparrow.png" border="0" alt="Z-A" title="Z-A">
   </a>
   </td>
