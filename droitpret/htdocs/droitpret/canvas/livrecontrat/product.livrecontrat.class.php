@@ -22,10 +22,10 @@
  *   \file       htdocs/product/canvas/livrecontrat/product.livrecontrat.class.php
  *   \ingroup    droitpret
  *   \brief      Fichier de la classe des produits specifiques de type livrecontrat
- *   \version    $Id: product.livrecontrat.class.php,v 1.1 2010/05/05 08:49:16 hregis Exp $
+ *   \version    $Id: product.livrecontrat.class.php,v 1.2 2010/05/05 09:05:48 hregis Exp $
  */
 
-require_once(DOL_DOCUMENT_ROOT.'/product/canvas/livre/product.livre.class.php');
+require_once(DOL_DOCUMENT_ROOT.'/droitpret/canvas/livre/product.livre.class.php');
 
 /**
  *  \class      ProductLivreContrat

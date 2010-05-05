@@ -15,34 +15,31 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: livre-create.tpl,v 1.1 2010/05/05 08:49:15 hregis Exp $
+ * $Id: edit.tpl,v 1.1 2010/05/05 09:05:47 hregis Exp $
  *}
  
 <!-- BEGIN SMARTY TEMPLATE -->
 
-<table width="100%" border="0" class="notopnoleftnoright" style="margin-bottom: 2px;">
+<form id="evolForm" action="fiche.php" method="post">
+<input type="hidden" name="action" value="update">
+<input type="hidden" name="id" value="{$prod_id}">
+<input type="hidden" name="canvas" value="{$prod_canvas}">
+<input type="hidden" name="price_base_type" value="TTC">
+
+<table width="100%" border="0" class="notopnoleftnoright">
 <tr>
-	<td class="nobordernopadding" width="40" align="left" valign="middle">
-		{$title_picto}
-	</td>
-	<td class="nobordernopadding" valign="middle">
-    	<div class="titre">{$title_text}</div>
+	<td class="notopnoleftnoright" valign="middle">
+    	<div class="titre">Éditer Livre</div>
 	</td>
 </tr>
 </table>
 
-<form id="evolForm" action="fiche.php" method="post">
-<input type="hidden" name="action" value="add">
-<input type="hidden" name="type" value="0">
-<input type="hidden" name="canvas" value="livre">
-<input type="hidden" name="price_base_type" value="TTC">
-
 <table class="border" width="100%">
  <tr>
-   <td width="15%">Référence</td>
+   <td width="15%">Réf.</td>
    <td colspan="2">
     <input name="ref" size="20" value="{$prod_ref}"
-     class="{$class_normal_ref}" onfocus="this.className='{$class_focus_ref}';" onblur="this.className='{$class_normal_ref}';">
+     class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">
   </td>
  </tr>
 
@@ -66,15 +63,21 @@
     {$prod_isbn}
   </td>
   <td width="15%">ISBN-13</td>
-  <td width="35%"><i>sera calculé</i>
+  <td width="35%">978-
+    <input name="isbn13" size="13" maxlength="12" class="normal" 
+     onfocus="this.className='focus';" onblur="this.className='normal';" value="{$prod_isbn}">
   </td>
  </tr>
 
  <tr>
   <td width="15%">EAN</td>
-  <td colspan="3" width="85%"><i>sera calculé</i></td>
+  <td width="35%">
+    <input class="normal" name="ean" size="16" maxlength="15" value="{$prod_ean}"
+     onfocus="this.className='focus';" onblur="this.className='normal';">
+  </td>
+  <td>Code barre</td>
+  <td>{$prod_ean}</td>
  </tr>
-
  <tr>
   <td>Pages</td>
   <td>
@@ -83,45 +86,52 @@
   </td>
   <td>Format</td>
   <td>
-
    <select class="flat" name="format">
     {html_options values=$livre_available_formats output=$livre_available_formats selected="$prod_format"}
    </select>
-
-</td>
+  </td>
+ </tr>
+ <tr>
+  <td>Poids</td>
+  <td colspan="3">
+   <input name="weight" size="5" value="{$prod_weight}"
+     class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">g
+   <input name="weight_units" type="hidden" value="-3">
+  </td>
  </tr>
 <tr>
  <td>Prix au feuillet</td>
  <td>
   <input name="px_feuillet" type="text" size="7" maxlength="6" value="{$prod_pxfeuil}"
-   class="normal" onfocus="this.className='focus';" onblur="this.className='normal';"> HT
+   class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">
  </td>
  <td>Prix couverture</td>
  <td>
   <input name="px_couverture" type="text" size="7" maxlength="6" value="{$prod_pxcouv}"
-   class="normal" onfocus="this.className='focus';" onblur="this.className='normal';"> HT
+   class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">
  </td>
 </tr>
 <tr>
  <td>Prix de revient</td>
- <td><i>sera calculé</i></td>
+ <td>{$prod_pxrevient}</td>
  <td>Prix reliure</td>
  <td>
   <input name="px_reliure" type="text" size="7" maxlength="6" value="{$prod_pxreliure}"
    class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">
  </td>
 </tr>
+</table>
 
+<br>
+
+<table class="border" width="100%">
  <tr>
-  <td>Prix de vente</td>
-  <td>
-   <input name="price" type="text" size="7" maxlength="6" value="{$prod_price}"
-    class="normal" onfocus="this.className='focus';" onblur="this.className='normal';"> TTC
-  </td>
-  <td>Taux TVA</td>
-  <td>
+  <td width="15%">Prix de vente</td>
+  <td width="35%">{$prod_pxvente} TTC</td>
+  <td width="15%">Taux TVA</td>
+  <td width="35%">
    <select class="flat" name="tva_tx">
-    {html_options values=$tva_taux_value output=$tva_taux_libelle selected="5.5"}
+    {html_options values=$tva_taux_value output=$tva_taux_libelle selected="$prod_tva_tx"}
    </select>
   </td>
  </tr>
@@ -131,30 +141,28 @@
 
 <table class="border" width="100%">
  <tr>
-  <td width="15%">Seuil stock</td>
+ <td width="15%">Stock disponible</td>
+ <td width="35%"><b>{$prod_stock_dispo}</b></td>
+  <td width="15%">Seuil d'alerte stock</td>
   <td width="35%">
    <input name="seuil_stock_alerte" size="4" value="{$prod_seuil_stock_alerte}"
      class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">
   </td>
+</tr>
+
+<tr>
   <td width="15%">Emplacement Stock</td>
-  <td width="35%">
+  <td width="85%" colspan="3">
    <input name="stock_loc" size="8" value="{$prod_stock_loc}"
      class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">
   </td>
  </tr>
  <tr>
   <td>Statut</td>
-  <td>
+  <td colspan="3">
    <select class="flat" name="statut">
-    <option value="1" selected="true">En vente</option>
-    <option value="0">Hors vente</option>
+    {html_options values=$prod_statuts_id output=$prod_statuts_value selected="$prod_statut_id"}
    </select>
-  </td>
-  <td>Poids</td>
-  <td>
-   <input name="weight" size="5" value="{$prod_weight}"
-     class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">g
-   <input name="weight_units" type="hidden" value="-3">
   </td>
  </tr>
 </table>
@@ -162,18 +170,17 @@
 <br>
 
 <table class="border" width="100%">
- <tr>
-  <td>Auteur / Editeur</td>
-  <td>
+
+{if $livre_contrat_locked eq '0'}
+<tr>
+ <td>Auteur / Editeur</td>
+ <td>
    <select class="flat" name="auteur">
     {html_options options=$livre_available_auteurs selected=$livre_auteur_id}
    </select>
-  </td>
-  <td>Saisi par</td>
-  <td>
-    {$user}
-  </td>
- </tr>
+ </td>
+ <td>Saisi par</td><td>{$livre_contrat_user_fullname}</td>
+</tr>
 <tr>
  <td width="15%">Durée du contrat :</td>
  <td width="35%">
@@ -181,9 +188,10 @@
    class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">
  </td>
  <td width="15%">Date d'application</td>
- <td width="35%">{html_select_date field_order='DMY' start_year='-10' reverse_years=True all_extra='class="flat"'}</td>
+ <td width="35%">
+  {html_select_date field_order='DMY' start_year='-10' time=$livre_contrat_date_app reverse_years=True all_extra='class="flat"'}
+ </td>
 </tr>
-
 <tr>
  <td>Taux conclu</td>
  <td>
@@ -196,28 +204,60 @@
    class="normal" onfocus="this.className='focus';" onblur="this.className='normal';">
  </td>
 </tr>
+<tr>
+ <td>Validation du contrat</td>
+ <td>
+  <input type="checkbox" name="locked" value="locked" />
+ </td>
+ <td colspan="2">En cochant la case vous interdisez toute modifications</td>
+
+</tr>
+
+{else}
+<tr>
+ <td>Auteur / Editeur</td>
+ <td>{$livre_auteur}</td>
+ <td>Saisi par</td><td>{$livre_contrat_user_fullname}</td>
+</tr>
+<tr>
+ <td width="15%">Durée du contrat : </td>
+ <td width="35%">{$livre_contrat_duree}</td>
+ <td width="15%">Date d'application</td>
+ <td width="35%">{$livre_contrat_date_app|date_format:"%d %B %Y"}</td>
+</tr>
+<tr>
+ <td>Taux conclu</td>
+ <td>{$livre_contrat_taux} %</td>
+ <td>Quantité achetée</td>
+ <td>{$livre_contrat_quant}</td>
+</tr>
+{/if}
+
 </table>
 
 <br>
 
 <table class="border" width="100%">
+
+
  <tr>
-  <td width="15%" valign="top">Description</td>
-  <td width="85%" colspan="3">
+  <td valign="top">Description</td>
+  <td colspan="3">
     <textarea name="desc" rows="6" cols="70"></textarea>
   </td>
  </tr>
 
  <tr>
-  <td width="15%" valign="top">Note (non visible sur les factures, propals...)
+  <td valign="top">Note (non visible sur les factures, propals...)
   </td>
-  <td width="85%" colspan="3">
+  <td colspan="3">
    <textarea name="note" rows="4" cols="70"></textarea>
   </td>
  </tr>
  <tr>
   <td colspan="4" align="center">
-   <input type="submit" class="button" value="Créer">
+   <input type="submit" class="button" value="Enregistrer">&nbsp;
+   <input type="submit" class="button" name="cancel" value="Annuler">
   </td>
  </tr>
 
