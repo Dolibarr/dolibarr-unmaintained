@@ -22,7 +22,7 @@
         \file       htdocs/chronodocs/contact.php
         \ingroup    chronodocs
         \brief      Onglet de gestion des contacts de chronodoc
-        \version    $Id: contact.php,v 1.3 2010/04/28 07:56:22 grandoc Exp $
+        \version    $Id: contact.php,v 1.4 2010/05/09 15:15:58 eldy Exp $
 */
 
 require ("./pre.inc.php");
@@ -45,14 +45,14 @@ $result = restrictedArea($user, 'chronodocs', $chronodocsid, 'chronodocs_entries
 if (( eregi("(add.*)|(upd.*)|(swap.*)|(del.*)|(set.*)|(edit.*)",$_POST["action"])
 	 )&& !$user->rights->chronodocs->entries->write
 	) accessforbidden();
-	
+
 /*
  * Ajout d'un nouveau contact
  */
 
 if ($_POST["action"] == 'addcontact' && $user->rights->chronodocs->entries->write)
 {
-	
+
 	$result = 0;
 	$chronodocs = new Chronodocs_entries($db);
 	$result = $chronodocs->fetch($_GET["id"]);
@@ -61,7 +61,7 @@ if ($_POST["action"] == 'addcontact' && $user->rights->chronodocs->entries->writ
     {
   		$result = $chronodocs->add_contact($_POST["contactid"], $_POST["type"], $_POST["source"]);
     }
-    
+
 	if ($result >= 0)
 	{
 		$chronodocs->set_date_u($user); // Update date_u and user_u
@@ -197,7 +197,7 @@ if ($id > 0)
 		*/
 		if ($_GET["action"] != 'editline' && $user->rights->chronodocs->entries->write)
 		{
-			
+
 			print '<tr class="liste_titre">';
 			print '<td>'.$langs->trans("Source").'</td>';
 			print '<td>'.$langs->trans("Company").'</td>';
@@ -257,7 +257,7 @@ if ($id > 0)
 
 			print '<td colspan="1">';
 			// On récupère les id des contacts déjà sélectionnés
-			//$contactAlreadySelected = $chronodocs->getListContactId('external');	// On ne doit pas desactiver un contact deja selectionner car on doit pouvoir le seclectionner une deuxieme fois pour un autre type	
+			//$contactAlreadySelected = $chronodocs->getListContactId('external');	// On ne doit pas desactiver un contact deja selectionner car on doit pouvoir le seclectionner une deuxieme fois pour un autre type
 			$nbofcontacts=$html->select_contacts($selectedCompany, $selected = '', $htmlname = 'contactid',0,$contactAlreadySelected);
 			if ($nbofcontacts == 0) print $langs->trans("NoContactDefined");
 			print '</td>';
@@ -284,7 +284,7 @@ if ($id > 0)
 		print '<td colspan="2">&nbsp;</td>';
 		print "</tr>\n";
 
-		$societe = new Societe($db);
+		$companystatic = new Societe($db);
 		$var = true;
 
 		foreach(array('internal','external') as $source)
@@ -309,9 +309,8 @@ if ($id > 0)
 				print '<td align="left">';
 				if ($tab[$i]['socid'] > 0)
 				{
-					print '<a href="'.DOL_URL_ROOT.'/soc.php?socid='.$tab[$i]['socid'].'">';
-					print img_object($langs->trans("ShowCompany"),"company").' '.$societe->get_nom($tab[$i]['socid']);
-					print '</a>';
+					$companystatic->fetch($tab[$i]['socid']);
+					print $companystatic->getNomUrl(1);
 				}
 				if ($tab[$i]['socid'] < 0)
 				{
@@ -375,5 +374,5 @@ if ($id > 0)
 
 $db->close();
 
-llxFooter('$Date: 2010/04/28 07:56:22 $');
+llxFooter('$Date: 2010/05/09 15:15:58 $');
 ?>
