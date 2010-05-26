@@ -8,7 +8,7 @@
     	\file       htdocs/speedfinder/index.php
 		\ingroup    speedfinder
 		\brief      Main speedfinder area page
-		\version    $Id: index.php,v 1.2 2009/11/30 22:37:40 hregis Exp $
+		\version    $Id: index.php,v 1.3 2010/05/26 11:46:15 eldy Exp $
 		\author		Marc STUDER
 */
 
@@ -50,7 +50,6 @@ $POPUPHEIGHT=empty($conf->global->SFINDER_POPUPH)?'520':$conf->global->SFINDER_P
 ****************************************************/
 
 llxHeader("",$langs->trans("SFinderSubTitle"), $langs->trans("SFinderSubTitle"));
-//llxHeader($langs->trans("ThirdParty"),'','EN:Third_Parties|FR:Tiers|ES:Empresas');
 
 print_fiche_titre($langs->trans("SpeedFinder"));
 
@@ -75,5 +74,5 @@ print $frame;
 // End of page
 $db->close();
 
-llxFooter('$Date: 2009/11/30 22:37:40 $ - $Revision: 1.2 $');
+llxFooter('$Date: 2010/05/26 11:46:15 $ - $Revision: 1.3 $');
 ?>
