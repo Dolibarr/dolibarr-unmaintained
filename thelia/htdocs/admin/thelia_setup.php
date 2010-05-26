@@ -21,7 +21,7 @@
  *   	\file       admin/thelia_setup.php
  *		\ingroup    thelia
  *		\brief      Configuration du module thelia
- *		\version    $Id: thelia_setup.php,v 1.2 2010/02/08 00:50:30 jfefe Exp $
+ *		\version    $Id: thelia_setup.php,v 1.3 2010/05/26 11:29:52 eldy Exp $
  *		\author		Put author name here
  *		\remarks	Put here some comments
  */
@@ -47,7 +47,7 @@ if ($_POST["action"] == 'setvalue' && $user->admin)
    $result=dolibarr_set_const($db, "THELIA_WS_URL",$_POST["THELIA_WS_URL"],'chaine',0,'',$conf->entity);
    $result=dolibarr_set_const($db, "THELIA_URL",$_POST["THELIA_URL"],'chaine',0,'',$conf->entity);
    $result=dolibarr_set_const($db, "THELIA_ADMIN_URL",$_POST["THELIA_ADMIN_URL"],'chaine',0,'',$conf->entity);
-   
+
    if ($result >= 0)
    {
       $mesg='<div class="ok">'.$langs->trans("SetupSaved").'</div>';
@@ -69,7 +69,7 @@ if ($_POST["action"] == 'setvalue' && $user->admin)
 ****************************************************/
 
 
-llxHeader('THeliaSetup','','');
+llxHeader('','THeliaSetup','');
 
 $linkback='<a href="'.DOL_URL_ROOT.'/admin/modules.php">'.$langs->trans("BackToModuleList").'</a>';
 
@@ -118,5 +118,5 @@ print '</table></form>';
 
 // End of page
 $db->close();
-llxFooter('$Date: 2010/02/08 00:50:30 $ - $Revision: 1.2 $');
+llxFooter('$Date: 2010/05/26 11:29:52 $ - $Revision: 1.3 $');
 ?>
