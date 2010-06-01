@@ -8,12 +8,13 @@
 	    \file       htdocs/admin/speedfinder.php
         \ingroup    google
         \brief      Setup page for speedfinder module
-		\version    $Id: speedfinder.php,v 1.3 2010/05/03 08:30:52 grandoc Exp $
+		\version    $Id: speedfinder.php,v 1.4 2010/06/01 14:38:50 grandoc Exp $
 */
 
 $res=@include("./pre.inc.php");
 if (! $res) include("../../../dolibarr/htdocs/admin/pre.inc.php");	// Used on dev env only
 
+require("../main.inc.php");
 require_once(DOL_DOCUMENT_ROOT."/lib/admin.lib.php");
 require_once(DOL_DOCUMENT_ROOT.'/core/class/html.formadmin.class.php');
 
@@ -273,5 +274,5 @@ print info_admin($message);
 
 $db->close();
 
-llxFooter('$Date: 2010/05/03 08:30:52 $ - $Revision: 1.3 $');
+llxFooter('$Date: 2010/06/01 14:38:50 $ - $Revision: 1.4 $');
 ?>
