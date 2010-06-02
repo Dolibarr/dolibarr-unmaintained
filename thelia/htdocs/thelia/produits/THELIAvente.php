@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: THELIAvente.php,v 1.6 2010/04/28 21:38:23 grandoc Exp $
+ * $Id: THELIAvente.php,v 1.7 2010/06/02 08:29:58 eldy Exp $
  */
 
 require("./pre.inc.php");
@@ -79,7 +79,7 @@ if ($_GET["action"] == 'vendre' )
 
 		//recherche de l'image
 		$pdir = get_exdir($product->id,2) . $product->id ."/photos/";
-		$dir = $conf->produit->dir_output . '/'. $pdir;
+		$dir = $conf->product->dir_output . '/'. $pdir;
 		$img = $product->liste_photos($dir);
 
 		if (sizeof($img) ==0) $prod['image'] = '';
@@ -146,7 +146,7 @@ if ($_GET["action"] == 'vendre' )
 	  print '<input type="hidden" name="token" value="'.$_SESSION['newtoken'].'">';
 	  print '<input type="hidden" name="prod" value="test"/>';
 	  print '<tr><td>';
-	  print $html->select_produits('','idprod'.$i,'',$conf->produit->limit_size,$soc->price_level);
+	  print $html->select_produits('','idprod'.$i,'',$conf->product->limit_size,$soc->price_level);
 	  print '</td>';
 	  print '<td><input type="text" size="3" name="qty'.$i.'" value="1"></td></tr>';
 	  print '<tr><td colspan="3" align="center"><input type="submit" class="button" value="'.$langs->trans('Oscsell').'"></td></tr>';
@@ -165,5 +165,5 @@ if ($_GET["action"] == 'vendre' )
  		print '<a class="tabAction" href="OSCvente.php?action=liste">'.$langs->trans("Liste").'</a>';
 	print "\n</div>\n";
 
-llxFooter('$Date: 2010/04/28 21:38:23 $ - $Revision: 1.6 $');
+llxFooter('$Date: 2010/06/02 08:29:58 $ - $Revision: 1.7 $');
 ?>

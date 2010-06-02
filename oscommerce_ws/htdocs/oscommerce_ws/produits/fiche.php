@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: fiche.php,v 1.2 2010/04/28 21:38:23 grandoc Exp $
+ * $Id: fiche.php,v 1.3 2010/06/02 08:29:57 eldy Exp $
  */
 
 require("./pre.inc.php");
@@ -113,8 +113,8 @@ if (($_GET["action"] == 'import' ) && ( $_GET["id"] != '' ) && ($user->rights->p
 			$prod = new Product($db);
 			$res = $prod->fetch($id);
 
-			$prod->add_photo_web($conf->produit->dir_output,$osc_prod->osc_image);
-			print '<p>cr�ation r�ussie produit '.$id.' r�f�rence : '.$product->ref;
+			$prod->add_photo_web($conf->product->dir_output,$osc_prod->osc_image);
+			print '<p>creation reussie produit '.$id.' reference : '.$product->ref;
 			$res = $osc_prod->transcode($osc_prod->osc_id,$product->id);
 
 			print ' Id osc : '.$osc_prod->osc_id.'</p>';
@@ -166,5 +166,5 @@ if (($_GET["action"] == 'import' ) && ( $_GET["id"] != '' ) && ($user->rights->p
 	}
 }
 
-llxFooter('$Date: 2010/04/28 21:38:23 $ - $Revision: 1.2 $');
+llxFooter('$Date: 2010/06/02 08:29:57 $ - $Revision: 1.3 $');
 ?>

@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: fiche.php,v 1.5 2010/04/28 21:38:23 grandoc Exp $
+ * $Id: fiche.php,v 1.6 2010/06/02 08:29:58 eldy Exp $
  */
 
 require("./pre.inc.php");
@@ -40,10 +40,10 @@ if (($_GET["action"] == 'import' ) && ( $_GET["id"] != '' ) && ($user->rights->p
 {
    $thelia_prod = new Thelia_product($db, $_GET['id']);
    $result = $thelia_prod->fetch($_GET['id']);
-  
+
    if ( !$result )
    {
-      
+
       dol_syslog("Thelia_product::fetch failed :".$_GET['id'].' '.$thelia_prod->error);
       if ($_error == 1)
       {
@@ -58,7 +58,7 @@ if (($_GET["action"] == 'import' ) && ( $_GET["id"] != '' ) && ($user->rights->p
       $doli_prod = $thelia_prod->thelia2dolibarr($_GET['id']);
       //var_dump($product);
    }
-   
+
    /* utilisation de la table de transco*/
    if ($thelia_prod->get_productid($thelia_prod->thelia_id)>0)
    {
@@ -66,23 +66,23 @@ if (($_GET["action"] == 'import' ) && ( $_GET["id"] != '' ) && ($user->rights->p
    }
    else
    {
-      
+
       $id = $doli_prod->create($user);
-      
+
       if ($id > 0)
       {
-        
+
          $prod = new Product($db);
          $res = $prod->fetch($id);
          $res = $thelia_prod->transcode($thelia_prod->thelia_id,$prod->id);
-         //    $prod->add_photo_web($conf->produit->dir_output,$thelia_prod->thelia_image);
-         
-         
+         //    $prod->add_photo_web($conf->product->dir_output,$thelia_prod->thelia_image);
+
+
          print '<div class="ok">Création réussie de la référence : <a href="../../product/fiche.php?id='.$id.'">'.$prod->ref.'</a></div>';
-         
-        
+
+
          print "\n<div class=\"tabsAction\">\n";
-         print '<a class="butAction" href="index.php">'.$langs->trans("Retour").'</a>'; 
+         print '<a class="butAction" href="index.php">'.$langs->trans("Retour").'</a>';
          print "\n</div><br>\n";
          //       $id_entrepot = THELIA_ENTREPOT;
          //       $id = $product->create_stock($user, $id_entrepot,$thelia_prod->thelia_stock);
@@ -91,7 +91,7 @@ if (($_GET["action"] == 'import' ) && ( $_GET["id"] != '' ) && ($user->rights->p
       else
       {
          print '<p class="error">Erreur lors de la création du produit :  '.$product->error.'</p>';
-         
+
          if ($id == -3)
          {
             $_error = 1;
@@ -108,7 +108,7 @@ if (($_GET["action"] == 'import' ) && ( $_GET["id"] != '' ) && ($user->rights->p
                // exit;
             }
             $id = $product_control->fetch($ref = $thelia_prod->thelia_ref);
-            
+
             if ($id > 0)
             {
                $id = $product->update($id, $user);
@@ -121,7 +121,7 @@ if (($_GET["action"] == 'import' ) && ( $_GET["id"] != '' ) && ($user->rights->p
             }
             else print '<br>update impossible $id : '.$product_control->error().' </br>';
          }
-  
+
          print '<p><a class="butAction" href="index.php">'.$langs->trans("Retour").'</a></p>';
       }
    }
@@ -139,12 +139,12 @@ if ($action == '' && !$cancel) {
   {
    // retrouve le produit THELIA associé au produit DOLIBARR
    $thelia_prodid = $thelia_prod->get_thelia_productid($_GET['dol_id']);
-   
+
    if($thelia_prodid > 0 )
    {
       $_GET['id'] = $thelia_prodid;
    }
-      
+
       $product = new Product($db);
       $product->fetch($_GET['dol_id']);
       $head=product_prepare_head($product, $user);
@@ -155,52 +155,52 @@ if ($action == '' && !$cancel) {
   else
   {
      print_titre("Fiche Article THELIA");
-  
+
   }
-     
-      
+
+
 		// récupère les infos du produit thelia par le webservice
 		$result = $thelia_prod->fetch($_GET['id']);
-      
+
 		if ( $result > 0)
 		{
-         
+
 			$id_prod = $thelia_prod->get_productid($_GET['id']);
          print '<table class="border" width="100%"><tr>';
          // Reference
          print '<td width="15%">'.$langs->trans("Ref").'</td><td width="85%">';
          print $thelia_prod->thelia_ref;
          print '</td>';
-         
+
          // Libelle
          print '<tr><td>'.$langs->trans("Label").'</td><td>'.$thelia_prod->thelia_titre.'</td></tr>';
-         
-         // Prix 
+
+         // Prix
          print '<tr><td>'.$langs->trans("SellingPrice").'</td><td>'.price($thelia_prod->thelia_prix).'</td></tr>';
          print '<tr><td>'.$langs->trans("SellingPrice").' 2</td><td>'.price($thelia_prod->thelia_prix2).'</td>';
          print '</tr>';
-         
-         // TVA 
+
+         // TVA
          print '<tr><td>'.$langs->trans("VAT").'</td><td>'.vatrate($thelia_prod->thelia_tva,true).'</td></tr>';
-         
+
          // Statut
          print '<tr><td>'.$langs->trans("Status").'</td><td>';
          print $thelia_prod->getStatut($thelia_prod->thelia_statut);
          print '</td></tr>';
-         
+
          // Description
          print '<tr><td valign="top">'.$langs->trans("Description").'</td><td>'.nl2br($thelia_prod->thelia_desc).'</td></tr>';
-         
-         
-			
+
+
+
         // Promo / nouveautés
          print '<tr><td>'.$langs->trans("TheliaPromo").'</td><td>'.$thelia_prod->thelia_promo.'</td></tr>';
          print '<tr><td>'.$langs->trans("TheliaNew").'</td><td>'.$thelia_prod->thelia_nouveaute.'</td></tr>';
-         
+
          // Stock et poids
          print '<tr><td>'.$langs->trans("Stock").'</td><td>'.$thelia_prod->thelia_stock.'</td></tr>';
          print '<tr><td>'.$langs->trans("Weight").'</td><td>'.$thelia_prod->thelia_poids.'</td></tr>';
-        
+
 			print "</table></div>";
 
 			/* ************************************************************************** */
@@ -230,5 +230,5 @@ if ($action == '' && !$cancel) {
 
 }
 
-llxFooter('$Date: 2010/04/28 21:38:23 $ - $Revision: 1.5 $');
+llxFooter('$Date: 2010/06/02 08:29:58 $ - $Revision: 1.6 $');
 ?>
