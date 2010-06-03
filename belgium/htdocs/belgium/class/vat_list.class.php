@@ -130,7 +130,7 @@ class VATList
 	
 	function fillClientsList()
 	{
-		$this->db->query('SELECT s.tva_intra, SUM(f.total) AS turn_over, SUM(f.tva) AS amount FROM ' . MAIN_DB_PREFIX . 'facture f, ' . MAIN_DB_PREFIX . 'societe s WHERE f.fk_soc = s.rowid AND f.fk_statut > 0 AND DATE_FORMAT(f.datef, \'%Y\') = \'' . addslashes($this->period) . '\' AND s.tva_assuj = 1 AND SUBSTRING(s.tva_intra, 1, 2) = \'BE\' GROUP BY s.tva_intra HAVING turn_over >= ' . VATList::MINIMUM_TURN_OVER);
+		$this->db->query('SELECT s.tva_intra, SUM(f.total) AS turn_over, SUM(f.tva) AS amount FROM ' . MAIN_DB_PREFIX . 'facture f, ' . MAIN_DB_PREFIX . 'societe s WHERE f.fk_soc = s.rowid AND f.fk_statut IN (1, 2) AND DATE_FORMAT(f.datef, \'%Y\') = \'' . addslashes($this->period) . '\' AND s.tva_assuj = 1 AND SUBSTRING(s.tva_intra, 1, 2) = \'BE\' GROUP BY s.tva_intra HAVING turn_over >= ' . VATList::MINIMUM_TURN_OVER);
 		$this->clientsList = array();
 		$sequence_number = 0;
 		while ($client = $this->db->fetch_array())
