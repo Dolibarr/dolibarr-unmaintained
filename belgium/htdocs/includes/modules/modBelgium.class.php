@@ -1,5 +1,5 @@
 <?php
-/* Copyright (C) 2009 Laurent Léonard <laurent@open-minds.org>
+/* Copyright (C) 2009-2010 Laurent Léonard <laurent@open-minds.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
  * 		\file 		htdocs/includes/modules/modBelgium.class.php
  *  	\ingroup 	belgium
  *  	\brief 		Description and activation file for module Belgium.
- *  	\version 	0.1
+ *  	\version 	0.1.1
  */
 
 include_once(DOL_DOCUMENT_ROOT . '/includes/modules/DolibarrModules.class.php');
@@ -68,7 +68,7 @@ class modBelgium extends DolibarrModules
 		$this->family = 'financial';
 		$this->name = preg_replace('/^mod/i', '', get_class($this));
 		$this->description = 'Features specific to belgian legislation';
-		$this->version = '0.1';
+		$this->version = '0.1.1';
 		$this->const_name = 'MAIN_MODULE_' . strtoupper($this->name);
 		$this->special = 0;
 		$this->picto = 'belgium@belgium';
