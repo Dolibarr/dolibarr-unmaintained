@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: facture.php,v 1.7 2010/05/03 08:48:12 grandoc Exp $
+ * $Id: facture.php,v 1.8 2010/06/05 15:20:47 eldy Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/client/facture.php,v $
  */
 
@@ -25,7 +25,7 @@
    \file       htdocs/telephonie/client/facture.php
    \ingroup    telephonie/facture
    \brief      Page de visualisation d'une facture
-   \version    $Revision: 1.7 $
+   \version    $Revision: 1.8 $
 */
 require("./pre.inc.php");
 
@@ -40,7 +40,7 @@ require_once DOL_DOCUMENT_ROOT."/compta/facture/class/facture.class.php";
 require_once DOL_DOCUMENT_ROOT."/compta/paiement/class/paiement.class.php";
 require_once DOL_DOCUMENT_ROOT."/lib/CMailFile.class.php";
 include_once DOL_DOCUMENT_ROOT."/contact/class/contact.class.php";
-include_once DOL_DOCUMENT_ROOT."/comm/action/actioncomm.class.php";
+include_once DOL_DOCUMENT_ROOT."/comm/action/class/actioncomm.class.php";
 
 if ($_GET["socid"]) { $socid=$_GET["socid"]; }
 if (isset($_GET["msg"])) { $msg=urldecode($_GET["msg"]); }
@@ -728,5 +728,5 @@ if ($_GET["facid"] > 0)
 
 $db->close();
 
-llxFooter('$Date: 2010/05/03 08:48:12 $ - $Revision: 1.7 $');
+llxFooter('$Date: 2010/06/05 15:20:47 $ - $Revision: 1.8 $');
 ?>
