@@ -2,13 +2,13 @@
 #----------------------------------------------------------------------------
 # \file         build/makepack-dolibarrmodule.pl
 # \brief        Package builder (tgz, zip, rpm, deb, exe)
-# \version      $Revision: 1.1 $
+# \version      $Revision: 1.2 $
 # \author       (c)2005-2006 Laurent Destailleur  <eldy@users.sourceforge.net>
 #----------------------------------------------------------------------------
 
 use Cwd;
 
-$PROJECT="numberwords";
+$PROJECT="mymodule";
 
 @LISTETARGET=("TGZ");   # Possible packages
 %REQUIREMENTTARGET=(    # Tool requirement for each package
@@ -19,7 +19,7 @@ $PROJECT="numberwords";
 
 
 use vars qw/ $REVISION $VERSION /;
-$REVISION='$Revision: 1.1 $'; $REVISION =~ /\s(.*)\s/; $REVISION=$1;
+$REVISION='$Revision: 1.2 $'; $REVISION =~ /\s(.*)\s/; $REVISION=$1;
 $VERSION="1.0 (build $REVISION)";
 
 
@@ -78,7 +78,9 @@ chdir($DIR);
 if (! -f "makepack-".$PROJECT.".conf")
 {
     print "Error: can't open conf file makepack-".$PROJECT.".conf\n";
-	print "Check that current directory is 'build' directory\n";
+	print "\n";
+	print "For help on building a module package, see web page\n";
+	print "http://wiki.dolibarr.org/index.php/Module_development#Create_a_package_to_distribute_and_install_your_module\n";
 	print "makepack-dolibarrmodule.pl aborted.\n";
     sleep 2;
     exit 2;
@@ -197,14 +199,19 @@ if ($nboftargetok) {
         print "\nBuild package for target $target\n";
         
     	if ($target eq 'TGZ') {
-    		unlink $FILENAMETGZ.tgz;
+    		print "Remove target $FILENAMETGZ.tgz...\n";
+    		unlink("$DESTI/$FILENAMETGZ.tgz");
     		print "Compress $BUILDROOT/* into $FILENAMETGZ.tgz...\n";
-   		    $cmd="tar --exclude-vcs --directory \"$BUILDROOT\" -czvf \"$FILENAMETGZ.tgz\" .";
+   		    $cmd="tar --exclude-vcs --exclude *.tgz --directory \"$BUILDROOT\" --group=500 --owner=500 -czvf \"$FILENAMETGZ.tgz\" .";
    		    $ret=`$cmd`;
             if ($OS =~ /windows/i) {
         		print "Move $FILENAMETGZ.tgz to $DESTI/$FILENAMETGZ.tgz\n";
         		$ret=`mv "$FILENAMETGZ.tgz" "$DESTI/$FILENAMETGZ.tgz"`;
             }
+            else
+            {
+        		$ret=`mv "$FILENAMETGZ.tgz" "$DESTI/$FILENAMETGZ.tgz"`;
+            }            
     		next;
     	}
 
