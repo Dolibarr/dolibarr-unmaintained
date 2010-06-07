@@ -23,7 +23,7 @@
         \file       htdocs/product_composition/product_composition.class.php
         \ingroup    product_composition
         \brief      *complete here*
-		\version    $Id: service_product_composition.class.php,v 1.3 2010/03/15 10:56:25 cdelambert Exp $
+		\version    $Id: service_product_composition.class.php,v 1.1 2010/06/07 14:49:47 pit Exp $
 		\author		Patrick Raguin
 */
 
@@ -155,9 +155,9 @@ class service_product_composition
 
 		$dao_product->id;
 
-		//R�cup�re la liste des produits (le dernier 0 correspond aux mati�res premi�res)
+		//Récupère la liste des produits (le dernier 0 correspond aux matières premières, le 4ème le nombre maximum de produits récupérés dans la base)
 		ob_start();
-		$html->select_produits('','product','',20,0,-1,0);
+		$html->select_produits('','product','',100,0,-1,0);
 		$input = ob_get_contents();
 		ob_end_clean();
 
@@ -256,14 +256,14 @@ class service_product_composition
      */
 	public function getCompoProductsDisplay($product)
 	{
-		//Liste des �lements qui composent l'article
+		//Liste des élements qui composent l'article
 
 
 		global $langs ;
 
 		$liste = array();
 
-		//R�cup�re le rowid des sous produits
+		//Récupère le rowid des sous produits
 		$res = dao_product_composition::select($this->db,'fk_product = '.$product);
 
 		if(($res)&&($this->db->num_rows() > 0))
@@ -271,7 +271,7 @@ class service_product_composition
 			while($item = $this->db->fetch_object($res))
 			{
 
-				//r�cup�re les informations des sous-produits ainsi que le cump
+				//récupère les informations des sous-produits ainsi que le cump
 				$rowid = $item->rowid;
 				$where = 'rowid = '.$item->fk_product_composition;
 
@@ -294,7 +294,7 @@ class service_product_composition
 					{
 
 						//Calcul le cout unitaire et ttc
-						//� partir du cump
+						//à partir du cump
 						if($item->price_pmp != 0)
 						{
 							$price = $item->price_pmp;
@@ -417,7 +417,7 @@ class service_product_composition
 			// Si tous les champs sont bien remplis on envoi la requète de cr�ation
 		  if ( ($dao_product_composition->create())==-1)
 		    {
-		      	// Si erreur lors de la cr�ation
+		      	// Si erreur lors de la création
 		      	$this->error = $langs->trans("product_composition_error");
 		      	return -1;
 
@@ -425,7 +425,7 @@ class service_product_composition
 		    else
 		    {
 
-		    	// La cr�ation s'est bien d�roul�e
+		    	// La création s'est bien déroulée
 		    	return $dao_product_composition->getId();
 
 		    }
@@ -494,8 +494,8 @@ class service_product_composition
 	{
 		global $langs ;
 
-		// On utlise la fonction de dolibar pour g�n�rer un formulaire de confirmation
-		// et on place ce texte g�n�rer dans une variable.
+		// On utlise la fonction de dolibar pour générer un formulaire de confirmation
+		// et on place ce texte générer dans une variable.
 		ob_start() ;
 		    $form = new Form($db);
 		    $form->form_confirm(DOL_URL_ROOT.'/composition/show_composition.php?id='.$_GET["id"].'&compo_product='.$_GET["compo_product"],$langs->trans("delete",$langs->trans("product_composition")),$langs->trans("confirm_delete",$langs->trans("product_composition")),"confirm_delete");
@@ -595,7 +595,7 @@ class service_product_composition
 
 
 	/*
-     *      \brief      Cette m�thode calcul le cout de revient pour toutes les compositions
+     *      \brief      Cette méthode calcul le cout de revient pour toutes les compositions
      *      \return     array of prices (HT and TTC)
      */
 	public function getFactoryPriceAll($product_id)
@@ -624,8 +624,8 @@ class service_product_composition
 
 		}
 
-		$price['HT'] = price($factory_price);
-		$price['TTC'] = price($factory_price_ttc);
+		$price['HT'] = $factory_price;
+		$price['TTC'] = $factory_price_ttc;
 		return $price;
 
 
@@ -636,7 +636,7 @@ class service_product_composition
 
 
 	/*
-     *      \brief   	Cette m�thode calcul le cout de revient avec les compositions dont la l'option ��cout de revient�� est � 1.
+     *      \brief   	Cette méthode calcul le cout de revient avec les compositions dont la l'option "cout de revient" est à 1.
      *      \return     array of prices (HT and TTC)
      */
 	public function getFactoryPrice($product_id)
@@ -651,23 +651,26 @@ class service_product_composition
 		$factory_price = 0;
 		$factoy_price_ttc = 0;
 
-		while($obj = $this->db->fetch_object($query))
+		if($query)
 		{
-			if($obj->cump != 0)
+			while($obj = $this->db->fetch_object($query))
 			{
-				$factory_price += $obj->cump;
-				$factory_price_ttc += $obj->cump * (1 + $obj->tva_tx / 100);
+				if($obj->cump != 0)
+				{
+					$factory_price += $obj->cump;
+					$factory_price_ttc += $obj->cump * (1 + $obj->tva_tx / 100);
+				}
+				else
+				{
+					$factory_price += $obj->total_price;
+					$factory_price_ttc += $obj->total_price_ttc;
+				}
+	
 			}
-			else
-			{
-				$factory_price += $obj->total_price;
-				$factory_price_ttc += $obj->total_price_ttc;
-			}
-
 		}
 
-		$price['HT'] = price($factory_price);
-		$price['TTC'] = price($factory_price_ttc);
+		$price['HT'] = $factory_price;
+		$price['TTC'] = $factory_price_ttc;
 		return $price;
 
 	}

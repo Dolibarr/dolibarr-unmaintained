@@ -25,7 +25,7 @@
  *		\file       htdocs/includes/modules/modComposition.class.php
  *		\ingroup    composition
  *		\brief      Description and activation file for module Composition
- *		\version	$Id: modComposition.class.php,v 1.7 2010/04/29 14:54:33 grandoc Exp $
+ *		\version	$Id: modComposition.class.php,v 1.8 2010/06/07 14:49:46 pit Exp $
  */
 
 include_once(DOL_DOCUMENT_ROOT ."/includes/modules/DolibarrModules.class.php");
@@ -80,8 +80,8 @@ class modComposition extends DolibarrModules
 		$this->config_page_url = array();
 
 		// Dependencies
-		$this->depends = array("modSociete","modProduct");		// List of modules id that must be enabled if this module is enabled
-		$this->requiredby = array();	// List of modules id to disable if this one is disabled
+		$this->depends = array("modSociete","modProduit");		// List of modules id that must be enabled if this module is enabled
+		$this->requiredby = array("modBook");	// List of modules id to disable if this one is disabled
 		$this->phpmin = array(4,1);					// Minimum version of PHP required by module
 		$this->need_dolibarr_version = array(2,8);	// Minimum version of Dolibarr required by module
 		$this->langfiles = array("@composition");

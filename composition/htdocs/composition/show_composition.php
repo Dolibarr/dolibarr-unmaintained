@@ -21,24 +21,24 @@
  *    \file       htdocs/composition/show_composition.php
  *    \ingroup
  *    \brief      * to complete *
- *    \version    $Id: show_composition.php,v 1.6 2010/04/29 09:08:44 hregis Exp $
+ *    \version    $Id: show_composition.php,v 1.7 2010/06/07 14:49:46 pit Exp $
  */
 
 require("../main.inc.php");
 
-require_once(DOL_DOCUMENT_ROOT."/composition/service_product.class.php");
-require_once(DOL_DOCUMENT_ROOT."/product/class/product.class.php");
-require_once(DOL_DOCUMENT_ROOT."/composition/dao_product_composition.class.php");
-require_once(DOL_DOCUMENT_ROOT."/composition/service_product_composition.class.php");
-require_once(DOL_DOCUMENT_ROOT."/lib/product.lib.php");
+require_once(DOL_DOCUMENT_ROOT."/composition/class/business/service_product.class.php");
+require_once(DOL_DOCUMENT_ROOT."/composition/class/data/dao_product_composition.class.php");
+require_once(DOL_DOCUMENT_ROOT."/composition/class/business/service_product_composition.class.php");
 require_once(DOL_DOCUMENT_ROOT."/composition/lib/composition.lib.php");
+require_once(DOL_DOCUMENT_ROOT."/product/class/product.class.php");
+require_once(DOL_DOCUMENT_ROOT."/lib/product.lib.php");
 
 $langs->load("bills");
 $langs->load("products");
 $langs->load("other");
 
 
-llxHeader("","",$langs->trans("CardProduct".$product->type));
+llxHeader("",$langs->trans("CardProduct".$product->type));
 
 $smarty->template_dir = './tpl' ;
 
@@ -51,7 +51,8 @@ $product->fetch($_GET['id']);
 //Affichage onglets
 $head=product_prepare_head($product, $user);
 $titre=$langs->trans("CardProduct".$product->type);
-dolibarr_fiche_head($head, 'tabComposedProducts', $titre);
+$picto=($product->type==1?'service':'product');
+dol_fiche_head($head, 'tabComposedProducts', $titre, 0, $picto);
 
 //Verification des autorisations
 if (!$user->rights->produit->lire) accessforbidden();
@@ -220,6 +221,6 @@ $smarty->display("show_composition.tpl") ;
 
 //End of user code
 
-llxFooter('$Date: 2010/04/29 09:08:44 $ - $Revision: 1.6 $');
+llxFooter('$Date: 2010/06/07 14:49:46 $ - $Revision: 1.7 $');
 
 ?>

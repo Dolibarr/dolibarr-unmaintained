@@ -1,4 +1,5 @@
 # Composition module
+CHARSET=UTF-8
 addCompo=Ajouter composition
 newCompo=Nouvelle composition
 ComposedProductsAbility=Prise en charges des compositions
@@ -10,3 +11,6 @@ listeComposition=Liste des compositions
 ComposedProducts=Composition de produits
 StockManaged=Gestion des stocks
 etatStock=Gestion des stocks
+confirm_delete=Confirmation de suppression
+delete=Suppression
+deleted=Supprimé
