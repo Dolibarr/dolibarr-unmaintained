@@ -62,7 +62,7 @@ class modBook extends DolibarrModules
 		$this->name = eregi_replace('^mod','',get_class($this));
 		$this->description = "Gestion des livres";
 
-		$this->revision = explode(' ','$Revision: 1.1 $');
+		$this->revision = explode(' ','$Revision: 1.2 $');
 		$this->version = $this->revision[1];
 
 		// Key used in llx_const table to save module status enabled/disabled
@@ -83,7 +83,7 @@ class modBook extends DolibarrModules
 
 			
 		// Relative path to Module style sheet if exists. Example: '/myModule/mycss.css'.
-		$this->style_sheet = '';
+		$this->style_sheet = '/book/css/book.css';
 
 
 
@@ -103,7 +103,7 @@ class modBook extends DolibarrModules
 		//End of user code
 		
 		// New pages on tabs
-		$this->tabs = array('Book:Book:@book:/book/show_book.php?id=__ID__');
+		$this->tabs = array('product:Book:@book:/book/show_book.php?id=__ID__');
 
 		// Boxes
 		$this->boxes = array();			// List of boxes
