@@ -16,7 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  * or see http://www.gnu.org/
  *
- * $Id: book.lib.php,v 1.1 2010/05/31 15:28:24 pit Exp $
+ * $Id: book.lib.php,v 1.2 2010/06/07 14:16:32 pit Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/book/htdocs/book/lib/book.lib.php,v $
  */
 
@@ -24,7 +24,7 @@
 	    \file       htdocs/lib/book.lib.php
 	    \ingroup    modBook
 		\brief      Ensemble de fonctions de base pour le module book
-		\version    $Revision: 1.1 $
+		\version    $Revision: 1.2 $
 		\author		Samuel Bouchet, Patrick Raguin, Pierre Morin
 */
 

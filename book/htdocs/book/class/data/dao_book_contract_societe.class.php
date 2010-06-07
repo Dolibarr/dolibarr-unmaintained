@@ -20,7 +20,7 @@
         \file       htdocs/book/class/data/dao_book_contract_societe.class.php
         \ingroup    book
         \brief      DAO to access societies table
-		\version    $Id: dao_book_contract_societe.class.php,v 1.1 2010/05/31 15:28:23 pit Exp $
+		\version    $Id: dao_book_contract_societe.class.php,v 1.2 2010/06/07 14:16:32 pit Exp $
 		\author		Pierre Morin
 */
 

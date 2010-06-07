@@ -20,7 +20,7 @@
  *  \file       htdocs/admin/produit.php
  *  \ingroup    produit
  *  \brief      Page d'administration/configuration du module Produit
- *  \version    $Id: index.php,v 1.1 2010/05/31 15:28:23 pit Exp $
+ *  \version    $Id: index.php,v 1.2 2010/06/07 14:16:32 pit Exp $
  */
 
 require_once("../../main.inc.php");

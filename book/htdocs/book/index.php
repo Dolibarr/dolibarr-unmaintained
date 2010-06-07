@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: index.php,v 1.1 2010/05/31 15:28:24 pit Exp $
+ * $Id: index.php,v 1.2 2010/06/07 14:16:32 pit Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/book/htdocs/book/index.php,v $
  *
  */
@@ -34,31 +34,30 @@
 /*require("./pre.inc.php");*/
 
 require("../main.inc.php");
-require(DOL_DOCUMENT_ROOT."/core/class/html.formfile.class.php");
-require(DOL_DOCUMENT_ROOT."/product/class/html.formproduct.class.php");
-require(DOL_DOCUMENT_ROOT."/lib/files.lib.php");
-require(DOL_DOCUMENT_ROOT."/lib/product.lib.php");
-require(DOL_DOCUMENT_ROOT."/book/lib/barcode.lib.php");
-require(DOL_DOCUMENT_ROOT."/book/lib/book.lib.php");
-require(DOL_DOCUMENT_ROOT."/book/class/business/courrier_droit_editeur.class.php");
-require(DOL_DOCUMENT_ROOT."/product/class/product.class.php");
-require(DOL_DOCUMENT_ROOT."/fourn/class/fournisseur.class.php");
-require(DOL_DOCUMENT_ROOT."/product/stock/class/mouvementstock.class.php");
+require_once(DOL_DOCUMENT_ROOT."/core/class/html.formfile.class.php");
+require_once(DOL_DOCUMENT_ROOT."/product/class/html.formproduct.class.php");
+require_once(DOL_DOCUMENT_ROOT."/lib/files.lib.php");
+require_once(DOL_DOCUMENT_ROOT."/lib/product.lib.php");
+require_once(DOL_DOCUMENT_ROOT."/book/lib/barcode.lib.php");
+require_once(DOL_DOCUMENT_ROOT."/book/lib/book.lib.php");
+require_once(DOL_DOCUMENT_ROOT."/product/class/product.class.php");
+require_once(DOL_DOCUMENT_ROOT."/fourn/class/fournisseur.class.php");
+require_once(DOL_DOCUMENT_ROOT."/product/stock/class/mouvementstock.class.php");
 
 //Inclusion of necessary services and DAO
 //Inclusion des DAO et des Services nécessaires
-require(DOL_DOCUMENT_ROOT."/composition/class/business/service_product.class.php");
-require(DOL_DOCUMENT_ROOT."/composition/class/data/dao_product_composition.class.php");
-require(DOL_DOCUMENT_ROOT."/composition/class/business/service_product_composition.class.php");
-require(DOL_DOCUMENT_ROOT."/book/class/data/dao_book.class.php");
-require(DOL_DOCUMENT_ROOT."/book/class/business/service_book.class.php");
-require(DOL_DOCUMENT_ROOT."/book/class/data/dao_book_contract.class.php");
-require(DOL_DOCUMENT_ROOT."/book/class/business/service_book_contract.class.php");
-require(DOL_DOCUMENT_ROOT."/book/class/data/dao_book_contract_bill.class.php");
-require(DOL_DOCUMENT_ROOT."/book/class/business/service_book_contract_bill.class.php");
-require(DOL_DOCUMENT_ROOT."/book/class/data/dao_book_contract_societe.class.php");
-require(DOL_DOCUMENT_ROOT."/book/class/business/service_book_contract_societe.class.php");
-require(DOL_DOCUMENT_ROOT."/book/class/business/html.formbook.class.php");
+require_once(DOL_DOCUMENT_ROOT."/composition/class/business/service_product.class.php");
+require_once(DOL_DOCUMENT_ROOT."/composition/class/data/dao_product_composition.class.php");
+require_once(DOL_DOCUMENT_ROOT."/composition/class/business/service_product_composition.class.php");
+require_once(DOL_DOCUMENT_ROOT."/book/class/data/dao_book.class.php");
+require_once(DOL_DOCUMENT_ROOT."/book/class/business/service_book.class.php");
+require_once(DOL_DOCUMENT_ROOT."/book/class/data/dao_book_contract.class.php");
+require_once(DOL_DOCUMENT_ROOT."/book/class/business/service_book_contract.class.php");
+require_once(DOL_DOCUMENT_ROOT."/book/class/data/dao_book_contract_bill.class.php");
+require_once(DOL_DOCUMENT_ROOT."/book/class/business/service_book_contract_bill.class.php");
+require_once(DOL_DOCUMENT_ROOT."/book/class/data/dao_book_contract_societe.class.php");
+require_once(DOL_DOCUMENT_ROOT."/book/class/business/service_book_contract_societe.class.php");
+require_once(DOL_DOCUMENT_ROOT."/book/class/business/html.formbook.class.php");
 
 //Loading of the necessary localization files
 // chargement des fichiers de langue nécessaires
@@ -190,7 +189,7 @@ $oSmarty->compile_dir = './tpl_c' ;
 				// Date
 				print '<td align="center" width="20%">'.dolibarr_print_date(filemtime($filepath),'dayhour').'</td>' ;
 				// Deleting
-				print '<td align="center" width="10%"><a href="'.DOL_URL_ROOT.'/document.php?action=remove_file&amp;modulepart=book&amp;file='.urlencode($filepath).'&amp;urlsource='.urlencode($urlsource).'">'.img_delete().'</a></td>' ;
+				print '<td align="center" width="10%"><a href="'.DOL_URL_ROOT.'/document.php?action=remove_file&amp;modulepart=book&amp;file=droitauteur/'.urlencode($file["name"]).'&amp;urlsource='.urlencode($urlsource).'">'.img_delete().'</a></td>' ;
 				
 			print '</tr>' ;
 		}

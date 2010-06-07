@@ -62,7 +62,7 @@ class modBook extends DolibarrModules
 		$this->name = eregi_replace('^mod','',get_class($this));
 		$this->description = "Gestion des livres";
 
-		$this->revision = explode(' ','$Revision: 1.2 $');
+		$this->revision = explode(' ','$Revision: 1.3 $');
 		$this->version = $this->revision[1];
 
 		// Key used in llx_const table to save module status enabled/disabled

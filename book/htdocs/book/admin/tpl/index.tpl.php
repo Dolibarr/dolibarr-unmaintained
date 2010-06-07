@@ -20,7 +20,7 @@
  *  \file       htdocs/book/admin/tpl/index.tpl.php
  *  \ingroup    book
  *  \brief      Page d'administration/configuration du module Book
- *  \version    $Id: index.tpl.php,v 1.1 2010/05/31 15:28:24 pit Exp $
+ *  \version    $Id: index.tpl.php,v 1.2 2010/06/07 14:16:32 pit Exp $
  */
 
 
@@ -92,5 +92,5 @@ print '</form>';
 
 $db->close();
 
-llxFooter('$Date: 2010/05/31 15:28:24 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2010/06/07 14:16:32 $ - $Revision: 1.2 $');
 ?>

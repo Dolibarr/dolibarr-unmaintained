@@ -19,7 +19,7 @@
 /**
  *	\file       htdocs/book/class/business/html.formbook.class.php
  *	\brief      Fichier de la classe des fonctions predefinie de composants html pour le module Book
- *	\version	$Id: html.formbook.class.php,v 1.1 2010/05/31 15:28:23 pit Exp $
+ *	\version	$Id: html.formbook.class.php,v 1.2 2010/06/07 14:16:32 pit Exp $
  */
 
 

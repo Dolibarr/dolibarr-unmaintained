@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: show_book.tpl,v 1.1 2010/05/31 15:28:23 pit Exp $
+ * $Id: show_book.tpl,v 1.2 2010/06/07 14:16:32 pit Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/book/htdocs/book/tpl/show_book.tpl,v $
  *}
 

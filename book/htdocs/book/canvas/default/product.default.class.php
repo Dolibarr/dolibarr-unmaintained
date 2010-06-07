@@ -20,7 +20,7 @@
  *	\file       htdocs/product/canvas/default/product.default.class.php
  *	\ingroup    produit
  *	\brief      Fichier de la classe des produits par defaut
- *	\version    $Id: product.default.class.php,v 1.1 2010/05/31 15:28:23 pit Exp $
+ *	\version    $Id: product.default.class.php,v 1.2 2010/06/07 14:16:32 pit Exp $
  */
 
 /**

@@ -21,7 +21,7 @@
         \file       htdocs/book/class/business/service_book_contract_societe.class.php
         \ingroup    book
         \brief      Service initialize a list of societies to be the editor of the book for the contract
-		\version    $Id: service_book_contract_societe.class.php,v 1.1 2010/05/31 15:28:23 pit Exp $
+		\version    $Id: service_book_contract_societe.class.php,v 1.2 2010/06/07 14:16:31 pit Exp $
 		\author		Pierre Morin
 */
 

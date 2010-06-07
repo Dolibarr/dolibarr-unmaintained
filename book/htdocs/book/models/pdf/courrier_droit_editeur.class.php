@@ -22,7 +22,7 @@
  \file       	product/book/courrier-droit-editeur.class.php
  \ingroup    	editeurs
  \brief      	Classe de generation des courriers pour les editeurs
- \version		$Id: courrier_droit_editeur.class.php,v 1.1 2010/06/07 13:07:56 pit Exp $
+ \version		$Id: courrier_droit_editeur.class.php,v 1.2 2010/06/07 14:16:32 pit Exp $
  */
 
 require_once(DOL_DOCUMENT_ROOT.'/includes/fpdf/fpdfi/fpdi_protection.php');

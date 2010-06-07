@@ -16,31 +16,13 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
- *
- * $Id: edit_book.php,v 1.1 2010/05/31 15:28:24 pit Exp $
- * $Source: /cvsroot/dolibarr/dolibarrmod/book/htdocs/book/edit_book.php,v $
- *
- */
-
-/**
-   \file       htdocs/product/edit_book.php
-   \ingroup    product
-   \brief      edit_book
-   \version    $Revision: 1.1 $
-*/
-
-/******************************* Includes (old content of pre.inc.php) ***********************/
-/*require("./pre.inc.php");*/
-
-require("../main.inc.php");
-require(DOL_DOCUMENT_ROOT."/core/class/html.formfile.class.php");
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA require(DOL_DOCUMENT_ROOT."/core/class/html.formfile.class.php");
 require(DOL_DOCUMENT_ROOT."/product/class/html.formproduct.class.php");
 require(DOL_DOCUMENT_ROOT."/lib/files.lib.php");
 require(DOL_DOCUMENT_ROOT."/lib/product.lib.php");
 require(DOL_DOCUMENT_ROOT."/book/lib/barcode.lib.php");
 require(DOL_DOCUMENT_ROOT."/book/lib/book.lib.php");
-require(DOL_DOCUMENT_ROOT."/book/class/business/courrier_droit_editeur.class.php");
+//require(DOL_DOCUMENT_ROOT."/book/models/pdf/courrier_droit_editeur.class.php");
 require(DOL_DOCUMENT_ROOT."/product/class/product.class.php");
 require(DOL_DOCUMENT_ROOT."/fourn/class/fournisseur.class.php");
 require(DOL_DOCUMENT_ROOT."/product/stock/class/mouvementstock.class.php");
@@ -58,7 +40,48 @@ require(DOL_DOCUMENT_ROOT."/book/class/data/dao_book_contract_bill.class.php");
 require(DOL_DOCUMENT_ROOT."/book/class/business/service_book_contract_bill.class.php");
 require(DOL_DOCUMENT_ROOT."/book/class/data/dao_book_contract_societe.class.php");
 require(DOL_DOCUMENT_ROOT."/book/class/business/service_book_contract_societe.class.php");
-require(DOL_DOCUMENT_ROOT."/book/class/business/html.formbook.class.php");
+require(DOL_DOCUMENT_ROOT."/book/class/business/html.formbook.class.php");02111-1307, USA.
+ *
+ * $Id: edit_book.php,v 1.2 2010/06/07 14:16:32 pit Exp $
+ * $Source: /cvsroot/dolibarr/dolibarrmod/book/htdocs/book/edit_book.php,v $
+ *
+ */
+
+/**
+   \file       htdocs/product/edit_book.php
+   \ingroup    product
+   \brief      edit_book
+   \version    $Revision: 1.2 $
+*/
+
+/******************************* Includes (old content of pre.inc.php) ***********************/
+/*require("./pre.inc.php");*/
+
+require("../main.inc.php");
+require_once(DOL_DOCUMENT_ROOT."/core/class/html.formfile.class.php");
+require_once(DOL_DOCUMENT_ROOT."/product/class/html.formproduct.class.php");
+require_once(DOL_DOCUMENT_ROOT."/lib/files.lib.php");
+require_once(DOL_DOCUMENT_ROOT."/lib/product.lib.php");
+require_once(DOL_DOCUMENT_ROOT."/book/lib/barcode.lib.php");
+require_once(DOL_DOCUMENT_ROOT."/book/lib/book.lib.php");
+require_once(DOL_DOCUMENT_ROOT."/product/class/product.class.php");
+require_once(DOL_DOCUMENT_ROOT."/fourn/class/fournisseur.class.php");
+require_once(DOL_DOCUMENT_ROOT."/product/stock/class/mouvementstock.class.php");
+
+//Inclusion of necessary services and DAO
+//Inclusion des DAO et des Services nécessaires
+require_once(DOL_DOCUMENT_ROOT."/composition/class/business/service_product.class.php");
+require_once(DOL_DOCUMENT_ROOT."/composition/class/data/dao_product_composition.class.php");
+require_once(DOL_DOCUMENT_ROOT."/composition/class/business/service_product_composition.class.php");
+require_once(DOL_DOCUMENT_ROOT."/book/class/data/dao_book.class.php");
+require_once(DOL_DOCUMENT_ROOT."/book/class/business/service_book.class.php");
+require_once(DOL_DOCUMENT_ROOT."/book/class/data/dao_book_contract.class.php");
+require_once(DOL_DOCUMENT_ROOT."/book/class/business/service_book_contract.class.php");
+require_once(DOL_DOCUMENT_ROOT."/book/class/data/dao_book_contract_bill.class.php");
+require_once(DOL_DOCUMENT_ROOT."/book/class/business/service_book_contract_bill.class.php");
+require_once(DOL_DOCUMENT_ROOT."/book/class/data/dao_book_contract_societe.class.php");
+require_once(DOL_DOCUMENT_ROOT."/book/class/business/service_book_contract_societe.class.php");
+require_once(DOL_DOCUMENT_ROOT."/book/class/business/html.formbook.class.php");
 
 //Loading of the necessary localization files
 // chargement des fichiers de langue nécessaires

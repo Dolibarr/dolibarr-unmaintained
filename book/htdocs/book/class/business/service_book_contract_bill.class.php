@@ -32,6 +32,9 @@
         \brief      Service managing book_contract_bill
 		\remarks	
 */
+
+require_once(DOL_DOCUMENT_ROOT."/book/models/pdf/courrier_droit_editeur.class.php");
+
 class service_book_contract_bill
 {
 	private $dao ;

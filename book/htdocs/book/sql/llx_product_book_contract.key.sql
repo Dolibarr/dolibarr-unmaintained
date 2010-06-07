@@ -15,7 +15,7 @@
 -- along with this program; if not, write to the Free Software
 -- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 --
--- $Id: llx_product_book_contract.key.sql,v 1.1 2010/05/31 15:28:22 pit Exp $
+-- $Id: llx_product_book_contract.key.sql,v 1.2 2010/06/07 14:16:31 pit Exp $
 -- ============================================================================
 
 ALTER TABLE llx_product_book_contract ADD INDEX idx_product_book_contract_fk_product_book (fk_product_book);
