@@ -18,7 +18,7 @@
  * @package  Numbers_Words
  * @author   Piotr Klaban <makler@man.torun.pl>
  * @license  PHP 3.0 http://www.php.net/license/3_0.txt
- * @version  CVS: $Id: lang.en_GB.php,v 1.1 2009/08/25 20:50:38 eldy Exp $
+ * @version  CVS: $Id: lang.en_GB.php,v 1.2 2010/06/15 18:48:24 eldy Exp $
  * @link     http://pear.php.net/package/Numbers_Words
  */
 
@@ -157,6 +157,7 @@ class Numbers_Words_en_GB extends Numbers_Words
       'HRK' => array(array('Croatian kuna'), array('lipa')),
       'HUF' => array(array('forint'), array('filler')),
       'ILS' => array(array('new sheqel','new sheqels'), array('agora','agorot')),
+      'IND' => array(array('dollar'), array('paise')),
       'ISK' => array(array('Icelandic króna'), array('aurar')),
       'JPY' => array(array('yen'), array('sen')),
       'LTL' => array(array('litas'), array('cent')),
