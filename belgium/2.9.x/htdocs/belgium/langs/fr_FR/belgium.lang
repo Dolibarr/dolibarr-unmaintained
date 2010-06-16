@@ -1,0 +1,19 @@
+# Dolibarr language file - fr_FR - belgium
+CHARSET=UTF-8
+
+Module100000Desc=Fonctionnalités spécifiques à la législation belge
+
+Belgium=Belgique
+ClientVATNumber=Numéro TVA client
+DeclarantVATNumber=Numéro de TVA du déclarant
+DeclarantNameAndAddress=Nom et adresse du déclarant
+ErrorBadDate=La date est erronnée
+ErrorBadNameID=L'identifiant du nom est erronné
+ErrorBadPeriod=La période est erronnée, elle devrait être une année valide
+ErrorBadSequenceNumber=Le numéro de séquence est erronné, il devrait être un nombre compris entre %d et %d inclus
+Intervat=Intervat
+SequenceNumber=Numéro de séquence
+TurnOverVATExcluded=Chiffre d'affaire HTVA
+VATAmount=Montant TVA
+VATClientsList=Liste des clients TVA
+XMLExport=Export XML
