@@ -16,7 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-include('../main.inc.php');
+include('pre.inc.php');
 
 if (!$user->rights->belgium->vat_list->read)
 	accessforbidden();
@@ -31,7 +31,7 @@ $name_id = isset($_POST['name_id']) ? $_POST['name_id'] : 0;
 $sequence_number = isset($_POST['sequence_number']) ? $_POST['sequence_number'] : 1;
 $year = isset($_REQUEST['year']) ? $_REQUEST['year'] : date('Y');
 
-$langs->load('@belgium');
+$langs->load('belgium');
 
 $vat_list = new VATList($db);
 

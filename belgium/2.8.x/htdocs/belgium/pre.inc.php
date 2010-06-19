@@ -16,12 +16,13 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-include('pre.inc.php');
+include('../main.inc.php');
 
-$langs->load('belgium');
-
-llxHeader('', $langs->trans('Belgium'));
-
-llxFooter();
+function llxHeader($head='', $title='', $help_url='')
+{
+	top_menu($head, $title, $help_url);
+	
+	left_menu(new Menu(), $help_url);
+}
 
 ?>

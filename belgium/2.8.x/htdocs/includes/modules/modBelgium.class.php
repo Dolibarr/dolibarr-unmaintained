@@ -71,7 +71,7 @@ class modBelgium extends DolibarrModules
 		$this->version = '0.1.1';
 		$this->const_name = 'MAIN_MODULE_' . strtoupper($this->name);
 		$this->special = 0;
-		$this->picto = 'belgium@belgium';
+		$this->picto = 'belgium';
 		
 		$this->dirs = array();
 		
@@ -83,7 +83,7 @@ class modBelgium extends DolibarrModules
 		$this->requiredby = array();
 		$this->phpmin = array(5,2);
 		$this->need_dolibarr_version = array(2,5);
-		$this->langfiles = array('@belgium');
+		$this->langfiles = array('belgium');
 		
 		$this->const = array();
 		
@@ -119,7 +119,7 @@ class modBelgium extends DolibarrModules
 			'mainmenu' => 'belgium',
 			'leftmenu' => '1',
 			'url' => '/belgium/index.php',
-			'langs' => '@belgium',
+			'langs' => 'belgium',
 			'position' => 100,
 			'perms' => '$user->rights->belgium->vat_list->read',
 			'target' => '',
@@ -133,7 +133,7 @@ class modBelgium extends DolibarrModules
 			'titre' => 'Intervat',
 			'mainmenu' => 'belgium',
 			'url' => '/belgium/index.php',
-			'langs' => '@belgium',
+			'langs' => 'belgium',
 			'position' => 100,
 			'perms' => '$user->rights->belgium->vat_list->read',
 			'target' => '',
@@ -147,7 +147,7 @@ class modBelgium extends DolibarrModules
 			'titre' => 'VATClientsList',
 			'mainmenu' => 'belgium',
 			'url' => '/belgium/vat_list.php',
-			'langs' => '@belgium',
+			'langs' => 'belgium',
 			'position' => 100,
 			'perms' => '$user->rights->belgium->vat_list->read',
 			'target' => '',
