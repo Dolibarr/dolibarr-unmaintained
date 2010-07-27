@@ -1,7 +1,7 @@
 <?php
 /* Copyright (C) 2008 Laurent Destailleur         <eldy@users.sourceforge.net>
  * Copyright (C) 2008 Raphael Bertrand (Resultic) <raphael.bertrand@resultic.fr>
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -22,29 +22,29 @@
  \file			htdocs/lib/saphir2.lib.php
  \brief			Ensemble de fonctions de base de dolibarr sous forme d'include.
 				Used for counters.
- \version		$Id: saphir2.lib.php,v 1.2 2008/11/02 00:22:23 raphael_bertrand Exp $
+ \version		$Id: saphir2.lib.php,v 1.3 2010/07/27 22:41:34 eldy Exp $
  */
 
 
 /**
  * Return next value for a saphir2 mask (based on get_next_value of function2.lib.php used by saphir)
  *
- * @param unknown_type $db
- * @param string	$mask				The mask to use for ref computation
- * @param string $table					The table of referenced objects
- * @param string $field					The name of the ref field
- * @param string $where				To add a filter on selection (for exemple to filter for invoice types) -optional
- * @param string $valueforccc			Value for "client code" used in ref computation -optional
- * @param integer $date				Date to use for ref computation (timestamp) -optional
- * @param integer $useglobalrefclient		Flag for Global Ref Client Computation mode switching -optional
- * @param array $extraparams			Array of extra params (for extensions) -optional
+ * @param   $db
+ * @param   $mask   				The mask to use for ref computation
+ * @param   $table					The table of referenced objects
+ * @param   $field					The name of the ref field
+ * @param   $where	     			To add a filter on selection (for exemple to filter for invoice types) -optional
+ * @param   $valueforccc			Value for "client code" used in ref computation -optional
+ * @param   $date		     		Date to use for ref computation (timestamp) -optional
+ * @param   $useglobalrefclient		Flag for Global Ref Client Computation mode switching -optional
+ * @param   $extraparams			Array of extra params (for extensions) -optional
  * @return 	string					New value
  */
 function get_next_value_saphir2($db,$mask,$table,$field,$where='',$valueforccc='',$date='',$useglobalrefclient=0,$extraparams=array())
 {
 	// Clean parameters
 	if ($date == '') $date=time();
-	
+
 	// Extract value for mask counter, mask raz and mask offset
 	if (! eregi('\{(0+)([@\+][0-9]+)?([@\+][0-9]+)?\}',$mask,$reg))
 	{
@@ -58,14 +58,14 @@ function get_next_value_saphir2($db,$mask,$table,$field,$where='',$valueforccc='
 		else
 		// END Saphir2 extension
 			return 'ErrorBadMask';
-			
+
 		// BEGIN Saphir2 extension
 		if(!empty($extraparams['allowOnlyRefClient']) && eregi('\{([@\+][0-9]+)([@\+][0-9]+)?\}',$mask,$regRaz))
 		{
 			$reg[2]=$regRaz[1];
 			$reg[3]=$regRaz[2];
 			$mask = str_replace($regRaz[0],"",$mask); //cleaning mask for next steps
-		}	
+		}
 		// END Saphir2 extension
 	}
 	$masktri=$reg[1].$reg[2].$reg[3];
@@ -126,7 +126,7 @@ function get_next_value_saphir2($db,$mask,$table,$field,$where='',$valueforccc='
 		if (strlen($reg[2]) == 4) $yearcomp=sprintf("%04d",date("Y",$date)+$yearoffset);
 		if (strlen($reg[2]) == 2) $yearcomp=sprintf("%02d",date("y",$date)+$yearoffset);
 		if (strlen($reg[2]) == 1) $yearcomp=substr(date("y",$date),2,1)+$yearoffset;
-			
+
 		$sqlwhere='';
 		$sqlwhere.='SUBSTRING('.$field.', '.(strlen($reg[1])+1).', '.strlen($reg[2]).') >= '.$yearcomp;
 		if ($monthcomp > 1)	// Test useless if monthcomp = 1 (or 0 is same as 1)
@@ -253,7 +253,7 @@ global $conf;
 	if ($date == '') $date=time();
 
 	if(!is_array($extraparams_tab))	$extraparams_tab=array(); //get default extraparams if any or not array value
-		
+
 	if((!empty($masks) || !empty($tables) || !empty($fields) || !empty($wheres) )
 	&&(is_string($masks) || is_string($tables) || is_string($fields) || is_string($wheres) ))
 	{ //convert strings to single row arrays
@@ -263,7 +263,7 @@ global $conf;
 		$wheres=array($wheres);
 		$extraparams_tab=array($extraparams_tab);
 	}
-	
+
 	if(!is_array($masks) || !is_array($tables) || !is_array($fields) || !is_array($wheres))
 	{   //get defaults (use global refs) - overide  given values except valueforccc because of null or invalid data
 		dolibarr_syslog("saphir2::get_next_refclientcounter_value use defauts values",LOG_DEBUG);
@@ -274,7 +274,7 @@ global $conf;
 		$wheres=$defaultInputs['wheres'];
 		$extraparams_tab=$defaultInputs['extraparams_tab'];
 	}
-	
+
 	for($numStep=0;$numStep<sizeOf($masks);$numStep++)
 	{
 		//get step values
@@ -282,12 +282,12 @@ global $conf;
 		$table=$tables[$numStep];
 		$field=$fields[$numStep];
 		$where=$wheres[$numStep];
-		
-		if(isset($extraparams_tab[$numStep])) 
+
+		if(isset($extraparams_tab[$numStep]))
 			$extraparams=$extraparams_tab[$numStep];
 		else
 			$extraparams=array();
-		
+
 		# BEGIN Saphir refclient routine part
 		// Extract value for mask counter, mask raz and mask offset
 		if (! eregi('\{(0+)([@\+][0-9]+)?([@\+][0-9]+)?\}',$mask,$reg))
@@ -302,14 +302,14 @@ global $conf;
 			else
 			// END Saphir2 extension
 				return 'ErrorBadMask';
-				
+
 			// BEGIN Saphir2 extension
 			if(!empty($extraparams['allowOnlyRefClient']) && eregi('\{([@\+][0-9]+)([@\+][0-9]+)?\}',$mask,$regRaz))
 			{
 				$reg[2]=$regRaz[1];
 				$reg[3]=$regRaz[2];
 				$mask = str_replace($regRaz[0],"",$mask); //cleaning mask for next steps
-			}	
+			}
 			// END Saphir2 extension
 		}
 		$masktri=$reg[1].$reg[2].$reg[3];
@@ -359,12 +359,12 @@ global $conf;
 		if ($maskraz >= 0)
 		{
 			if ($maskraz > 12) return 'ErrorBadMaskBadRazMonth';
-			
+
 			// Define reg
 			if ($maskraz > 1 && ! eregi('^(.*)\{(y+)\}\{(m+)\}',$maskwithonlyymcode,$reg)) return 'ErrorCantUseRazInStartedYearIfNoYearMonthInMask';
 			if ($maskraz <= 1 && ! eregi('^(.*)\{(y+)\}',$maskwithonlyymcode,$reg)) return 'ErrorCantUseRazIfNoYearInMask';
 			//print "x".$maskwithonlyymcode." ".$maskraz;
-			
+
 			// Define $yearcomp and $monthcomp (that will be use in the select where to search max number)
 			$monthcomp=$maskraz;
 			$yearoffset=0;
@@ -373,7 +373,7 @@ global $conf;
 			if (strlen($reg[2]) == 4) $yearcomp=sprintf("%04d",date("Y")+$yearoffset);
 			if (strlen($reg[2]) == 2) $yearcomp=sprintf("%02d",date("y")+$yearoffset);
 			if (strlen($reg[2]) == 1) $yearcomp=substr(date("y"),2,1)+$yearoffset;
-				
+
 			$sqlwhere='';
 			$sqlwhere.='SUBSTRING('.$field.', '.(strlen($reg[1])+1).', '.strlen($reg[2]).') >= '.$yearcomp;
 			if ($monthcomp > 1)	// Test useless if monthcomp = 1 (or 0 is same as 1)
@@ -384,11 +384,11 @@ global $conf;
 		else
 			$sqlwhere='';
 		//print "masktri=".$masktri." maskcounter=".$maskcounter." maskraz=".$maskraz." maskoffset=".$maskoffset."<br>\n";
-		
+
 		if ($maskrefclient_maskcounter)
 		{
 			//print "maskrefclient_maskcounter=".$maskrefclient_maskcounter." maskwithnocode=".$maskwithnocode." maskrefclient=".$maskrefclient."\n<br>";
-				
+
 			// Define $sqlstring
 			$maskrefclient_posnumstart=strpos($maskwithnocode,$maskrefclient_maskcounter,strpos($maskwithnocode,$maskrefclient));	// Pos of counter in final string (from 0 to ...)
 			if ($maskrefclient_posnumstart <= 0) return 'ErrorBadMask';
@@ -416,7 +416,7 @@ global $conf;
 			if ($where) $maskrefclient_sql.=$where;//use the same optional where as general mask
 			if ($sqlwhere) $maskrefclient_sql.=' AND '.$sqlwhere; //use the same sqlwhere as general mask
 			$maskrefclient_sql.=' AND (SUBSTRING('.$field.', '.(strpos($maskwithnocode,$maskrefclient)+1).', '.strlen($maskrefclient_maskclientcode).")='".$maskrefclient_clientcode."')";
-				
+
 			dolibarr_syslog("saphir2::get_next_refclientcounter_value maskrefclient_sql=".$maskrefclient_sql, LOG_DEBUG);
 			$maskrefclient_resql=$db->query($maskrefclient_sql);
 			if ($maskrefclient_resql)
@@ -428,7 +428,7 @@ global $conf;
 			if (empty($maskrefclient_counter) || eregi('[^0-9]',$maskrefclient_counter)) $maskrefclient_counter=$maskrefclient_maskoffset;
 			$maskrefclient_counter++;
 		}
-		
+
 		# END Saphir refclient routine part
 		$numSteps[]=str_pad($maskrefclient_counter,strlen($maskrefclient_maskcounter),"0",STR_PAD_LEFT);
 		dolibarr_syslog("saphir2::get_next_refclientcounter_value numSteps value=".$numFinal,LOG_DEBUG);
@@ -442,7 +442,7 @@ global $conf;
 /**
  * Return refclientcounter settings values for counters activated with refclientcounter value global sharing
  *
- * @return 	array	Associative Array  containing values of $masks,$tables,$fields,$wheres,$extraparams_tab 
+ * @return 	array	Associative Array  containing values of $masks,$tables,$fields,$wheres,$extraparams_tab
  */
 function get_globalrefclientcounter_settings()
 {
@@ -454,21 +454,21 @@ global $conf;
 	$fields=array();
 	$wheres=array();
 	$extraparams_tab=array();
-		
+
 	// Module commande client
 	if ($conf->commande->enabled && $conf->global->COMMANDE_ADDON == "mod_commande_saphir2" && $conf->global->COMMANDE_SAPHIR2_MASK && $conf->global->COMMANDE_SAPHIR2_USEGLOBALCLIENTREF)
 	{
 		$extraparams=array();//no extra params basicaly
 		if(!empty($conf->global->ALLOWONLYREFCLIENT))
 			$extraparams['allowOnlyRefClient']=true;
-			
+
 		$masks[]=$conf->global->COMMANDE_SAPHIR_MASK;
 		$tables[]='commande';
 		$fields[]='ref';
 		$wheres[]='';
 		$extraparams_tab[]=$extraparams;
 	}
-	
+
 	// Module facture
 	if ($conf->facture->enabled && $conf->global->FACTURE_ADDON == "saphir2" && $conf->global->FACTURE_SAPHIR2_MASK_CREDIT && $conf->global->FACTURE_SAPHIR2_USEGLOBALCLIENTREF_CREDIT)
 	{
@@ -480,42 +480,42 @@ global $conf;
 	}
 	if ($conf->facture->enabled && $conf->global->FACTURE_ADDON == "saphir2" && $conf->global->FACTURE_SAPHIR2_MASK_INVOICE && $conf->global->FACTURE_SAPHIR2_USEGLOBALCLIENTREF_INVOICE)
 	{
-			
+
 		$masks[]=$conf->global->FACTURE_SAPHIR2_MASK_INVOICE;
 		$tables[]='facture';
 		$fields[]='facnumber';
 		$wheres[]=" AND type != 2";
 		$extraparams_tab[]=array();//no extra params (facture)
 	}
-	
+
 	// Module ficheinter
 	if ($conf->fichinter->enabled && $conf->global->FICHEINTER_ADDON == "saphir2" && $conf->global->FICHINTER_SAPHIR2_MASK && $conf->global->FICHINTER_SAPHIR2_USEGLOBALCLIENTREF)
 	{
 		$extraparams=array();//no extra params basicaly
 		if(!empty($conf->global->ALLOWONLYREFCLIENT))
 			$extraparams['allowOnlyRefClient']=true;
-			
+
 		$masks[]=$conf->global->FICHINTER_SAPHIR2_MASK;
 		$tables[]='fichinter';
 		$fields[]='ref';
 		$wheres[]='';
 		$extraparams_tab[]=$extraparams;
 	}
-	
+
 	// Module propal
 	if ($conf->propal->enabled && $conf->global->PROPALE_ADDON == "mod_propale_saphir2" && $conf->global->PROPALE_SAPHIR2_MASK && $conf->global->PROPALE_SAPHIR2_USEGLOBALCLIENTREF)
 	{
 		$extraparams=array();//no extra params basicaly
 		if(!empty($conf->global->ALLOWONLYREFCLIENT))
 			$extraparams['allowOnlyRefClient']=true;
-	
+
 		$masks[]=$conf->global->PROPALE_SAPHIR2_MASK;
 		$tables[]='propal';
 		$fields[]='ref';
 		$wheres[]='';
 		$extraparams_tab[]=$extraparams;
-	}	
-		
+	}
+
 	// Module chronodocs
 	if ( (!empty($conf->global->MAIN_MODULE_CHRONODOCS)) && $conf->global->CHRONODOCS_ADDON == "saphir2" && $conf->global->CHRONODOCS_SAPHIR2_MASK && $conf->global->CHRONODOCS_SAPHIR2_USEGLOBALCLIENTREF)
 	{
@@ -525,20 +525,20 @@ global $conf;
 			$typeRef_maskbefore='{'.$regTypeRef[1].'}';
 			$typeRef_maskafter=str_pad("",strlen($regTypeRef[1]),"_",STR_PAD_LEFT);
 			$chronodocs_saphir2_mask = str_replace($typeRef_maskbefore,$typeRef_maskafter,$chronodocs_saphir2_mask);
-		}		
-		
+		}
+
 		$extraparams=array();//no extra params basicaly
 		if(!empty($conf->global->ALLOWONLYREFCLIENT))
 			$extraparams['allowOnlyRefClient']=true;
 
-		
+
 		$masks[]=$chronodocs_saphir2_mask;
 		$tables[]='chronodocs_entries';
 		$fields[]='ref';
 		$wheres[]='';
 		$extraparams_tab[]=$extraparams;
 	}
-	
+
 	//RETURN
 	return array('masks' => $masks,
 				 'tables' =>$tables,
