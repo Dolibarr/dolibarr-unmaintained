@@ -2,7 +2,8 @@
 /* Copyright (C) 2001-2002 Rodolphe Quiedeville <rodolphe@quiedeville.org>
  * Copyright (C) 2004-2006 Laurent Destailleur  <eldy@users.sourceforge.net>
  * Copyright (C) 2010      Regis Houssin        <regis@dolibarr.fr>
- *
+ * Copyright (C) 2010      Cyrille de Lambert        <cyrille.delambert@auguria.net>
+ * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -17,14 +18,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: index.php,v 1.1 2010/07/29 15:02:31 cdelambert Exp $
+ * $Id: index.php,v 1.2 2010/07/29 16:27:10 cdelambert Exp $
  */
 
 /**
  *     \file       htdocs/droitpret/index.php
  *     \ingroup    droitpret
  *     \brief      Page accueil droitpret
- *     \version    $Revision: 1.1 $
+ *     \version    $Revision: 1.2 $
  */
 
 require("./pre.inc.php");
