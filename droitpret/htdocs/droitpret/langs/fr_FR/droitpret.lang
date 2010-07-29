@@ -1,9 +1,5 @@
 # Dolibarr language file - fr_FR - droitpret
 CHARSET=UTF-8
 
-NewBook=Nouveau livre
-ListCover=Couvertures
-ListContract=Contrats
-Book=Livre
-Books=Livres
-BookList=Liste livres
+DroitPretArea=Gestion des droits de prêts
+MailSuccessfulySent=Mail envoyé avec succès
