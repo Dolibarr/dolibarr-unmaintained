@@ -19,7 +19,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: show_book.php,v 1.2 2010/06/07 14:16:32 pit Exp $
+ * $Id: show_book.php,v 1.3 2010/07/29 21:01:06 cdelambert Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/book/htdocs/book/show_book.php,v $
  *
  */
@@ -28,7 +28,7 @@
    \file       htdocs/book/show_book.php
    \ingroup    
    \brief      * to complete *
-   \version    $Revision: 1.2 $
+   \version    $Revision: 1.3 $
 */
 
 /******************************* Includes (old content of pre.inc.php) ***********************/
@@ -84,9 +84,8 @@ llxHeader("",$langs->trans("CardProduct0"));
 
 // Instanciation d'un l'objet Smarty
 $oSmarty = new Smarty();
-
-$oSmarty->template_dir = './tpl' ;
-$oSmarty->compile_dir = './tpl_c' ;
+if(!is_dir($oSmarty->template_dir)) mkdir($oSmarty->template_dir);	
+if(!is_dir($oSmarty->compile_dir)) mkdir($oSmarty->compile_dir);	
 
 //$oSmarty->debugging = true;
 
@@ -292,10 +291,10 @@ else
 }
 	$oSmarty->assign('missing',$langs->trans('not_found', $langs->trans('book'))) ;
 	
-	$oSmarty->display("show_book.tpl") ;
+	$oSmarty->display(DOL_DOCUMENT_ROOT."/book/tpl/show_book.tpl") ;
 
 //End of user code
 
-llxFooter('$Date: 2010/06/07 14:16:32 $ - $Revision: 1.2 $');
+llxFooter('$Date: 2010/07/29 21:01:06 $ - $Revision: 1.3 $');
 
 ?>

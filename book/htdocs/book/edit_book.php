@@ -42,7 +42,7 @@ require(DOL_DOCUMENT_ROOT."/book/class/data/dao_book_contract_societe.class.php"
 require(DOL_DOCUMENT_ROOT."/book/class/business/service_book_contract_societe.class.php");
 require(DOL_DOCUMENT_ROOT."/book/class/business/html.formbook.class.php");02111-1307, USA.
  *
- * $Id: edit_book.php,v 1.2 2010/06/07 14:16:32 pit Exp $
+ * $Id: edit_book.php,v 1.3 2010/07/29 21:01:06 cdelambert Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/book/htdocs/book/edit_book.php,v $
  *
  */
@@ -51,7 +51,7 @@ require(DOL_DOCUMENT_ROOT."/book/class/business/html.formbook.class.php");02111-
    \file       htdocs/product/edit_book.php
    \ingroup    product
    \brief      edit_book
-   \version    $Revision: 1.2 $
+   \version    $Revision: 1.3 $
 */
 
 /******************************* Includes (old content of pre.inc.php) ***********************/
@@ -103,9 +103,8 @@ require_once(DOL_DOCUMENT_ROOT."/lib/product.lib.php");
 
 // Instanciation d'un l'objet Smarty
 $oSmarty = new Smarty();
-
-$oSmarty->template_dir = './tpl' ;
-$oSmarty->compile_dir = './tpl_c' ;
+if(!is_dir($oSmarty->template_dir)) mkdir($oSmarty->template_dir);	
+if(!is_dir($oSmarty->compile_dir)) mkdir($oSmarty->compile_dir);	
 
 //$oSmarty->debugging = true;
 
@@ -199,7 +198,7 @@ if($_GET['id'])
 	}
 	  
  	// Affichage du template après compilation
-	$oSmarty->display('edit_book.tpl');
+	$oSmarty->display(DOL_DOCUMENT_ROOT.'/book/tpl/edit_book.tpl');
 
 	
 }

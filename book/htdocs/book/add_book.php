@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: add_book.php,v 1.2 2010/06/07 14:16:32 pit Exp $
+ * $Id: add_book.php,v 1.3 2010/07/29 21:01:06 cdelambert Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/book/htdocs/book/add_book.php,v $
  *
  */
@@ -27,7 +27,7 @@
    \file       htdocs/product/add_book.php
    \ingroup    product
    \brief      add_book
-   \version    $Revision: 1.2 $
+   \version    $Revision: 1.3 $
 */
 
 /******************************* Includes (old content of pre.inc.php) ***********************/
@@ -75,11 +75,8 @@ require_once(DOL_DOCUMENT_ROOT.'/includes/smarty/libs/Smarty.class.php');
 
 // Instanciation of a Smarty object
 $oSmarty = new Smarty();
-
-$oSmarty->template_dir = './tpl' ;
-$oSmarty->compile_dir = './tpl_c' ;
-
-
+if(!is_dir($oSmarty->template_dir)) mkdir($oSmarty->template_dir);	
+if(!is_dir($oSmarty->compile_dir)) mkdir($oSmarty->compile_dir);	
 
  if ($_POST["action"] == 'add')
 {
@@ -154,7 +151,7 @@ else
 	$oSmarty->assign('error', $langs->trans('ErrorForbidden'));
 }
  	//Template displaying after compilation
-	$oSmarty->display('add_book.tpl');
+	$oSmarty->display(DOL_DOCUMENT_ROOT.'/book/tpl/add_book.tpl');
 
 
 //End of user code
