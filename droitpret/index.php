@@ -17,20 +17,21 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: index.php,v 1.3 2010/03/22 11:49:14 hregis Exp $
+ * $Id: index.php,v 1.1 2010/07/29 15:02:31 cdelambert Exp $
  */
 
 /**
  *     \file       htdocs/droitpret/index.php
  *     \ingroup    droitpret
  *     \brief      Page accueil droitpret
- *     \version    $Revision: 1.3 $
+ *     \version    $Revision: 1.1 $
  */
 
 require("./pre.inc.php");
 require_once(DOL_DOCUMENT_ROOT ."/droitpret/droitpret.class.php");
 require_once(DOL_DOCUMENT_ROOT ."/droitpret/modules_droitpret.php");
 
+$langs->load("droitpret@droitpret");
 
 global $conf;
 

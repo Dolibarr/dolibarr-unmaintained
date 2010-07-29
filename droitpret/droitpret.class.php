@@ -21,7 +21,7 @@
  *     \file       htdocs/droitpret/droitpret.class.php
  *     \ingroup    droitpret
  *     \brief      Fichier de la classe ddes droits de prets
- *     \version    $Id: droitpret.class.php,v 1.3 2010/03/22 11:49:14 hregis Exp $
+ *     \version    $Id: droitpret.class.php,v 1.1 2010/07/29 15:02:31 cdelambert Exp $
  */
 
 
@@ -64,20 +64,29 @@ class DroitPret
 
     	$this->nbfact = 0;
 
-    	$dateEnvoie = date("Y-m-d H:i:s",mktime($this->dateEnvoie['hours'],$this->dateEnvoie['minutes'],$this->dateEnvoie['seconds'],$this->dateEnvoie['mon'],$this->dateEnvoie['mday'],$this->dateEnvoie['year']));
-
-    	$sql = "INSERT INTO ".MAIN_DB_PREFIX."droitpret_rapport(date_envoie,format,date_debut,date_fin,fichier,nbfact) VALUES('".$dateEnvoie."','".$this->format."','".date("Y-m-d H:i:s",$this->dated)."','".date("Y-m-d H:i:s",$this->datef)."','".$this->refFile."',0)";
+    	$dateenvoi = date("Y-m-d H:i:s",mktime($this->dateEnvoie['hours'],$this->dateEnvoie['minutes'],$this->dateEnvoie['seconds'],$this->dateEnvoie['mon'],$this->dateEnvoie['mday'],$this->dateEnvoie['year']));
+		$sql =	"DELETE FROM ".MAIN_DB_PREFIX."droitpret_rapport WHERE fichier like '%".$this->refFile."%'";
+		$this->db->query($sql);	
+    	$sql = "INSERT INTO ".MAIN_DB_PREFIX."droitpret_rapport(date_envoie,format,date_debut,date_fin,fichier,nbfact) VALUES('".$dateenvoi."','".$this->format."','".date("Y-m-d H:i:s",$this->dated)."','".date("Y-m-d H:i:s",$this->datef)."','".$this->refFile."',0)";
     	$this->db->query($sql);
+    	if (!is_dir($conf->droitpret->dir_output)){
+    		mkdir($conf->droitpret->dir_output);
+    	} 
+    	if (!is_dir($conf->droitpret->dir_temp)){
+    		mkdir($conf->droitpret->dir_temp);
+    	}
+    	
+    	
 		$lien = $conf->droitpret->dir_temp."/".$this->refFile;
 
 		$ref = $this->db->last_insert_id(MAIN_DB_PREFIX."droitpret_rapport");
-
+		
 		$this->fp = fopen($lien,"w");
 		$this->WriteDEB($ref);
 		$this->WriteTET();
 		$this->WriteFin();
 		fclose($this->fp);
-
+		
 		$sql = "UPDATE ".MAIN_DB_PREFIX."droitpret_rapport SET nbfact = ".$this->nbfact." WHERE rowid = ".$ref;
 		$this->db->query($sql);
     }
