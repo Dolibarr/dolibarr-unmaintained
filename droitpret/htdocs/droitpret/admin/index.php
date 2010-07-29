@@ -18,18 +18,19 @@
  */
 
 /**
- *   	\file       htdocs/admin/droitpret.php
+ *   	\file       htdocs/droitpret/admin/index.php
  *		\ingroup    pret
  *		\brief      Page d'administration/configuration du module DroitPret
- *		\version    $Id: droitpret.php,v 1.2 2010/05/04 15:15:29 hregis Exp $
+ *		\version    $Id: index.php,v 1.1 2010/07/29 15:02:33 cdelambert Exp $
  */
 
-require("../../main.inc.php");
+require_once("../../main.inc.php");
 require_once(DOL_DOCUMENT_ROOT."/lib/admin.lib.php");
 require_once(DOL_DOCUMENT_ROOT."/categories/class/categorie.class.php");
 
 $langs->load("admin");
 $langs->load("categories");
+$langs->load("admin_droitpret@droitpret");
 
 if (!$user->admin)
   accessforbidden();
@@ -50,7 +51,7 @@ if ($_POST["action"] == 'update' || $_POST["action"] == 'add')
 	}
 	else
 	{
-        Header("Location: droitpret.php");
+        Header("Location: index.php");
 		exit;
 	}
 }
@@ -80,7 +81,7 @@ $form = new Form($db);
 
 // Categorie
 $var=!$var;
-print '<form action="droitpret.php" method="POST">';
+print '<form action="index.php" method="POST">';
 print '<input type="hidden" name="token" value="'.$_SESSION['newtoken'].'">';
 print '<input type="hidden" name="action" value="update">';
 print '<input type="hidden" name="rowid" value="'.$rowid.'">';
@@ -97,9 +98,9 @@ print '</form>';
 
 // Adresse destination
 $var=!$var;
-print '<form action="droitpret.php" method="POST">';
+print '<form action=".php" method="POST">';
 print '<input type="hidden" name="token" value="'.$_SESSION['newtoken'].'">';
-print '<input type="hidden" name="action" value="update">';
+print '<input type="hidden" name="aindexction" value="update">';
 print '<input type="hidden" name="rowid" value="'.$rowid.'">';
 print '<input type="hidden" name="constname" value="DROITPRET_MAIL">';
 print '<input type="hidden" name="consttype" value="chaine">';
