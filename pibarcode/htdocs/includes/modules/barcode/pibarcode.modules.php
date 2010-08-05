@@ -21,21 +21,22 @@
 /**
  *      \file       htdocs/includes/modules/barcode/pibarcode.modules.php
  *		\ingroup    facture
- *		\brief      Fichier contenant la classe du modèle de generation code barre pibarcode
- *		\version    $Id: pibarcode.modules.php,v 1.1 2010/08/05 22:12:46 eldy Exp $
+ *		\brief      Fichier contenant la classe du modele de generation code barre pibarcode
+ *		\version    $Id: pibarcode.modules.php,v 1.2 2010/08/05 22:50:57 eldy Exp $
  */
 
 require_once(DOL_DOCUMENT_ROOT ."/includes/modules/barcode/modules_barcode.php");
 
+
 /**	    \class      modPibarcode
-		\brief      Classe du modèle de generation code barre pibarcode
+		\brief      Classe du modele de generation code barre pibarcode
 */
 class modPibarcode extends ModeleBarCode
 {
 	var $version='dolibarr';		// 'development', 'experimental', 'dolibarr'
 	var $error='';
 
-    /**     \brief      Renvoi la description du modele de numérotation
+    /**     \brief      Renvoi la description du modele de numerotation
      *      \return     string      Texte descripif
      */
     function info()
@@ -45,9 +46,8 @@ class modPibarcode extends ModeleBarCode
     	return 'Pi-barcode';
     }
 
-    /**     \brief      Test si les numéros déjà en vigueur dans la base ne provoquent pas de
-     *                  de conflits qui empechera cette numérotation de fonctionner.
-     *      \return     boolean     false si conflit, true si ok
+    /**     \brief      Test if module can be activated
+     *      \return     boolean     false if ko, true if ok
      */
     function canBeActivated()
     {
@@ -92,7 +92,7 @@ class modPibarcode extends ModeleBarCode
 		$_GET["readable"]=$readable;
 
 		// Chargement de la classe de codage
-		foreach ($conf->dol_document_root as $dirroot)
+		foreach ($conf->file->dol_document_root as $dirroot)
 		{
 			$file=$dirroot . '/includes/barcode/pi_barcode/pi_barcode.php';
 			$result=@include_once($file);
@@ -139,10 +139,11 @@ class modPibarcode extends ModeleBarCode
 		$_GET["readable"]=$readable;
 
 		// Chargement de la classe de codage
-		foreach ($conf->dol_document_root as $dirroot)
+		foreach ($conf->file->dol_document_root as $dirroot)
 		{
 			$file=$dirroot . '/includes/barcode/pi_barcode/pi_barcode.php';
 			$result=@include_once($file);
+			//print $file." - ".$result;
 			if ($result) break;
 		}
 		//require_once(DOL_DOCUMENT_ROOT.'/includes/barcode/pi_barcode/pi_barcode.php');
