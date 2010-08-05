@@ -20,7 +20,7 @@
  * @package  Numbers_Words
  * @author   Piotr Klaban <makler@man.torun.pl>
  * @license  PHP 3.0 http://www.php.net/license/3_0.txt
- * @version  CVS: $Id: Words.php,v 1.4 2010/06/06 18:07:23 eldy Exp $
+ * @version  CVS: $Id: Words.php,v 1.5 2010/08/05 23:19:18 eldy Exp $
  * @link     http://pear.php.net/package/Numbers_Words
  */
 
@@ -147,10 +147,10 @@ class Numbers_Words
         } elseif ($len > 2) {
             // get the 3rd digit after the comma
             $round_digit = substr($currency[1], 2, 1);
-            
+
             // cut everything after the 2nd digit
             $currency[1] = substr($currency[1], 0, 2);
-            
+
             if ($round_digit >= 5) {
                 // round up without losing precision
                 include_once "Math/BigInteger.php";

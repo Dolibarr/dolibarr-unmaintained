@@ -21,7 +21,7 @@
  *	\file			htdocs/lib/functionsnumberswords.lib.php
  *	\brief			A set of functions for Dolibarr
  *					This file contains functions for plugin numberwords.
- *	\version		$Id: functions_numberwords.lib.php,v 1.5 2010/01/13 16:36:01 eldy Exp $
+ *	\version		$Id: functions_numberwords.lib.php,v 1.6 2010/08/05 23:19:19 eldy Exp $
  */
 
 
@@ -60,6 +60,8 @@ function numberwords_getLabelFromNumber($langs,$number,$isamount=0)
 	global $conf;
 
 	dol_syslog("numberwords_getLabelFromNumber langs->defaultlang=".$langs->defaultlang." number=".$number." isamount=".$isamount);
+	$langs->load("dict");
+
 	$outlang=$langs->defaultlang;	// Output language we want
 	$outlangarray=explode('_',$outlang,2);
 	// If lang is xx_XX, then we use xx
@@ -85,11 +87,12 @@ function numberwords_getLabelFromNumber($langs,$number,$isamount=0)
 	}
 
 	// Define label on currency and cent in the property of object handle
-	$handle->labelcurrency=$conf->monnaie;	// By default
+	$handle->labelcurrency=$conf->monnaie;	// By default (EUR, USD)
 	$handle->labelcents='cent';				// By default
 
 	// Overwrite label of currency to ours
 	$labelcurrencysing=$langs->transnoentitiesnoconv("CurrencySing".$conf->monnaie);
+	//print "CurrencySing".$conf->monnaie."=>".$labelcurrencysing;
 	if ($labelcurrencysing && $labelcurrencysing != -1 && $labelcurrencysing!='CurrencySing'.$conf->monnaie) $handle->labelcurrency=$labelcurrencysing;
 	else
 	{
@@ -108,6 +111,7 @@ function numberwords_getLabelFromNumber($langs,$number,$isamount=0)
 	// Call method of object handle to make convertion
 	if ($isamount)
 	{
+		//print "currency: ".$conf->monnaie;
 		$numberwords=$handle->toCurrency($number, $outlang, $conf->monnaie);
 	}
 	else

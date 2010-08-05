@@ -18,7 +18,7 @@
  * @package  Numbers_Words
  * @author   Kouber Saparev <kouber@php.net>
  * @license  PHP 3.0 http://www.php.net/license/3_0.txt
- * @version  CVS: $Id: lang.fr.php,v 1.2 2009/11/06 21:40:44 eldy Exp $
+ * @version  CVS: $Id: lang.fr.php,v 1.3 2010/08/05 23:19:18 eldy Exp $
  * @link     http://pear.php.net/package/Numbers_Words
  */
 
@@ -61,7 +61,7 @@ class Numbers_Words_fr extends Numbers_Words
      * @var string
      * @access public
      */
-    var $lang_native = 'Français';
+    var $lang_native = 'FranÃ§ais';
 
     /**
      * The words for some numbers.
@@ -97,7 +97,7 @@ class Numbers_Words_fr extends Numbers_Words
      * @var string
      * @access private
      */
-    var $_zero = 'zéro';
+    var $_zero = 'zÃ©ro';
 
     /**
      * The word for infinity.

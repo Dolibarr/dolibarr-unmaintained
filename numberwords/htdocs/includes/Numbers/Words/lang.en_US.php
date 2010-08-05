@@ -18,7 +18,7 @@
  * @package  Numbers_Words
  * @author   Piotr Klaban <makler@man.torun.pl>
  * @license  PHP 3.0 http://www.php.net/license/3_0.txt
- * @version  CVS: $Id: lang.en_US.php,v 1.3 2010/06/17 21:49:32 eldy Exp $
+ * @version  CVS: $Id: lang.en_US.php,v 1.4 2010/08/05 23:19:18 eldy Exp $
  * @link     http://pear.php.net/package/Numbers_Words
  */
 
@@ -250,7 +250,7 @@ class Numbers_Words_en_US extends Numbers_Words
       'HUF' => array(array('forint'), array('filler')),
       'ILS' => array(array('new sheqel','new sheqels'), array('agora','agorot')),
       'IND' => array(array('dollar','dollars'), array('paisa','paise')),
-      'ISK' => array(array('Icelandic króna'), array('aurar')),
+      'ISK' => array(array('Icelandic krona'), array('aurar')),
       'JPY' => array(array('yen'), array('sen')),
       'LTL' => array(array('litas'), array('cent')),
       'LVL' => array(array('lat'), array('sentim')),
@@ -263,7 +263,7 @@ class Numbers_Words_en_US extends Numbers_Words
       'SEK' => array(array('Swedish krona'), array('oere')),
       'SIT' => array(array('Tolar'), array('stotinia')),
       'SKK' => array(array('Slovak koruna'), array()),
-      'TRL' => array(array('lira'), array('kuruş')),
+      'TRL' => array(array('lira'), array('kuru')),
       'UAH' => array(array('hryvna'), array('cent')),
       'USD' => array(array('dollar'), array('cent')),
       'YUM' => array(array('dinars'), array('para')),

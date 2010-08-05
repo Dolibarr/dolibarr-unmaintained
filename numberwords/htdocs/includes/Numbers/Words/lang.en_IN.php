@@ -18,12 +18,12 @@
  * @package  Numbers_Words
  * @author   Piotr Klaban <makler@man.torun.pl>
  * @license  PHP 3.0 http://www.php.net/license/3_0.txt
- * @version  CVS: $Id: lang.en_GB.php,v 1.4 2010/08/05 23:19:18 eldy Exp $
+ * @version  CVS: $Id: lang.en_IN.php,v 1.1 2010/08/05 23:19:18 eldy Exp $
  * @link     http://pear.php.net/package/Numbers_Words
  */
 
 /**
- * Class for translating numbers into British English.
+ * Class for translating numbers into American English.
  *
  * @author Piotr Klaban
  * @package Numbers_Words
@@ -36,7 +36,7 @@
 //require_once "Numbers/Words.php";
 
 /**
- * Class for translating numbers into British English.
+ * Class for translating numbers into American English.
  *
  * @category Numbers
  * @package  Numbers_Words
@@ -44,7 +44,7 @@
  * @license  PHP 3.0 http://www.php.net/license/3_0.txt
  * @link     http://pear.php.net/package/Numbers_Words
  */
-class Numbers_Words_en_GB extends Numbers_Words
+class Numbers_Words_en_IN extends Numbers_Words
 {
 
     // {{{ properties
@@ -54,21 +54,21 @@ class Numbers_Words_en_GB extends Numbers_Words
      * @var string
      * @access public
      */
-    var $locale = 'en_GB';
+    var $locale = 'en_IN';
 
     /**
      * Language name in English
      * @var string
      * @access public
      */
-    var $lang = 'British English';
+    var $lang = 'Indian English';
 
     /**
      * Native language name
      * @var string
      * @access public
      */
-    var $lang_native = 'British English';
+    var $lang_native = 'Indian English';
 
     /**
      * The word for the minus sign
@@ -80,7 +80,9 @@ class Numbers_Words_en_GB extends Numbers_Words
     /**
      * The sufixes for exponents (singular and plural)
      * Names partly based on:
-     * http://www.users.dircon.co.uk/~shaunf/shaun/numbers/millions.htm
+     * http://home.earthlink.net/~mrob/pub/math/largenum.html
+     * http://mathforum.org/dr.math/faq/faq.large.numbers.html
+     * http://www.mazes.com/AmericanNumberingSystem.html
      * @var array
      * @access private
      */
@@ -88,27 +90,117 @@ class Numbers_Words_en_GB extends Numbers_Words
         0 => array(''),
         3 => array('thousand'),
         6 => array('million'),
-       12 => array('billion'),
-       18 => array('trillion'),
-       24 => array('quadrillion'),
-       30 => array('quintillion'),
-       36 => array('sextillion'),
-       42 => array('septillion'),
-       48 => array('octillion'),
-       54 => array('nonillion'),
-       60 => array('decillion'),
-       66 => array('undecillion'),
-       72 => array('duodecillion'),
-       78 => array('tredecillion'),
-       84 => array('quattuordecillion'),
-       90 => array('quindecillion'),
-       96 => array('sexdecillion'),
-      102 => array('septendecillion'),
-      108 => array('octodecillion'),
-      114 => array('novemdecillion'),
-      120 => array('vigintillion'),
-      192 => array('duotrigintillion'),
-      600 => array('centillion')
+        9 => array('billion'),
+       12 => array('trillion'),
+       15 => array('quadrillion'),
+       18 => array('quintillion'),
+       21 => array('sextillion'),
+       24 => array('septillion'),
+       27 => array('octillion'),
+       30 => array('nonillion'),
+       33 => array('decillion'),
+       36 => array('undecillion'),
+       39 => array('duodecillion'),
+       42 => array('tredecillion'),
+       45 => array('quattuordecillion'),
+       48 => array('quindecillion'),
+       51 => array('sexdecillion'),
+       54 => array('septendecillion'),
+       57 => array('octodecillion'),
+       60 => array('novemdecillion'),
+       63 => array('vigintillion'),
+       66 => array('unvigintillion'),
+       69 => array('duovigintillion'),
+       72 => array('trevigintillion'),
+       75 => array('quattuorvigintillion'),
+       78 => array('quinvigintillion'),
+       81 => array('sexvigintillion'),
+       84 => array('septenvigintillion'),
+       87 => array('octovigintillion'),
+       90 => array('novemvigintillion'),
+       93 => array('trigintillion'),
+       96 => array('untrigintillion'),
+       99 => array('duotrigintillion'),
+       // 100 => array('googol') - not latin name
+       // 10^googol = 1 googolplex
+      102 => array('trestrigintillion'),
+      105 => array('quattuortrigintillion'),
+      108 => array('quintrigintillion'),
+      111 => array('sextrigintillion'),
+      114 => array('septentrigintillion'),
+      117 => array('octotrigintillion'),
+      120 => array('novemtrigintillion'),
+      123 => array('quadragintillion'),
+      126 => array('unquadragintillion'),
+      129 => array('duoquadragintillion'),
+      132 => array('trequadragintillion'),
+      135 => array('quattuorquadragintillion'),
+      138 => array('quinquadragintillion'),
+      141 => array('sexquadragintillion'),
+      144 => array('septenquadragintillion'),
+      147 => array('octoquadragintillion'),
+      150 => array('novemquadragintillion'),
+      153 => array('quinquagintillion'),
+      156 => array('unquinquagintillion'),
+      159 => array('duoquinquagintillion'),
+      162 => array('trequinquagintillion'),
+      165 => array('quattuorquinquagintillion'),
+      168 => array('quinquinquagintillion'),
+      171 => array('sexquinquagintillion'),
+      174 => array('septenquinquagintillion'),
+      177 => array('octoquinquagintillion'),
+      180 => array('novemquinquagintillion'),
+      183 => array('sexagintillion'),
+      186 => array('unsexagintillion'),
+      189 => array('duosexagintillion'),
+      192 => array('tresexagintillion'),
+      195 => array('quattuorsexagintillion'),
+      198 => array('quinsexagintillion'),
+      201 => array('sexsexagintillion'),
+      204 => array('septensexagintillion'),
+      207 => array('octosexagintillion'),
+      210 => array('novemsexagintillion'),
+      213 => array('septuagintillion'),
+      216 => array('unseptuagintillion'),
+      219 => array('duoseptuagintillion'),
+      222 => array('treseptuagintillion'),
+      225 => array('quattuorseptuagintillion'),
+      228 => array('quinseptuagintillion'),
+      231 => array('sexseptuagintillion'),
+      234 => array('septenseptuagintillion'),
+      237 => array('octoseptuagintillion'),
+      240 => array('novemseptuagintillion'),
+      243 => array('octogintillion'),
+      246 => array('unoctogintillion'),
+      249 => array('duooctogintillion'),
+      252 => array('treoctogintillion'),
+      255 => array('quattuoroctogintillion'),
+      258 => array('quinoctogintillion'),
+      261 => array('sexoctogintillion'),
+      264 => array('septoctogintillion'),
+      267 => array('octooctogintillion'),
+      270 => array('novemoctogintillion'),
+      273 => array('nonagintillion'),
+      276 => array('unnonagintillion'),
+      279 => array('duononagintillion'),
+      282 => array('trenonagintillion'),
+      285 => array('quattuornonagintillion'),
+      288 => array('quinnonagintillion'),
+      291 => array('sexnonagintillion'),
+      294 => array('septennonagintillion'),
+      297 => array('octononagintillion'),
+      300 => array('novemnonagintillion'),
+      303 => array('centillion'),
+      309 => array('duocentillion'),
+      312 => array('trecentillion'),
+      366 => array('primo-vigesimo-centillion'),
+      402 => array('trestrigintacentillion'),
+      603 => array('ducentillion'),
+      624 => array('septenducentillion'),
+     // bug on a earthlink page: 903 => array('trecentillion'),
+     2421 => array('sexoctingentillion'),
+     3003 => array('millillion'),
+     3000003 => array('milli-millillion')
         );
 
     /**
@@ -183,14 +275,14 @@ class Numbers_Words_en_GB extends Numbers_Words
      * @var string
      * @access public
      */
-    var $def_currency = 'GBP'; // English pound
+    var $def_currency = 'USD'; // American dollar
 
     // }}}
     // {{{ toWords()
 
     /**
      * Converts a number to its word representation
-     * in British English language
+     * in American English language
      *
      * @param integer $num       An integer between -infinity and infinity inclusive :)
      *                           that need to be converted to words
@@ -388,7 +480,7 @@ class Numbers_Words_en_GB extends Numbers_Words
      *
      * @access public
      * @author Piotr Klaban <makler@man.torun.pl>
-     * @since  Numbers_Words 0.13.1
+     * @since  Numbers_Words 0.4
      */
     function toCurrencyWords($int_curr, $decimal, $fraction = false, $convert_fraction = true)
     {
@@ -430,7 +522,6 @@ class Numbers_Words_en_GB extends Numbers_Words
         return $ret;
     }
     // }}}
-
 
 }
 
