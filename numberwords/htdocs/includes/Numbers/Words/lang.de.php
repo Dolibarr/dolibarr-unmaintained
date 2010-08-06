@@ -18,7 +18,7 @@
  * @package  Numbers_Words
  * @author   Piotr Klaban <makler@man.torun.pl>
  * @license  PHP 3.0 http://www.php.net/license/3_0.txt
- * @version  CVS: $Id: lang.de.php,v 1.1 2009/08/25 20:50:38 eldy Exp $
+ * @version  CVS: $Id: lang.de.php,v 1.2 2010/08/06 07:20:58 eldy Exp $
  * @link     http://pear.php.net/package/Numbers_Words
  */
 
@@ -121,7 +121,7 @@ class Numbers_Words_de extends Numbers_Words
      */
     var $_digits = array(
         0 => 'null', 'ein', 'zwei', 'drei', 'vier',
-        'f¸nf', 'sechs', 'sieben', 'acht', 'neun'
+        'f√ºnf', 'sechs', 'sieben', 'acht', 'neun'
     );
 
     /**
@@ -262,7 +262,7 @@ class Numbers_Words_de extends Numbers_Words
             break;
 
         case 3:
-            $ret .= $this->_sep . 'dreiﬂig';
+            $ret .= $this->_sep . 'drei√üig';
             break;
 
         case 2:
@@ -280,7 +280,7 @@ class Numbers_Words_de extends Numbers_Words
                 break;
 
             case 2:
-                $ret .= $this->_sep . 'zwˆlf';
+                $ret .= $this->_sep . 'zw√∂lf';
                 break;
 
             case 3:

@@ -18,7 +18,7 @@
  * @package  Numbers_Words
  * @author   Jesper Veggerby <pear.nosey@veggerby.dk>
  * @license  PHP 3.0 http://www.php.net/license/3_0.txt
- * @version  CVS: $Id: lang.dk.php,v 1.1 2009/08/25 20:50:38 eldy Exp $
+ * @version  CVS: $Id: lang.dk.php,v 1.2 2010/08/06 07:20:58 eldy Exp $
  * @link     http://pear.php.net/package/Numbers_Words
  */
 
@@ -134,14 +134,14 @@ class Numbers_Words_dk extends Numbers_Words
       'CHF' => array(array('schweitzer franc'), array('rappen')),
       'CYP' => array(array('cypriotisk pund', 'cypriotiske pund'), array('cent')),
       'CZK' => array(array('tjekkisk koruna'), array('halerz')),
-      'DKK' => array(array('krone', 'kroner'), array('øre')),
+      'DKK' => array(array('krone', 'kroner'), array('Ã¸re')),
       'EUR' => array(array('euro'), array('euro-cent')),
       'GBP' => array(array('pund'), array('pence')),
       'HKD' => array(array('Hong Kong dollar', 'Hong Kong dollars'), array('cent')),
       'JPY' => array(array('yen'), array('sen')),
-      'NOK' => array(array('norsk krone', 'norske kroner'), array('øre')),
+      'NOK' => array(array('norsk krone', 'norske kroner'), array('Ã¸re')),
       'PLN' => array(array('zloty', 'zlotys'), array('grosz')),
-      'SEK' => array(array('svensk krone', 'svenske kroner'), array('øre')),
+      'SEK' => array(array('svensk krone', 'svenske kroner'), array('Ã¸re')),
       'USD' => array(array('dollar', 'dollars'), array('cent'))
     );
 

@@ -19,7 +19,7 @@
  * @author   Piotr Klaban <makler@man.torun.pl>
  * @author   Robin Ericsson <robin.ericsson@profecta.se>
  * @license  PHP 3.0 http://www.php.net/license/3_0.txt
- * @version  CVS: $Id: lang.sv.php,v 1.1 2009/08/25 20:50:38 eldy Exp $
+ * @version  CVS: $Id: lang.sv.php,v 1.2 2010/08/06 07:20:58 eldy Exp $
  * @link     http://pear.php.net/package/Numbers_Words
  */
 
@@ -120,8 +120,8 @@ class Numbers_Words_sv extends Numbers_Words
      * @access private
      */
     var $_digits = array(
-        0 => 'noll', 'ett', 'två', 'tre', 'fyra',
-        'fem', 'sex', 'sju', 'åtta', 'nio'
+        0 => 'noll', 'ett', 'tvÃ¥', 'tre', 'fyra',
+        'fem', 'sex', 'sju', 'Ã¥tta', 'nio'
     );
 
     /**
@@ -242,7 +242,7 @@ class Numbers_Words_sv extends Numbers_Words
             break;
 
         case 8:
-            $ret .= $this->_sep . 'åttio';
+            $ret .= $this->_sep . 'Ã¥ttio';
             break;
 
         case 4:

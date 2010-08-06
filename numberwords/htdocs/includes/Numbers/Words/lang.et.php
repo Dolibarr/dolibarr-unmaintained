@@ -18,7 +18,7 @@
  * @package  Numbers_Words
  * @author   Erkki Saarniit <erkki@center.ee>
  * @license  PHP 3.0 http://www.php.net/license/3_0.txt
- * @version  CVS: $Id: lang.et.php,v 1.1 2009/08/25 20:50:39 eldy Exp $
+ * @version  CVS: $Id: lang.et.php,v 1.2 2010/08/06 07:20:58 eldy Exp $
  * @link     http://pear.php.net/package/Numbers_Words
  */
 // DOL_CHANGE
@@ -194,8 +194,8 @@ class Numbers_Words_et extends Numbers_Words
      * @access private
      */
     var $_digits = array(
-        0 => 'null', 'üks', 'kaks', 'kolm', 'neli',
-        'viis', 'kuus', 'seitse', 'kaheksa', 'üheksa'
+        0 => 'null', 'Ã¼ks', 'kaks', 'kolm', 'neli',
+        'viis', 'kuus', 'seitse', 'kaheksa', 'Ã¼heksa'
     );
 
     /**
@@ -297,13 +297,13 @@ class Numbers_Words_et extends Numbers_Words
         case 4:
         case 3:
         case 2:
-            $ret .= $this->_sep . $this->_digits[$t] . 'kümmend';
+            $ret .= $this->_sep . $this->_digits[$t] . 'kÃ¼mmend';
             break;
 
         case 1:
             switch ($d) {
             case 0:
-                $ret .= $this->_sep . 'kümme';
+                $ret .= $this->_sep . 'kÃ¼mme';
                 break;
 
             case 1:

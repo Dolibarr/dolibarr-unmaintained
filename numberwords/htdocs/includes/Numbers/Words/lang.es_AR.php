@@ -19,7 +19,7 @@
  * @author   Xavier Noguer   <xnoguer.php@gmail.com>
  * @author   Martin Marrese  <mmare@mecon.gov.ar>
  * @license  PHP 3.0 http://www.php.net/license/3_0.txt
- * @version  CVS: $Id: lang.es_AR.php,v 1.1 2009/08/25 20:50:38 eldy Exp $
+ * @version  CVS: $Id: lang.es_AR.php,v 1.2 2010/08/06 07:20:58 eldy Exp $
  * @link     http://pear.php.net/package/Numbers_Words
  */
 
@@ -71,7 +71,7 @@ class Numbers_Words_es_AR extends Numbers_Words
      * @var string
      * @access public
      */
-    var $lang_native = 'Español';
+    var $lang_native = 'EspaÃ±ol';
 
     /**
      * The word for the minus sign
@@ -88,16 +88,16 @@ class Numbers_Words_es_AR extends Numbers_Words
     var $_exponent = array(
         0 => array('',''),
         3 => array('mil','mil'),
-        6 => array('millón','millones'),
-       12 => array('billón','billones'),
-       18 => array('trilón','trillones'),
-       24 => array('cuatrillón','cuatrillones'),
-       30 => array('quintillón','quintillones'),
-       36 => array('sextillón','sextillones'),
-       42 => array('septillón','septillones'),
-       48 => array('octallón','octallones'),
-       54 => array('nonallón','nonallones'),
-       60 => array('decallón','decallones'),
+        6 => array('millÃ³n','millones'),
+       12 => array('billÃ³n','billones'),
+       18 => array('trilÃ³n','trillones'),
+       24 => array('cuatrillÃ³n','cuatrillones'),
+       30 => array('quintillÃ³n','quintillones'),
+       36 => array('sextillÃ³n','sextillones'),
+       42 => array('septillÃ³n','septillones'),
+       48 => array('octallÃ³n','octallones'),
+       54 => array('nonallÃ³n','nonallones'),
+       60 => array('decallÃ³n','decallones'),
         );
     /**
      * The array containing the digits (indexed by the digits themselves).
@@ -145,7 +145,7 @@ class Numbers_Words_es_AR extends Numbers_Words
       'HRK' => array(array('Croatian kuna'), array('lipa')),
       'HUF' => array(array('forint'), array('filler')),
       'ILS' => array(array('new sheqel','new sheqels'), array('agora','agorot')),
-      'ISK' => array(array('Icelandic króna'), array('aurar')),
+      'ISK' => array(array('Icelandic krÃ³na'), array('aurar')),
       'JPY' => array(array('yen'), array('sen')),
       'LTL' => array(array('litas'), array('cent')),
       'LVL' => array(array('lat'), array('sentim')),
@@ -158,7 +158,7 @@ class Numbers_Words_es_AR extends Numbers_Words
       'SEK' => array(array('Swedish krona'), array('oere')),
       'SIT' => array(array('Tolar'), array('stotinia')),
       'SKK' => array(array('Slovak koruna'), array()),
-      'TRL' => array(array('lira'), array('kuruþ')),
+      'TRL' => array(array('lira'), array('kuruÃ¾')),
       'UAH' => array(array('hryvna'), array('cent')),
       'USD' => array(array('dollar'), array('cent')),
       'YUM' => array(array('dinars'), array('para')),
@@ -307,7 +307,7 @@ class Numbers_Words_es_AR extends Numbers_Words
                 $ret .= $this->_sep . 'veinte';
             } else {
                 if (($power > 0) and ($d == 1)) {
-                    $ret .= $this->_sep . 'veintiún';
+                    $ret .= $this->_sep . 'veintiÃºn';
                 } else {
                     $ret .= $this->_sep . 'veinti' . $this->_digits[$d];
                 }

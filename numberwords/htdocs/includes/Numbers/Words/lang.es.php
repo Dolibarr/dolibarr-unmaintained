@@ -18,7 +18,7 @@
  * @package  Numbers_Words
  * @author   Xavier Noguer
  * @license  PHP 3.0 http://www.php.net/license/3_0.txt
- * @version  CVS: $Id: lang.es.php,v 1.1 2009/08/25 20:50:38 eldy Exp $
+ * @version  CVS: $Id: lang.es.php,v 1.2 2010/08/06 07:20:58 eldy Exp $
  * @link     http://pear.php.net/package/Numbers_Words
  */
 
@@ -69,7 +69,7 @@ class Numbers_Words_es extends Numbers_Words
      * @var string
      * @access public
      */
-    var $lang_native = 'Espa駉l';
+    var $lang_native = 'Espa帽ol';
 
     /**
      * The word for the minus sign
@@ -86,16 +86,16 @@ class Numbers_Words_es extends Numbers_Words
     var $_exponent = array(
         0 => array('',''),
         3 => array('mil','mil'),
-        6 => array('mill髇','millones'),
-       12 => array('bill髇','billones'),
-       18 => array('tril髇','trillones'),
-       24 => array('cuatrill髇','cuatrillones'),
-       30 => array('quintill髇','quintillones'),
-       36 => array('sextill髇','sextillones'),
-       42 => array('septill髇','septillones'),
-       48 => array('octall髇','octallones'),
-       54 => array('nonall髇','nonallones'),
-       60 => array('decall髇','decallones'),
+        6 => array('mill贸n','millones'),
+       12 => array('bill贸n','billones'),
+       18 => array('tril贸n','trillones'),
+       24 => array('cuatrill贸n','cuatrillones'),
+       30 => array('quintill贸n','quintillones'),
+       36 => array('sextill贸n','sextillones'),
+       42 => array('septill贸n','septillones'),
+       48 => array('octall贸n','octallones'),
+       54 => array('nonall贸n','nonallones'),
+       60 => array('decall贸n','decallones'),
         );
     /**
      * The array containing the digits (indexed by the digits themselves).
@@ -243,7 +243,7 @@ class Numbers_Words_es extends Numbers_Words
                 $ret .= $this->_sep . 'veinte';
             } else {
                 if (($power > 0) and ($d == 1)) {
-                    $ret .= $this->_sep . 'veinti鷑';
+                    $ret .= $this->_sep . 'veinti煤n';
                 } else {
                     $ret .= $this->_sep . 'veinti' . $this->_digits[$d];
                 }
