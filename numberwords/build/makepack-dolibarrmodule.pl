@@ -2,13 +2,13 @@
 #----------------------------------------------------------------------------
 # \file         build/makepack-dolibarrmodule.pl
 # \brief        Package builder (tgz, zip, rpm, deb, exe)
-# \version      $Revision: 1.2 $
+# \version      $Revision: 1.3 $
 # \author       (c)2005-2006 Laurent Destailleur  <eldy@users.sourceforge.net>
 #----------------------------------------------------------------------------
 
 use Cwd;
 
-$PROJECT="mymodule";
+$PROJECT="numberwords";
 
 @LISTETARGET=("TGZ");   # Possible packages
 %REQUIREMENTTARGET=(    # Tool requirement for each package
@@ -19,7 +19,7 @@ $PROJECT="mymodule";
 
 
 use vars qw/ $REVISION $VERSION /;
-$REVISION='$Revision: 1.2 $'; $REVISION =~ /\s(.*)\s/; $REVISION=$1;
+$REVISION='$Revision: 1.3 $'; $REVISION =~ /\s(.*)\s/; $REVISION=$1;
 $VERSION="1.0 (build $REVISION)";
 
 
