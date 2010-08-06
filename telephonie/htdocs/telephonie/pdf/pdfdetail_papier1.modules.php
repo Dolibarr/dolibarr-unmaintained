@@ -16,7 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  * or see http://www.gnu.org/
  *
- * $Id: pdfdetail_papier1.modules.php,v 1.3 2010/04/25 14:46:44 grandoc Exp $
+ * $Id: pdfdetail_papier1.modules.php,v 1.4 2010/08/06 13:56:09 hregis Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/pdf/pdfdetail_papier1.modules.php,v $
  *
  * Génère un PDF de la première page de résumé et un tableur des communications
@@ -57,7 +57,7 @@ class pdfdetail_papier {
     {
       $fac = new Facture($this->db,"",$factel->fk_facture);
       $fac->fetch($factel->fk_facture);  
-      $fac->fetch_client();
+      $fac->fetch_thirdparty();
 
       $objlignetel = new LigneTel($this->db);
 

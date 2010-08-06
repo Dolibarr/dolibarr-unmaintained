@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: facturation-emission.php,v 1.7 2010/04/29 14:54:33 grandoc Exp $
+ * $Id: facturation-emission.php,v 1.8 2010/08/06 13:56:09 hregis Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/script/facturation-emission.php,v $
  *
  *
@@ -28,7 +28,7 @@
    \file       htdocs/telephonie/script/facturation-emission.php
    \ingroup    telephonie
    \brief      Emission des factures
-   \version    $Revision: 1.7 $
+   \version    $Revision: 1.8 $
 */
 
 
@@ -787,7 +787,7 @@ function facture_contrat($db, $user, $contrat_id, $factel_ids, $datetime, &$fact
       if ($verbose) dol_syslog("G�n�ration du pdf facture : $facid");
       
       $fac->fetch($facid);
-      $fac->fetch_client();
+      $fac->fetch_thirdparty();
       $fac->client->load_ban();
       
       $message = "";

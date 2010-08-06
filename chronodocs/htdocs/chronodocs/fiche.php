@@ -23,7 +23,7 @@
  \file       htdocs/chronodocs/fiche.php
  \brief      Fichier fiche chronodoc
  \ingroup    chronodocs
- \version    $Id: fiche.php,v 1.3 2008/11/02 00:22:22 raphael_bertrand Exp $
+ \version    $Id: fiche.php,v 1.4 2010/08/06 13:56:09 hregis Exp $
  */
 
 require("./pre.inc.php");
@@ -96,7 +96,7 @@ if ($_POST["action"] == 'add')
 	{
 		if(empty($chronodocs->ref))
 		{//Get new reference before create
-			$chronodocs->fetch_client();
+			$chronodocs->fetch_thirdparty();
 			$chronodocs->fetch_chronodocs_type();
 			
 			if (! $conf->global->CHRONODOCS_ADDON)
@@ -153,7 +153,7 @@ if ($_POST["action"] == 'update')
 	
 	if(empty($chronodocs->ref) ||($chronodocs_oldref==$chronodocs->ref && $chronodocs_oldtype!=$chronodocs->fk_chronodocs_type))
 	{//Get new reference before update
-		$chronodocs->fetch_client();
+		$chronodocs->fetch_thirdparty();
 		$chronodocs->fetch_chronodocs_type();
 		
 		$chronodocs->set_ref($user,'REGENERATED'); // Erase old ref (to avoid increasing counter if updating last created ref)
@@ -325,7 +325,7 @@ if ($_GET["id"] > 0 && $_GET["action"] != 'create' )
 		dolibarr_print_error($db);
 		exit;
 	}
-	$chronodocs->fetch_client();
+	$chronodocs->fetch_thirdparty();
 	$chronodocs->fetch_chronodocs_type();
 	
 	if ($mesg) print $mesg."<br>";
@@ -697,5 +697,5 @@ if ($_GET["action"] == 'create' || $_GET["action"] == 'editAll')
 
 $db->close();
 
-llxFooter('$Date: 2008/11/02 00:22:22 $ - $Revision: 1.3 $');
+llxFooter('$Date: 2010/08/06 13:56:09 $ - $Revision: 1.4 $');
 ?>
