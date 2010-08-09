@@ -22,7 +22,7 @@
  *      \file       htdocs/includes/modules/barcode/pibarcode.modules.php
  *		\ingroup    facture
  *		\brief      Fichier contenant la classe du modele de generation code barre pibarcode
- *		\version    $Id: pibarcode.modules.php,v 1.2 2010/08/05 22:50:57 eldy Exp $
+ *		\version    $Id: pibarcode.modules.php,v 1.3 2010/08/09 23:01:19 eldy Exp $
  */
 
 require_once(DOL_DOCUMENT_ROOT ."/includes/modules/barcode/modules_barcode.php");
@@ -33,7 +33,7 @@ require_once(DOL_DOCUMENT_ROOT ."/includes/modules/barcode/modules_barcode.php")
 */
 class modPibarcode extends ModeleBarCode
 {
-	var $version='dolibarr';		// 'development', 'experimental', 'dolibarr'
+	var $version='2.9';		// 'development', 'experimental', 'dolibarr'
 	var $error='';
 
     /**     \brief      Renvoi la description du modele de numerotation
