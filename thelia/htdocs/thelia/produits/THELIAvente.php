@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: THELIAvente.php,v 1.7 2010/06/02 08:29:58 eldy Exp $
+ * $Id: THELIAvente.php,v 1.8 2010/08/09 15:42:37 eldy Exp $
  */
 
 require("./pre.inc.php");
@@ -31,10 +31,11 @@ if ($_GET["action"] == 'liste' )
 	$sql = "SELECT o.doli_prodidp as idp, o.osc_prodid as oscid, o.osc_lastmodif as date ";
 	$sql .= "FROM ".MAIN_DB_PREFIX."osc_product as o";
 
-	if ( $db->query($sql) )
+    $resql=$db->query($sql);
+	if ($resql)
 	{
 	    $langs->load("products");
-	    $num = $db->num_rows();
+	    $num = $db->num_rows($resql);
 	    if ($num)
 	    {
 	        $i = 0;
@@ -45,7 +46,7 @@ if ($_GET["action"] == 'liste' )
 	        while ($i < $num)
 	        {
 	            $var=!$var;
-	            $obj = $db->fetch_object();
+	            $obj = $db->fetch_object($resql);
 
 	            print '<tr $bc[$var]><td nowrap><a href="'.DOL_URL_ROOT.'/product/fiche.php?id='.$obj->idp.'">'.img_object($langs->trans("ShowProduct"),"Product").' '.$obj->idp.'</a></td>';
 	            print '<td><a href="'.DOL_URL_ROOT.'/comm/fiche.php?socid='.$obj->idp.'">'.img_object($langs->trans("OscProd"),"Product").' '.$obj->oscid.'</a></td></tr>';
@@ -165,5 +166,5 @@ if ($_GET["action"] == 'vendre' )
  		print '<a class="tabAction" href="OSCvente.php?action=liste">'.$langs->trans("Liste").'</a>';
 	print "\n</div>\n";
 
-llxFooter('$Date: 2010/06/02 08:29:58 $ - $Revision: 1.7 $');
+llxFooter('$Date: 2010/08/09 15:42:37 $ - $Revision: 1.8 $');
 ?>

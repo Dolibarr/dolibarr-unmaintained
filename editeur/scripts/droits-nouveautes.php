@@ -22,7 +22,7 @@
  *  \file       scripts/books/droits-editeurs.php
  *  \ingroup    editeurs
  *  \brief      Script de generation des courriers pour les editeurs
- * 	\version	$Id: droits-nouveautes.php,v 1.1 2010/06/05 15:45:14 eldy Exp $
+ * 	\version	$Id: droits-nouveautes.php,v 1.2 2010/08/09 15:42:37 eldy Exp $
  */
 
 require_once("../../htdocs/master.inc.php");
@@ -112,7 +112,8 @@ $sql .= " AND p.rowid = c.fk_cnv_livre";
 $sql .= " AND p.canvas = 'livre'";
 $sql .= " ORDER BY p.rowid ASC";
 
-if ($db->query($sql))
+$resql=$db->query($sql);
+if ($resql)
 {
   $i = 0;
   $j = 1;
@@ -135,7 +136,7 @@ if ($db->query($sql))
   $page->write_string(0,13,"Droits\na payer",$fdroits);
   $page->write_string(0,14,"Droits payes\ndavance",$fdroits);
 
-  while ($obj = $db->fetch_object())
+  while ($obj = $db->fetch_object($resql))
     {
       $k = $j+1;
 
