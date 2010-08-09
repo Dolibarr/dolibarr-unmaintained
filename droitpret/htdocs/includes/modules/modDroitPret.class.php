@@ -19,7 +19,7 @@
 
 /**
  *	\defgroup   DroitPret     Module droitpret
- *	\version	$Id: modDroitPret.class.php,v 1.1 2010/07/29 16:27:10 cdelambert Exp $
+ *	\version	$Id: modDroitPret.class.php,v 1.5 2010/08/09 14:58:09 eldy Exp $
  *	\brief      Module pour gerer le suivi des droits de prets
  */
 

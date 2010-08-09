@@ -21,7 +21,7 @@
  *     \file       htdocs/droitpret/droitpret.class.php
  *     \ingroup    droitpret
  *     \brief      Fichier de la classe ddes droits de prets
- *     \version    $Id: droitpret.class.php,v 1.1 2010/07/29 15:02:31 cdelambert Exp $
+ *     \version    $Id: droitpret.class.php,v 1.5 2010/08/09 14:58:09 eldy Exp $
  */
 
 

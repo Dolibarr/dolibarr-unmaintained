@@ -27,7 +27,7 @@
  *	\file       htdocs/includes/modules/modChronodocs.class.php
  *	\ingroup    chronodocs
  *	\brief      Description and activation file for module Chronodocs
- *	\version	$Id: modChronodocs.class.php,v 1.8 2010/04/21 05:33:41 hregis Exp $
+ *	\version	$Id: modChronodocs.class.php,v 1.9 2010/08/09 14:56:29 eldy Exp $
  */
 
 include_once(DOL_DOCUMENT_ROOT ."/includes/modules/DolibarrModules.class.php");
@@ -74,18 +74,18 @@ class modChronodocs extends DolibarrModules
 		$this->dirs = array();
 		$this->dirs[0] = DOL_DATA_ROOT.'/chronodocs';
 		$this->dirs[1] = DOL_DATA_ROOT.'/chronodocs/temp';
-			
+
 		// Relative path to module style sheet if exists. Example: '/chronodocs/mycss.css'.
 		$this->style_sheet = '';
 
 		// Config pages. Put here list of php page names stored in admin directory used to setup module.
-		$this->config_page_url = array("chronodocs.php");
+		$this->config_page_url = array("chronodocs.php@chronodocs");
 
 		// Dependencies
 		$this->depends = array("modSociete","modCommercial");		// List of modules id that must be enabled if this module is enabled
 		$this->requiredby = array();	// List of modules id to disable if this one is disabled
 		$this->phpmin = array(4,1);					// Minimum version of PHP required by module
-		$this->need_dolibarr_version = array(2,4);	// Minimum version of Dolibarr required by module
+		$this->need_dolibarr_version = array(2,9);	// Minimum version of Dolibarr required by module
 		$this->langfiles = array("@chronodocs");
 
 		// Constants
@@ -140,28 +140,28 @@ class modChronodocs extends DolibarrModules
 		$this->rights[$r][4] = 'entries';		// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
 		$this->rights[$r][5] = 'write';			// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
 		$r++;
-			
+
 		$this->rights[$r][0] = 2602; 				// Permission id (must not be already used)
 		$this->rights[$r][1] = 'Delete chronodocs';	// Permission label
 		$this->rights[$r][3] = 0; 					// Permission by default for new user (0/1)
 		$this->rights[$r][4] = 'entries';			// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
 		$this->rights[$r][5] = 'delete';			// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
 		$r++;
-			
+
 		$this->rights[$r][0] = 2603; 				// Permission id (must not be already used)
 		$this->rights[$r][1] = 'Read chronodocs_types details';	// Permission label
 		$this->rights[$r][3] = 0; 					// Permission by default for new user (0/1)
 		$this->rights[$r][4] = 'types';			// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
 		$this->rights[$r][5] = 'read';			// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
 		$r++;
-			
+
 		$this->rights[$r][0] = 2604; 				// Permission id (must not be already used)
 		$this->rights[$r][1] = 'Write chronodocs_types (Create/Edit)';	// Permission label
 		$this->rights[$r][3] = 0; 					// Permission by default for new user (0/1)
 		$this->rights[$r][4] = 'types';			// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
 		$this->rights[$r][5] = 'write';			// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
 		$r++;
-			
+
 		$this->rights[$r][0] = 2605; 				// Permission id (must not be already used)
 		$this->rights[$r][1] = 'Delete chronodocs_types';	// Permission label
 		$this->rights[$r][3] = 0; 					// Permission by default for new user (0/1)
@@ -346,7 +346,7 @@ class modChronodocs extends DolibarrModules
 				}
 				closedir($handle);
 			}
-			
+
 			if ($error == 0)
 			{
 				$ok = 1;

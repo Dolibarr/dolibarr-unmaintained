@@ -25,7 +25,7 @@
     	\file       htdocs/admin/chronodocs.php
 		\ingroup    chronodocs
 		\brief      Page d'administration/configuration du module chronodocs (partialy from fichinter code)
-		\version    $Id: chronodocs.php,v 1.1 2010/08/09 14:56:14 eldy Exp $
+		\version    $Id: chronodocs.php,v 1.2 2010/08/09 14:57:38 eldy Exp $
 */
 
 require("./pre.inc.php");
@@ -380,5 +380,5 @@ print '<br>';
 
 $db->close();
 
-llxFooter('$Date: 2010/08/09 14:56:14 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2010/08/09 14:57:38 $ - $Revision: 1.2 $');
 ?>

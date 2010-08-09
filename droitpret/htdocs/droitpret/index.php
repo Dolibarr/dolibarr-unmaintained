@@ -18,14 +18,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: index.php,v 1.2 2010/07/29 16:27:10 cdelambert Exp $
+ * $Id: index.php,v 1.5 2010/08/09 14:58:09 eldy Exp $
  */
 
 /**
  *     \file       htdocs/droitpret/index.php
  *     \ingroup    droitpret
  *     \brief      Page accueil droitpret
- *     \version    $Revision: 1.2 $
+ *     \version    $Revision: 1.5 $
  */
 
 require("./pre.inc.php");

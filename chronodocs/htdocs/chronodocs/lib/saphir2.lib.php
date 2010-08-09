@@ -22,7 +22,7 @@
  \file			htdocs/lib/saphir2.lib.php
  \brief			Ensemble de fonctions de base de dolibarr sous forme d'include.
 				Used for counters.
- \version		$Id: saphir2.lib.php,v 1.1 2010/08/09 14:56:14 eldy Exp $
+ \version		$Id: saphir2.lib.php,v 1.2 2010/08/09 14:57:38 eldy Exp $
  */
 
 

@@ -27,7 +27,7 @@
  *	\file       htdocs/includes/modules/modthelia.class.php
  *	\ingroup    thelia
  *	\brief      Fichier de description et activation du module THELIA
- * 	\version	$Id: modThelia.class.php,v 1.3 2010/02/08 00:50:30 jfefe Exp $
+ * 	\version	$Id: modThelia.class.php,v 1.4 2010/08/09 14:58:18 eldy Exp $
  */
 include_once(DOL_DOCUMENT_ROOT ."/includes/modules/DolibarrModules.class.php");
 
@@ -60,7 +60,7 @@ class modThelia extends DolibarrModules
 		$this->dirs = array();
 
 		// Config pages
-      $this->config_page_url =  array("thelia_setup.php");
+        $this->config_page_url =  array("thelia_setup.php@thelia");
 
 		// Dependances
 		$this->depends = array();
@@ -77,13 +77,13 @@ class modThelia extends DolibarrModules
 		// Permissions
 		$this->rights = array();
       //	$this->rights_class = 'boutique';
-         
-         
-      
+
+
+
       // Menus
       //------
       $r=0;
-      
+
       $this->menu[$r]=array(
       'fk_menu'=>0,
       'type'=>'top',
@@ -97,7 +97,7 @@ class modThelia extends DolibarrModules
       'target'=>'',
       'user'=>0);
       $r++;
-      
+
       // Example to declare a Left Menu entry:
       $this->menu[$r]=array(
       'fk_menu'=>'r=0',    // Use r=value where r is index key used for the parent menu entry (higher parent must be a top menu entry)
@@ -111,16 +111,16 @@ class modThelia extends DolibarrModules
       'perms'=>'1',        // Use 'perms'=>'$user->rights->mymodule->level1->level2' if you want your menu with a permission rules
       'target'=>'',
       'user'=>0);          // 0=Menu for internal users,1=external users, 2=both
-      $r++;      
+      $r++;
 
       // Example to declare a Left Menu entry:
-      $this->menu[$r]=array('fk_menu'=>'r=1', 'type'=>'left', 'titre'=>'Commandes', 'mainmenu'=>'thelia', 'url'=>'/thelia/commandes/index.php', 'langs'=>'other', 'position'=>101, 'enabled'=>'1', 'perms'=>'1', 'target'=>'', 'user'=>0);       
-      $r++;         
-      $this->menu[$r]=array('fk_menu'=>'r=1', 'type'=>'left', 'titre'=>'Clients', 'mainmenu'=>'thelia', 'url'=>'/thelia/clients/index.php', 'langs'=>'other', 'position'=>102, 'enabled'=>'1', 'perms'=>'1', 'target'=>'', 'user'=>0);       
+      $this->menu[$r]=array('fk_menu'=>'r=1', 'type'=>'left', 'titre'=>'Commandes', 'mainmenu'=>'thelia', 'url'=>'/thelia/commandes/index.php', 'langs'=>'other', 'position'=>101, 'enabled'=>'1', 'perms'=>'1', 'target'=>'', 'user'=>0);
       $r++;
-      $this->menu[$r]=array('fk_menu'=>'r=1', 'type'=>'left', 'titre'=>'Produits', 'mainmenu'=>'thelia', 'url'=>'/thelia/produits/index.php', 'langs'=>'other', 'position'=>103, 'enabled'=>'1', 'perms'=>'1', 'target'=>'', 'user'=>0);       
+      $this->menu[$r]=array('fk_menu'=>'r=1', 'type'=>'left', 'titre'=>'Clients', 'mainmenu'=>'thelia', 'url'=>'/thelia/clients/index.php', 'langs'=>'other', 'position'=>102, 'enabled'=>'1', 'perms'=>'1', 'target'=>'', 'user'=>0);
       $r++;
-      $this->menu[$r]=array('fk_menu'=>'r=1', 'type'=>'left', 'titre'=>'Catégories', 'mainmenu'=>'thelia', 'url'=>'/thelia/produits/categories.php', 'langs'=>'other', 'position'=>104, 'enabled'=>'1', 'perms'=>'1', 'target'=>'', 'user'=>0);       
+      $this->menu[$r]=array('fk_menu'=>'r=1', 'type'=>'left', 'titre'=>'Produits', 'mainmenu'=>'thelia', 'url'=>'/thelia/produits/index.php', 'langs'=>'other', 'position'=>103, 'enabled'=>'1', 'perms'=>'1', 'target'=>'', 'user'=>0);
+      $r++;
+      $this->menu[$r]=array('fk_menu'=>'r=1', 'type'=>'left', 'titre'=>'Catégories', 'mainmenu'=>'thelia', 'url'=>'/thelia/produits/categories.php', 'langs'=>'other', 'position'=>104, 'enabled'=>'1', 'perms'=>'1', 'target'=>'', 'user'=>0);
       $r++;
 
       // Array to add new pages in new tabs
@@ -135,7 +135,7 @@ class modThelia extends DolibarrModules
 	{
 		$sql = array();
       $result=$this->load_tables();
-      
+
 		return $this->_init($sql);
 	}
 
@@ -153,7 +153,7 @@ class modThelia extends DolibarrModules
    {
       return $this->_load_tables('/thelia/sql/');
    }
-   
+
 
 }
 ?>
