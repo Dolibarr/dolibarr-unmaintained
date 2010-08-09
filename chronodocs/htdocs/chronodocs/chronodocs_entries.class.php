@@ -21,7 +21,7 @@
         \file       chronodocs/chronodocs_entries.class.php
         \ingroup    chronodocs
         \brief      CRUD class file for chronodocs entries (Create/Read/Update/Delete)
-		\version    $Id: chronodocs_entries.class.php,v 1.14 2010/04/29 14:54:33 grandoc Exp $
+		\version    $Id: chronodocs_entries.class.php,v 1.15 2010/08/09 15:04:18 eldy Exp $
 		\author	Raphael Bertrand (Resultic) <raphael.bertrand@resultic.fr>
 		\remarks	Initialy built by build_class_from_table on 2008-08-18 17:28
 */
@@ -49,7 +49,7 @@ class Chronodocs_entries  extends CommonObject
 
     var $id;
 
-	var $client=null;				// Objet societe client (a charger par fetch_client)
+	var $client=null;				// Objet societe client (a charger par fetch_thirdparty)
 	var $chronodocs_type=null;		// Objet chronodocs_types (a charger par fetch_chronodocs_type)
 	var $propvalues=null;			// Objet contenant les objets chronodocs_propvalues correspondants (a charger par fetch_chronodocs_propvalues)
 
