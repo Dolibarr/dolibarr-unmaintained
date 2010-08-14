@@ -23,7 +23,7 @@
         \file       htdocs/product_composition/product_composition.class.php
         \ingroup    product_composition
         \brief      *complete here*
-		\version    $Id: service_product_composition.class.php,v 1.1 2010/06/07 14:49:47 pit Exp $
+		\version    $Id: service_product_composition.class.php,v 1.2 2010/08/14 02:43:19 eldy Exp $
 		\author		Patrick Raguin
 */
 
@@ -266,7 +266,7 @@ class service_product_composition
 		//Récupère le rowid des sous produits
 		$res = dao_product_composition::select($this->db,'fk_product = '.$product);
 
-		if(($res)&&($this->db->num_rows() > 0))
+		if(($res)&&($this->db->num_rows($res) > 0))
 		{
 			while($item = $this->db->fetch_object($res))
 			{
@@ -665,7 +665,7 @@ class service_product_composition
 					$factory_price += $obj->total_price;
 					$factory_price_ttc += $obj->total_price_ttc;
 				}
-	
+
 			}
 		}
 
