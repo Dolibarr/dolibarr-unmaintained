@@ -2,6 +2,7 @@
 CHARSET=UTF-8
 
 Module100000Desc=Fonctionnalités spécifiques à la législation belge
+Module100000Name=Belgique
 
 Belgium=Belgique
 ClientVATNumber=Numéro TVA client
