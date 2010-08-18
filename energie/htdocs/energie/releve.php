@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: releve.php,v 1.1 2009/10/20 16:19:26 eldy Exp $
+ * $Id: releve.php,v 1.2 2010/08/18 13:40:23 eldy Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/energie/htdocs/energie/releve.php,v $
  *
  */
@@ -24,7 +24,7 @@
  *  \file       htdocs/energie/compteur.php
  *  \ingroup    energie
  *  \brief      Fiche compteur
- *  \version    $Revision: 1.1 $
+ *  \version    $Revision: 1.2 $
  */
 
 require("./pre.inc.php");
@@ -91,7 +91,7 @@ if ($_GET["id"] > 0)
       $limit = $conf->liste_limit;
       $offset = $limit * $page ;
 
-      $sql = "SELECT ".$db->pdate("date_releve")." as date_releve, valeur, rowid";
+      $sql = "SELECT date_releve, valeur, rowid";
       $sql .= " FROM ".MAIN_DB_PREFIX."energie_compteur_releve as ecr";
       $sql .= " WHERE ecr.fk_compteur = '".$compteur->id."'";
 
@@ -116,7 +116,7 @@ if ($_GET["id"] > 0)
 	      $obj = $db->fetch_object($resql);
 	      $var=!$var;
 	      print "<tr $bc[$var]><td>";
-	      print dol_print_date($obj->date_releve,'%a %d %B %Y');
+	      print dol_print_date($db->jdate($obj->date_releve),'%a %d %B %Y');
 	      print '</td><td>'.$obj->valeur.'</td>';
 	      print '<td><a href="releve.php?id='.$compteur->id.'&amp;action=delete&amp;rowid='.$obj->rowid.'&amp;page='.$page.'">';
 	      print img_delete().'</a></td></tr>';
@@ -140,5 +140,5 @@ else
 
 $db->close();
 
-llxFooter("<em>Derni&egrave;re modification $Date: 2009/10/20 16:19:26 $ r&eacute;vision $Revision: 1.1 $</em>");
+llxFooter("<em>Derni&egrave;re modification $Date: 2010/08/18 13:40:23 $ r&eacute;vision $Revision: 1.2 $</em>");
 ?>

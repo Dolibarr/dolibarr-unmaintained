@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: graph-line.php,v 1.2 2010/05/01 21:09:47 grandoc Exp $
+ * $Id: graph-line.php,v 1.3 2010/08/18 13:40:23 eldy Exp $
  */
 
 require_once("../../htdocs/master.inc.php");
@@ -51,7 +51,7 @@ if ($resql_c)
 
 	  $compteur_id = $obj_c->rowid;
 
-	  $sql = "SELECT ".$db->pdate("date_releve")." as date_releve, valeur";
+	  $sql = "SELECT date_releve, valeur";
 	  $sql .= " FROM ".MAIN_DB_PREFIX."energie_compteur_releve";
 	  $sql .= " WHERE fk_compteur = ".$obj_c->rowid;
 	  $sql .= " ORDER BY date_releve ASC";
@@ -67,7 +67,7 @@ if ($resql_c)
 		{
 		  $obj = $db->fetch_object($resql);
 
-		  $previous_date  = $obj->date_releve;
+		  $previous_date  = $db->jdate($obj->date_releve);
 		  $previous_value = $obj->valeur;
 
 		  $i++;

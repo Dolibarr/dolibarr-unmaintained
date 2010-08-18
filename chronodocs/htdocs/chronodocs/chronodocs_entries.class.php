@@ -21,7 +21,7 @@
         \file       chronodocs/chronodocs_entries.class.php
         \ingroup    chronodocs
         \brief      CRUD class file for chronodocs entries (Create/Read/Update/Delete)
-		\version    $Id: chronodocs_entries.class.php,v 1.15 2010/08/09 15:04:18 eldy Exp $
+		\version    $Id: chronodocs_entries.class.php,v 1.16 2010/08/18 13:40:23 eldy Exp $
 		\author	Raphael Bertrand (Resultic) <raphael.bertrand@resultic.fr>
 		\remarks	Initialy built by build_class_from_table on 2008-08-18 17:28
 */
@@ -210,8 +210,8 @@ class Chronodocs_entries  extends CommonObject
 		$sql.= " t.filename_orig,";
 		$sql.= " t.filesize,";
 		$sql.= " t.brief,";
-		$sql.= " ".$this->db->pdate('t.date_c')." as date_c,";
-		$sql.= " ".$this->db->pdate('t.date_u')." as date_u,";
+		$sql.= " t.date_c,";
+		$sql.= " t.date_u,";
 		$sql.= " t.fk_chronodocs_type,";
 		$sql.= " t.socid,";
 		$sql.= " t.fk_status,";
@@ -238,8 +238,8 @@ class Chronodocs_entries  extends CommonObject
 				$this->filename_orig = $obj->filename_orig;
 				$this->filesize = $obj->filesize;
 				$this->brief = $obj->brief;
-				$this->date_c = $obj->date_c;
-				$this->date_u = $obj->date_u;
+				$this->date_c = $this->db->jdate($obj->date_c);
+				$this->date_u = $this->db->jdate($obj->date_u);
 				$this->fk_chronodocs_type = $obj->fk_chronodocs_type;
 				$this->socid = $obj->socid;
 				$this->fk_status = $obj->fk_status;
@@ -821,7 +821,7 @@ class Chronodocs_entries  extends CommonObject
 		if(empty($id))
 			$id=$this->id;
 
-		$sql = "SELECT c.rowid, c.ref, ".$this->db->pdate("date_c")." as date_c, ".$this->db->pdate("date_u")." as date_u,";
+		$sql = "SELECT c.rowid, c.ref, date_c, date_u,";
 		$sql.= " fk_user_c, fk_user_u";
 		$sql.= " FROM ".MAIN_DB_PREFIX."chronodocs_entries as c";
 		$sql.= " WHERE c.rowid = ".$id;
@@ -848,8 +848,8 @@ class Chronodocs_entries  extends CommonObject
 					$this->user_modification = $muser;
 				}
 				$this->ref			     = $obj->ref;
-				$this->date_creation     = $obj->date_c;
-				$this->date_modification = $obj->date_u;
+				$this->date_creation     = $this->db->jdate($obj->date_c);
+				$this->date_modification = $this->db->jdate($obj->date_u);
 			}
 
 			$this->db->free($result);
@@ -881,7 +881,7 @@ class Chronodocs_entries  extends CommonObject
 
 		$tab_objp=array();
 
-		$sql = "SELECT s.nom,s.rowid as socid, f.ref,".$db->pdate("f.date_c")." as dp,".$db->pdate("f.date_u")." as date_u, f.rowid as fichid, f.title, f.fk_chronodocs_type";
+		$sql = "SELECT s.nom,s.rowid as socid, f.ref, f.date_c, f.date_u, f.rowid as fichid, f.title, f.fk_chronodocs_type";
 		//if (!$user->rights->societe->client->voir && !$socid) $sql .= ", sc.socid, sc.fk_user";
 		$sql.= " FROM ".MAIN_DB_PREFIX."societe as s, ".MAIN_DB_PREFIX."chronodocs_entries as f ";
 		if (!$user->rights->societe->client->voir && !$socid) $sql .= ", ".MAIN_DB_PREFIX."societe_commerciaux as sc";
