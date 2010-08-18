@@ -23,7 +23,7 @@
  \file       htdocs/chronodocs/fiche.php
  \brief      Fichier fiche chronodoc
  \ingroup    chronodocs
- \version    $Id: fiche.php,v 1.4 2010/08/06 13:56:09 hregis Exp $
+ \version    $Id: fiche.php,v 1.5 2010/08/18 19:05:20 eldy Exp $
  */
 
 require("./pre.inc.php");
@@ -58,15 +58,15 @@ if (! empty($_POST['socid_id']))
 if ($user->societe_id) $socid=$user->societe_id;
 $result = restrictedArea($user, 'chronodocs', $chronodocsid, 'chronodocs_entries','entries','socid');
 
-if ((in_array($_POST["action"],array('create','add','update','builddoc')) 
+if ((in_array($_POST["action"],array('create','add','update','builddoc'))
 	 || eregi("(set.*)|(edit.*)",$_POST["action"])
 	 )&& !$user->rights->chronodocs->entries->write
 	) accessforbidden();
 
-if (in_array($_POST["action"],array('delete')) 
+if (in_array($_POST["action"],array('delete'))
 	&& !$user->rights->chronodocs->entries->delete
 	) accessforbidden();
-	
+
 
 /*
  * Traitements des actions
@@ -98,25 +98,25 @@ if ($_POST["action"] == 'add')
 		{//Get new reference before create
 			$chronodocs->fetch_thirdparty();
 			$chronodocs->fetch_chronodocs_type();
-			
+
 			if (! $conf->global->CHRONODOCS_ADDON)
 			{
 				dolibarr_print_error($db,$langs->trans("Error")." ".$langs->trans("Error_CHRONODOCS_ADDON_NotDefined"));
 				exit;
 			}
-				
+
 			$obj = $conf->global->CHRONODOCS_ADDON;
 			$obj = "mod_chronodocs_".$obj;
 			$modChronodocs = new $obj;
 			$chronodocs->ref = $modChronodocs->getNextValue($chronodocs->client,$chronodocs,$chronodocs->chronodocs_type->ref);
 		}
-	
+
 		$result = $chronodocs->create($user);
 		if ($result > 0)
 		{
 			$_GET["id"]=$result;      // Force raffraichissement sur fiche venant d'etre creee
 			$chronodocsid=$result;
-			
+
 		    $chronodocs->add_contact($user->id,"AUTHOR", "internal"); //Auto set author contact
 		}
 		else
@@ -136,10 +136,10 @@ if ($_POST["action"] == 'update')
 {
 	$chronodocs = new Chronodocs_entries($db);
 	$chronodocs->fetch($_POST["id"]); //get old chronodoc
-	
+
 	$chronodocs_oldref=$chronodocs->ref;
 	$chronodocs_oldtype=$chronodocs->fk_chronodocs_type;
-	
+
 	$chronodocs->ref = $_POST["ref"];
 	$chronodocs->title = $_POST["title"];
 	$chronodocs->brief = $_POST["brief"];
@@ -150,34 +150,34 @@ if ($_POST["action"] == 'update')
 	//$chronodocs->fk_status = 0;
 	//$chronodocs->fk_user_c = $user->id;
 	$chronodocs->fk_user_u = $user->id;
-	
+
 	if(empty($chronodocs->ref) ||($chronodocs_oldref==$chronodocs->ref && $chronodocs_oldtype!=$chronodocs->fk_chronodocs_type))
 	{//Get new reference before update
 		$chronodocs->fetch_thirdparty();
 		$chronodocs->fetch_chronodocs_type();
-		
+
 		$chronodocs->set_ref($user,'REGENERATED'); // Erase old ref (to avoid increasing counter if updating last created ref)
-		
+
 		if (! $conf->global->CHRONODOCS_ADDON)
 		{
 			dolibarr_print_error($db,$langs->trans("Error")." ".$langs->trans("Error_CHRONODOCS_ADDON_NotDefined"));
 			exit;
 		}
-			
+
 		$obj = $conf->global->CHRONODOCS_ADDON;
 		$obj = "mod_chronodocs_".$obj;
 		$modChronodocs = new $obj;
 		$chronodocs->ref = $modChronodocs->getNextValue($chronodocs->client,$chronodocs,$chronodocs->chronodocs_type->ref);
 	}
-	
+
 	$chronodocs->update($user);
-	
-	if(!empty($_POST['new_propvalues']) && is_array($_POST['new_propvalues']) 
+
+	if(!empty($_POST['new_propvalues']) && is_array($_POST['new_propvalues'])
 	&& !empty($_POST['id_propvalues']) && is_array($_POST['id_propvalues']) )
 	{
 		$chronodocs_propvalues=new Chronodocs_propvalues($db);
 		$chronodocs_propfields=new Chronodocs_propfields($db);
-		
+
 		foreach ($_POST['new_propvalues'] as $propid => $new_content)
 		{
 			if($propid > 0)
@@ -186,7 +186,7 @@ if ($_POST["action"] == 'update')
 					$valid=$_POST['id_propvalues'][$propid];
 				else
 					$valid=0;
-					
+
 				if($valid >0)
 				{
 					$result=$chronodocs_propvalues->fetch($valid);
@@ -213,15 +213,15 @@ if ($_POST["action"] == 'update')
 						$result=0;
 					}
 				}
-				
+
 				if($result<0)
 				{
 					dolibarr_print_error($db,$chronodocs_propvalues->error);
-				}				
+				}
 			}
 		}
 	}
-	
+
 	if($chronodocs_oldref!=$chronodocs->ref)
 	{
 		$olddir=DOL_DATA_ROOT."/chronodocs/" . dol_string_nospecial($chronodocs_oldref);
@@ -271,7 +271,7 @@ if ($_REQUEST['action'] == 'builddoc')	// En get ou en post
 	$chronodocs = new Chronodocs_entries($db);
 	$chronodocs->fetch($_GET['id']);
     //$chronodocs->fetch_lines();
-	
+
 	if ($_REQUEST['lang_id'])
 	{
 		$outputlangs = new Translate("",$conf);
@@ -290,11 +290,11 @@ if ($_REQUEST['action'] == 'builddoc')	// En get ou en post
 if(($_POST["action"] == 'confirm_delete' AND $_POST["confirm"] == 'yes') && ($user->rights->chronodocs->types->delete))
 {
 	$chronodocs = new Chronodocs_entries($db);
-	$chronodocs->fetch($_GET['id']);	
+	$chronodocs->fetch($_GET['id']);
 	if (!empty($chronodocs->id))
 	{
-		$result = $chronodocs->delete($user);	
-		if ($result < 0) 
+		$result = $chronodocs->delete($user);
+		if ($result < 0)
 			dolibarr_print_error($db,$chronodocs->error);
 		else
 		{
@@ -327,7 +327,7 @@ if ($_GET["id"] > 0 && $_GET["action"] != 'create' )
 	}
 	$chronodocs->fetch_thirdparty();
 	$chronodocs->fetch_chronodocs_type();
-	
+
 	if ($mesg) print $mesg."<br>";
 
 	$head = chronodocs_prepare_head($chronodocs);
@@ -348,10 +348,10 @@ if ($_GET["id"] > 0 && $_GET["action"] != 'create' )
 
 	// Ref
 	print '<tr><td width="25%">'.$langs->trans("Ref").'</td><td>'.$chronodocs->ref.'</td></tr>';
-	
+
 	// Societe
 	print "<tr><td>".$langs->trans("Company")."</td><td>".$chronodocs->client->getNomUrl(1)."</td></tr>";
-	
+
 	// Type
 	if ($user->rights->chronodocs->types->read)
 		print "<tr><td>".$langs->trans("ChronodocType")."</td><td>".$chronodocs->chronodocs_type->getNomUrl(1)."</td></tr>";
@@ -380,8 +380,8 @@ if ($_GET["id"] > 0 && $_GET["action"] != 'create' )
 	}
 	print '</td>';
 	print '</tr>';
-	
-	// Titre 
+
+	// Titre
 	print '<tr>';
 	if ($_GET['action'] == 'edit_title')
 	{
@@ -401,7 +401,7 @@ if ($_GET["id"] > 0 && $_GET["action"] != 'create' )
 		print "<td>".$chronodocs->title."</td>";
 	}
 	print "</tr>\n";
-	
+
 	// Description
 	print '<tr><td>';
 	print '<table class="nobordernopadding" width="100%"><tr><td>';
@@ -437,9 +437,9 @@ if ($_GET["id"] > 0 && $_GET["action"] != 'create' )
 
 	// Statut
 	//print '<tr><td>'.$langs->trans("Status").'</td><td>'.$chronodocs->getLibStatut(4).'</td></tr>';
-	
+
 	print "</table><br>";
-	
+
 	//PROPRIETES supplementaires
 	print $langs->trans("OtherPropfields")." :<br>";
 	print '<table class="border" width="100%">';
@@ -474,13 +474,13 @@ if ($_GET["id"] > 0 && $_GET["action"] != 'create' )
 	//fin  PROPRIETES supplementaires
 
 	print "</table><br>";
-	
+
 		/*
 		 * Documents generes
 		 */
 		require_once(DOL_DOCUMENT_ROOT."/includes/modules/chronodocs/files.class.php");
 		$formfile=new ChronodocsFiles($db);
-		
+
 		$filename=dol_string_nospecial($chronodocs->ref);
 		$filedir=$formfile->dir_output . "/" . dol_string_nospecial($chronodocs->ref);
 		$urlsource=$_SERVER["PHP_SELF"]."?id=".$chronodocs->id;
@@ -509,20 +509,11 @@ if ($_GET["id"] > 0 && $_GET["action"] != 'create' )
 			print 'href="'.$_SERVER["PHP_SELF"].'?id='.$chronodocs->id.'&amp;action=editAll"';
 			print '>'.$langs->trans('Modify').'</a>';
 		}
-	
+
 		// Delete
 		if ($chronodocs->statut == 0 && $user->rights->chronodocs->entries->delete)
 		{
-			print '<a class="butActionDelete" ';
-			if ($conf->use_javascript_ajax && $conf->global->MAIN_CONFIRM_AJAX)
-			{
-				$url = $_SERVER["PHP_SELF"].'?id='.$chronodocs->id.'&action=confirm_delete&confirm=yes';
-				print 'href="#" onClick="dialogConfirm(\''.$url.'\',\''.$langs->trans("ConfirmDeleteChronodoc").'\',\''.$langs->trans("Yes").'\',\''.$langs->trans("No").'\',\'delete\')"';
-			}
-			else
-			{
-				print 'href="'.$_SERVER["PHP_SELF"].'?id='.$chronodocs->id.'&amp;action=delete"';
-			}
+			print '<a class="butActionDelete" href="'.$_SERVER["PHP_SELF"].'?id='.$chronodocs->id.'&amp;action=delete"';
 			print '>'.$langs->trans('Delete').'</a>';
 		}
 	}
@@ -550,23 +541,23 @@ if ($_GET["action"] == 'create' || $_GET["action"] == 'editAll')
 	$chronodocs = new Chronodocs_entries($db);
 	$chronodocs->date_c = time();
 	if ($chronodocsid) 	$result=$chronodocs->fetch($chronodocsid);
-	
-	if ($_GET["action"] == 'editAll' && !empty($chronodocs->socid)) 
+
+	if ($_GET["action"] == 'editAll' && !empty($chronodocs->socid))
 	{
 		$_GET["socid"]=$chronodocs->socid; //get socid from chronodoc instead of url
 	}
-	
+
 	if ($_GET["socid"] > 0)
 	{
 			$societe=new Societe($db);
 			$societe->fetch($_GET["socid"]);
 	}
-	
+
 	if ($_GET["chronodocs_type"] > 0 && $_GET["action"] == 'create')
 	{
 		$chronodocs->fk_chronodocs_type=$_GET["chronodocs_type"]; //get given chronotypeid
 	}
-	
+
 	/* This is done during validation
 	if (! $conf->global->CHRONODOCS_ADDON)
 	{
@@ -582,9 +573,9 @@ if ($_GET["action"] == 'create' || $_GET["action"] == 'editAll')
 	*/
 
 	if ($_GET["socid"] && !empty($chronodocs->fk_chronodocs_type))
-	{	
+	{
 		$chronodocs->fetch_chronodocs_type();
-		
+
 		print "<form name='chronodocs' action=\"fiche.php\" method=\"post\">";
 		if ($_GET["action"] == 'create')
 			{
@@ -596,35 +587,35 @@ if ($_GET["action"] == 'create' || $_GET["action"] == 'editAll')
 				print "<input type=\"hidden\" name=\"id\" value=\"$chronodocsid\">";
 			}
 		print '<table class="border" width="100%">';
-		
+
 		// Ref
 		print "<tr><td>".$langs->trans("Ref")."</td>";
 		print "<td><input name=\"ref\" value=\"".$chronodocs->ref."\" size=\"32\"></td></tr>\n";
-		
+
 		// Societe
 		print '<input type="hidden" name="socid" value='.$_GET["socid"].'>';
 		print "<tr><td>".$langs->trans("Company")."</td><td>".$societe->getNomUrl(1)."</td></tr>";
-		
+
 		// Type
 		print '<tr>';
 		print '<td>'.$langs->trans("ChronodocType").'</td>';
 		print '<td>';
 		//$chronodocType=new Chronodocs_types($db); //Not editable since chronodocs propfields
-		//$liste=$chronodocType->liste_types($db); 
+		//$liste=$chronodocType->liste_types($db);
 		//$html->select_array('chronodocs_type',$liste,$chronodocs->fk_chronodocs_type);
 		print $chronodocs->chronodocs_type->getNomUrl(1);
 		print '<input type="hidden" name="chronodocs_type" value='.$chronodocs->fk_chronodocs_type.'>';
 		print "</td></tr>";
-		
+
 		// Date
 		print "<tr><td>".$langs->trans("Date")."</td><td>";
 		$html->select_date($chronodocs->date_c,"p",'','','','chronodocs');
 		print "</td></tr>";
-		
+
 		// Titre
 		print "<tr><td>".$langs->trans("Title")."</td>";
 		print "<td><input name=\"title\" size=\"74\" value=\"".$chronodocs->title."\"></td></tr>\n";
-		
+
 		// Description
 		print '<tr><td valign="top">'.$langs->trans("Description").'</td>';
 		print "<td>";
@@ -641,11 +632,11 @@ if ($_GET["action"] == 'create' || $_GET["action"] == 'editAll')
 		}
 
 		print '</td></tr>';
-		
+
 		//PROPRIETES supplementaires
 		$nb_propvals=$chronodocs->fetch_chronodocs_propvalues();
 		if($nb_propvals > 0) // OK et au moins 1 prop
-		{	
+		{
 			$auto_propfields_index=array();
 			for($i=0;$i<$nb_propvals;$i++)
 			{
@@ -659,18 +650,18 @@ if ($_GET["action"] == 'create' || $_GET["action"] == 'editAll')
 			}
 		}
 		//fin  PROPRIETES supplementaires
-		
+
 		print '<tr><td colspan="2" align="center">';
 		if ($_GET["action"] == 'create')
 			print '<input type="submit" class="button" value="'.$langs->trans("Create").'">';
 		else
 			print '<input type="submit" class="button" value="'.$langs->trans("Modify").'">';
-			
+
 		print '</td></tr>';
 
 		print '</table>';
 		print '</form>';
-		
+
 	}
 	else
 	{
@@ -681,7 +672,7 @@ if ($_GET["action"] == 'create' || $_GET["action"] == 'editAll')
 		print "</td></tr>";
 		print "<tr><td>".$langs->trans("ChronodocType")."</td><td>";
 		$chronodocType=new Chronodocs_types($db); //Not editable since chronodocs propfields
-		$liste=$chronodocType->liste_types($db); 
+		$liste=$chronodocType->liste_types($db);
 		$html->select_array('chronodocs_type',$liste,$_GET['chronodocs_type']);
 		print "</td></tr>";
 		print '<tr><td colspan="2" align="center">';
@@ -697,5 +688,5 @@ if ($_GET["action"] == 'create' || $_GET["action"] == 'editAll')
 
 $db->close();
 
-llxFooter('$Date: 2010/08/06 13:56:09 $ - $Revision: 1.4 $');
+llxFooter('$Date: 2010/08/18 19:05:20 $ - $Revision: 1.5 $');
 ?>

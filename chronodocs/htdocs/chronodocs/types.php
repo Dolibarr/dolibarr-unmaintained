@@ -23,7 +23,7 @@
  \file       htdocs/chronodocs/types.php
  \brief      Fichier fiche type de chronodoc
  \ingroup    chronodocs
- \version    $Id: types.php,v 1.4 2010/05/01 14:30:11 eldy Exp $
+ \version    $Id: types.php,v 1.5 2010/08/18 19:05:20 eldy Exp $
  */
 
 require("./pre.inc.php");
@@ -674,16 +674,7 @@ if ($_GET["id"] > 0 && $_GET["action"] != 'create' && $_GET["action"] != 'info' 
 		// Delete
 		if ($chronodocstype->statut == 0 && $user->rights->chronodocs->types->delete && ($chronodocstype->get_nb_chronodocs()==0) )
 		{
-			print '<a class="butActionDelete" ';
-			if ($conf->use_javascript_ajax && $conf->global->MAIN_CONFIRM_AJAX)
-			{
-				$url = $_SERVER["PHP_SELF"].'?id='.$chronodocstype->id.'&action=confirm_delete&confirm=yes';
-				print 'href="#" onClick="dialogConfirm(\''.$url.'\',\''.$langs->trans("ConfirmDeleteChronodocType").'\',\''.$langs->trans("Yes").'\',\''.$langs->trans("No").'\',\'delete\')"';
-			}
-			else
-			{
-				print 'href="'.$_SERVER["PHP_SELF"].'?id='.$chronodocstype->id.'&amp;action=delete"';
-			}
+			print '<a class="butActionDelete" href="'.$_SERVER["PHP_SELF"].'?id='.$chronodocstype->id.'&amp;action=delete"';
 			print '>'.$langs->trans('Delete').'</a>';
 		}
 	}
@@ -869,5 +860,5 @@ if (empty($_GET["id"]) &&  (empty($_GET["action"]) || $_GET["action"] != 'create
 }
 $db->close();
 
-llxFooter('$Date: 2010/05/01 14:30:11 $ - $Revision: 1.4 $');
+llxFooter('$Date: 2010/08/18 19:05:20 $ - $Revision: 1.5 $');
 ?>
