@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: ws_orders.php,v 1.3 2010/02/08 00:50:30 jfefe Exp $
+ * $Id: ws_orders.php,v 1.4 2010/08/18 13:46:31 eldy Exp $
  */
 set_magic_quotes_runtime(0);
 //if (function_exists('xdebug_disable')) xdebug_disable();
@@ -27,7 +27,7 @@ require_once('./lib/nusoap.php');
 require_once('./includes/configure.php');
 
 /*
-// fichier THELIA_id 
+// fichier THELIA_id
 include_once("../classes/Commande.class.php");
 include_once("classes/Client.class.php");
 include_once("classes/Venteprod.class.php");
@@ -57,7 +57,7 @@ $s->wsdl->addComplexType(
       'annee'=>array('name'=>'status','type'=>'xsd:string', 'use'=>'optionnal'),
    )
 );
-      
+
 $s->wsdl->addComplexType(
    'TableauCA',
    'complexType',
@@ -137,11 +137,11 @@ function get_CAmensuel() {
 	$sql .= " WHERE c.statut = '4' ";
 //AND YEAR(o.date_purchased) = YEAR(now()) ";
 	$sql .= " GROUP BY annee, mois ORDER BY annee desc ,mois desc limit 1,12";
-   
+
 	if (!($resquer = mysql_query($sql,$connexion)))  return new soap_fault("Server", "MySQL 3 ".$sql, mysql_error());
 
 		switch ($numrows = mysql_numrows($resquer)) {
-		case 0 : 
+		case 0 :
 			return new soap_fault("Server", "MySQL 4", $sql);
 			break;
 		default :
@@ -150,7 +150,7 @@ function get_CAmensuel() {
 				$result[$i] =  mysql_fetch_array($resquer, MYSQL_ASSOC);
 				$i++;
 			}
-       
+
 			break;
 		}
 	mysql_close($connexion);
@@ -168,7 +168,7 @@ function get_orders($limit='', $status='') {
 	if (!($db = mysql_select_db(DB_DATABASE, $connexion)))  return new soap_fault("Server", "MySQL 2", mysql_error());
 
 //on recherche//
-$sql = "SELECT c.id, c.ref, UNIX_TIMESTAMP(c.date) as date, c.paiement, cl.id as id_client, cl.ref as ref_client, cl.nom, cl.prenom";
+$sql = "SELECT c.id, c.ref, c.date, c.paiement, cl.id as id_client, cl.ref as ref_client, cl.nom, cl.prenom";
 $sql .= " FROM commande as c ";
 $sql .= "JOIN client as cl ON cl.id=c.client ";
 if ($status > 0) $sql .=  " WHERE c.statut = ".$status;
@@ -198,7 +198,7 @@ if ($limit > 0) $sql .= " LIMIT ".$limit;
 				$i++;
 			}
 			break;
-         
+
 		}
 	mysql_close($connexion);
 
@@ -218,7 +218,7 @@ function get_lastOrderClients($id='',$name='',$limit='') {
 	$sql .= " FROM orders_total as t JOIN orders as o on o.orders_id = t.orders_id ";
 	$sql .= " JOIN orders_status as s on o.orders_status = s.orders_status_id and s.language_id = 1";
 	$sql .= " WHERE t.class = 'ot_subtotal' and o.orders_status < 5 order by o.date_purchased desc";
-   
+
 	if ($limit > 0) $sql .= " LIMIT ".$limit;
 
 	if (!($resquer = mysql_query($sql,$connexion)))  return new soap_fault("Server", "MySQL 3 ".$sql, mysql_error());
@@ -255,14 +255,14 @@ function get_Order($orderid="0",$limit='')
 $sql .= " FROM orders_total as t JOIN orders as o on o.orders_id = t.orders_id ";
 $sql .= " WHERE t.class = 'ot_subtotal'";
 */
-// o.orders_id, o.customers_name, o.customers_id, o.date_purchased, o.payment_method, t.value as total, sum(p.value) as port, s.orders_status_name as statut  
-$sql = "SELECT c.id, c.ref, UNIX_TIMESTAMP(c.date) as date, c.transaction, c.port, c.livraison as bl, c.remise, c.colis, c.paiement, c.statut, cl.id as client_id, cl.ref as client_ref, cl.nom, cl.prenom";
+// o.orders_id, o.customers_name, o.customers_id, o.date_purchased, o.payment_method, t.value as total, sum(p.value) as port, s.orders_status_name as statut
+$sql = "SELECT c.id, c.ref, c.date, c.transaction, c.port, c.livraison as bl, c.remise, c.colis, c.paiement, c.statut, cl.id as client_id, cl.ref as client_ref, cl.nom, cl.prenom";
 $sql .= " FROM commande as c ";
 $sql .= " JOIN client as cl ON cl.id=c.client ";
 $sql .= " WHERE c.statut < 5 "; // élimine les commandes annulées
 if ($orderid > 0) $sql .=  " AND c.id = '".$orderid."'";
 $sql .= " ORDER BY c.date desc";
-//echo $sql; 
+//echo $sql;
 	if (!($resquer = mysql_query($sql,$connexion)))  return new soap_fault("Server", "MySQL 3 ".$sql, mysql_error());
 	$result ='';
 

@@ -21,7 +21,7 @@
  \file       htdocs/oscommerce_ws/index.php
  \ingroup    oscommerce2
  \brief      Page accueil zone boutique
- \version    $Id: index.php,v 1.4 2010/04/13 14:05:42 grandoc Exp $
+ \version    $Id: index.php,v 1.5 2010/08/18 13:46:31 eldy Exp $
  */
 
 require("./pre.inc.php");
@@ -269,7 +269,7 @@ elseif (!($err = $client->getError()) ) {
 
 		while ($i < $num)	{
 			print "<tr $bc[$var]>";
-			print "<td>".$result[$i][date_purchased]."</td><td>".$result[$i][customers_name]."</td><td>".$result[$i][delivery_country]."</td><td>".convert_price($result[$i][value])."</td><td>".$result[$i][payment_method]."</td><td>".$result[$i][orders_id]."</td><td>".$result[$i][statut]."</td></tr>";
+			print "<td>".dol_print_date($db->jdate($result[$i][date_purchased]))."</td><td>".$result[$i][customers_name]."</td><td>".$result[$i][delivery_country]."</td><td>".convert_price($result[$i][value])."</td><td>".$result[$i][payment_method]."</td><td>".$result[$i][orders_id]."</td><td>".$result[$i][statut]."</td></tr>";
 			$i++;
 			$var=!$var;
 		}
@@ -284,5 +284,5 @@ else {
 print '</tr></table>';
 
 
-llxFooter('$Date: 2010/04/13 14:05:42 $ - $Revision: 1.4 $');
+llxFooter('$Date: 2010/08/18 13:46:31 $ - $Revision: 1.5 $');
 ?>
