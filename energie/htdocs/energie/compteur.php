@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: compteur.php,v 1.2 2010/08/18 13:40:23 eldy Exp $
+ * $Id: compteur.php,v 1.3 2010/08/19 15:25:25 hregis Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/energie/htdocs/energie/compteur.php,v $
  *
  */
@@ -24,7 +24,7 @@
  *  \file       htdocs/energie/compteur.php
  *  \ingroup    energie
  *  \brief      Fiche compteur
- *  \version    $Revision: 1.2 $
+ *  \version    $Revision: 1.3 $
  */
 
 require("./pre.inc.php");
@@ -107,7 +107,7 @@ if ($_GET["action"] == 'create')
 
   print "<tr $bc[$var]>";
   print '<td>Energie</td><td>';
-  print $html->select_array("energie", $compteur->energies);
+  print $html->selectarray("energie", $compteur->energies);
   print '</td></tr>';
 
   print '<tr><td colspan="2" align="center"><input type="submit" value="'.$langs->trans("Add").'" class="button"></td></tr>';
@@ -224,5 +224,5 @@ else
 
 $db->close();
 
-llxFooter('$Date: 2010/08/18 13:40:23 $ - $Revision: 1.2 $');
+llxFooter('$Date: 2010/08/19 15:25:25 $ - $Revision: 1.3 $');
 ?>

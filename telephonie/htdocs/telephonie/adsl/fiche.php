@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: fiche.php,v 1.1 2009/10/20 16:19:28 eldy Exp $
+ * $Id: fiche.php,v 1.2 2010/08/19 15:25:25 hregis Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/adsl/fiche.php,v $
  *
  */
@@ -355,7 +355,7 @@ if ($_GET["action"] == 'create')
 	}
       $db->free($resql);
     }
-  $form->select_array("client",$ff,$ligne->client_comm);
+  $form->selectarray("client",$ff,$ligne->client_comm);
   print '</td></tr>';
 
   print '<tr><td>&nbsp;</td><td><input type="submit" value="Cr�er"></td></tr>'."\n";
@@ -455,7 +455,7 @@ elseif ($_GET["action"] == 'create_line' && $_GET["client"] > 0)
 	    }
 	  else
 	    {
-	      $form->select_array("contrat",$contrats_id);
+	      $form->selectarray("contrat",$contrats_id);
 	      print '</td></tr>';
 	    }
 
@@ -482,7 +482,7 @@ elseif ($_GET["action"] == 'create_line' && $_GET["client"] > 0)
 		}
 	      $db->free();      
 	    }
-	  $form->select_array("client_install",$ff,$ligne->client_install_id);
+	  $form->selectarray("client_install",$ff,$ligne->client_install_id);
 	  print " (Correspond � l'adresse d'installation)</td></tr>";
 	  
 	  print '<tr><td width="20%">Client � facturer</td><td >';
@@ -503,7 +503,7 @@ elseif ($_GET["action"] == 'create_line' && $_GET["client"] > 0)
 		}
 	      $db->free();     
 	    }
-	  $form->select_array("client_facture",$ff,$ligne->client_facture_id);
+	  $form->selectarray("client_facture",$ff,$ligne->client_facture_id);
 	  print '</td></tr>';
 	  
 	  /*
@@ -529,7 +529,7 @@ elseif ($_GET["action"] == 'create_line' && $_GET["client"] > 0)
 	      $db->free();
 	      
 	    }
-	  $form->select_array("type",$ff,$ligne->type);
+	  $form->selectarray("type",$ff,$ligne->type);
 	  print '</td></tr>';
 	  /*
 	   * Fournisseur
@@ -558,7 +558,7 @@ elseif ($_GET["action"] == 'create_line' && $_GET["client"] > 0)
 	    {
 	      print $db->error();
 	    }
-	  $form->select_array("fournisseur",$ff,$ligne->fournisseur);
+	  $form->selectarray("fournisseur",$ff,$ligne->fournisseur);
 	  print '</td></tr>';
 	  
 	  /*
@@ -584,7 +584,7 @@ elseif ($_GET["action"] == 'create_line' && $_GET["client"] > 0)
 	      
 	    }
       
-	  $form->select_array("commercial",$ff,$ligne->commercial);
+	  $form->selectarray("commercial",$ff,$ligne->commercial);
       
 	  print '</td></tr>';
       
@@ -913,5 +913,5 @@ print "</div>";
 
 $db->close();
 
-llxFooter("<em>Derni&egrave;re modification $Date: 2009/10/20 16:19:28 $ r&eacute;vision $Revision: 1.1 $</em>");
+llxFooter("<em>Derni&egrave;re modification $Date: 2010/08/19 15:25:25 $ r&eacute;vision $Revision: 1.2 $</em>");
 ?>

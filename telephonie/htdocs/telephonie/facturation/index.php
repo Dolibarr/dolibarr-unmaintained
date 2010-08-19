@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: index.php,v 1.2 2010/05/01 14:30:11 eldy Exp $
+ * $Id: index.php,v 1.3 2010/08/19 15:25:25 hregis Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/facturation/index.php,v $
  *
  */
@@ -140,7 +140,7 @@ print '<tr class="liste_titre"><td>Charger un fichier CDR</td></tr>';
 print "<tr $bc[$var]><td>";
 
 $form = new Form($db);
-$form->select_array("fournisseur",$fourns);
+$form->selectarray("fournisseur",$fourns);
 
 print '<input type="file"   name="userfile" size="40" maxlength="80"><br />';
 print '<input type="submit" value="'.$langs->trans("Upload").'" name="sendit"> &nbsp; ';
@@ -166,5 +166,5 @@ print '</table>';
 
 $db->close();
 
-llxFooter("<em>Derni&egrave;re modification $Date: 2010/05/01 14:30:11 $ r&eacute;vision $Revision: 1.2 $</em>");
+llxFooter("<em>Derni&egrave;re modification $Date: 2010/08/19 15:25:25 $ r&eacute;vision $Revision: 1.3 $</em>");
 ?>

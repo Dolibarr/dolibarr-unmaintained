@@ -139,7 +139,7 @@ function getHtmlForm($type,$attribute_name,$value='',$null=0,$form_name='',$text
 			
 		case is_array($type):
 			ob_start(); 
-			$html->select_array($attribute_name,$type,$value,$null);
+			$html->selectarray($attribute_name,$type,$value,$null);
 			$input = ob_get_contents(); 
 			ob_end_clean();		
 			break ;

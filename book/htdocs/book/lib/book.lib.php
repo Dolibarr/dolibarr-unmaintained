@@ -16,7 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  * or see http://www.gnu.org/
  *
- * $Id: book.lib.php,v 1.2 2010/06/07 14:16:32 pit Exp $
+ * $Id: book.lib.php,v 1.3 2010/08/19 15:25:25 hregis Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/book/htdocs/book/lib/book.lib.php,v $
  */
 
@@ -24,7 +24,7 @@
 	    \file       htdocs/lib/book.lib.php
 	    \ingroup    modBook
 		\brief      Ensemble de fonctions de base pour le module book
-		\version    $Revision: 1.2 $
+		\version    $Revision: 1.3 $
 		\author		Samuel Bouchet, Patrick Raguin, Pierre Morin
 */
 
@@ -194,7 +194,7 @@ function getHtmlForm($db,$type,$attribute_name,$value='',$null=0,$form_name='',$
 			
 			ob_start(); 
 			$statutarray=array('1' => $langs->trans("OnSell"), '0' => $langs->trans("NotOnSell"));
-			$html->select_array($attribute_name,$statutarray,$value);	
+			$html->selectarray($attribute_name,$statutarray,$value);	
 			$input = ob_get_contents(); 
 			ob_end_clean();			
 			break;		
@@ -217,7 +217,7 @@ function getHtmlForm($db,$type,$attribute_name,$value='',$null=0,$form_name='',$
 			
 		case is_array($type):
 			ob_start(); 
-			$html->select_array($attribute_name,$type,$value,$null);
+			$html->selectarray($attribute_name,$type,$value,$null);
 			$input = ob_get_contents(); 
 			ob_end_clean();		
 			break ;

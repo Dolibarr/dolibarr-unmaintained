@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: xdsl_product.php,v 1.2 2010/04/28 21:38:23 grandoc Exp $
+ * $Id: xdsl_product.php,v 1.3 2010/08/19 15:25:25 hregis Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/config/xdsl_product.php,v $
  */
 
@@ -23,7 +23,7 @@
     \file       htdocs/telephonie/config/xdsl.php
     \ingroup    telephonie
     \brief      Page configuration telephonie
-    \version    $Revision: 1.2 $
+    \version    $Revision: 1.3 $
 */
 
 require("./pre.inc.php");
@@ -108,7 +108,7 @@ $xfourns = $xfourn->ListArray();
 print '<tr class="pair"><td>Ajouter un liens depuis les services</td>';
 print '<td align="left">';
 print '</td><td><input name="intitule"></td><td>';
-$form->select_array("prod",$prods);
+$form->selectarray("prod",$prods);
 
 print '<input type="submit" value="'.$langs->trans('Add').'">';
 print '</td></tr>';

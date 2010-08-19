@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: xdsl_wkf.php,v 1.2 2010/04/28 21:38:23 grandoc Exp $
+ * $Id: xdsl_wkf.php,v 1.3 2010/08/19 15:25:25 hregis Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/config/xdsl_wkf.php,v $
  */
 
@@ -23,7 +23,7 @@
     \file       htdocs/telephonie/config/xdsl.php
     \ingroup    telephonie
     \brief      Page configuration telephonie
-    \version    $Revision: 1.2 $
+    \version    $Revision: 1.3 $
 */
 
 require("./pre.inc.php");
@@ -112,9 +112,9 @@ if ( $resql = $db->query( $sql) )
 print '<tr class="pair"><td>Ajouter une alerte pour l\'utilisateur</td>';
 print '<td align="left">';
 
-$form->select_array("wkf_user",$uss);
+$form->selectarray("wkf_user",$uss);
 print ' sur l\'action ';
-$form->select_array("wkf_statut",$ligne->statuts);
+$form->selectarray("wkf_statut",$ligne->statuts);
 
 print '</td><td><input type="submit" value="'.$langs->trans('Add').'">';
 print '</td></tr>';

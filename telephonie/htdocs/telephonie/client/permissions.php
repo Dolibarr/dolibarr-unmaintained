@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: permissions.php,v 1.1 2009/10/20 16:19:27 eldy Exp $
+ * $Id: permissions.php,v 1.2 2010/08/19 15:25:24 hregis Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/client/permissions.php,v $
  *
  */
@@ -183,7 +183,7 @@ if ($soc->id)
 
 	  print '<tr class="liste_titre">';
 	  print '<td>';
-	  $form->select_array("new_user",$uss);
+	  $form->selectarray("new_user",$uss);
 	  print '</td>';
 	  print '<td align="center"><input name="read" type="checkbox"></td>';
 	  print '<td align="center"><input name="write" type="checkbox"></td>';
@@ -240,5 +240,5 @@ print '</div>';
 
 $db->close();
 
-llxFooter("<em>Derni&egrave;re modification $Date: 2009/10/20 16:19:27 $ r&eacute;vision $Revision: 1.1 $</em>");
+llxFooter("<em>Derni&egrave;re modification $Date: 2010/08/19 15:25:24 $ r&eacute;vision $Revision: 1.2 $</em>");
 ?>

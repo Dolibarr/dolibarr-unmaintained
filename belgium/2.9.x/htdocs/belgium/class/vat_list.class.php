@@ -290,7 +290,7 @@ class VATList
 		echo '<tr>';
 		echo '<td>' . $langs->trans('DeclarantNameAndAddress') . '</td>';
 		echo '<td>';
-		$form->select_array('name_id', $this->proposedNames, $this->nameID);
+		$form->selectarray('name_id', $this->proposedNames, $this->nameID);
 		echo '<br />' . $this->street . '<br />' . $this->country . '-' . $this->zipCode . ' ' . $this->city . '</td>';
 		echo '</tr>';
 

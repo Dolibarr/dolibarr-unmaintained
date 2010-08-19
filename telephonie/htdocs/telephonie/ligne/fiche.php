@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: fiche.php,v 1.1 2009/10/20 16:19:22 eldy Exp $
+ * $Id: fiche.php,v 1.2 2010/08/19 15:25:24 hregis Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/ligne/fiche.php,v $
  *
  */
@@ -312,7 +312,7 @@ if ($_GET["action"] == 'create1')
 	}
       $db->free();      
     }
-  $form->select_array("client_comm",$ff,$ligne->client_comm);
+  $form->selectarray("client_comm",$ff,$ligne->client_comm);
   print '</td></tr>';
 
   print '<tr><td>&nbsp;</td><td><input type="submit" value="Cr�er"></td></tr>'."\n";
@@ -431,13 +431,13 @@ elseif ($_GET["action"] == 'create' && $_GET["contratid"] > 0)
 	      $db->free();
 	      
 	    }
-	  $form->select_array("fournisseur",$ff,$ligne->fournisseur);
+	  $form->selectarray("fournisseur",$ff,$ligne->fournisseur);
 
 	  $tech = array();
 	  $tech["presel"] = "Pr�s�lection";
 	  $tech["voip"] = "VoIP";
 	  print "</td><td>Technologie&nbsp;:&nbsp;";
-	  $form->select_array("techno",$tech,"presel");
+	  $form->selectarray("techno",$tech,"presel");
 
 	  print '</td></tr>';
 	  
@@ -464,7 +464,7 @@ elseif ($_GET["action"] == 'create' && $_GET["contratid"] > 0)
 	      $db->free();
 	      
 	    }
-	  $form->select_array("concurrent",$ff,$ligne->concurrent);
+	  $form->selectarray("concurrent",$ff,$ligne->concurrent);
 	  print '</td></tr>';
 	  
 	  print '<tr><td width="20%">Remise LMN</td><td><input name="remise" size="3" maxlength="2" value="'.$ligne->remise.'">&nbsp;%</td></tr>'."\n";
@@ -1232,7 +1232,7 @@ if ( $user->rights->telephonie->ligne_commander && $ligne->statut == 3 )
       print '<tr class="liste_titre">';
       print '<td colspan="2">Commander la ligne chez un autre fournisseur</td></tr>';
       print '<tr><td width="20%">Fournisseur</td><td >';
-      $form->select_array("fournisseur",$ff,$ligne->fournisseur);
+      $form->selectarray("fournisseur",$ff,$ligne->fournisseur);
       print '</td></tr>';
       
       print '<tr><td colspan="2"align="center"><input type="submit" name="Activer"></td></tr>';
@@ -1380,5 +1380,5 @@ print "</div>";
 
 $db->close();
 
-llxFooter("<em>Derni&egrave;re modification $Date: 2009/10/20 16:19:22 $ r&eacute;vision $Revision: 1.1 $</em>");
+llxFooter("<em>Derni&egrave;re modification $Date: 2010/08/19 15:25:24 $ r&eacute;vision $Revision: 1.2 $</em>");
 ?>

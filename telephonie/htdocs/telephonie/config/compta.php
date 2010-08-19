@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: compta.php,v 1.1 2009/10/20 16:19:29 eldy Exp $
+ * $Id: compta.php,v 1.2 2010/08/19 15:25:25 hregis Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/config/compta.php,v $
  */
 
@@ -23,7 +23,7 @@
     \file       htdocs/telephonie/config/index.php
     \ingroup    telephonie
     \brief      Page configuration telephonie
-    \version    $Revision: 1.1 $
+    \version    $Revision: 1.2 $
 */
 
 require("./pre.inc.php");
@@ -91,7 +91,7 @@ if ($result)
 $html = new Form($db);
 print '<tr><td>Compte</td><td>';
 
-print $html->select_array("cg",$cgs);
+print $html->selectarray("cg",$cgs);
 
 print '</td><td><input type="submit"></td></tr>';
 

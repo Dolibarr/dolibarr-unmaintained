@@ -23,7 +23,7 @@
  \file       htdocs/telephonie/client/new.php
  \ingroup    telephonie
  \brief      Creation d'un nouveau client
- \version    $Id: new.php,v 1.4 2010/04/29 14:54:32 grandoc Exp $
+ \version    $Id: new.php,v 1.5 2010/08/19 15:25:24 hregis Exp $
  */
 
 require("pre.inc.php");
@@ -760,7 +760,7 @@ if ($user->rights->telephonie->ligne->creer)
 
 	}
 
-	$form->select_array("commercial_sign",$ff,$ligne->commercial_sign);
+	$form->selectarray("commercial_sign",$ff,$ligne->commercial_sign);
 
 	print '</td>';
 
@@ -801,7 +801,7 @@ if ($user->rights->telephonie->ligne->creer)
 
 	$def =$ligne->fournisseur?$ligne->fournisseur:TELEPHONIE_FOURNISSEUR_DEFAUT_ID;
 
-	$form->select_array("fournisseur",$ff,$def);
+	$form->selectarray("fournisseur",$ff,$def);
 	print '</td>';
 
 	print '<td width="20%">Fournisseur précédent</td><td>';
@@ -821,7 +821,7 @@ if ($user->rights->telephonie->ligne->creer)
 		$db->free();
 
 	}
-	$form->select_array("concurrent",$ff,$ligne->concurrent);
+	$form->selectarray("concurrent",$ff,$ligne->concurrent);
 	print '</td></tr>';
 
 	print "</table>\n";
@@ -859,6 +859,6 @@ if ($user->rights->telephonie->ligne->creer)
 $db->close();
 
 
-llxFooter('$Date: 2010/04/29 14:54:32 $ - $Revision: 1.4 $');
+llxFooter('$Date: 2010/08/19 15:25:24 $ - $Revision: 1.5 $');
 ?>
 

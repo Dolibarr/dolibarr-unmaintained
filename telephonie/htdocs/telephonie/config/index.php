@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: index.php,v 1.1 2009/10/20 16:19:29 eldy Exp $
+ * $Id: index.php,v 1.2 2010/08/19 15:25:25 hregis Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/config/index.php,v $
  */
 
@@ -23,7 +23,7 @@
     \file       htdocs/telephonie/config/index.php
     \ingroup    telephonie
     \brief      Page configuration telephonie
-    \version    $Revision: 1.1 $
+    \version    $Revision: 1.2 $
 */
 
 require("./pre.inc.php");
@@ -116,7 +116,7 @@ if ($resql)
     }
   $db->free($resql);	
 }
-$form->select_array("value4",$ff,TELEPHONIE_GROUPE_COMMERCIAUX_ID);
+$form->selectarray("value4",$ff,TELEPHONIE_GROUPE_COMMERCIAUX_ID);
 
 print '</td><td><input type="submit" value="'.$langs->trans('Update').'">';
 print '</td><td>TELEPHONIE_GROUPE_COMMERCIAUX_ID</td></tr>';
@@ -137,7 +137,7 @@ if ($resql)
     }
   $db->free($resql);	
 }
-$form->select_array("value2",$ff,TELEPHONIE_FOURNISSEUR_DEFAUT_ID);
+$form->selectarray("value2",$ff,TELEPHONIE_FOURNISSEUR_DEFAUT_ID);
 
 print '</td><td><input type="submit" value="'.$langs->trans('Update').'">';
 print '</td><td>TELEPHONIE_FOURNISSEUR_DEFAUT_ID</td></tr>';
@@ -165,7 +165,7 @@ if ($resql)
 
 print '<td>';
 
-$form->select_array("value3",$gg,TELEPHONIE_GRILLE_VENTE_DEFAUT_ID);
+$form->selectarray("value3",$gg,TELEPHONIE_GRILLE_VENTE_DEFAUT_ID);
 
 print '</td><td><input type="submit" value="'.$langs->trans('Update').'"></td>';
 print '<td>TELEPHONIE_GRILLE_VENTE_DEFAUT_ID</td></tr>';

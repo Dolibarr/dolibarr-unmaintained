@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: fiche.php,v 1.1 2009/10/20 16:19:31 eldy Exp $
+ * $Id: fiche.php,v 1.2 2010/08/19 15:25:24 hregis Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/fournisseur/fiche.php,v $
  *
  */
@@ -123,13 +123,13 @@ if ($_GET["action"] == 'create')
 
   print '<tr><td width="20%">Méthode de commande</td>';
   print '<td>';
-  print $html->select_array("methode",$arr,$fourn->class_commande);
+  print $html->selectarray("methode",$arr,$fourn->class_commande);
   print '</td>';
   print '<td>méthode utilisée pour les commandes de lignes</td></tr>';
 
   print '<tr><td width="20%">Format de CDR</td>';
   print '<td>';
-  print $html->select_array("cdrformat",$cdr,$fourn->cdrformat);
+  print $html->selectarray("cdrformat",$cdr,$fourn->cdrformat);
   print '</td>';
   print '<td>Format des fichiers CDR</td></tr>';
 
@@ -137,7 +137,7 @@ if ($_GET["action"] == 'create')
   asort($ta->liste_name);
   print '<tr><td width="20%">Grille de tarif</td>';
   print '<td>';
-  print $html->select_array("grille",$ta->liste_name);
+  print $html->selectarray("grille",$ta->liste_name);
   print '</td>';
   print '<td>Grille de tarif</td></tr>';
 
@@ -190,20 +190,20 @@ if ($_GET["id"] > 0)
 
 	print '<tr><td width="20%">Méthode de commande</td>';
 	print '<td>';
-	print $html->select_array("methode",$arr,$fourn->class_commande);
+	print $html->selectarray("methode",$arr,$fourn->class_commande);
 	print '</td>';
 	print '<td>méthode utilisée pour les commandes de lignes</td></tr>';
     
 	print '<tr><td width="20%">Format de CDR</td>';
 	print '<td>';
-	print $html->select_array("cdrformat",$cdr,$fourn->cdrformat);
+	print $html->selectarray("cdrformat",$cdr,$fourn->cdrformat);
 	print '</td>';
 	print '<td>Format des fichiers CDR</td></tr>';
 
 	print '<tr><td width="20%">Blocage des commandes</td>';
 	print '<td>';
 
-	print $html->select_array("commande_bloque",$art,$fourn->commande_bloque);
+	print $html->selectarray("commande_bloque",$art,$fourn->commande_bloque);
 	print '</td>';
 	print '<td>Les commandes vers ce fournisseur sont bloquées</td></tr>';
 
@@ -211,7 +211,7 @@ if ($_GET["id"] > 0)
 	
 	print '<tr><td width="20%">Grille de tarif</td>';
 	print '<td>';
-	print $html->select_array("grille",$ta->liste_name, $fourn->grille);
+	print $html->selectarray("grille",$ta->liste_name, $fourn->grille);
 	print '</td>';
 	print '<td>Grille de tarif</td></tr>';
 
@@ -302,5 +302,5 @@ print "</div>";
 
 $db->close();
 
-llxFooter("<em>Derni&egrave;re modification $Date: 2009/10/20 16:19:31 $ r&eacute;vision $Revision: 1.1 $</em>");
+llxFooter("<em>Derni&egrave;re modification $Date: 2010/08/19 15:25:24 $ r&eacute;vision $Revision: 1.2 $</em>");
 ?>

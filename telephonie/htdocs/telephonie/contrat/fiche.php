@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: fiche.php,v 1.1 2009/10/20 16:19:28 eldy Exp $
+ * $Id: fiche.php,v 1.2 2010/08/19 15:25:25 hregis Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/contrat/fiche.php,v $
  *
  */
@@ -173,7 +173,7 @@ if ($_GET["action"] == 'create' && $user->rights->telephonie->ligne->creer)
 	}
       $db->free();      
     }
-  $form->select_array("client_comm",$ff,$ligne->client_comm);
+  $form->selectarray("client_comm",$ff,$ligne->client_comm);
   print '</td></tr>';
 
   print '<tr><td>&nbsp;</td><td><input type="submit" value="Cr�er"></td></tr>'."\n";
@@ -269,7 +269,7 @@ elseif ($_GET["action"] == 'create_line' && $_GET["client_comm"] > 0 && $user->r
 	    {
 	      print $sql;
 	    }
-	  $form->select_array("client",$ff,$ligne->client);
+	  $form->selectarray("client",$ff,$ligne->client);
 	  print '</td></tr>';
 	  
 	  print '<tr><td width="20%">Client � facturer</td><td >';
@@ -292,7 +292,7 @@ elseif ($_GET["action"] == 'create_line' && $_GET["client_comm"] > 0 && $user->r
 		}
 	      $db->free();     
 	    }
-	  $form->select_array("client_facture",$ff,$ligne->client_facture);
+	  $form->selectarray("client_facture",$ff,$ligne->client_facture);
 	  print '</td></tr>';
 	  
 	  /*
@@ -323,7 +323,7 @@ elseif ($_GET["action"] == 'create_line' && $_GET["client_comm"] > 0 && $user->r
 	      
 	    }
 	  
-	  $form->select_array("commercial_sign",$ff,$ligne->commercial);
+	  $form->selectarray("commercial_sign",$ff,$ligne->commercial);
 	  
 	  print '</td></tr>';
 	  
@@ -1124,5 +1124,5 @@ else
 
 $db->close();
 
-llxFooter("<em>Derni&egrave;re modification $Date: 2009/10/20 16:19:28 $ r&eacute;vision $Revision: 1.1 $</em>");
+llxFooter("<em>Derni&egrave;re modification $Date: 2010/08/19 15:25:25 $ r&eacute;vision $Revision: 1.2 $</em>");
 ?>

@@ -20,7 +20,7 @@
  *  \file       htdocs/energie/compteur_groupe.php
  *  \ingroup    energie
  *  \brief      Fiche de gestion des groupes des compteurs
- *  \version    $Id: compteur_groupe.php,v 1.1 2009/10/20 16:19:26 eldy Exp $
+ *  \version    $Id: compteur_groupe.php,v 1.2 2010/08/19 15:25:25 hregis Exp $
  */
 
 require("./pre.inc.php");
@@ -95,7 +95,7 @@ if ($_GET["id"] > 0)
 		$compteur->GroupsAvailable();
 
 		print '<td>Groupe</td><td>';
-		print $html->select_array("groupe", $compteur->groups_available);
+		print $html->selectarray("groupe", $compteur->groups_available);
 		print '</td>';
 
 		print '<td align="center"><input type="submit" value="'.$langs->trans("Add").'"></td></tr>';
@@ -117,5 +117,5 @@ else
 
 $db->close();
 
-llxFooter("<em>Derni&egrave;re modification $Date: 2009/10/20 16:19:26 $ r&eacute;vision $Revision: 1.1 $</em>");
+llxFooter("<em>Derni&egrave;re modification $Date: 2010/08/19 15:25:25 $ r&eacute;vision $Revision: 1.2 $</em>");
 ?>
