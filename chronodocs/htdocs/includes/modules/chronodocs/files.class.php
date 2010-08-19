@@ -27,7 +27,7 @@
         \brief      Classe de gestion des documents de chronodoc
         \author	Raphael Bertrand (Resultic) <raphael.bertrand@resultic.fr>
         \remarks	Initialy built from FormFile.class.php and htdocs/document.php
-        \version    $Id: files.class.php,v 1.5 2010/08/19 15:25:25 hregis Exp $
+        \version    $Id: files.class.php,v 1.6 2010/08/19 20:29:45 eldy Exp $
 */
 
 require_once(DOL_DOCUMENT_ROOT."/core/class/html.formfile.class.php");
@@ -133,7 +133,7 @@ class ChronodocsFiles extends FormFile
 
 				print '<tr '.$bc[$var].'>';
 				print '<td align="center">'.$langs->trans('Model').' ';
-				$html->selectarray('model',$modellist,$modelselected,0,0,1);
+				print $html->selectarray('model',$modellist,$modelselected,0,0,1);
 				$texte=$langs->trans('Generate');
 				print '</td>';
 				print '<td align="center">';

@@ -23,7 +23,7 @@
  \file       htdocs/chronodocs/types.php
  \brief      Fichier fiche type de chronodoc
  \ingroup    chronodocs
- \version    $Id: types.php,v 1.6 2010/08/19 15:25:25 hregis Exp $
+ \version    $Id: types.php,v 1.7 2010/08/19 20:29:45 eldy Exp $
  */
 
 require("./pre.inc.php");
@@ -635,7 +635,7 @@ if ($_GET["id"] > 0 && $_GET["action"] != 'create' && $_GET["action"] != 'info' 
 				print '<form name="add_propfield" action="'.$_SERVER["PHP_SELF"].'?id='.$chronodocstype->id.'" method="post">';
 				print '<input type="hidden" name="action" value="add_propfield">';
 				print '<td colspan="2" align="left">AUTO: ';
-				$html->selectarray('propfield_ref',$auto_propfields_ref,$_GET['propfield_ref'],0,1);
+				print $html->selectarray('propfield_ref',$auto_propfields_ref,$_GET['propfield_ref'],0,1);
 				print '</td>';
 				//print '<td width="25%" align="center">'."<input name=\"propfield_title\" value=\"".$propfield->title."\" size=\"40\">".'</td>';
 				print '<td align="center">';
@@ -860,5 +860,5 @@ if (empty($_GET["id"]) &&  (empty($_GET["action"]) || $_GET["action"] != 'create
 }
 $db->close();
 
-llxFooter('$Date: 2010/08/19 15:25:25 $ - $Revision: 1.6 $');
+llxFooter('$Date: 2010/08/19 20:29:45 $ - $Revision: 1.7 $');
 ?>

@@ -23,7 +23,7 @@
  \file       htdocs/chronodocs/fiche.php
  \brief      Fichier fiche chronodoc
  \ingroup    chronodocs
- \version    $Id: fiche.php,v 1.6 2010/08/19 15:25:25 hregis Exp $
+ \version    $Id: fiche.php,v 1.7 2010/08/19 20:29:45 eldy Exp $
  */
 
 require("./pre.inc.php");
@@ -602,7 +602,6 @@ if ($_GET["action"] == 'create' || $_GET["action"] == 'editAll')
 		print '<td>';
 		//$chronodocType=new Chronodocs_types($db); //Not editable since chronodocs propfields
 		//$liste=$chronodocType->liste_types($db);
-		//$html->selectarray('chronodocs_type',$liste,$chronodocs->fk_chronodocs_type);
 		print $chronodocs->chronodocs_type->getNomUrl(1);
 		print '<input type="hidden" name="chronodocs_type" value='.$chronodocs->fk_chronodocs_type.'>';
 		print "</td></tr>";
@@ -673,7 +672,7 @@ if ($_GET["action"] == 'create' || $_GET["action"] == 'editAll')
 		print "<tr><td>".$langs->trans("ChronodocType")."</td><td>";
 		$chronodocType=new Chronodocs_types($db); //Not editable since chronodocs propfields
 		$liste=$chronodocType->liste_types($db);
-		$html->selectarray('chronodocs_type',$liste,$_GET['chronodocs_type']);
+		print $html->selectarray('chronodocs_type',$liste,$_GET['chronodocs_type']);
 		print "</td></tr>";
 		print '<tr><td colspan="2" align="center">';
 		print "<input type=\"hidden\" name=\"action\" value=\"create\">";
@@ -688,5 +687,5 @@ if ($_GET["action"] == 'create' || $_GET["action"] == 'editAll')
 
 $db->close();
 
-llxFooter('$Date: 2010/08/19 15:25:25 $ - $Revision: 1.6 $');
+llxFooter('$Date: 2010/08/19 20:29:45 $ - $Revision: 1.7 $');
 ?>

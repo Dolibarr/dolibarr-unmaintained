@@ -5,7 +5,7 @@
 
 /* Copyright (C) 2008 Samuel  Bouchet <samuel.bouchet@auguria.net>
  * Copyright (C) 2008 Patrick Raguin  <patrick.raguin@auguria.net>
- * Copyright (C) 2008 Samuel Bouchet, Patrick Raguin <samuel.bouchet@auguria.net, patrick.raguin@auguria.net> 
+ * Copyright (C) 2008 Samuel Bouchet, Patrick Raguin <samuel.bouchet@auguria.net, patrick.raguin@auguria.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@
 */
 
 function getfieldToKeyFieldArray($query){
-				
+
 	preg_match("/SELECT (.*) FROM/i",$query,$matches) ; // fields between select and FROM
 	$queryfields = explode(",",$matches[1]) ; // array of fields
 
@@ -47,9 +47,9 @@ function getfieldToKeyFieldArray($query){
 		}
 		// on recupere la partie gauche du point pour avoir la table
 		$tmp = explode(".",$tmp) ;
-		
+
 		$table = trim($tmp[0]) ;
-		
+
 		$tmp = preg_split("/ as /i",$tmp[1]) ;
 		$fieldname = (isset($tmp[1]))? trim($tmp[1]) : trim($tmp[0]) ;
 		if($tmp[0]=="rowid"){
@@ -57,7 +57,7 @@ function getfieldToKeyFieldArray($query){
 		}
 		$keys[$fieldname] = $tableidfields[$table] ;
 	}
-	
+
 	return $keys ;
 }
 
@@ -102,55 +102,52 @@ function formatValue($type,$value){
  *      \return     			html code
  */
 function getHtmlForm($type,$attribute_name,$value='',$null=0,$form_name='',$textarea_rows=3){
-	
+
 	$html = new Form($db);
-	
+
 	switch($type)
 	{
 		case "datetime":
-			
-			ob_start(); 
+
+			ob_start();
 			$html->select_date($value,$attribute_name,'1','1',$null,$form_name,1);
-			$input = ob_get_contents(); 
-			ob_end_clean();				
+			$input = ob_get_contents();
+			ob_end_clean();
 			break;
 
 		case "date":
-			ob_start(); 
+			ob_start();
 			$html->select_date($value,$attribute_name,'0','0',$null,$form_name,1);
-			$input = ob_get_contents(); 
-			ob_end_clean();				
+			$input = ob_get_contents();
+			ob_end_clean();
 			break;
 
 		case "time":
-			ob_start(); 
+			ob_start();
 			$html->select_date($value,$attribute_name,'1','1',$null,$form_name,0);
-			$input = ob_get_contents(); 
-			ob_end_clean();				
-			break;				
-			
+			$input = ob_get_contents();
+			ob_end_clean();
+			break;
+
 		case "boolean":
 			$input = $html->selectyesno($attribute_name,$value,1);
 			break;
-			
+
 		case "text":
 			$input = '<textarea name='.$attribute_name.' wrap="soft" cols="70" rows="'.$textarea_rows.'">'.$value.'</textarea>';
 			break ;
-			
+
 		case is_array($type):
-			ob_start(); 
-			$html->selectarray($attribute_name,$type,$value,$null);
-			$input = ob_get_contents(); 
-			ob_end_clean();		
+			$input = $html->selectarray($attribute_name,$type,$value,$null);
 			break ;
-			
+
 		default:
 			$input = '<input type="text" size="40" maxlength="255" name='.$attribute_name.' value="'.$value.'" />';
 			break;
-	}	
+	}
 
 	return $input;
-	
+
 }
 
 
