@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: cdrformat.fructidor.class.php,v 1.1 2009/10/20 16:19:31 eldy Exp $
+ * $Id: cdrformat.fructidor.class.php,v 1.2 2010/08/24 20:27:25 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/fournisseur/cdrformat/cdrformat.fructidor.class.php,v $
  *
  * Format de CDR Fructidor
@@ -61,7 +61,7 @@ class CdrFormatFructidor
       {
 	$cont = fgets($hf, 1024);
 	
-	if (strlen(trim($cont)) > 0)
+	if (dol_strlen(trim($cont)) > 0)
 	  {
 	    $tabline = explode(";", $cont);
 	    if (sizeof($tabline) == 7)

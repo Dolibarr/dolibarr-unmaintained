@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: fournisseurtel.class.php,v 1.1 2009/10/20 16:19:24 eldy Exp $
+ * $Id: fournisseurtel.class.php,v 1.2 2010/08/24 20:27:25 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/fournisseurtel.class.php,v $
  *
  */
@@ -201,7 +201,7 @@ class FournisseurTelephonie {
 	if (is_readable($this->classdir.$file) && substr($file, 0, 8) == 'commande' && substr($file, -10) == '.class.php')
 	  {
 
-	    $name = substr($file, 9, strlen($file) -19);
+	    $name = substr($file, 9, dol_strlen($file) -19);
 
 	    $filebis = $this->classdir . $file;
       
@@ -231,7 +231,7 @@ class FournisseurTelephonie {
       {
 	if (is_readable($this->cdrformatdir.$file) && substr($file, 0, 9) == 'cdrformat' && substr($file, -10) == '.class.php')
 	  {
-	    $name = substr($file, 10, strlen($file) -20);
+	    $name = substr($file, 10, dol_strlen($file) -20);
 	    $filebis = $this->classdir . $file;
       
 	    // Chargement de la classe de numérotation

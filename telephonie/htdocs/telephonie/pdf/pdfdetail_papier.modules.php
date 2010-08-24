@@ -16,7 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  * or see http://www.gnu.org/
  *
- * $Id: pdfdetail_papier.modules.php,v 1.4 2010/08/06 13:56:09 hregis Exp $
+ * $Id: pdfdetail_papier.modules.php,v 1.5 2010/08/24 20:27:24 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/pdf/pdfdetail_papier.modules.php,v $
  *
  * Génère un PDF de la première page de résumé et un tableur des communications
@@ -64,7 +64,7 @@ class pdfdetail_papier {
 	  $dir  = FAC_OUTPUTDIR . "/" . $fac->ref . "/" ;
 	  $file = $dir . $fac->ref . "-$ligne-detail.pdf";
 
-	  if (strlen($objlignetel->code_analytique) > 0)
+	  if (dol_strlen($objlignetel->code_analytique) > 0)
 	    {
 	      $file = $dir . $fac->ref . "-$ligne-$objlignetel->code_analytique-detail.pdf";
 	    }

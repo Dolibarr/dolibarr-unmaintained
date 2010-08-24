@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: ligneadsl.class.php,v 1.1 2009/10/20 16:19:28 eldy Exp $
+ * $Id: ligneadsl.class.php,v 1.2 2010/08/24 20:27:25 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/adsl/ligneadsl.class.php,v $
  *
  */
@@ -95,7 +95,7 @@ class LigneAdsl {
    */
   function create($user)
   {
-    if (strlen(trim($this->numero)) == 10)
+    if (dol_strlen(trim($this->numero)) == 10)
       {
 	$sql = "INSERT INTO ".MAIN_DB_PREFIX."telephonie_adsl_ligne";
 	$sql .= " (fk_client, fk_client_install, fk_client_facture, fk_contrat, numero_ligne, fk_type, fk_fournisseur, note, fk_commercial, statut, fk_user_creat)";

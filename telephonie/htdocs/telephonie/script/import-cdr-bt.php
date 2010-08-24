@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: import-cdr-bt.php,v 1.1 2009/10/20 16:19:23 eldy Exp $
+ * $Id: import-cdr-bt.php,v 1.2 2010/08/24 20:27:24 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/script/import-cdr-bt.php,v $
  *
  * Script d'import des CDR BT
@@ -28,7 +28,7 @@ $opt = getopt("f:");
 $file = $opt['f'];
 $id_fourn = 2;
 
-if (strlen($file) == 0)
+if (dol_strlen($file) == 0)
 {
   print "Usage :\n php import-cdr-bt.php -f <filename>\n";
   exit;
@@ -217,7 +217,7 @@ foreach ($newfiles as $xfile)
 		{
 		  $cont = fgets($hf, 1024);
 		  
-		  if (strlen(trim($cont)) > 0)
+		  if (dol_strlen(trim($cont)) > 0)
 		    {
 		      // 297400910,2005-03-23 08:08:08,Appels Mob.-ORANGE,0680301933, 106, .3445
 		      // 297400910,2005-03-23 09:24:36,Appels Mob.-ORANGE,0675621805, 5, .0162

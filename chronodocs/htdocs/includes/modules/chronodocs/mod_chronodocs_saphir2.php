@@ -24,7 +24,7 @@
 	\file       htdocs/includes/modules/chronodocs/mod_chronodocs_saphir2.php
 	\ingroup    fiche intervention
 	\brief      Fichier contenant la classe du modèle de numérotation de référence de fiche intervention Saphir2
-	\version    $Id: mod_chronodocs_saphir2.php,v 1.1 2008/09/10 09:34:58 raphael_bertrand Exp $
+	\version    $Id: mod_chronodocs_saphir2.php,v 1.2 2010/08/24 20:27:25 grandoc Exp $
 */
 
 require_once(DOL_DOCUMENT_ROOT ."/includes/modules/chronodocs/modules_chronodocs.php");
@@ -145,8 +145,8 @@ class mod_chronodocs_saphir2 extends ModeleNumRefChronodocs
 		{	
 			//process chronodocs's  TypeRef filter before getting next counter value (note: with global refclient activated it will be then escaped for getting refclient value)
 			$typeRef_maskbefore='{'.$regTypeRef[1].'}';
-			$typeRef_maskafter=substr($valueforttt,0,strlen($regTypeRef[1]));//get n first characters of client code to form typeRef_maskafter
-			$typeRef_maskafter=str_pad($typeRef_maskafter,strlen($regTypeRef[1]),"#",STR_PAD_RIGHT);//padding typeRef_maskafter for having exactly n characters in typeRef_maskafter
+			$typeRef_maskafter=substr($valueforttt,0,dol_strlen($regTypeRef[1]));//get n first characters of client code to form typeRef_maskafter
+			$typeRef_maskafter=str_pad($typeRef_maskafter,dol_strlen($regTypeRef[1]),"#",STR_PAD_RIGHT);//padding typeRef_maskafter for having exactly n characters in typeRef_maskafter
 			$mask = str_replace($typeRef_maskbefore,$typeRef_maskafter,$mask);
 		}	
 		

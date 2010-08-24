@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: tarifs.php,v 1.1 2009/10/20 16:19:27 eldy Exp $
+ * $Id: tarifs.php,v 1.2 2010/08/24 20:27:24 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/client/tarifs.php,v $
  *
  */
@@ -30,7 +30,7 @@ if ($_POST["action"] == 'addtarif' && $user->rights->telephonie->tarif->client_m
   $error = 0;
   $saisieok = 1;
 
-  if (strlen(trim($_POST["temporel"])) == 0 OR strlen(trim($_POST["fixe"])) == 0)
+  if (dol_strlen(trim($_POST["temporel"])) == 0 OR dol_strlen(trim($_POST["fixe"])) == 0)
     {
       $saisieok = 0;
     }
@@ -137,7 +137,7 @@ if ($_GET["special"] == 'done')
 if ($_GET["action"] == 'delete' && $user->rights->telephonie->tarif->client_modifier)
 {
 
-  if (strlen(trim($_GET["tid"])) > 0)
+  if (dol_strlen(trim($_GET["tid"])) > 0)
     {
       $sql = "DELETE FROM ".MAIN_DB_PREFIX."telephonie_tarif_client";
       $sql .= " WHERE rowid = ".$_GET["tid"];
@@ -339,5 +339,5 @@ print '</div>';
 
 $db->close();
 
-llxFooter("<em>Derni&egrave;re modification $Date: 2009/10/20 16:19:27 $ r&eacute;vision $Revision: 1.1 $</em>");
+llxFooter("<em>Derni&egrave;re modification $Date: 2010/08/24 20:27:24 $ r&eacute;vision $Revision: 1.2 $</em>");
 ?>

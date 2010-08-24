@@ -17,7 +17,7 @@
  */
 
 /**
- * 	\version	$Id: cyberpaiement.class.php,v 1.1 2010/01/12 10:26:24 eldy Exp $
+ * 	\version	$Id: cyberpaiement.class.php,v 1.2 2010/08/24 20:27:25 grandoc Exp $
  */
 
 /* Classe de gestion du systeme de paiement de la banque Populaire
@@ -115,12 +115,12 @@ class Cyberpaiement
     $this->champ101 = $prenom;
     
     /* Soci�t� */
-    if (strlen(trim($societe)))
+    if (dol_strlen(trim($societe)))
       {
 	$this->champ102 = $societe;
       }
     /* T�l�phone */
-    if (strlen(trim($telephone)))
+    if (dol_strlen(trim($telephone)))
       {
 	$this->champ103 = $telephone;
       }
@@ -130,31 +130,31 @@ class Cyberpaiement
     $this->champ104 = trim($email);
     
     /* Fax */
-    if (strlen(trim($fax)))
+    if (dol_strlen(trim($fax)))
       {
 	$this->champ106 = $fax;
       }
     
     /* Adresse num�ro et rue */
-    if (strlen(trim($adresse)))
+    if (dol_strlen(trim($adresse)))
       {
 	$this->champ107 = $adresse;
       }
     
     /* Ville */
-    if (strlen(trim($ville)))
+    if (dol_strlen(trim($ville)))
       {
 	$this->champ108 = $ville;
       }
     
     /* Code Postal */
-    if (strlen(trim($cp)))
+    if (dol_strlen(trim($cp)))
       {
 	$this->champ109 = trim($cp);
       }
     
     /* Code Pays : purement Informatif */
-    if (strlen(trim($pays)))
+    if (dol_strlen(trim($pays)))
       {
 	$this->champ110 = trim($pays);
       }

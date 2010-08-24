@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: telephonie.commercial.class.php,v 1.1 2009/10/20 16:19:24 eldy Exp $
+ * $Id: telephonie.commercial.class.php,v 1.2 2010/08/24 20:27:25 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/telephonie.commercial.class.php,v $
  *
  */
@@ -44,12 +44,12 @@ class CommercialTelephonie {
     {
       $error = 0;
 
-      if (strlen(trim($this->nom)) == 0)
+      if (dol_strlen(trim($this->nom)) == 0)
 	{
 	  $this->error_string["nom"] = "Valeur manquante";
 	  $error++;
 	}
-      if (strlen(trim($this->prenom)) == 0)
+      if (dol_strlen(trim($this->prenom)) == 0)
 	{
 	  $this->error_string["prenom"] = "Valeur manquante";
 	  $error++;

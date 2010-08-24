@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: baracc.class.php,v 1.1 2009/10/20 16:19:25 eldy Exp $
+ * $Id: baracc.class.php,v 1.2 2010/08/24 20:27:25 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/stats/graph/baracc.class.php,v $
  *
  */
@@ -65,7 +65,7 @@ class GraphBarAcc extends DolibarrGraph {
     $graph->xaxis->scale->SetGrace(20);
 
     $LabelAngle = 45;
-    if ($this->LabelAngle <> $LabelAngle && strlen($this->LabelAngle) > 0)
+    if ($this->LabelAngle <> $LabelAngle && dol_strlen($this->LabelAngle) > 0)
       {
 	$LabelAngle = $this->LabelAngle;
       }

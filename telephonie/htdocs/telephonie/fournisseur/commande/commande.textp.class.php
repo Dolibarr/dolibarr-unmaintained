@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: commande.textp.class.php,v 1.1 2009/10/20 16:19:31 eldy Exp $
+ * $Id: commande.textp.class.php,v 1.2 2010/08/24 20:27:24 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/fournisseur/commande/commande.textp.class.php,v $
  *
  * Classe de commande de ligne au format Texte
@@ -53,7 +53,7 @@ class CommandeMethodeTextP extends CommandeMethode
 
     $fname = DOL_DATA_ROOT ."/telephonie/ligne/commande/".$this->filename;
 
-    if (strlen(trim($this->fourn->email_commande)) == 0)
+    if (dol_strlen(trim($this->fourn->email_commande)) == 0)
       {
 	return -3;
       }
@@ -160,7 +160,7 @@ class CommandeMethodeTextP extends CommandeMethode
 	      {
 		$obj = $this->db->fetch_object($resql);	
 		
-		if (strlen($obj->ligne)== 10)
+		if (dol_strlen($obj->ligne)== 10)
 		  {		    
 		    $soc = new Societe($this->db);
 		    $soc->fetch($obj->socid);

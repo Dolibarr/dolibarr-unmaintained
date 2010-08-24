@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: facture.php,v 1.8 2010/06/05 15:20:47 eldy Exp $
+ * $Id: facture.php,v 1.9 2010/08/24 20:27:24 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/client/facture.php,v $
  */
 
@@ -25,7 +25,7 @@
    \file       htdocs/telephonie/client/facture.php
    \ingroup    telephonie/facture
    \brief      Page de visualisation d'une facture
-   \version    $Revision: 1.8 $
+   \version    $Revision: 1.9 $
 */
 require("./pre.inc.php");
 
@@ -80,7 +80,7 @@ if ($_POST["action"] == 'send' || $_POST["action"] == 'relance')
 	    $sendtoid = $_POST["receiver"];
 	  }
 
-	  if (strlen($sendto))
+	  if (dol_strlen($sendto))
             {
 	      $from = $_POST["fromname"] . " <" . $_POST["frommail"] .">";
 	      $replyto = $_POST["replytoname"]. " <" . $_POST["replytomail"].">";
@@ -728,5 +728,5 @@ if ($_GET["facid"] > 0)
 
 $db->close();
 
-llxFooter('$Date: 2010/06/05 15:20:47 $ - $Revision: 1.8 $');
+llxFooter('$Date: 2010/08/24 20:27:24 $ - $Revision: 1.9 $');
 ?>

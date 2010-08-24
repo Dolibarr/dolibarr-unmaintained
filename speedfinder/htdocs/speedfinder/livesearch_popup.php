@@ -8,7 +8,7 @@
     	\file       htdocs/speedfinder/livesearch.php
 		\ingroup    speedfinder
 		\brief      Speedfinder AJAX SQL result constructor page
-		\version    $Id: livesearch_popup.php,v 1.1 2009/11/30 22:37:40 hregis Exp $
+		\version    $Id: livesearch_popup.php,v 1.2 2010/08/24 20:27:24 grandoc Exp $
 		\author		Marc STUDER
 */
 
@@ -28,7 +28,7 @@ $NBCAR_MINI=empty($conf->global->SFINDER_NBCAR)?2:$conf->global->SFINDER_NBCAR;
 $SEPAR_PHONE=empty($conf->global->SFINDER_FSEPAR)?' / ':$conf->global->SFINDER_FSEPAR;
 
 //lookup all links from the db if length of q>nn
-if (strlen($q) >= $NBCAR_MINI) {
+if (dol_strlen($q) >= $NBCAR_MINI) {
 	$hint="";
 	$q = strtolower($q);
 	$sql_search = 'SELECT SOC.rowid as SOCid, SOC.nom, SOC.tel, CTC.rowid as CTCid, CTC.name, CTC.firstname, CTC.phone, CTC.phone_perso, CTC.phone_mobile '.

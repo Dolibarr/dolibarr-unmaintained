@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: workflowtel.class.php,v 1.1 2009/10/20 16:19:24 eldy Exp $
+ * $Id: workflowtel.class.php,v 1.2 2010/08/24 20:27:25 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/workflowtel.class.php,v $
  *
  */
@@ -103,7 +103,7 @@ class WorkflowTelephonie {
 
     $message .= "Ligne numéro : ".$numero."\n";
     $message .= "Evénement    : ".$ligne->statuts[$statut_id]."\n";
-    if (strlen(trim($commentaire)))
+    if (dol_strlen(trim($commentaire)))
 	$message .= "Commentaire  : ".$commentaire."\n";
 
     $message .= "\n\n--\n";

@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: import-cdr.php,v 1.1 2009/10/20 16:19:23 eldy Exp $
+ * $Id: import-cdr.php,v 1.2 2010/08/24 20:27:24 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/script/import-cdr.php,v $
  *
  * Script d'import des CDR des fournisseurs
@@ -28,7 +28,7 @@ $opt = getopt("f:i:");
 $file = $opt['f'];
 $id_fourn = $opt['i'];
 
-if (strlen($file) == 0 || strlen($id_fourn) == 0)
+if (dol_strlen($file) == 0 || dol_strlen($id_fourn) == 0)
 {
   print "Usage :\n php import-cdr.php -f <filename> -i <id_fournisseur>\n";
   exit;
@@ -188,7 +188,7 @@ if (is_readable($file))
 	{
 	  $cont = fgets($hf, 1024);
   
-	  if (strlen(trim($cont)) > 0)
+	  if (dol_strlen(trim($cont)) > 0)
 	    {
 	      $tabline = explode(";", $cont);
 	      if (sizeof($tabline) == 11)

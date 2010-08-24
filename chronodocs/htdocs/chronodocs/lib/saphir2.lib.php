@@ -22,7 +22,7 @@
  \file			htdocs/lib/saphir2.lib.php
  \brief			Ensemble de fonctions de base de dolibarr sous forme d'include.
 				Used for counters.
- \version		$Id: saphir2.lib.php,v 1.2 2010/08/09 14:57:38 eldy Exp $
+ \version		$Id: saphir2.lib.php,v 1.3 2010/08/24 20:27:24 grandoc Exp $
  */
 
 
@@ -72,7 +72,7 @@ function get_next_value_saphir2($db,$mask,$table,$field,$where='',$valueforccc='
 	$maskcounter=$reg[1];
 	$maskraz=-1;
 	$maskoffset=0;
-	if (strlen($maskcounter) < 3) return 'CounterMustHaveMoreThan3Digits';
+	if (dol_strlen($maskcounter) < 3) return 'CounterMustHaveMoreThan3Digits';
 
 	// Extract value for third party mask counter
 	if (eregi('\{(c+)(0*)\}',$mask,$regClientRef))
@@ -81,10 +81,10 @@ function get_next_value_saphir2($db,$mask,$table,$field,$where='',$valueforccc='
 		$maskrefclient_maskclientcode=$regClientRef[1];
 		$maskrefclient_maskcounter=$regClientRef[2];
 		$maskrefclient_maskoffset=0; //default value of maskrefclient_counter offset
-		$maskrefclient_clientcode=substr($valueforccc,0,strlen($maskrefclient_maskclientcode));//get n first characters of client code to form maskrefclient_clientcode
-		$maskrefclient_clientcode=str_pad($maskrefclient_clientcode,strlen($maskrefclient_maskclientcode),"#",STR_PAD_RIGHT);//padding maskrefclient_clientcode for having exactly n characters in maskrefclient_clientcode
+		$maskrefclient_clientcode=substr($valueforccc,0,dol_strlen($maskrefclient_maskclientcode));//get n first characters of client code to form maskrefclient_clientcode
+		$maskrefclient_clientcode=str_pad($maskrefclient_clientcode,dol_strlen($maskrefclient_maskclientcode),"#",STR_PAD_RIGHT);//padding maskrefclient_clientcode for having exactly n characters in maskrefclient_clientcode
 		$maskrefclient_clientcode=dol_string_nospecial($maskrefclient_clientcode);//sanitize maskrefclient_clientcode for sql insert and sql select like
-		//if (strlen($maskrefclient_maskcounter) > 0 && strlen($maskrefclient_maskcounter) < 3) return 'CounterMustHaveMoreThan3Digits';
+		//if (dol_strlen($maskrefclient_maskcounter) > 0 && dol_strlen($maskrefclient_maskcounter) < 3) return 'CounterMustHaveMoreThan3Digits';
 	}
 	else $maskrefclient='';
 
@@ -123,15 +123,15 @@ function get_next_value_saphir2($db,$mask,$table,$field,$where='',$valueforccc='
 		$yearoffset=0;
 		$yearcomp=0;
 		if (date("m",$date) < $maskraz) { $yearoffset=-1; }	// If current month lower that month of return to zero, year is previous year
-		if (strlen($reg[2]) == 4) $yearcomp=sprintf("%04d",date("Y",$date)+$yearoffset);
-		if (strlen($reg[2]) == 2) $yearcomp=sprintf("%02d",date("y",$date)+$yearoffset);
-		if (strlen($reg[2]) == 1) $yearcomp=substr(date("y",$date),2,1)+$yearoffset;
+		if (dol_strlen($reg[2]) == 4) $yearcomp=sprintf("%04d",date("Y",$date)+$yearoffset);
+		if (dol_strlen($reg[2]) == 2) $yearcomp=sprintf("%02d",date("y",$date)+$yearoffset);
+		if (dol_strlen($reg[2]) == 1) $yearcomp=substr(date("y",$date),2,1)+$yearoffset;
 
 		$sqlwhere='';
-		$sqlwhere.='SUBSTRING('.$field.', '.(strlen($reg[1])+1).', '.strlen($reg[2]).') >= '.$yearcomp;
+		$sqlwhere.='SUBSTRING('.$field.', '.(dol_strlen($reg[1])+1).', '.dol_strlen($reg[2]).') >= '.$yearcomp;
 		if ($monthcomp > 1)	// Test useless if monthcomp = 1 (or 0 is same as 1)
 		{
-			$sqlwhere.=' AND SUBSTRING('.$field.', '.(strlen($reg[1])+strlen($reg[2])+1).', '.strlen($reg[3]).') >= '.$monthcomp;
+			$sqlwhere.=' AND SUBSTRING('.$field.', '.(dol_strlen($reg[1])+dol_strlen($reg[2])+1).', '.dol_strlen($reg[3]).') >= '.$monthcomp;
 		}
 	}
 	//print "masktri=".$masktri." maskcounter=".$maskcounter." maskraz=".$maskraz." maskoffset=".$maskoffset."<br>\n";
@@ -139,7 +139,7 @@ function get_next_value_saphir2($db,$mask,$table,$field,$where='',$valueforccc='
 	// Define $sqlstring
 	$posnumstart=strpos($maskwithnocode,$maskcounter);	// Pos of counter in final string (from 0 to ...)
 	if ($posnumstart < 0) return 'ErrorBadMaskFailedToLocatePosOfSequence';
-	$sqlstring='SUBSTRING('.$field.', '.($posnumstart+1).', '.strlen($maskcounter).')';
+	$sqlstring='SUBSTRING('.$field.', '.($posnumstart+1).', '.dol_strlen($maskcounter).')';
 	//print "x".$sqlstring;
 
 	// Define $maskLike
@@ -151,8 +151,8 @@ function get_next_value_saphir2($db,$mask,$table,$field,$where='',$valueforccc='
 	$maskLike = str_replace(dol_string_nospecial('{y}'),'_',$maskLike);
 	$maskLike = str_replace(dol_string_nospecial('{mm}'),'__',$maskLike);
 	$maskLike = str_replace(dol_string_nospecial('{dd}'),'__',$maskLike);
-	$maskLike = str_replace(dol_string_nospecial('{'.$masktri.'}'),str_pad("",strlen($maskcounter),"_"),$maskLike);
-	if ($maskrefclient) $maskLike = str_replace(dol_string_nospecial('{'.$maskrefclient.'}'),str_pad("",strlen($maskrefclient),"_"),$maskLike);
+	$maskLike = str_replace(dol_string_nospecial('{'.$masktri.'}'),str_pad("",dol_strlen($maskcounter),"_"),$maskLike);
+	if ($maskrefclient) $maskLike = str_replace(dol_string_nospecial('{'.$maskrefclient.'}'),str_pad("",dol_strlen($maskrefclient),"_"),$maskLike);
 
 	// Get counter in database
 	$counter=0;
@@ -189,16 +189,16 @@ function get_next_value_saphir2($db,$mask,$table,$field,$where='',$valueforccc='
 			dolibarr_syslog("saphir2::get_next_value local refclient computation",LOG_DEBUG);
 			$maskrefclient_counter=get_next_refclientcounter_value($db,$mask,$table,$field,$where,$valueforccc,$date,$extraparams);
 		}
-		if( strlen($maskrefclient_counter)>strlen($maskrefclient_maskcounter) )
+		if( dol_strlen($maskrefclient_counter)>dol_strlen($maskrefclient_maskcounter) )
 			{//Too long, probably overflow
 			 $maskrefclient_counter=(int)$maskrefclient_counter;// get int value
-			 if (((int)(str_pad("",strlen($maskrefclient_maskcounter),"9",STR_PAD_LEFT)))<$maskrefclient_counter)
+			 if (((int)(str_pad("",dol_strlen($maskrefclient_maskcounter),"9",STR_PAD_LEFT)))<$maskrefclient_counter)
 				{//Overflow
-				dolibarr_syslog("saphir2::get_next_value overflow (".$maskrefclient_counter.") as more than ".strlen($maskrefclient_maskcounter)."chars",LOG_ERR); //Overflow Alert
-				$maskrefclient_counter=str_pad("",strlen($maskrefclient_maskcounter),"#",STR_PAD_LEFT);
+				dolibarr_syslog("saphir2::get_next_value overflow (".$maskrefclient_counter.") as more than ".dol_strlen($maskrefclient_maskcounter)."chars",LOG_ERR); //Overflow Alert
+				$maskrefclient_counter=str_pad("",dol_strlen($maskrefclient_maskcounter),"#",STR_PAD_LEFT);
 				}
 			}
-			$maskrefclient_counter=str_pad($maskrefclient_counter,strlen($maskrefclient_maskcounter),"0",STR_PAD_LEFT); //adjust returned value
+			$maskrefclient_counter=str_pad($maskrefclient_counter,dol_strlen($maskrefclient_maskcounter),"0",STR_PAD_LEFT); //adjust returned value
 		#SAPHIR2 SPECIFIC CODE END
 	}
 
@@ -215,7 +215,7 @@ function get_next_value_saphir2($db,$mask,$table,$field,$where='',$valueforccc='
 
 	// Now we replace the counter
 	$maskbefore='{'.$masktri.'}';
-	$maskafter=str_pad($counter,strlen($maskcounter),"0",STR_PAD_LEFT);
+	$maskafter=str_pad($counter,dol_strlen($maskcounter),"0",STR_PAD_LEFT);
 	//print 'x'.$maskbefore.'-'.$maskafter.'y';
 	$numFinal = str_replace($maskbefore,$maskafter,$numFinal);
 
@@ -224,7 +224,7 @@ function get_next_value_saphir2($db,$mask,$table,$field,$where='',$valueforccc='
 	{
 		//print "maskrefclient=".$maskrefclient." maskwithonlyymcode=".$maskwithonlyymcode." maskwithnocode=".$maskwithnocode."\n<br>";
 		$maskrefclient_maskbefore='{'.$maskrefclient.'}';
-		$maskrefclient_maskafter=$maskrefclient_clientcode.str_pad($maskrefclient_counter,strlen($maskrefclient_maskcounter),"0",STR_PAD_LEFT);
+		$maskrefclient_maskafter=$maskrefclient_clientcode.str_pad($maskrefclient_counter,dol_strlen($maskrefclient_maskcounter),"0",STR_PAD_LEFT);
 		$numFinal = str_replace($maskrefclient_maskbefore,$maskrefclient_maskafter,$numFinal);
 	}
 
@@ -315,7 +315,7 @@ global $conf;
 		$masktri=$reg[1].$reg[2].$reg[3];
 		$maskcounter=$reg[1];
 		$maskraz=-1;
-		if (strlen($maskcounter) < 3) return 'CounterMustHaveMoreThan3Digits';
+		if (dol_strlen($maskcounter) < 3) return 'CounterMustHaveMoreThan3Digits';
 
 		// Extract value for third party mask counter
 		if (eregi('\{(c+)(0*)\}',$mask,$regClientRef))
@@ -324,10 +324,10 @@ global $conf;
 			$maskrefclient_maskclientcode=$regClientRef[1];
 			$maskrefclient_maskcounter=$regClientRef[2];
 			$maskrefclient_maskoffset=0; //default value of maskrefclient_counter offset
-			$maskrefclient_clientcode=substr($valueforccc,0,strlen($maskrefclient_maskclientcode));//get n first characters of client code to form maskrefclient_clientcode
-			$maskrefclient_clientcode=str_pad($maskrefclient_clientcode,strlen($maskrefclient_maskclientcode),"#",STR_PAD_RIGHT);//padding maskrefclient_clientcode for having exactly n characters in maskrefclient_clientcode
+			$maskrefclient_clientcode=substr($valueforccc,0,dol_strlen($maskrefclient_maskclientcode));//get n first characters of client code to form maskrefclient_clientcode
+			$maskrefclient_clientcode=str_pad($maskrefclient_clientcode,dol_strlen($maskrefclient_maskclientcode),"#",STR_PAD_RIGHT);//padding maskrefclient_clientcode for having exactly n characters in maskrefclient_clientcode
 			$maskrefclient_clientcode=dol_string_nospecial($maskrefclient_clientcode);//sanitize maskrefclient_clientcode for sql insert and sql select like
-			//if (strlen($maskrefclient_maskcounter) > 0 && strlen($maskrefclient_maskcounter) < 3) return 'CounterMustHaveMoreThan3Digits';
+			//if (dol_strlen($maskrefclient_maskcounter) > 0 && dol_strlen($maskrefclient_maskcounter) < 3) return 'CounterMustHaveMoreThan3Digits';
 		}
 		else
 		{
@@ -370,15 +370,15 @@ global $conf;
 			$yearoffset=0;
 			$yearcomp=0;
 			if (date("m") < $maskraz) { $yearoffset=-1; }	// If current month lower that month of return to zero, year is previous year
-			if (strlen($reg[2]) == 4) $yearcomp=sprintf("%04d",date("Y")+$yearoffset);
-			if (strlen($reg[2]) == 2) $yearcomp=sprintf("%02d",date("y")+$yearoffset);
-			if (strlen($reg[2]) == 1) $yearcomp=substr(date("y"),2,1)+$yearoffset;
+			if (dol_strlen($reg[2]) == 4) $yearcomp=sprintf("%04d",date("Y")+$yearoffset);
+			if (dol_strlen($reg[2]) == 2) $yearcomp=sprintf("%02d",date("y")+$yearoffset);
+			if (dol_strlen($reg[2]) == 1) $yearcomp=substr(date("y"),2,1)+$yearoffset;
 
 			$sqlwhere='';
-			$sqlwhere.='SUBSTRING('.$field.', '.(strlen($reg[1])+1).', '.strlen($reg[2]).') >= '.$yearcomp;
+			$sqlwhere.='SUBSTRING('.$field.', '.(dol_strlen($reg[1])+1).', '.dol_strlen($reg[2]).') >= '.$yearcomp;
 			if ($monthcomp > 1)	// Test useless if monthcomp = 1 (or 0 is same as 1)
 			{
-				$sqlwhere.=' AND SUBSTRING('.$field.', '.(strlen($reg[1])+strlen($reg[2])+1).', '.strlen($reg[3]).') >= '.$monthcomp;
+				$sqlwhere.=' AND SUBSTRING('.$field.', '.(dol_strlen($reg[1])+dol_strlen($reg[2])+1).', '.dol_strlen($reg[3]).') >= '.$monthcomp;
 			}
 		}
 		else
@@ -392,7 +392,7 @@ global $conf;
 			// Define $sqlstring
 			$maskrefclient_posnumstart=strpos($maskwithnocode,$maskrefclient_maskcounter,strpos($maskwithnocode,$maskrefclient));	// Pos of counter in final string (from 0 to ...)
 			if ($maskrefclient_posnumstart <= 0) return 'ErrorBadMask';
-			$maskrefclient_sqlstring='SUBSTRING('.$field.', '.($maskrefclient_posnumstart+1).', '.strlen($maskrefclient_maskcounter).')';
+			$maskrefclient_sqlstring='SUBSTRING('.$field.', '.($maskrefclient_posnumstart+1).', '.dol_strlen($maskrefclient_maskcounter).')';
 			//print "x".$sqlstring;
 
 			// Define $maskrefclient_maskLike
@@ -404,8 +404,8 @@ global $conf;
 			$maskrefclient_maskLike = str_replace(dol_string_nospecial('{y}'),'_',$maskrefclient_maskLike);
 			$maskrefclient_maskLike = str_replace(dol_string_nospecial('{mm}'),'__',$maskrefclient_maskLike);
 			$maskrefclient_maskLike = str_replace(dol_string_nospecial('{dd}'),'__',$maskrefclient_maskLike);
-			$maskrefclient_maskLike = str_replace(dol_string_nospecial('{'.$masktri.'}'),str_pad("",strlen($maskcounter),"_"),$maskrefclient_maskLike);
-			$maskrefclient_maskLike = str_replace(dol_string_nospecial('{'.$maskrefclient.'}'),$maskrefclient_clientcode.str_pad("",strlen($maskrefclient_maskcounter),"_"),$maskrefclient_maskLike);
+			$maskrefclient_maskLike = str_replace(dol_string_nospecial('{'.$masktri.'}'),str_pad("",dol_strlen($maskcounter),"_"),$maskrefclient_maskLike);
+			$maskrefclient_maskLike = str_replace(dol_string_nospecial('{'.$maskrefclient.'}'),$maskrefclient_clientcode.str_pad("",dol_strlen($maskrefclient_maskcounter),"_"),$maskrefclient_maskLike);
 
 			// Get counter in database
 			$maskrefclient_counter=0;
@@ -415,7 +415,7 @@ global $conf;
 			$maskrefclient_sql.= " WHERE ".$field." like '".$maskrefclient_maskLike."'";
 			if ($where) $maskrefclient_sql.=$where;//use the same optional where as general mask
 			if ($sqlwhere) $maskrefclient_sql.=' AND '.$sqlwhere; //use the same sqlwhere as general mask
-			$maskrefclient_sql.=' AND (SUBSTRING('.$field.', '.(strpos($maskwithnocode,$maskrefclient)+1).', '.strlen($maskrefclient_maskclientcode).")='".$maskrefclient_clientcode."')";
+			$maskrefclient_sql.=' AND (SUBSTRING('.$field.', '.(strpos($maskwithnocode,$maskrefclient)+1).', '.dol_strlen($maskrefclient_maskclientcode).")='".$maskrefclient_clientcode."')";
 
 			dolibarr_syslog("saphir2::get_next_refclientcounter_value maskrefclient_sql=".$maskrefclient_sql, LOG_DEBUG);
 			$maskrefclient_resql=$db->query($maskrefclient_sql);
@@ -430,10 +430,10 @@ global $conf;
 		}
 
 		# END Saphir refclient routine part
-		$numSteps[]=str_pad($maskrefclient_counter,strlen($maskrefclient_maskcounter),"0",STR_PAD_LEFT);
+		$numSteps[]=str_pad($maskrefclient_counter,dol_strlen($maskrefclient_maskcounter),"0",STR_PAD_LEFT);
 		dolibarr_syslog("saphir2::get_next_refclientcounter_value numSteps value=".$numFinal,LOG_DEBUG);
 	}
-	$numSteps[]=str_pad("1",strlen($maskrefclient_maskcounter),"0",STR_PAD_LEFT);
+	$numSteps[]=str_pad("1",dol_strlen($maskrefclient_maskcounter),"0",STR_PAD_LEFT);
 	$numFinal=max($numSteps);
 	dolibarr_syslog("saphir2::get_next_refclientcounter_value return ".$numFinal,LOG_DEBUG);
 	return $numFinal;
@@ -523,7 +523,7 @@ global $conf;
 		if (eregi('\{(t+)\}',$chronodocs_saphir2_mask,$regTypeRef))
 		{	//escape chronodocs's  TypeRef filter before getting next refclientcounter value for chronodocs
 			$typeRef_maskbefore='{'.$regTypeRef[1].'}';
-			$typeRef_maskafter=str_pad("",strlen($regTypeRef[1]),"_",STR_PAD_LEFT);
+			$typeRef_maskafter=str_pad("",dol_strlen($regTypeRef[1]),"_",STR_PAD_LEFT);
 			$chronodocs_saphir2_mask = str_replace($typeRef_maskbefore,$typeRef_maskafter,$chronodocs_saphir2_mask);
 		}
 

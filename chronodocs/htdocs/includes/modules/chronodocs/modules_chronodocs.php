@@ -24,7 +24,7 @@
 		\ingroup    chronodocs
 		\brief      Fichier contenant les classes mères des modules de generation des chronodocs 
 		            et la classe mère de numérotation des chronodocs 
-		\version    $Id: modules_chronodocs.php,v 1.1 2008/09/10 09:34:57 raphael_bertrand Exp $
+		\version    $Id: modules_chronodocs.php,v 1.2 2010/08/24 20:27:25 grandoc Exp $
 */
 
 require_once(DOL_DOCUMENT_ROOT.'/lib/functions.lib.php');
@@ -234,7 +234,7 @@ function chronodocs_create($db, $object, $modele='', $outputlangs='')
 	
 	dolibarr_syslog("chronodocs_create modele=$modele", LOG_DEBUG);
 	// Positionne modele sur le nom du modele à utiliser
-	if (! strlen($modele))
+	if (! dol_strlen($modele))
 	{
 		if ($conf->global->CHRONODOCS_ADDON_TEMPLATE)
 		{

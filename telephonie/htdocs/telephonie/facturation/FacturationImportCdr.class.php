@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: FacturationImportCdr.class.php,v 1.1 2009/10/20 16:19:21 eldy Exp $
+ * $Id: FacturationImportCdr.class.php,v 1.2 2010/08/24 20:27:24 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/facturation/FacturationImportCdr.class.php,v $
  *
  * Script d'import des CDR
@@ -170,7 +170,7 @@ class FacturationImportCdr {
 	exit ;
       }
     
-    if (strlen($fourn->cdrformat))
+    if (dol_strlen($fourn->cdrformat))
       {
 	if (@require_once(DOL_DOCUMENT_ROOT."/telephonie/fournisseur/cdrformat/cdrformat.".$fourn->cdrformat.".class.php"))
 	  {

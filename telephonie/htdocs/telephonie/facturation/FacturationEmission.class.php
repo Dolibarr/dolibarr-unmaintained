@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: FacturationEmission.class.php,v 1.8 2010/08/06 13:56:10 hregis Exp $
+ * $Id: FacturationEmission.class.php,v 1.9 2010/08/24 20:27:24 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/facturation/FacturationEmission.class.php,v $
  *
  *
@@ -28,7 +28,7 @@
    \file       htdocs/telephonie/script/facturation-emission.php
    \ingroup    telephonie
    \brief      Emission des factures
-   \version    $Revision: 1.8 $
+   \version    $Revision: 1.9 $
 */
 
 require_once (DOL_DOCUMENT_ROOT."/compta/facture/class/facture.class.php");
@@ -149,7 +149,7 @@ class FacturationEmission {
 	$sql .= " AND f.fk_ligne = l.rowid ";
 	$sql .= " AND l.fk_contrat = c.rowid";  
 	
-	if (strlen($optcontrat) >  0)
+	if (dol_strlen($optcontrat) >  0)
 	  {
 	    $sql .= " AND c.rowid=".$optcontrat;
 	    dol_syslog("Limite sur le contrat : ".$optcontrat);
@@ -385,7 +385,7 @@ class FacturationEmission {
 		/* Insertion des lignes de factures */
 		$libelle = "";
 
-		if (strlen(trim($ligne->code_analytique)) > 0)
+		if (dol_strlen(trim($ligne->code_analytique)) > 0)
 		  {
 		    $libelle .= "".$ligne->code_analytique." ";
 		  }
@@ -739,7 +739,7 @@ class FacturationEmission {
 		// Differents modeles de factures detaillees
 	      
 		$modele = "standard";
-		if (strlen($ligne->pdfdetail) > 0)
+		if (dol_strlen($ligne->pdfdetail) > 0)
 		  {
 		    $modele = $ligne->pdfdetail;
 		  }
@@ -907,7 +907,7 @@ class FacturationEmission {
 		  {
 		    $sendto .= html_entity_decode($emails[$k]) . ",";
 		  }
-		$sendto = substr($sendto,0,strlen($sendto) - 1);
+		$sendto = substr($sendto,0,dol_strlen($sendto) - 1);
 
 		dol_syslog("[EM] Envoi email � ".html_entity_decode($sendto) );
 

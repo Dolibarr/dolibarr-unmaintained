@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: commande_presel.php,v 1.1 2009/10/20 16:19:22 eldy Exp $
+ * $Id: commande_presel.php,v 1.2 2010/08/24 20:27:24 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/script/commande_presel.php,v $
  *
  *
@@ -41,7 +41,7 @@ for ($i = 1 ; $i < sizeof($argv) ; $i++)
     {
       $verbose = 3;
     }
-  if (strlen($argv[$i]) == 10)
+  if (dol_strlen($argv[$i]) == 10)
     {
       $ligne = $argv[$i];
       print "Filtre sur la ligne ".$ligne."\n";

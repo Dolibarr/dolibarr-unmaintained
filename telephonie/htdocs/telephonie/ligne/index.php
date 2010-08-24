@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: index.php,v 1.1 2009/10/20 16:19:22 eldy Exp $
+ * $Id: index.php,v 1.2 2010/08/24 20:27:24 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/ligne/index.php,v $
  *
  */
@@ -207,7 +207,7 @@ if ($resql)
       print '<a href="fiche.php?id='.$obj->rowid.'">'.dol_print_phone($obj->ligne,0,0,true)."</a></td>\n";
 
       $nom = stripslashes($obj->nom);
-      if (strlen(stripslashes($obj->nom)) > 20)
+      if (dol_strlen(stripslashes($obj->nom)) > 20)
 	{
 	  $nom = substr(stripslashes($obj->nom),0,20)."...";
 	}
@@ -275,5 +275,5 @@ print "</table>\n</form>\n";
 
 $db->close();
 
-llxFooter("<em>Derni&egrave;re modification $Date: 2009/10/20 16:19:22 $ r&eacute;vision $Revision: 1.1 $</em>");
+llxFooter("<em>Derni&egrave;re modification $Date: 2010/08/24 20:27:24 $ r&eacute;vision $Revision: 1.2 $</em>");
 ?>

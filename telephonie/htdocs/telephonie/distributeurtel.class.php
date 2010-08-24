@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: distributeurtel.class.php,v 1.1 2009/10/20 16:19:24 eldy Exp $
+ * $Id: distributeurtel.class.php,v 1.2 2010/08/24 20:27:25 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/distributeurtel.class.php,v $
  *
  */
@@ -44,12 +44,12 @@ class DistributeurTelephonie {
     {
       $error = 0;
 
-      if (strlen(trim($this->nom)) == 0)
+      if (dol_strlen(trim($this->nom)) == 0)
 	{
 	  $this->error_string["nom"] = "Valeur manquante";
 	  $error++;
 	}
-      if (strlen(trim($this->avance)) == 0)
+      if (dol_strlen(trim($this->avance)) == 0)
 	{
 	  $this->error_string["avance"] = "Valeur manquante";
 	  $error++;
@@ -72,7 +72,7 @@ class DistributeurTelephonie {
 	  $this->error_string["duree"] = "Valeur incohérente";
 	  $error++;
 	}
-      if (strlen(trim($this->duree)) == 0)
+      if (dol_strlen(trim($this->duree)) == 0)
 	{
 	  $this->error_string["duree"] = "Valeur manquante";
 	  $error++;
@@ -89,7 +89,7 @@ class DistributeurTelephonie {
 	  $this->error_string["prelev"] = "Mauvais format";
 	  $error++;
 	}
-      if (strlen(trim($this->prelev)) == 0)
+      if (dol_strlen(trim($this->prelev)) == 0)
 	{
 	  $this->error_string["prelev"] = "Valeur manquante";
 	  $error++;
@@ -106,7 +106,7 @@ class DistributeurTelephonie {
 	  $this->error_string["autre"] = "Mauvais format";
 	  $error++;
 	}
-      if (strlen(trim($this->autre)) == 0)
+      if (dol_strlen(trim($this->autre)) == 0)
 	{
 	  $this->error_string["autre"] = "Valeur manquante";
 	  $error++;

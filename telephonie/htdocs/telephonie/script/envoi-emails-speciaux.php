@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: envoi-emails-speciaux.php,v 1.7 2010/04/29 14:54:33 grandoc Exp $
+ * $Id: envoi-emails-speciaux.php,v 1.8 2010/08/24 20:27:24 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/script/envoi-emails-speciaux.php,v $
  *
  *
@@ -176,7 +176,7 @@ if (sizeof($factures_a_mailer) > 0)
 		{
 		  $sendto .= html_entity_decode($emails[$k]) . ",";
 		}
-	      $sendto = substr($sendto,0,strlen($sendto) - 1);
+	      $sendto = substr($sendto,0,dol_strlen($sendto) - 1);
 	      
 	      dol_syslog("Envoi email à ".html_entity_decode($sendto) );
 	      

@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: fiche.php,v 1.2 2010/08/19 15:25:24 hregis Exp $
+ * $Id: fiche.php,v 1.3 2010/08/24 20:27:24 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/ligne/fiche.php,v $
  *
  */
@@ -37,7 +37,7 @@ if ($_POST["action"] == 'add' && $user->rights->telephonie->ligne->creer)
   $result = 0;
   
   $cbegin = trim($_POST["numero"]);
-  $cend = strlen(trim($_POST["numero_end"]))>0?trim($_POST["numero_end"]):trim($_POST["numero"]);
+  $cend = dol_strlen(trim($_POST["numero_end"]))>0?trim($_POST["numero_end"]):trim($_POST["numero"]);
 
   $cli = $cbegin;
   
@@ -345,7 +345,7 @@ elseif ($_GET["action"] == 'create' && $_GET["contratid"] > 0)
   if ( $socc->fetch($contrat->client_comm_id) == 1)
     {
 
-      if (strlen($socc->code_client) == 0)
+      if (dol_strlen($socc->code_client) == 0)
 	{
 	  print '<table class="border" width="100%" cellspacing="0" cellpadding="4">';
 	  print '<tr><td width="20%">Client</td><td >';  
@@ -358,7 +358,7 @@ elseif ($_GET["action"] == 'create' && $_GET["contratid"] > 0)
 	  print '</table><br /><br />';
 	  print 'Impossible de cr�er une ligne pour cette soci�t�, vous devez au pr�alablement lui affecter un code client.';
 	}
-      elseif (strlen($socc->code_client) > 0 && $socc->check_codeclient() <> 0)
+      elseif (dol_strlen($socc->code_client) > 0 && $socc->check_codeclient() <> 0)
 	{
 	  print '<table class="border" width="100%" cellspacing="0" cellpadding="4">';
 	  print '<tr><td width="20%">Client</td><td >';  
@@ -693,7 +693,7 @@ else
 			  print '<tr><td valign="top" width="20%">'.strftime("%d/%m/%y",$row[0]).'</td>';
 			  print '<td><img src="./graph'.$row[1].'.png">&nbsp;';
 			  print $ligne->statuts[$row[1]];
-			  if (strlen($row[4]) > 0)
+			  if (dol_strlen($row[4]) > 0)
 			    {
 			      print '<br />'.$row[4];
 			    }
@@ -1380,5 +1380,5 @@ print "</div>";
 
 $db->close();
 
-llxFooter("<em>Derni&egrave;re modification $Date: 2010/08/19 15:25:24 $ r&eacute;vision $Revision: 1.2 $</em>");
+llxFooter("<em>Derni&egrave;re modification $Date: 2010/08/24 20:27:24 $ r&eacute;vision $Revision: 1.3 $</em>");
 ?>

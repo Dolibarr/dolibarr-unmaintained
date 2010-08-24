@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: lignetel.class.php,v 1.1 2009/10/20 16:19:24 eldy Exp $
+ * $Id: lignetel.class.php,v 1.2 2010/08/24 20:27:24 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/lignetel.class.php,v $
  *
  */
@@ -152,7 +152,7 @@ class LigneTel {
 
       }
 
-    if (strlen($commentaire))
+    if (dol_strlen($commentaire))
       {
 	$message .= "Commentaire : ".$commentaire;
       }
@@ -175,7 +175,7 @@ class LigneTel {
   {
     $remise = ereg_replace(",",".", $remise);
 
-    if (strlen(trim($remise)) <> 0 && is_numeric($remise))
+    if (dol_strlen(trim($remise)) <> 0 && is_numeric($remise))
       {
 
 	if (!$this->db->begin())
@@ -236,7 +236,7 @@ class LigneTel {
    */
   function create($user, $mode_paiement='pre')
   {
-    if (strlen(trim($this->numero)) == 10)
+    if (dol_strlen(trim($this->numero)) == 10)
       {
 	/*
 	 * fk_commercial est encore définit pour supporter la migration en douceur 

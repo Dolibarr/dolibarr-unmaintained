@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: groupe.php,v 1.1 2009/10/20 16:19:22 eldy Exp $
+ * $Id: groupe.php,v 1.2 2010/08/24 20:27:24 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/ligne/groupe.php,v $
  *
  */
@@ -98,7 +98,7 @@ if ($_GET["search_client_facture"])
   $sql .= " AND sf.nom LIKE '%".$sel."%'";
 }
 
-if (strlen($_GET["statut"]))
+if (dol_strlen($_GET["statut"]))
 {
   $sql .= " AND l.statut = ".$_GET["statut"];
 }
@@ -184,5 +184,5 @@ else
 
 $db->close();
 
-llxFooter("<em>Derni&egrave;re modification $Date: 2009/10/20 16:19:22 $ r&eacute;vision $Revision: 1.1 $</em>");
+llxFooter("<em>Derni&egrave;re modification $Date: 2010/08/24 20:27:24 $ r&eacute;vision $Revision: 1.2 $</em>");
 ?>

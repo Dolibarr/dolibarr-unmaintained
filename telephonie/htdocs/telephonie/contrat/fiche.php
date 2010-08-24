@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: fiche.php,v 1.2 2010/08/19 15:25:25 hregis Exp $
+ * $Id: fiche.php,v 1.3 2010/08/24 20:27:25 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/contrat/fiche.php,v $
  *
  */
@@ -201,7 +201,7 @@ elseif ($_GET["action"] == 'create_line' && $_GET["client_comm"] > 0 && $user->r
   if ( $socc->id > 0)
     {
 
-      if (strlen($socc->code_client) == 0)
+      if (dol_strlen($socc->code_client) == 0)
 	{
 	  print '<table class="border" width="100%" cellspacing="0" cellpadding="4">';
 	  print '<tr><td width="20%">Client</td><td >';  
@@ -214,7 +214,7 @@ elseif ($_GET["action"] == 'create_line' && $_GET["client_comm"] > 0 && $user->r
 	  print '</table><br /><br />';
 	  print 'Impossible de cr�er un contrat pour cette societe, vous devez au prealablement lui affecter un code client.';
 	}
-      elseif (strlen($socc->code_client) > 0 && $socc->check_codeclient() <> 0)
+      elseif (dol_strlen($socc->code_client) > 0 && $socc->check_codeclient() <> 0)
 	{
 	  print '<table class="border" width="100%" cellspacing="0" cellpadding="4">';
 	  print '<tr><td width="20%">Client</td><td >';  
@@ -1124,5 +1124,5 @@ else
 
 $db->close();
 
-llxFooter("<em>Derni&egrave;re modification $Date: 2010/08/19 15:25:25 $ r&eacute;vision $Revision: 1.2 $</em>");
+llxFooter("<em>Derni&egrave;re modification $Date: 2010/08/24 20:27:25 $ r&eacute;vision $Revision: 1.3 $</em>");
 ?>

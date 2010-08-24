@@ -21,7 +21,7 @@
  *	    \file       htdocs/compta/bank/bplc.php
  *      \ingroup    banque
  *		\brief      Page of BPLC transactions
- *		\version    $Id: bplc.php,v 1.1 2010/01/12 10:26:24 eldy Exp $
+ *		\version    $Id: bplc.php,v 1.2 2010/08/24 20:27:25 grandoc Exp $
  */
 
 require("./pre.inc.php");
@@ -80,8 +80,8 @@ if ($resql)
 
       print "<tr $bc[1]>";
 
-      $type = substr($objp->ref_commande, strlen($objp->ref_commande) - 2 );
-      $id = substr($objp->ref_commande, 0 , strlen($objp->ref_commande) - 2 );
+      $type = substr($objp->ref_commande, dol_strlen($objp->ref_commande) - 2 );
+      $id = substr($objp->ref_commande, 0 , dol_strlen($objp->ref_commande) - 2 );
 
       if ($type == 10)
 	{
@@ -103,5 +103,5 @@ print "</table>";
 
 $db->close();
 
-llxFooter('$Date: 2010/01/12 10:26:24 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2010/08/24 20:27:25 $ - $Revision: 1.2 $');
 ?>

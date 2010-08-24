@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: liste.php,v 1.1 2009/10/20 16:19:28 eldy Exp $
+ * $Id: liste.php,v 1.2 2010/08/24 20:27:25 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/contrat/liste.php,v $
  *
  */
@@ -80,7 +80,7 @@ if ($_GET["search_client_facture"])
   $sql .= " AND sf.nom LIKE '%".$sel."%'";
 }
 
-if (strlen($_GET["statut"]))
+if (dol_strlen($_GET["statut"]))
 {
   $sql .= " AND c.statut = ".$_GET["statut"];
 }
@@ -155,5 +155,5 @@ else
 
 $db->close();
 
-llxFooter("<em>Derni&egrave;re modification $Date: 2009/10/20 16:19:28 $ r&eacute;vision $Revision: 1.1 $</em>");
+llxFooter("<em>Derni&egrave;re modification $Date: 2010/08/24 20:27:25 $ r&eacute;vision $Revision: 1.2 $</em>");
 ?>

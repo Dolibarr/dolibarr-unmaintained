@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: commande.php,v 1.1 2009/10/20 16:19:22 eldy Exp $
+ * $Id: commande.php,v 1.2 2010/08/24 20:27:24 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/ligne/commande.php,v $
  *
  */
@@ -95,7 +95,7 @@ if ($_GET["id"] or $_GET["numero"])
       $ftx = new FournisseurTelephonie($db, $ligne->fournisseur_id);
       $ftx->fetch($ligne->fournisseur_id);
 
-      if (strlen($ligne->numero) <> 10)
+      if (dol_strlen($ligne->numero) <> 10)
 	{
 	  $ok_commande = 0;
 	}
@@ -121,5 +121,5 @@ else
 
 $db->close();
 
-llxFooter('$Date: 2009/10/20 16:19:22 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2010/08/24 20:27:24 $ - $Revision: 1.2 $');
 ?>

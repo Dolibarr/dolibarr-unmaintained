@@ -23,7 +23,7 @@
  */
 
 /**
- * 	\version	$Id: retourbplc.class.php,v 1.1 2010/01/12 10:26:24 eldy Exp $
+ * 	\version	$Id: retourbplc.class.php,v 1.2 2010/08/24 20:27:25 grandoc Exp $
  */
 
 class Retourbplc
@@ -208,7 +208,7 @@ class Retourbplc
 	  }
     }
 
-    return substr($totalVal, strlen($totalVal)-1, 1);
+    return substr($totalVal, dol_strlen($totalVal)-1, 1);
   }
   /**
    * \brief Postion de C5 dans N0
@@ -270,7 +270,7 @@ class Retourbplc
   function array_reverse($string)
   {
 
-    $len = strlen($string);
+    $len = dol_strlen($string);
 
     $i = $len;
     $j = 0;

@@ -16,7 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  * or see http://www.gnu.org/
  *
- * $Id: telephonie-tarif.class.php,v 1.1 2009/10/20 16:19:24 eldy Exp $
+ * $Id: telephonie-tarif.class.php,v 1.2 2010/08/24 20:27:25 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/telephonie-tarif.class.php,v $
  *
  */
@@ -95,7 +95,7 @@ class TelephonieTarif {
 	    $this->prefixes[$pref][$i_pref] = $row[0];
 	    
 	    // Taille maximale du prefixe
-	    $this->prefixe_max[$pref] = max(strlen($row[0]), $this->prefixe_max[$pref]);
+	    $this->prefixe_max[$pref] = max(dol_strlen($row[0]), $this->prefixe_max[$pref]);
 	    
 	    $i++;
 	  }

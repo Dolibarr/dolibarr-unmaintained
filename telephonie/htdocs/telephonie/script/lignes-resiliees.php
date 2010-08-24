@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: lignes-resiliees.php,v 1.2 2010/04/28 07:41:32 eldy Exp $
+ * $Id: lignes-resiliees.php,v 1.3 2010/08/24 20:27:24 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/script/lignes-resiliees.php,v $
  *
  * Calcul des commissions des distributeurs
@@ -110,7 +110,7 @@ foreach ($lignes as $lid)
   $societe->fetch($ligne->client_comm_id);
   $socnom = $societe->nom;
 
-  if (strlen($socnom) > 40)
+  if (dol_strlen($socnom) > 40)
     {
       $socnom = substr($socnom, 0, 37) . "...";
     }

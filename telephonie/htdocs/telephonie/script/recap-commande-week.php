@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: recap-commande-week.php,v 1.1 2009/10/20 16:19:23 eldy Exp $
+ * $Id: recap-commande-week.php,v 1.2 2010/08/24 20:27:24 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/script/recap-commande-week.php,v $
  *
  *
@@ -223,7 +223,7 @@ function Generate($date_gen, $db, $date_now, $email)
   /*
    *
    */
-  if (strlen($email))
+  if (dol_strlen($email))
     {
       MailFile($fname, $shortname, $email);
     }

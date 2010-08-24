@@ -23,7 +23,7 @@
  \file       htdocs/telephonie/client/new.php
  \ingroup    telephonie
  \brief      Creation d'un nouveau client
- \version    $Id: new.php,v 1.5 2010/08/19 15:25:24 hregis Exp $
+ \version    $Id: new.php,v 1.6 2010/08/24 20:27:24 grandoc Exp $
  */
 
 require("pre.inc.php");
@@ -58,31 +58,31 @@ if ($_POST["action"] == 'add')
 	$contact->firstname    = $_POST["cprenom"];
 	$contact->email        = strtolower($_POST["cmail"]);
 
-	if (strlen(trim($_POST["nom"])) == 0)
+	if (dol_strlen(trim($_POST["nom"])) == 0)
 	{
 		$mesg = "Nom de société incorrect";
 		$verif = "nok";
 	}
 
-	if (strlen(trim($_POST["code_client"])) <> 6 && $verif == 'ok')
+	if (dol_strlen(trim($_POST["code_client"])) <> 6 && $verif == 'ok')
 	{
 		$mesg = "Code client incorrect";
 		$verif = "nok";
 	}
 
-	if (strlen(trim($_POST["adresse"])) == 0 && $verif == 'ok')
+	if (dol_strlen(trim($_POST["adresse"])) == 0 && $verif == 'ok')
 	{
 		$mesg = "Adresse de société manquante";
 		$verif = "nok";
 	}
 
-	if (strlen(trim($_POST["cp"])) == 0 && $verif == 'ok')
+	if (dol_strlen(trim($_POST["cp"])) == 0 && $verif == 'ok')
 	{
 		$mesg = "Code postal manquant";
 		$verif = "nok";
 	}
 
-	if (strlen(trim($_POST["ville"])) == 0 && $verif == 'ok')
+	if (dol_strlen(trim($_POST["ville"])) == 0 && $verif == 'ok')
 	{
 		$mesg = "Ville manquante";
 		$verif = "nok";
@@ -97,21 +97,21 @@ if ($_POST["action"] == 'add')
 	$rib->proprio      = $_POST["titulaire"];
 
 
-	if ((strlen(trim($_POST["rib_banque"])) + strlen(trim($_POST["rib_guichet"])) + strlen(trim($_POST["rib_compte"])) + strlen(trim($_POST["rib_cle"])))<> 0 && $verif == 'ok')
+	if ((dol_strlen(trim($_POST["rib_banque"])) + dol_strlen(trim($_POST["rib_guichet"])) + dol_strlen(trim($_POST["rib_compte"])) + dol_strlen(trim($_POST["rib_cle"])))<> 0 && $verif == 'ok')
 	{
-		if (strlen(trim($_POST["rib_banque"])) <> 5 && $verif == 'ok')
+		if (dol_strlen(trim($_POST["rib_banque"])) <> 5 && $verif == 'ok')
 		{
 			$mesg = "Rib code banque incomplet";
 			$verif = "nok";
 		}
 
-		if (strlen(trim($_POST["rib_guichet"])) <> 5 && $verif == 'ok')
+		if (dol_strlen(trim($_POST["rib_guichet"])) <> 5 && $verif == 'ok')
 		{
 			$mesg = "Rib code agence incomplet";
 			$verif = "nok";
 		}
 
-		if (strlen(trim($_POST["titulaire"])) == 0 && $verif == 'ok')
+		if (dol_strlen(trim($_POST["titulaire"])) == 0 && $verif == 'ok')
 		{
 			$mesg = "Vous devez indiquer le titulaire du compte";
 			$verif = "nok";
@@ -124,10 +124,10 @@ if ($_POST["action"] == 'add')
 		}
 	}
 
-	if (strlen(trim($_POST["cmail"])) > 0 && $verif == 'ok')
+	if (dol_strlen(trim($_POST["cmail"])) > 0 && $verif == 'ok')
 	{
 
-		if (strlen(trim($_POST["cnom"])) == 0 && $verif == 'ok')
+		if (dol_strlen(trim($_POST["cnom"])) == 0 && $verif == 'ok')
 		{
 			$mesg = "Nom de contact manquant";
 			$verif = "nok";
@@ -147,13 +147,13 @@ if ($_POST["action"] == 'add')
 	}
 
 
-	if (strlen(trim($_POST["cli"])) <> 9 && $verif == 'ok')
+	if (dol_strlen(trim($_POST["cli"])) <> 9 && $verif == 'ok')
 	{
 		$mesg = "Numéro de ligne #1 (0".$_POST["cli"].") incorrect";
 		$verif = "nok";
 	}
 
-	if (strlen(trim($_POST["cliend"])) > 0 && strlen(trim($_POST["cliend"])) <> 9 && $verif == 'ok')
+	if (dol_strlen(trim($_POST["cliend"])) > 0 && dol_strlen(trim($_POST["cliend"])) <> 9 && $verif == 'ok')
 	{
 		$mesg = "Numéro de ligne dernier SDA (0".$_POST["cliend"].") incorrect";
 		$verif = "nok";
@@ -178,9 +178,9 @@ if ($_POST["action"] == 'add')
 
 	/* Ligne #2 */
 
-	if (strlen(trim($_POST["cli2"])) > 0 && $verif == 'ok')
+	if (dol_strlen(trim($_POST["cli2"])) > 0 && $verif == 'ok')
 	{
-		if (strlen(trim($_POST["cli2"])) <> 9 && $verif == 'ok')
+		if (dol_strlen(trim($_POST["cli2"])) <> 9 && $verif == 'ok')
 		{
 			$mesg = "Numéro de ligne #2 (0".$_POST["cli2"].") incorrect";
 			$verif = "nok";
@@ -202,9 +202,9 @@ if ($_POST["action"] == 'add')
 	}
 	/* Ligne #3 */
 
-	if (strlen(trim($_POST["cli3"])) > 0 && $verif == 'ok')
+	if (dol_strlen(trim($_POST["cli3"])) > 0 && $verif == 'ok')
 	{
-		if (strlen(trim($_POST["cli3"])) <> 9 && $verif == 'ok')
+		if (dol_strlen(trim($_POST["cli3"])) <> 9 && $verif == 'ok')
 		{
 			$mesg = "Numéro de ligne #3 (0".$_POST["cli3"].") incorrect";
 			$verif = "nok";
@@ -226,7 +226,7 @@ if ($_POST["action"] == 'add')
 	}
 
 	/* Verif Tarif */
-	if (strlen(trim($_POST["france"])) > 0 && $verif == "ok")
+	if (dol_strlen(trim($_POST["france"])) > 0 && $verif == "ok")
 	{
 		$temporel = ereg_replace(",",".",trim($_POST["france"]));
 
@@ -253,7 +253,7 @@ if ($_POST["action"] == 'add')
 			}
 		}
 	}
-	if (strlen(trim($_POST["mobil"])) > 0 && $verif == "ok")
+	if (dol_strlen(trim($_POST["mobil"])) > 0 && $verif == "ok")
 	{
 		$temporel = ereg_replace(",",".",trim($_POST["mobil"]));
 
@@ -332,7 +332,7 @@ if ($_POST["action"] == 'add')
 	}
 
 
-	if ((strlen(trim($_POST["rib_banque"])) + strlen(trim($_POST["rib_guichet"])) + strlen(trim($_POST["rib_compte"])) + strlen(trim($_POST["rib_cle"])))<> 0 && $verif == 'ok' && !$error)
+	if ((dol_strlen(trim($_POST["rib_banque"])) + dol_strlen(trim($_POST["rib_guichet"])) + dol_strlen(trim($_POST["rib_compte"])) + dol_strlen(trim($_POST["rib_cle"])))<> 0 && $verif == 'ok' && !$error)
 	{
 		$rib->socid = $soc->id;
 		if ( $rib->update($user) > 0)
@@ -387,7 +387,7 @@ if ($_POST["action"] == 'add')
 
 	if(!$error && $verif == "ok")
 	{
-		if (strlen(trim($_POST["cli"])) == 9)
+		if (dol_strlen(trim($_POST["cli"])) == 9)
 		{
 
 	  if ( $ligne->create($user, $_POST["mode_paiement"]) == 0)
@@ -406,7 +406,7 @@ if ($_POST["action"] == 'add')
 
 	if(!$error && $verif == "ok")
 	{
-		if (strlen(trim($_POST["cli"])) == 9 && strlen(trim($_POST["cliend"])) == 9)
+		if (dol_strlen(trim($_POST["cli"])) == 9 && dol_strlen(trim($_POST["cliend"])) == 9)
 		{
 	  $cbegin = trim($_POST["cli"]) + 1;
 	  $cend = trim($_POST["cliend"]);
@@ -460,7 +460,7 @@ if ($_POST["action"] == 'add')
 
 	if(!$error && $verif == "ok")
 	{
-		if (strlen(trim($_POST["cli2"])) == 9)
+		if (dol_strlen(trim($_POST["cli2"])) == 9)
 		{
 
 	  if ( $ligne->create($user, $_POST["mode_paiement"]) == 0)
@@ -492,7 +492,7 @@ if ($_POST["action"] == 'add')
 
 	if(!$error && $verif == "ok")
 	{
-		if (strlen(trim($_POST["cli3"])) == 9)
+		if (dol_strlen(trim($_POST["cli3"])) == 9)
 		{
 
 	  if ( $ligne->create($user, $_POST["mode_paiement"]) == 0)
@@ -509,7 +509,7 @@ if ($_POST["action"] == 'add')
 	}
 
 	/* DEBUT TARIFS */
-	if (strlen(trim($_POST["france"])) > 0 && $verif == "ok")
+	if (dol_strlen(trim($_POST["france"])) > 0 && $verif == "ok")
 	{
 		$temporel = ereg_replace(",",".",trim($_POST["france"]));
 
@@ -548,7 +548,7 @@ if ($_POST["action"] == 'add')
 	}
 
 	/* mobiles */
-	if (strlen(trim($_POST["mobil"])) > 0 && $verif == "ok")
+	if (dol_strlen(trim($_POST["mobil"])) > 0 && $verif == "ok")
 	{
 		$mobil_ids = array(1289,1290,1291,1292);
 		foreach ($mobil_ids as $mobil_id)
@@ -859,6 +859,6 @@ if ($user->rights->telephonie->ligne->creer)
 $db->close();
 
 
-llxFooter('$Date: 2010/08/19 15:25:24 $ - $Revision: 1.5 $');
+llxFooter('$Date: 2010/08/24 20:27:24 $ - $Revision: 1.6 $');
 ?>
 

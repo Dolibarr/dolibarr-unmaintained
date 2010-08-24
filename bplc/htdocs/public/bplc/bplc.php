@@ -22,7 +22,7 @@
  * 	\brief		Gestion du retour du systeme de Cyberpaiement
  * 				Cette page est appellee par le serveur de la BPLC lors de
  * 				l'utilisation au systeme RSTS.
- * 	\version	$Id: bplc.php,v 1.2 2010/04/25 13:03:29 grandoc Exp $
+ * 	\version	$Id: bplc.php,v 1.3 2010/08/24 20:27:25 grandoc Exp $
  */
 
 define("NOLOGIN",1);	// This means this output page does not require to be logged.
@@ -60,7 +60,7 @@ $retbplc->ref_commande      = $CHAMP200;
 $return =  $retbplc->insertdb();
 
 
-$don_id = substr($retbplc->ref_commande, 0, strlen($retbplc->ref_commande) -2);
+$don_id = substr($retbplc->ref_commande, 0, dol_strlen($retbplc->ref_commande) -2);
 print $don_id;
 
 if($return)
@@ -76,7 +76,7 @@ if($return)
 
       $don = new Don($db);
 
-      $don_id = strstr($retbplc->ref_commande, 0, strlen($retbplc->ref_commande) -2);
+      $don_id = strstr($retbplc->ref_commande, 0, dol_strlen($retbplc->ref_commande) -2);
 
       // 5 correspond au paiement en ligne voir table llx_c_paiement
 

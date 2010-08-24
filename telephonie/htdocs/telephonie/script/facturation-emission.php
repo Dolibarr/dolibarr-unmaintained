@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: facturation-emission.php,v 1.8 2010/08/06 13:56:09 hregis Exp $
+ * $Id: facturation-emission.php,v 1.9 2010/08/24 20:27:24 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/script/facturation-emission.php,v $
  *
  *
@@ -28,7 +28,7 @@
    \file       htdocs/telephonie/script/facturation-emission.php
    \ingroup    telephonie
    \brief      Emission des factures
-   \version    $Revision: 1.8 $
+   \version    $Revision: 1.9 $
 */
 
 
@@ -39,7 +39,7 @@ $opt = getopt("l:c:");
 $limit = $opt['l'];
 $optcontrat = $opt['c'];
 
-if (strlen($limit) == 0 && strlen($optcontrat) == 0)
+if (dol_strlen($limit) == 0 && dol_strlen($optcontrat) == 0)
 {
   print "Usage :\n  php facturation-emission.php -l <limit>\n";
   exit;
@@ -127,7 +127,7 @@ if (!$error)
   $sql .= " AND f.fk_ligne = l.rowid ";
   $sql .= " AND l.fk_contrat = c.rowid";  
   
-  if (strlen($optcontrat) >  0)
+  if (dol_strlen($optcontrat) >  0)
     {
       $sql .= " AND c.rowid=".$optcontrat;
       dol_syslog("Limite sur le contrat : ".$optcontrat);
@@ -373,7 +373,7 @@ function facture_contrat($db, $user, $contrat_id, $factel_ids, $datetime, &$fact
 	      /* Insertion des lignes de factures */
 	      $libelle = "";
 
-	      if (strlen(trim($ligne->code_analytique)) > 0)
+	      if (dol_strlen(trim($ligne->code_analytique)) > 0)
 		{
 		  $libelle .= "".$ligne->code_analytique." ";
 		}
@@ -725,7 +725,7 @@ function facture_contrat($db, $user, $contrat_id, $factel_ids, $datetime, &$fact
 	      // Differents modeles de factures detaillees
 	      
 	      $modele = "standard";
-	      if (strlen($ligne->pdfdetail) > 0)
+	      if (dol_strlen($ligne->pdfdetail) > 0)
 		{
 		  $modele = $ligne->pdfdetail;
 		}
@@ -898,7 +898,7 @@ function _emails($db, $user, $contrat_id, $factures_a_mailer)
 	      {
 		$sendto .= html_entity_decode($emails[$k]) . ",";
 	      }
-	      $sendto = substr($sendto,0,strlen($sendto) - 1);
+	      $sendto = substr($sendto,0,dol_strlen($sendto) - 1);
 
 
 	      dol_syslog("[EM] Envoi email � ".html_entity_decode($sendto) );

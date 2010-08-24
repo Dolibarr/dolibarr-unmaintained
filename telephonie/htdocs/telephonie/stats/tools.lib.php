@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: tools.lib.php,v 1.1 2009/10/20 16:19:30 eldy Exp $
+ * $Id: tools.lib.php,v 1.2 2010/08/24 20:27:24 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/stats/tools.lib.php,v $
  *
  */
@@ -54,6 +54,6 @@ function stat_year_bar($year)
 	}
       $x++;
     }
-  print substr($string,0,strlen($string) - 13);
+  print substr($string,0,dol_strlen($string) - 13);
 }
 ?>

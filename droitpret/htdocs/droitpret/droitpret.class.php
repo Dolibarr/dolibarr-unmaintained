@@ -21,7 +21,7 @@
  *     \file       htdocs/droitpret/droitpret.class.php
  *     \ingroup    droitpret
  *     \brief      Fichier de la classe ddes droits de prets
- *     \version    $Id: droitpret.class.php,v 1.5 2010/08/09 14:58:09 eldy Exp $
+ *     \version    $Id: droitpret.class.php,v 1.6 2010/08/24 20:27:24 grandoc Exp $
  */
 
 
@@ -257,7 +257,7 @@ class DroitPret
 
     function ComplChar($chaine,$char,$size)
     {
-		$chaineSize=strlen ($chaine);
+		$chaineSize=dol_strlen ($chaine);
 		$ComplChar = $chaine;
 		for ($i = $chaineSize; $i < $size;$i++)
 		{

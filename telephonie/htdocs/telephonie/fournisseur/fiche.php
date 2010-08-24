@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: fiche.php,v 1.2 2010/08/19 15:25:24 hregis Exp $
+ * $Id: fiche.php,v 1.3 2010/08/24 20:27:25 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/fournisseur/fiche.php,v $
  *
  */
@@ -266,7 +266,7 @@ if ($_GET["id"] > 0)
 	print '</table><br />';
 	print 'Format de CDR<br/>';
 
-	if (strlen($fourn->cdrformat))
+	if (dol_strlen($fourn->cdrformat))
 	  {
 	    if (@require_once(DOL_DOCUMENT_ROOT."/telephonie/fournisseur/cdrformat/cdrformat.".$fourn->cdrformat.".class.php"))
 	      {
@@ -302,5 +302,5 @@ print "</div>";
 
 $db->close();
 
-llxFooter("<em>Derni&egrave;re modification $Date: 2010/08/19 15:25:24 $ r&eacute;vision $Revision: 1.2 $</em>");
+llxFooter("<em>Derni&egrave;re modification $Date: 2010/08/24 20:27:25 $ r&eacute;vision $Revision: 1.3 $</em>");
 ?>

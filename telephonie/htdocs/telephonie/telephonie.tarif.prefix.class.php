@@ -16,7 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  * or see http://www.gnu.org/
  *
- * $Id: telephonie.tarif.prefix.class.php,v 1.1 2009/10/20 16:19:24 eldy Exp $
+ * $Id: telephonie.tarif.prefix.class.php,v 1.2 2010/08/24 20:27:24 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/telephonie.tarif.prefix.class.php,v $
  *
  */
@@ -25,7 +25,7 @@
    \file       htdocs/telephonie.tarif.class.php
    \ingroup    facture
    \brief      Fichier de la classe des tarifs telephonies
-   \version    $Revision: 1.1 $
+   \version    $Revision: 1.2 $
 */
 
 /**
@@ -68,7 +68,7 @@ class TelephonieTarifPrefix {
       {
 	$this->fetch($prefix);
 
-	if ($this->tarif_id == 0 && strlen(trim($prefix)) > 0)
+	if ($this->tarif_id == 0 && dol_strlen(trim($prefix)) > 0)
 	  {
 	    $sql = "INSERT INTO ".MAIN_DB_PREFIX."telephonie_prefix";
 	    $sql .= "(prefix, fk_tarif)";

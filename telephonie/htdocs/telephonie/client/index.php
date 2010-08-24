@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: index.php,v 1.1 2009/10/20 16:19:27 eldy Exp $
+ * $Id: index.php,v 1.2 2010/08/24 20:27:24 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/client/index.php,v $
  *
  */
@@ -115,7 +115,7 @@ if ($resql)
       print img_file();      
       print '</a>&nbsp;';
       $nom = $obj->nom;
-      if (strlen($obj->nom) > 33)
+      if (dol_strlen($obj->nom) > 33)
 	$nom = substr($obj->nom,0,30)."...";
 
       print '<a href="'.DOL_URL_ROOT.'/telephonie/client/fiche.php?id='.$obj->socid.'">'.stripslashes($nom).'</a></td>';
@@ -214,7 +214,7 @@ if ($resql)
       print img_file();      
       print '</a>&nbsp;';
       $nom = $obj->nom;
-      if (strlen($obj->nom) > 33)
+      if (dol_strlen($obj->nom) > 33)
 	$nom = substr($obj->nom,0,30)."...";
       print '<a href="'.DOL_URL_ROOT.'/telephonie/client/fiche.php?id='.$obj->socid.'">'.stripslashes($nom).'</a></td>';
       print '<td>'.stripslashes($obj->commentaire)."</td>\n";
@@ -233,5 +233,5 @@ print '</table>';
 
 $db->close();
 
-llxFooter("<em>Derni&egrave;re modification $Date: 2009/10/20 16:19:27 $ r&eacute;vision $Revision: 1.1 $</em>");
+llxFooter("<em>Derni&egrave;re modification $Date: 2010/08/24 20:27:24 $ r&eacute;vision $Revision: 1.2 $</em>");
 ?>

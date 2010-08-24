@@ -25,7 +25,7 @@
     	\file       htdocs/admin/chronodocs.php
 		\ingroup    chronodocs
 		\brief      Page d'administration/configuration du module chronodocs (partialy from fichinter code)
-		\version    $Id: chronodocs.php,v 1.2 2010/08/09 14:57:38 eldy Exp $
+		\version    $Id: chronodocs.php,v 1.3 2010/08/24 20:27:26 grandoc Exp $
 */
 
 require("./pre.inc.php");
@@ -272,10 +272,10 @@ $var=true;
 $handle=opendir($dir);
 while (($file = readdir($handle))!==false)
 {
-  if (substr($file, strlen($file) -12) == '.modules.php' && substr($file,0,4) == 'tpl_')
+  if (substr($file, dol_strlen($file) -12) == '.modules.php' && substr($file,0,4) == 'tpl_')
     {
-      $name = substr($file, 4, strlen($file) -16);
-      $classname = substr($file, 0, strlen($file) -12);
+      $name = substr($file, 4, dol_strlen($file) -16);
+      $classname = substr($file, 0, dol_strlen($file) -12);
 
       $var=!$var;
 
@@ -380,5 +380,5 @@ print '<br>';
 
 $db->close();
 
-llxFooter('$Date: 2010/08/09 14:57:38 $ - $Revision: 1.2 $');
+llxFooter('$Date: 2010/08/24 20:27:26 $ - $Revision: 1.3 $');
 ?>

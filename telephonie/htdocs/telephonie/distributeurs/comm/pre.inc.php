@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: pre.inc.php,v 1.1 2009/10/20 16:19:27 eldy Exp $
+ * $Id: pre.inc.php,v 1.2 2010/08/24 20:27:26 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/distributeurs/comm/pre.inc.php,v $
  *
  */
@@ -126,7 +126,7 @@ function llxHeader($head = "", $title="") {
 
 	  $texte = $row[0];
 
-	  if (strlen($texte) > 15)
+	  if (dol_strlen($texte) > 15)
 	    {
 	      $texte = substr($texte,0,12)."...";
 	    }

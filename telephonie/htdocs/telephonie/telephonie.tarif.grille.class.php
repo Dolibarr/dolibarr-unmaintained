@@ -16,7 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  * or see http://www.gnu.org/
  *
- * $Id: telephonie.tarif.grille.class.php,v 1.1 2009/10/20 16:19:24 eldy Exp $
+ * $Id: telephonie.tarif.grille.class.php,v 1.2 2010/08/24 20:27:25 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/telephonie.tarif.grille.class.php,v $
  *
  */
@@ -25,7 +25,7 @@
    \file       htdocs/telephonie.tarif.class.php
    \ingroup    facture
    \brief      Fichier de la classe des tarifs telephonies
-   \version    $Revision: 1.1 $
+   \version    $Revision: 1.2 $
 */
 
 
@@ -100,7 +100,7 @@ class TelephonieTarifGrille {
   { 
     $result = 0;
 
-    if (strlen(trim($name)) > 0)
+    if (dol_strlen(trim($name)) > 0)
       {
 	$sql = "INSERT INTO ".MAIN_DB_PREFIX."telephonie_tarif_grille";
 	$sql .= "(libelle, type_tarif)";
