@@ -291,7 +291,7 @@ class VATList
 		echo '<td>' . $langs->trans('DeclarantNameAndAddress') . '</td>';
 		echo '<td>';
 		print $form->selectarray('name_id', $this->proposedNames, $this->nameID);
-		echo '<br />' . $this->street . '<br />' . $this->country . '-' . $this->zipCode . ' ' . $this->city . '</td>';
+		echo '<br>' . $this->street . '<br>' . $this->country . '-' . $this->zipCode . ' ' . $this->city . '</td>';
 		echo '</tr>';
 
 		echo '<tr>';
@@ -316,7 +316,7 @@ class VATList
 
 		echo '</table>';
 
-		echo '<br />';
+		echo '<br>';
 
 		echo '<table class="noborder" width="100%">';
 
