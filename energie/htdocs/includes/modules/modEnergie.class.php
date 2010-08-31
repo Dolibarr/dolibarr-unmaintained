@@ -20,7 +20,7 @@
 /**
  *	\defgroup   energie     Module energy
  * 	\brief      Module pour le suivi de la consommation d'energie
- *	\version	$Id: modEnergie.class.php,v 1.4 2010/05/01 21:09:47 grandoc Exp $
+ *	\version	$Id: modEnergie.class.php,v 1.5 2010/08/31 22:40:45 eldy Exp $
  */
 
 /**
@@ -58,7 +58,7 @@ class modEnergie extends DolibarrModules
 		$this->version = 'dolibarr';
 
 		$this->const_name = 'MAIN_MODULE_'.strtoupper($this->name);
-		$this->special = 3;
+		$this->special = 2;
 		$this->picto='energie';
 
 		// Data directories to create when module is enabled
@@ -98,7 +98,7 @@ class modEnergie extends DolibarrModules
 		$this->remove();
 
 		$sql = array();
-		
+
 		$result=$this->load_tables();
 
 		return $this->_init($sql);
@@ -114,7 +114,7 @@ class modEnergie extends DolibarrModules
 
 		return $this->_remove($sql);
 	}
-	
+
 	/**
 	 *		\brief		Create tables and keys required by module
 	 *					This function is called by this->init.

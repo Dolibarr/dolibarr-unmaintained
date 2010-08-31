@@ -26,7 +26,7 @@
  \file       htdocs/includes/modules/modTelephonie.class.php
  \ingroup    telephonie
  \brief      Fichier de description et activation du module de Telephonie
-	\version	$Id: modTelephonie.class.php,v 1.2 2010/04/21 05:33:41 hregis Exp $
+	\version	$Id: modTelephonie.class.php,v 1.3 2010/08/31 22:40:45 eldy Exp $
  */
 
 include_once(DOL_DOCUMENT_ROOT."/includes/modules/DolibarrModules.class.php");
@@ -59,7 +59,7 @@ class modTelephonie extends DolibarrModules
 		$this->version = 'dolibarr';
 
 		$this->const_name = 'MAIN_MODULE_'.strtoupper($this->name);
-		$this->special = 3;
+		$this->special = 2;
 		$this->picto='phoning';
 
 		// Relative path to module style sheet if exists
