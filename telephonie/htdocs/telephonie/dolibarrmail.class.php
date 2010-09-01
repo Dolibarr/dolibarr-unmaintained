@@ -18,7 +18,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  * or see http://www.gnu.org/
  *
- * $Id: dolibarrmail.class.php,v 1.1 2009/10/20 16:19:24 eldy Exp $
+ * $Id: dolibarrmail.class.php,v 1.2 2010/09/01 08:01:19 grandoc Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/telephonie/htdocs/telephonie/dolibarrmail.class.php,v $
  *
  * Lots of code inspired from Dan Potter's CMailFile class
@@ -31,7 +31,7 @@
         \author     Eric Seigne
         \author     Rodolphe Quiedeville
         \author     Laurent Destailleur.
-        \version    $Revision: 1.1 $
+        \version    $Revision: 1.2 $
 */
 
 /** 
@@ -111,7 +111,8 @@ class DolibarrMail
   
   function attach_file($filename_list,$mimetype_list,$mimefilename_list)
   {
-    for ($i = 0; $i < count($filename_list); $i++)
+    $filename_list_size=count($filename_list);
+	for($i=0;$i < $filename_list_size;$i++)
       {
 	$encoded = $this->encode_file($filename_list[$i]);
 
@@ -247,7 +248,8 @@ class DolibarrMail
 
     //    $out = $out . "Content-transfer-encoding: 8BIT\n";
 
-    for($i = 0; $i < count($filename_list); $i++)
+    $filename_list_size=count($filename_list);
+	for($i=0;$i < $filename_list_size;$i++)
       {
 	if ($mimefilename_list[$i]) 
 	  {
