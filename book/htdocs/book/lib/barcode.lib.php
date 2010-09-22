@@ -48,7 +48,7 @@ function calculate_ean_key($ean)
 
 /**
 *    \brief      Conversion code bare
-*    \param      typeIn type en entrée
+*    \param      typeIn type en entrï¿½e
 *    \param      typeOut type en sortie
 *    \param      value code bare
 *    \return     retourne le code barre sour le format typeOut
@@ -63,7 +63,7 @@ function convert_code_barre($typeIn,$typeOut,$value)
 }
 
 /**
-*    \brief      Conversion code bare de isbn à isbn13
+*    \brief      Conversion code bare de isbn ï¿½ isbn13
 *    \param      isbn
 *    \return     retourne isbn13
 */
@@ -73,14 +73,14 @@ function convert_isbn_to_isbn13($isbn)
 
 	$isbn13 = "978".'-'.$isbn_array[0].'-'.$isbn_array[1].'-'.$isbn_array[2];
 
-	$isbn13_key = calculate_ean_key("978".$isbn_array[10].$isbn_array[1].$isbn_array[2]);
+	$isbn13_key = calculate_ean_key("978".$isbn_array[0].$isbn_array[1].$isbn_array[2]);
 	$isbn13.= '-'.$isbn13_key;
 	
 	return $isbn13;
 }
 
 /**
-*    \brief      Conversion code bare de isbn à ean13
+*    \brief      Conversion code bare de isbn ï¿½ ean13
 *    \param      isbn
 *    \return     retourne ean13
 */
@@ -96,7 +96,7 @@ function convert_isbn_to_ean13($isbn)
 }
 
 /**
-*    \brief      Conversion code bare de isbn13 à isbn
+*    \brief      Conversion code bare de isbn13 ï¿½ isbn
 *    \param      isbn13
 *    \return     retourne isbn
 */
@@ -109,7 +109,7 @@ function convert_isbn13_to_isbn($isbn13)
 }
 
 /**
-*    \brief      Conversion code bare de isbn13 à ean13
+*    \brief      Conversion code bare de isbn13 ï¿½ ean13
 *    \param      isbn13
 *    \return     retourne ean13
 */
@@ -121,7 +121,7 @@ function convert_isbn13_to_ean13($isbn13)
 }
 
 /**
-*    \brief      Conversion code bare de ean13 à isbn
+*    \brief      Conversion code bare de ean13 ï¿½ isbn
 *    \param      ean13
 *    \return     retourne isbn
 */
@@ -131,18 +131,18 @@ function convert_ean13_to_isbn($ean13)
 	$groupSize = getSizeGroupISBN($code);
 	$isbn = substr($code,0,$groupSize)."-";
 	
-	//Pas terminé
+	//Pas terminï¿½
 	
 }
 
 /**
-*    \brief      Conversion code bare de ean13 à isbn13
+*    \brief      Conversion code bare de ean13 ï¿½ isbn13
 *    \param      ean13
 *    \return     retourne isbn13
 */
 function convert_ean13_to_isbn13($ean13)
 {
-	//Pas terminé
+	//Pas terminï¿½
 }
 
 /**
