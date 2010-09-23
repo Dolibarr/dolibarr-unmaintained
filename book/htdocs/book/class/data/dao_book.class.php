@@ -25,7 +25,7 @@
         \file       htdocs/product/dao_book.class.php
         \ingroup    book
         \brief      This file is an example for a class file
-		\version    $Id: dao_book.class.php,v 1.2 2010/06/07 14:16:32 pit Exp $
+		\version    $Id: dao_book.class.php,v 1.3 2010/09/23 16:20:01 cdelambert Exp $
 		\author		Patrick Raguin
 */
 
@@ -48,10 +48,6 @@ class dao_book // extends CommonObject
     private $id;
     
     private $nbpages;
-    private $isbn;
-    private $isbn13;
-    private $ean;
-    private $ean13;
     private $format;
     private $contract;
 	private $stock_reel;
@@ -72,14 +68,6 @@ class dao_book // extends CommonObject
 	
     public function getNbpages() {return $this->nbpages;}
     public function setNbpages($value='') {$this->nbpages = $value;}
-    public function getISBN() {return $this->isbn;}
-    public function setISBN($value='') {$this->isbn = $value;}
-    public function getISBN13() {return $this->isbn13;}
-    public function setISBN13($value='') {$this->isbn13 = $value;}
-    public function getEAN() {return $this->ean;}
-    public function setEAN($value='') {$this->ean = $value;}
-	public function getEAN13() {return $this->ean13;}
-    public function setEAN13($value='') {$this->ean13 = $value;}
     public function getFormat() {return $this->format;}
     public function setFormat($value='') {$this->format = $value;}
     public function getContract() {return $this->contract;}
@@ -101,10 +89,6 @@ class dao_book // extends CommonObject
 		// Clean parameters 
 		
 	    $this->nbpages=trim($this->nbpages);
-	    $this->isbn=trim($this->isbn);
-	    $this->ean=trim($this->ean);
-	    $this->isbn13=trim($this->isbn13);
-	    $this->ean13=trim($this->ean13);
 	    $this->format=trim($this->format);
         
 
@@ -117,10 +101,6 @@ class dao_book // extends CommonObject
 		
 		$sql.= "rowid,";
 		$sql.= "nbpages,";
-		$sql.= "isbn,";
-		$sql.= "isbn13,";
-		$sql.= "ean,";
-		$sql.= "ean13,";
 		$sql.= "format,";
 		$sql.= "fk_contract";
 		
@@ -128,10 +108,6 @@ class dao_book // extends CommonObject
 
 	    $sql.= " ".$this->id .",";
 	    $sql.= " ".(! isset($this->nbpages)?'NULL':"'".$this->nbpages."'").",";
-	    $sql.= " ".(! isset($this->isbn)?'NULL':"'".$this->isbn."'").",";
-	    $sql.= " ".(! isset($this->isbn13)?'NULL':"'".$this->isbn13."'").",";
-	    $sql.= " ".(! isset($this->ean)?'NULL':"'".$this->ean."'").",";
-	    $sql.= " ".(! isset($this->ean13)?'NULL':"'".$this->ean13."'").",";
 	    $sql.= " ".(! isset($this->format)?'NULL':"'".$this->format."',");
 	    $sql.= " ".(! isset($this->contract)?'NULL':"'".$this->contract."'");
 		       
@@ -173,8 +149,6 @@ class dao_book // extends CommonObject
     	
 		// Clean parameters
 	    $this->nbpages=trim($this->nbpages);
-	    $this->isbn=trim($this->isbn);
-	    $this->ean=trim($this->ean);
 	    $this->format=trim($this->format);
        
 
@@ -185,10 +159,6 @@ class dao_book // extends CommonObject
         $sql = "UPDATE ".MAIN_DB_PREFIX."product_book SET";
         
 	   	$sql.= " nbpages='".addslashes($this->nbpages)."',";
-	   	$sql.= " isbn='".addslashes($this->isbn)."',";
-	   	$sql.= " isbn13='".addslashes($this->isbn13)."',";
-	   	$sql.= " ean='".addslashes($this->ean)."',";
-	   	$sql.= " ean13='".addslashes($this->ean13)."',";
 	   	$sql.= " format='".addslashes($this->format)."',";
    		$sql.= " fk_contract=".( ((! isset($this->contract)) || empty($this->contract))?'NULL':"'".addslashes($this->contract)."'" ); //if we don't use NULL when $this->contract is empty, we've got a problem with constraints in database
         
@@ -231,10 +201,6 @@ class dao_book // extends CommonObject
         
 	   	$sql.= " b.rowid,";
 	   	$sql.= " b.nbpages,";
-	   	$sql.= " b.isbn,";
-	   	$sql.= " b.isbn13,";
-	   	$sql.= " b.ean,";
-	   	$sql.= " b.ean13,";
 	   	$sql.= " b.format,";
 		$sql.= " b.fk_contract,";
 		$sql.= " s.reel";
@@ -255,10 +221,6 @@ class dao_book // extends CommonObject
     
 				$this->id = $obj->rowid;
 				$this->nbpages = $obj->nbpages;
-				$this->isbn = $obj->isbn;
-				$this->isbn13 = $obj->isbn13;
-				$this->ean = $obj->ean;
-				$this->ean13 = $obj->ean13;
 				$this->format = $obj->format;
 				$this->contract = $obj->fk_contract;
 				$this->stock_reel = $obj->reel;
@@ -324,10 +286,6 @@ class dao_book // extends CommonObject
 		$this->id=0;
 		
 	    $this->nbpages='';
-	    $this->isbn='';
-	    $this->ean='';
-	    $this->isbn13='';
-	    $this->ean13='';
 	    $this->format='';
 	    $this->contract='';
 		
@@ -351,10 +309,6 @@ class dao_book // extends CommonObject
         if( $fields == ''){
 	   	$sql.= " t.rowid,";
 	   	$sql.= " t.nbpages,";
-	   	$sql.= " t.isbn,";
-	   	$sql.= " t.isbn13,";
-	   	$sql.= " t.ean,";
-	   	$sql.= " t.ean13,";
 	   	$sql.= " t.format,";
 	   	$sql.= " t.fk_contract";
 

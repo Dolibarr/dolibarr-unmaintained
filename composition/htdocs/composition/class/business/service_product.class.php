@@ -23,7 +23,7 @@
         \file       htdocs/product_composition/product.class.php
         \ingroup    product
         \brief      *complete here*
-		\version    $Id: service_product.class.php,v 1.2 2010/08/14 02:43:19 eldy Exp $
+		\version    $Id: service_product.class.php,v 1.3 2010/09/23 16:20:01 cdelambert Exp $
 		\author		Patrick Raguin
 */
 
@@ -197,8 +197,13 @@ class service_product
 		}
 			$this->dao->libelle = $post["product_label"];
 
+			//barcode
+			$this->dao->barcode = $post["product_barcode"];
+			
 		//description
 
+			
+			
 			$this->dao->description = $post["product_description"];
 
 		//note
@@ -255,6 +260,13 @@ class service_product
 				// Si erreur lors de la creation
 				$this->error = $this->dao->error();
 				return -1;
+				
+				$updateBarrCode=$this->dao->update_barcode($user);
+				if($updateBarrCode < 0)
+					{
+						$this->error = $this->dao->error;
+						return -1;
+					}
 			}
 			else
 			{
@@ -308,7 +320,9 @@ class service_product
 				$error = $langs->trans("ErrorFieldRequired","product_label");
 			}
 			$this->dao->libelle = $post["product_label"];
-
+			
+			//product_barcode
+			$this->dao->barcode = $post["product_barcode"];
 			//product_description
 			$this->dao->description = $post["product_description"];
 
@@ -389,8 +403,14 @@ class service_product
 						$this->error = $this->dao->error;
 						return -1;
 					}
+					
+					$updateBarrCode=$this->dao->update_barcode($user);
+					if($updateBarrCode < 0)
+					{
+						$this->error = $this->dao->error;
+						return -1;
+					}
 				}
-
 			}
 			else
 			{
@@ -425,6 +445,11 @@ class service_product
 			$data["product_label"] = array(
 				"label" => $langs->trans("Label"),
 				"value" => $this->dao->libelle
+			);
+			
+		    $data["product_barcode"] = array(
+				"label" => $langs->trans("Barcode"),
+				"value" => $this->dao->barcode
 			);
 
 			$data["product_description"] = array(
@@ -537,6 +562,11 @@ class service_product
 				"label" => $langs->trans("Label"),
 				"value" => $this->dao->libelle
 			);
+			
+			$data["product_barcode"] = array(
+				"label" => $langs->trans("Barcode"),
+				"value" => $this->dao->barcode
+			);
 
 
 			if ($this->dao->price_base_type == 'TTC')
@@ -617,6 +647,13 @@ class service_product
 					"type" => "string",
 					"label" => $langs->trans("Label"),
 					"input" => getHtmlForm($this->db,self::getType("label"),"product_label",$post['product_label'],false)
+				);
+			$data["product_barcode"] = array(
+					"entity" => "product",
+					"attribute" => "barcode",
+					"type" => "string",
+					"label" => $langs->trans("Barcode"),
+					"input" => getHtmlForm($this->db,self::getType("barcode"),"product_barcode",$post['product_barcode'],0,'',13,13)
 				);
 			$data["product_description"] = array(
 					"entity" => "product",
@@ -731,6 +768,16 @@ class service_product
 				"value" => $this->dao->libelle,
 				"label" => $langs->trans("Label"),
 				"input" => getHtmlForm($this->db,self::getType("label"),"product_label",$value)
+			);
+			
+		$value = (($post['product_barcode']=='')?$this->dao->barcode:$post['product_barcode']);
+		$data["product_barcode"] = array(
+				"entity" => "product",
+				"attribute" => "barcode",
+				"type" => self::getType("barcode"),
+				"value" => $this->dao->barcode,
+				"label" => $langs->trans("Barcode"),
+				"input" => getHtmlForm($this->db,self::getType("barcode"),"product_barcode",$value)
 			);
 
 		$value = (($post['product_description']=='')?$this->dao->description:$post['product_description']);

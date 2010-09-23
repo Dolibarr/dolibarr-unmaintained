@@ -12,10 +12,6 @@ Product_sold=Quantité vendue
 book_pxrevient=Prix de revient
 book_nbpages=Nombre de pages
 book_format=Format
-book_isbn=ISBN
-book_isbn13=ISBN13
-book_ean=EAN
-book_ean13=EAN13
 VATRate=Taux de TVA
 product_seuil_stock_alerte=Seuil d'alerte
 product_stock_reel=Stock réel
@@ -62,6 +58,7 @@ save=Enregistrer
 seuil_stock_alerte=Seuil d'alerte du stock
 StockLimit=Limite du stock : 
 product_ref=Référence du produit
+Barcode=Code barre
 
 MailAlreadyExist=Ce courrier existe déjà
 

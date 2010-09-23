@@ -15,12 +15,11 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: create.tpl.php,v 1.2 2010/06/07 14:16:32 pit Exp $
+ * $Id: create.tpl.php,v 1.3 2010/09/23 16:20:01 cdelambert Exp $
  */
 ?>
 
 <!-- BEGIN PHP TEMPLATE -->
-
 <?php echo $this->object->tpl['title']; ?>
 
 <?php if ($mesg) { ?>

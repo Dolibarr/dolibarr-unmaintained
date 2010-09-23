@@ -127,7 +127,7 @@ function convert_isbn13_to_ean13($isbn13)
 */
 function convert_ean13_to_isbn($ean13)
 {
-	$code = substr($ean13,3,dol_strlen($ean13));
+	$code = substr($ean13,3,strlen($ean13));
 	$groupSize = getSizeGroupISBN($code);
 	$isbn = substr($code,0,$groupSize)."-";
 	
@@ -199,7 +199,7 @@ function getGroupISBN($code)
 
 function getSizeGroupISBN($code)
 {
-	return dol_strlen(getGroupISBN($code));
+	return strlen(getGroupISBN($code));
 }
 
 

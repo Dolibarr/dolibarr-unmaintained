@@ -23,7 +23,7 @@
         \file       htdocs/product/book.class.php
         \ingroup    book
         \brief      *complete here*
-		\version    $Id: service_book.class.php,v 1.2 2010/06/07 14:16:31 pit Exp $
+		\version    $Id: service_book.class.php,v 1.3 2010/09/23 16:20:01 cdelambert Exp $
 		\author		Patrick Raguin
 */
 
@@ -297,42 +297,6 @@ class service_book extends service_product
 		//nbpages
 		$this->dao->setNbpages($post["book_nbpages"]);
 			
-		//ISBN
-		if($post['book_isbn'] != '')
-		{
-			$book_isbn_array = explode("-",$post['book_isbn']);
-			if($book_isbn_array[3] == '')
-			{
-				$isbn_key = calculate_isbn_key($book_isbn_array[0].$book_isbn_array[1].$book_isbn_array[2]);	
-			}
-			else
-			{
-				$isbn_key = $book_isbn_array[3];
-			}
-	
-			$isbn = $book_isbn_array[0].'-'.$book_isbn_array[1].'-'.$book_isbn_array[2].'-'.$isbn_key;
-			$this->dao->setISBN($isbn);
-	
-			//EAN13
-			$ean13 = $post['book_ean13'];
-			if($ean13 == '')
-			{
-				$ean13 = convert_code_barre('isbn','ean13',$isbn);
-	
-			}
-			$this->dao->setEAN13($ean13);
-			
-			// ISBN13
-			$isbn13 = $post['book_isbn13'];
-			if($isbn13 == '')
-			{
-				$isbn13 = convert_code_barre('isbn','isbn13',$isbn);
-			}
-			$this->dao->setISBN13($isbn13);				
-			
-			
-			
-		}
 	
 
 		//format
@@ -381,41 +345,6 @@ class service_book extends service_product
 
 		//book_nbpages		
 		$this->dao->setNbpages($post["book_nbpages"]);
-
-		//book_ISBN
-		if($post['book_isbn'] != '')
-		{
-			$book_isbn_array = explode("-",$post['book_isbn']);
-			if($book_isbn_array[3] == '')
-			{
-				$isbn_key = calculate_isbn_key($book_isbn_array[0].$book_isbn_array[1].$book_isbn_array[2]);	
-			}
-			else
-			{
-				$isbn_key = $book_isbn_array[3];
-			}
-	
-			$isbn = $book_isbn_array[0].'-'.$book_isbn_array[1].'-'.$book_isbn_array[2].'-'.$isbn_key;
-			$this->dao->setISBN($isbn);
-	
-			//EAN13
-			$ean13 = $post['book_ean13'];
-			if($ean13 == '')
-			{
-				$ean13 = convert_code_barre('isbn','ean13',$isbn);
-	
-			}
-			$this->dao->setEAN13($ean13);
-			
-			// ISBN13
-			$isbn13 = $post['book_isbn13'];
-			if($isbn13 == '')
-			{
-				$isbn13 = convert_code_barre('isbn','isbn13',$isbn);
-			}
-			$this->dao->setISBN13($isbn13);			
-		
-		}
 	
 		//book_format
 		$this->dao->setFormat($post["book_format"]);
@@ -455,26 +384,6 @@ class service_book extends service_product
 			$data["book_nbpages"] = array(
 				"label" => $langs->trans("Nbpages"),
 				"value" => $this->dao->getNbpages()
-			);
-			
-			$data["book_isbn"] = array(
-				"label" => "ISBN",
-				"value" => $this->dao->getISBN()
-			);
-			
-			$data["book_isbn13"] = array(
-				"label" => "ISBN13",
-				"value" => $this->dao->getISBN13()
-			);
-			
-			$data["book_ean"] = array(
-				"label" => "EAN",
-				"value" => $this->dao->getEAN()
-			);
-
-			$data["book_ean13"] = array(
-				"label" => "EAN13",
-				"value" => $this->dao->getEAN13()
 			);
 			
 			$data["book_format"] = array(
@@ -526,47 +435,13 @@ class service_book extends service_product
 				"label" => $langs->trans("Nbpages"),
 				"input" =>getHtmlForm($this->db,self::getType("nbpages"),"book_nbpages",$post['book_nbpages'])
 			);
-			
-		
-			
-		$data["book_isbn"] = array(
-				"entity" => "book",
-				"attribute" => "isbn",
-				"type" => self::getType("ISBN"),
-				"label" => "ISBN",
-				"input" =>  getHtmlForm($this->db,self::getType("isbn"),"book_isbn",$post['book_isbn'])   
-
-	
-			);
-		$data["book_ean"] = array(
-				"entity" => "book",
-				"attribute" => "ean",
-				"type" => self::getType("EAN"),
-				"label" => "EAN",
-				"input" => "<i>".$langs->trans("Calculated")."</i>"
-			);
-			
-		$data["book_isbn13"] = array(
-				"entity" => "book",
-				"attribute" => "isbn13",
-				"type" => self::getType("ISBN13"),
-				"label" => "ISBN13",
-				"input" => "<i>".$langs->trans("Calculated")."</i>"
-			);
-		$data["book_ean13"] = array(
-				"entity" => "book",
-				"attribute" => "ean13",
-				"type" => self::getType("EAN13"),
-				"label" => "EAN13",
-				"input" => "<i>".$langs->trans("Calculated")."</i>"
-			);
-			
+						
 		$data["book_format"] = array(
 				"entity" => "book",
 				"attribute" => "format",
 				"type" => self::getType("format"),
 				"label" => $langs->trans("Format"),
-				"input" =>  getHtmlForm($this->db,self::getType("format"),"book_format",$post['book_format'])   
+				"input" => getHtmlForm($this->db,self::getType("format"),"book_format",$post['book_format'])   
 			);
 				
 
@@ -599,38 +474,6 @@ class service_book extends service_product
 				"value" => $this->dao->getNbpages(),
 				"label" => $langs->trans("Nbpages"),
 				"input" => getHtmlForm($this->db,self::getType("nbpages"),"book_nbpages",$value,0,"",7)
-			);
-
-		$value = (($post['book_isbn']=='')?$this->dao->getISBN():$post['book_isbn']);
-		$data["book_isbn"] = array(
-				"entity" => "book",
-				"attribute" => "isbn",
-				"type" => self::getType("ISBN"),	
-				"value" => $this->dao->getISBN(),
-				"label" => "ISBN",
-				"input" => getHtmlForm($this->db,self::getType("isbn"),"book_isbn",$value)
-			);
-			
-		$value = (($post['book_isbn13']=='')?$this->dao->getISBN13():$post['book_isbn13']);
-		$data["book_isbn13"] = array(
-				"entity" => "book",
-				"attribute" => "isbn13",
-				"type" => self::getType("ISBN"),	
-				"value" => $this->dao->getISBN(),
-				"label" => "ISBN13",
-				"input" => getHtmlForm($this->db,self::getType("isbn13"),"book_isbn13",$value)
-			);								
-
-			
-			
-		$value = (($post['book_ean13']=='')?$this->dao->getEAN13():$post['book_ean13']);	
-		$data["book_ean13"] = array(
-				"entity" => "book",
-				"attribute" => "ean13",
-				"type" => self::getType("EAN13"),	
-				"value" => $this->dao->getEAN13(),
-				"label" => "EAN13",
-				"input" => getHtmlForm($this->db,self::getType("ean13"),"book_ean13",$value)
 			);
 							
 		$value = (($post['book_format']=='')?$this->dao->getFormat():$post['book_format']);
@@ -713,6 +556,9 @@ class service_book extends service_product
 			case "product_label" :
 				return "string" ;
 				break ;
+			case "product_barcode" :
+				return "string" ;
+				break ;
 			case "locker_code" :
 				return "string" ;
 				break ;
@@ -725,20 +571,11 @@ class service_book extends service_product
 			case "nbpages" :
 				return "integer" ;
 				break ;
-			case "isbn" :
-				return "string" ;
-				break ;
-			case "isbn13" :
+			case "barcode" :
 				return "string" ;
 				break ;
 			case "format" :
 				return "format" ;
-				break ;
-			case "ean" :
-				return "string" ;
-				break ;
-			case "ean13" :
-				return "string" ;
 				break ;
 			case "format" :
 				return "string" ;

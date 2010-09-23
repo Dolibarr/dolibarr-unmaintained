@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: index.php,v 1.3 2010/07/29 21:01:06 cdelambert Exp $
+ * $Id: index.php,v 1.4 2010/09/23 16:20:01 cdelambert Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/book/htdocs/book/index.php,v $
  *
  */
@@ -38,7 +38,6 @@ require_once(DOL_DOCUMENT_ROOT."/core/class/html.formfile.class.php");
 require_once(DOL_DOCUMENT_ROOT."/product/class/html.formproduct.class.php");
 require_once(DOL_DOCUMENT_ROOT."/lib/files.lib.php");
 require_once(DOL_DOCUMENT_ROOT."/lib/product.lib.php");
-require_once(DOL_DOCUMENT_ROOT."/book/lib/barcode.lib.php");
 require_once(DOL_DOCUMENT_ROOT."/book/lib/book.lib.php");
 require_once(DOL_DOCUMENT_ROOT."/product/class/product.class.php");
 require_once(DOL_DOCUMENT_ROOT."/fourn/class/fournisseur.class.php");

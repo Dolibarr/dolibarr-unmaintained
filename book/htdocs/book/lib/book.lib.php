@@ -16,7 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  * or see http://www.gnu.org/
  *
- * $Id: book.lib.php,v 1.4 2010/08/19 20:29:45 eldy Exp $
+ * $Id: book.lib.php,v 1.5 2010/09/23 16:20:01 cdelambert Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/book/htdocs/book/lib/book.lib.php,v $
  */
 
@@ -24,7 +24,7 @@
 	    \file       htdocs/lib/book.lib.php
 	    \ingroup    modBook
 		\brief      Ensemble de fonctions de base pour le module book
-		\version    $Revision: 1.4 $
+		\version    $Revision: 1.5 $
 		\author		Samuel Bouchet, Patrick Raguin, Pierre Morin
 */
 
@@ -39,8 +39,8 @@ function getLabelFormatFromKey($db,$id,$format='')
 	$sql.= 'SELECT '.(($format=='')?'code':implode(',',$format));
 	$sql.= ' FROM '.MAIN_DB_PREFIX.'c_paper_format';
 	$sql.= ' WHERE rowid = '.$id;
-
-
+	
+	
 	dolibarr_syslog('getLabelFormatFromKey sql='.$sql,LOG_DEBUG);
     $resql=$db->query($sql);
     if ($resql)
@@ -50,12 +50,12 @@ function getLabelFormatFromKey($db,$id,$format='')
 		return implode(' ',$row);
     }
 	return '';
-
+	
 }
 
 
 function getfieldToKeyFieldArray($query){
-
+				
 	preg_match("/SELECT (.*) FROM/i",$query,$matches) ; // fields between select and FROM
 	$queryfields = explode(",",$matches[1]) ; // array of fields
 
@@ -71,9 +71,9 @@ function getfieldToKeyFieldArray($query){
 		}
 		// on récupère la partie gauche du point pour avoir la table
 		$tmp = explode(".",$tmp) ;
-
+		
 		$table = trim($tmp[0]) ;
-
+		
 		$tmp = preg_split("/ as /i",$tmp[1]) ;
 		$fieldname = (isset($tmp[1]))? trim($tmp[1]) : trim($tmp[0]) ;
 		if($tmp[0]=="rowid"){
@@ -81,7 +81,7 @@ function getfieldToKeyFieldArray($query){
 		}
 		$keys[$fieldname] = $tableidfields[$table] ;
 	}
-
+	
 	return $keys ;
 }
 
@@ -130,104 +130,106 @@ function formatValue($type,$value){
  *      \return     			html code
  */
 function getHtmlForm($db,$type,$attribute_name,$value='',$null=0,$form_name='',$size=40, $textarea_rows=3){
-
+	
 	global $langs;
-
+	
 	$html = new Formbook($db);
 	$html_product = new FormProduct($db);
 
 	switch($type)
 	{
 		case "datetime":
-
-			ob_start();
+			
+			ob_start(); 
 			$html->select_date($value,$attribute_name,'1','1',$null,$form_name,1);
-			$input = ob_get_contents();
-			ob_end_clean();
+			$input = ob_get_contents(); 
+			ob_end_clean();				
 			break;
 
 		case "date":
-			ob_start();
+			ob_start(); 
 			$html->select_date($value,$attribute_name,'0','0',$null,$form_name,1);
-			$input = ob_get_contents();
-			ob_end_clean();
+			$input = ob_get_contents(); 
+			ob_end_clean();				
 			break;
 
 		case "time":
-			ob_start();
+			ob_start(); 
 			$html->select_date($value,$attribute_name,'1','1',$null,$form_name,0);
-			$input = ob_get_contents();
-			ob_end_clean();
+			$input = ob_get_contents(); 
+			ob_end_clean();				
+			break;	
+
+		case "barcode":
+			$input = '<input name="'.$attribute_name.'" maxlength="13" value="'.$value['barcode'].'">';
 			break;
-
-		case "isbn":
-			$input = '<input name="'.$attribute_name.'a" size="3" maxlength="5" value="'.$value['book_isbna'].'">';
-    		$input.= ' - <input name="'.$attribute_name.'b" size="8" maxlength="7" value="'.$value['book_isbnb'].'">';
-    		$input.= ' - <input name="'.$attribute_name.'c" size="13" maxlength="12" value="'.$value['book_isbnc'].'">';
-    		$input.= ' - <input name="'.$attribute_name.'d" size="1" maxlength="1" value="'.$value['book_isbnd'].'">';
-
-			break;
-
+			
 		case "price_base_type" :
-			ob_start();
+			ob_start(); 
 			$html->select_PriceBaseType($value,$attribute_name);
-			$input = ob_get_contents();
-			ob_end_clean();
-			break;
+			$input = ob_get_contents(); 
+			ob_end_clean();				
+			break;				
 
 		case "vatrate" :
-			ob_start();
+			ob_start(); 
 			if($value == '') $value = '5.5';
 			$html->select_tva($attribute_name,$value);
-			$input = ob_get_contents();
-			ob_end_clean();
-			break;
-
+			$input = ob_get_contents(); 
+			ob_end_clean();				
+			break;	
+		
 		case "format" :
 			ob_start();
-			$html->select_paper_format($value,$attribute_name,array('label'));
-			$input = ob_get_contents();
-			ob_end_clean();
-			break;
-
+			$html->select_paper_format($value,$attribute_name,array('label')); 
+			$input = ob_get_contents(); 
+			ob_end_clean();				
+			break;	
+							
 		case "status" :
-
+			
+			ob_start(); 
 			$statutarray=array('1' => $langs->trans("OnSell"), '0' => $langs->trans("NotOnSell"));
-			$input = $html->selectarray($attribute_name,$statutarray,$value);
-			break;
-
+			$html->select_array($attribute_name,$statutarray,$value);	
+			$input = ob_get_contents(); 
+			ob_end_clean();			
+			break;		
+			
 		case "weight_units" :
 			if($value == '')$value = -3;
-			ob_start();
+			ob_start(); 
 			$html_product->select_measuring_units($attribute_name,"weight",$value);
-			$input = ob_get_contents();
-			ob_end_clean();
-			break;
-
+			$input = ob_get_contents(); 
+			ob_end_clean();			
+			break;		
+						
 		case "boolean":
 			$input = $html->selectyesno($attribute_name,$value,1);
 			break;
-
+			
 		case "text":
 			$input = '<textarea name="'.$attribute_name.'" wrap="soft" cols="70" rows="'.$textarea_rows.'">'.$value.'</textarea>';
 			break ;
-
+			
 		case is_array($type):
-			$input = $html->selectarray($attribute_name,$type,$value,$null);
+			ob_start(); 
+			$html->select_array($attribute_name,$type,$value,$null);
+			$input = ob_get_contents(); 
+			ob_end_clean();		
 			break ;
 
 		case "integer":
 			$input = '<input type="text" size="10" maxlength="255" name="'.$attribute_name.'" value="'.$value.'" />';
-			break ;
-
-
+			break ;			
+			
+			
 		default:
 			$input = '<input type="text" size="'.$size.'" maxlength="255" name="'.$attribute_name.'" value="'.$value.'" />';
 			break;
-	}
+	}	
 
 	return $input;
-
+	
 }
 
 /*
@@ -237,7 +239,7 @@ function getHtmlForm($db,$type,$attribute_name,$value='',$null=0,$form_name='',$
  *      \return     		string the content of the ORDER BY clause
  */
 function getORDERBY($entityname, $fields){
-
+	
 	$sort = '' ;
 	if( isset($_GET['sortfield']) && ($_GET['entity']==$entityname) )
 	{
@@ -258,26 +260,26 @@ function getORDERBY($entityname, $fields){
  */
 function getWHERE($entityname,$fields, &$params){
 	global $db ;
-
+	
 	$where = '' ;
 	if( $_GET['search']==$entityname )
 	{
 		// regenerate the get parameters for the search to preserve filter while sorting
 		$params[$entityname].='&amp;search='.$entityname ;
-
+		
 		$and = '' ;
-
+		
 		foreach ($fields[$entityname] as $att) {
 
 			if( $_GET[$entityname.$att["attribute"]] != ''){
 				// write the get part of URL
 				$params[$entityname].='&amp;'.$entityname.$att["attribute"].'='.$_GET[$entityname.$att["attribute"]] ;
-
+				
 				//compare booleans
 				if($att["type"]=='boolean'){
 					$bool = (in_array(strtolower($_GET[$entityname.$att["attribute"]]),array(strtolower($langs->trans("yes")),'1')))? '1':'0';
 					$where.=' '.$and.$att["entity"].'.'.$att["attribute"].' LIKE \'%'.$bool.'%\'' ;
-
+					
 				// compare dates
 				}else if(($att["type"]=='datetime')||($att["type"]=='date')){
 					/*TODO : comparaison de dates*/
@@ -285,11 +287,11 @@ function getWHERE($entityname,$fields, &$params){
 				}else{
 					$where.=' '.$and.$att["entity"].'.'.$att["attribute"].' LIKE \'%'.$db->escape($_GET[$entityname.$att["attribute"]]).'%\'' ;
 				}
-				$and = 'AND ' ;
-			}
+				$and = 'AND ' ;	
+			} 
 		}
-	}
-
+	} 
+	
 	return $where ;
 }
 

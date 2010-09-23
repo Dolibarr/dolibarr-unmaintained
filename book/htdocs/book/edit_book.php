@@ -20,7 +20,6 @@
 require(DOL_DOCUMENT_ROOT."/product/class/html.formproduct.class.php");
 require(DOL_DOCUMENT_ROOT."/lib/files.lib.php");
 require(DOL_DOCUMENT_ROOT."/lib/product.lib.php");
-require(DOL_DOCUMENT_ROOT."/book/lib/barcode.lib.php");
 require(DOL_DOCUMENT_ROOT."/book/lib/book.lib.php");
 //require(DOL_DOCUMENT_ROOT."/book/models/pdf/courrier_droit_editeur.class.php");
 require(DOL_DOCUMENT_ROOT."/product/class/product.class.php");
@@ -42,7 +41,7 @@ require(DOL_DOCUMENT_ROOT."/book/class/data/dao_book_contract_societe.class.php"
 require(DOL_DOCUMENT_ROOT."/book/class/business/service_book_contract_societe.class.php");
 require(DOL_DOCUMENT_ROOT."/book/class/business/html.formbook.class.php");02111-1307, USA.
  *
- * $Id: edit_book.php,v 1.3 2010/07/29 21:01:06 cdelambert Exp $
+ * $Id: edit_book.php,v 1.4 2010/09/23 16:20:01 cdelambert Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/book/htdocs/book/edit_book.php,v $
  *
  */
@@ -51,7 +50,7 @@ require(DOL_DOCUMENT_ROOT."/book/class/business/html.formbook.class.php");02111-
    \file       htdocs/product/edit_book.php
    \ingroup    product
    \brief      edit_book
-   \version    $Revision: 1.3 $
+   \version    $Revision: 1.4 $
 */
 
 /******************************* Includes (old content of pre.inc.php) ***********************/
@@ -62,7 +61,6 @@ require_once(DOL_DOCUMENT_ROOT."/core/class/html.formfile.class.php");
 require_once(DOL_DOCUMENT_ROOT."/product/class/html.formproduct.class.php");
 require_once(DOL_DOCUMENT_ROOT."/lib/files.lib.php");
 require_once(DOL_DOCUMENT_ROOT."/lib/product.lib.php");
-require_once(DOL_DOCUMENT_ROOT."/book/lib/barcode.lib.php");
 require_once(DOL_DOCUMENT_ROOT."/book/lib/book.lib.php");
 require_once(DOL_DOCUMENT_ROOT."/product/class/product.class.php");
 require_once(DOL_DOCUMENT_ROOT."/fourn/class/fournisseur.class.php");

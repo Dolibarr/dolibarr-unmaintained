@@ -20,7 +20,7 @@
  *	\file       htdocs/product/canvas/default/product.default.class.php
  *	\ingroup    produit
  *	\brief      Fichier de la classe des produits par defaut
- *	\version    $Id: product.default.class.php,v 1.3 2010/08/24 20:27:26 grandoc Exp $
+ *	\version    $Id: product.default.class.php,v 1.4 2010/09/23 16:20:01 cdelambert Exp $
  */
 
 /**
@@ -120,6 +120,9 @@ class ProductDefault extends Product
 			// Volume
 			$this->tpl['volume'] = $this->volume;
 			$this->tpl['volume_units'] = $formproduct->load_measuring_units("volume_units","volume",$this->volume_units);
+			
+						// Volume
+			$this->tpl['barcode'] = $this->barcode;
 		}
 		
 		if ($action == 'view')
@@ -225,11 +228,11 @@ class ProductDefault extends Product
 			}
 		}
 		
-		if (isset($_GET["envente"]) && dol_strlen($_GET["envente"]) > 0)
+		if (isset($_GET["envente"]) && strlen($_GET["envente"]) > 0)
 		{
 			$sql.= " AND p.envente = ".addslashes($_GET["envente"]);
 		}
-		if (isset($_GET["canvas"]) && dol_strlen($_GET["canvas"]) > 0)
+		if (isset($_GET["canvas"]) && strlen($_GET["canvas"]) > 0)
 		{
 			$sql.= " AND p.canvas = '".addslashes($_GET["canvas"])."'";
 		}

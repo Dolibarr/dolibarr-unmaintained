@@ -63,7 +63,7 @@ class modBook extends DolibarrModules
 		$this->name = preg_replace('/^mod/i','',get_class($this));
 		$this->description = "Gestion des livres";
 
-		$this->revision = explode(' ','$Revision: 1.6 $');
+		$this->revision = explode(' ','$Revision: 1.7 $');
 		$this->version = $this->revision[1];
 
 		// Key used in llx_const table to save module status enabled/disabled

@@ -15,17 +15,13 @@
 -- along with this program; if not, write to the Free Software
 -- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 --
--- $Id: llx_product_book.sql,v 1.2 2010/06/07 14:16:31 pit Exp $
+-- $Id: llx_product_book.sql,v 1.3 2010/09/23 16:20:00 cdelambert Exp $
 -- ============================================================================
 
 CREATE TABLE llx_product_book (
   rowid 		integer NOT NULL PRIMARY KEY,
   tms 			timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   nbpages 		integer default NULL,
-  isbn 			varchar(50) default NULL,
-  isbn13 		varchar(50) default NULL,
-  ean 			varchar(50) default NULL,
-  ean13 		varchar(50) default NULL,
   format 		varchar(1) default NULL,
   fk_contract 	integer default NULL
 ) type=innodb;
