@@ -19,7 +19,7 @@
 
 /**
  *	\defgroup   DroitPret     Module droitpret
- *	\version	$Id: modDroitPret.class.php,v 1.5 2010/08/09 14:58:09 eldy Exp $
+ *	\version	$Id: modDroitPret.class.php,v 1.6 2010/09/23 17:12:54 cdelambert Exp $
  *	\brief      Module pour gerer le suivi des droits de prets
  */
 
@@ -66,10 +66,11 @@ class modDroitPret  extends DolibarrModules
 		$this->conflictwith 	= array();
 		$this->needleftmenu 	= array();
 		$this->needtotopmenu 	= array();
-		$this->langfiles 		= array("droitpret");
+		$this->langfiles 		= array("@droitpret,admin_droitpret@droitpret");
 
 		// Config pages
-		$this->config_page_url = array("droitpret.php@droitpret");
+		$this->config_page_url = array("../droitpret/admin/index.php");
+
 
 		// Constants
 		//Example: $this->const=array(0=>array('MYMODULE_MYNEWCONST1','chaine','myvalue','This is a constant to add',0),
@@ -90,7 +91,7 @@ class modDroitPret  extends DolibarrModules
 	      'mainmenu'=>'droitpret',
 	      'leftmenu'=>'1',
 	      'url'=>'/droitpret/index.php',
-	      'langs'=>'',
+	      'langs'=>'@droitpret',
 	      'position'=>100,
 	      'perms'=>'1',
 	      'target'=>'',

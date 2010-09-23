@@ -1,0 +1,6 @@
+# Dolibarr language file - fr_FR - droitpret
+CHARSET=UTF-8
+
+PretSetup=Configuration du droit de prêt
+catActive=Catégorie tiers pour les droits de prêt
+DroitPretArea=Gestion du droit de prêt
