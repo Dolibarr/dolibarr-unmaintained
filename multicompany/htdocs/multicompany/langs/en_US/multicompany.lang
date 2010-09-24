@@ -1,0 +1,6 @@
+# Dolibarr language file - en_US - multicompany
+CHARSET=UTF-8
+
+ListOfEntities=List of entities
+AddEntity=Add entity
+EditEntity=Edit entity
