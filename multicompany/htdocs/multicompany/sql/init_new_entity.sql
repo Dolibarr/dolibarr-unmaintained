@@ -14,7 +14,7 @@
 -- along with this program; if not, write to the Free Software
 -- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 --
--- $Id: init_new_entity.sql,v 1.1 2010/06/29 14:57:06 hregis Exp $
+-- $Id: init_new_entity.sql,v 1.2 2010/09/24 17:25:40 hregis Exp $
 --
 
 --
@@ -35,6 +35,8 @@ insert into llx_const (name, value, type, note, visible, entity) values ('MAIN_M
 insert into llx_const (name, value, type, note, visible, entity) values ('MAIN_MENUFRONT_BARRETOP','eldy_frontoffice.php','chaine','Module de gestion de la barre de menu du haut pour utilisateurs externes',0,__ENTITY__);
 insert into llx_const (name, value, type, note, visible, entity) values ('MAIN_MENU_BARRELEFT','eldy_backoffice.php','chaine','Module de gestion de la barre de menu gauche pour utilisateurs internes',0,__ENTITY__);
 insert into llx_const (name, value, type, note, visible, entity) values ('MAIN_MENUFRONT_BARRELEFT','eldy_frontoffice.php','chaine','Module de gestion de la barre de menu gauche pour utilisateurs externes',0,__ENTITY__);
+insert into llx_const (name, value, type, note, visible, entity) values ('MAIN_MENU_SMARTPHONE','iphone_backoffice.php','chaine','Module de gestion de la barre de menu smartphone pour utilisateurs internes',0,__ENTITY__);
+insert into llx_const (name, value, type, note, visible, entity) values ('MAIN_MENUFRONT_SMARTPHONE','iphone_frontoffice.php','chaine','Module de gestion de la barre de menu smartphone pour utilisateurs externes',0,__ENTITY__);
 
 insert into llx_const (name, value, type, note, visible, entity) values ('MAIN_THEME','eldy','chaine','Thème par défaut',0,__ENTITY__);
 
@@ -59,49 +61,9 @@ insert into llx_const (name, value, type, note, visible, entity) values('SOCIETE
 insert into llx_const (name, value, type, note, visible, entity) values('SOCIETE_CODECOMPTA_ADDON','mod_codecompta_panicum','yesno','Module to control third parties codes',0,__ENTITY__);
 
 --
--- Mail Adherent
---
-insert into llx_const (name, value, type, note, visible, entity) values ('ADHERENT_MAIL_REQUIRED','1','yesno','Le mail est obligatoire pour créer un adhérent',0,__ENTITY__);
-insert into llx_const (name, value, type, note, visible, entity) values ('ADHERENT_MAIL_FROM','adherents@domain.com','chaine','From des mails adherents',0,__ENTITY__);
-insert into llx_const (name, value, type, note, visible, entity) values ('ADHERENT_MAIL_RESIL','Votre adhesion vient d\'etre resiliee.\r\nNous esperons vous revoir tres bientot','texte','Mail de Resiliation',0,__ENTITY__);
-insert into llx_const (name, value, type, note, visible, entity) values ('ADHERENT_MAIL_VALID','Votre adhesion vient d\'etre validee. \r\nVoici le rappel de vos coordonnees (toute information erronee entrainera la non validation de votre inscription) :\r\n\r\n%INFOS%\r\n\r\n','texte','Mail de validation',0,__ENTITY__);
-insert into llx_const (name, value, type, note, visible, entity) values ('ADHERENT_MAIL_COTIS','Bonjour %PRENOM%,\r\nMerci de votre inscription.\r\nCet email confirme que votre cotisation a ete recue et enregistree.\r\n\r\n','texte','Mail de validation de cotisation',0,__ENTITY__);
-insert into llx_const (name, value, type, note, visible, entity) values ('ADHERENT_MAIL_VALID_SUBJECT','Votre adhésion a ete validée','chaine','Sujet du mail de validation',0,__ENTITY__);
-insert into llx_const (name, value, type, note, visible, entity) values ('ADHERENT_MAIL_RESIL_SUBJECT','Resiliation de votre adhesion','chaine','Sujet du mail de resiliation',0,__ENTITY__);
-insert into llx_const (name, value, type, note, visible, entity) values ('ADHERENT_MAIL_COTIS_SUBJECT','Recu de votre cotisation','chaine','Sujet du mail de validation de cotisation',0,__ENTITY__);
-
---
 -- Mail Mailing
 --
 insert into llx_const (name, value, type, note, visible, entity) values ('MAILING_EMAIL_FROM','dolibarr@domain.com','chaine','EMail emmetteur pour les envois d emailings',0,__ENTITY__);
-
---
--- Mailman
---
-insert into llx_const (name, value, type, note, visible, entity) values ('ADHERENT_USE_MAILMAN','0','yesno','Utilisation de Mailman',0,__ENTITY__);
-insert into llx_const (name, value, type, note, visible, entity) values ('ADHERENT_MAILMAN_UNSUB_URL','http://lists.domain.com/cgi-bin/mailman/admin/%LISTE%/members?adminpw=%MAILMAN_ADMINPW%&user=%EMAIL%','chaine','Url de desinscription aux listes mailman',0,__ENTITY__);
-insert into llx_const (name, value, type, note, visible, entity) values ('ADHERENT_MAILMAN_URL','http://lists.domain.com/cgi-bin/mailman/admin/%LISTE%/members?adminpw=%MAILMAN_ADMINPW%&send_welcome_msg_to_this_batch=1&subscribees=%EMAIL%','chaine','Url pour les inscriptions mailman',0,__ENTITY__);
-insert into llx_const (name, value, type, note, visible, entity) values ('ADHERENT_MAILMAN_LISTS','test-test,test-test2','chaine','Listes auxquelles inscrire les nouveaux adherents',0,__ENTITY__);
-insert into llx_const (name, value, type, note, visible, entity) values ('ADHERENT_MAILMAN_ADMINPW','','chaine','Mot de passe Admin des liste mailman',0,__ENTITY__);
-insert into llx_const (name, value, type, note, visible, entity) values ('ADHERENT_MAILMAN_SERVER','lists.domain.com','chaine','Serveur hebergeant les interfaces d Admin des listes mailman',0,__ENTITY__);
-insert into llx_const (name, value, type, note, visible, entity) values ('ADHERENT_MAILMAN_LISTS_COTISANT','','chaine','Liste(s) auxquelles les nouveaux cotisants sont inscris automatiquement',0,__ENTITY__);
-
---
--- SPIP
---
-insert into llx_const (name, value, type, note, visible, entity) values ('ADHERENT_USE_SPIP','0','yesno','Utilisation de SPIP ?',0,__ENTITY__);
-insert into llx_const (name, value, type, note, visible, entity) values ('ADHERENT_USE_SPIP_AUTO','0','yesno','Utilisation de SPIP automatiquement',0,__ENTITY__);
-insert into llx_const (name, value, type, note, visible, entity) values ('ADHERENT_SPIP_USER','user','chaine','user spip',0,__ENTITY__);
-insert into llx_const (name, value, type, note, visible, entity) values ('ADHERENT_SPIP_PASS','pass','chaine','Pass de connection',0,__ENTITY__);
-insert into llx_const (name, value, type, note, visible, entity) values ('ADHERENT_SPIP_SERVEUR','localhost','chaine','serveur spip',0,__ENTITY__);
-insert into llx_const (name, value, type, note, visible, entity) values ('ADHERENT_SPIP_DB','spip','chaine','db spip',0,__ENTITY__);
-
---
--- Cartes adherents
---
-insert into llx_const (name, value, type, note, visible, entity) values ('ADHERENT_CARD_HEADER_TEXT','%ANNEE%','chaine','Texte imprime sur le haut de la carte adherent',0,__ENTITY__);
-insert into llx_const (name, value, type, note, visible, entity) values ('ADHERENT_CARD_FOOTER_TEXT','Association AZERTY','chaine','Texte imprime sur le bas de la carte adherent',0,__ENTITY__);
-insert into llx_const (name, value, type, note, visible, entity) values ('ADHERENT_CARD_TEXT','%TYPE% n° %ID%\r\n%PRENOM% %NOM%\r\n<%EMAIL%>\r\n%ADRESSE%\r\n%CP% %VILLE%\r\n%PAYS%','texte','Texte imprime sur la carte adherent',0,__ENTITY__);
 
 --
 -- FCKEditor

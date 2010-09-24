@@ -17,10 +17,10 @@
  */
 
 /**
- *	\file       htdocs/admin/multicompany.php
+ *	\file       htdocs/multicompany/admin/multicompany.php
  *	\ingroup    multicompany
  *	\brief      Page d'administration/configuration du module Multi-societe
- *	\version    $Id: multicompany.php,v 1.2 2010/09/24 16:33:32 hregis Exp $
+ *	\version    $Id: multicompany.php,v 1.3 2010/09/24 17:25:40 hregis Exp $
  */
 
 require("../../main.inc.php");
@@ -29,6 +29,7 @@ require_once(DOL_DOCUMENT_ROOT."/lib/admin.lib.php");
 require_once(DOL_DOCUMENT_ROOT."/lib/company.lib.php");
 
 $langs->load("admin");
+$langs->load("@multicompany");
 
 if (!$user->admin || $user->entity)
 accessforbidden();
@@ -93,5 +94,5 @@ $mc->assign_values($_GET["action"]);
 $mc->display();
 
 
-llxFooter('$Date: 2010/09/24 16:33:32 $ - $Revision: 1.2 $');
+llxFooter('$Date: 2010/09/24 17:25:40 $ - $Revision: 1.3 $');
 ?>
