@@ -1,4 +1,5 @@
-{* Copyright (C) 2009 Regis Houssin <regis@dolibarr.fr>
+<?php
+/* Copyright (C) 2009-2010 Regis Houssin <regis@dolibarr.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,11 +15,12 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: view-entity.tpl,v 1.1 2010/06/29 14:57:05 hregis Exp $
- *}
+ * $Id: entity_view.tpl.php,v 1.1 2010/09/24 16:33:32 hregis Exp $
+ */
+?>
  
-<!-- BEGIN SMARTY TEMPLATE -->
+<!-- BEGIN PHP TEMPLATE -->
 
 
 
-<!-- END SMARTY TEMPLATE -->
+<!-- END PHP TEMPLATE -->

@@ -20,11 +20,11 @@
  *	\file       htdocs/admin/multicompany.php
  *	\ingroup    multicompany
  *	\brief      Page d'administration/configuration du module Multi-societe
- *	\version    $Id: multicompany.php,v 1.1 2010/06/29 14:57:06 hregis Exp $
+ *	\version    $Id: multicompany.php,v 1.2 2010/09/24 16:33:32 hregis Exp $
  */
 
 require("../../main.inc.php");
-require_once(DOL_DOCUMENT_ROOT."/multicompany/class/multicompany.class.php");
+require_once(DOL_DOCUMENT_ROOT."/multicompany/class/actions_multicompany.class.php");
 require_once(DOL_DOCUMENT_ROOT."/lib/admin.lib.php");
 require_once(DOL_DOCUMENT_ROOT."/lib/company.lib.php");
 
@@ -33,23 +33,13 @@ $langs->load("admin");
 if (!$user->admin || $user->entity)
 accessforbidden();
 
-$mc = new Multicompany($db);
+$mc = new ActionsMulticompany($db);
 
 /*
  * Actions
  */
 
-if ($_GET["action"] == 'setactive')
-{
-	$mc->setEntity($_GET['id'],'active',$_GET["value"]);
-	if ($_GET["value"] == 0) $mc->setEntity($_GET['id'],'visible',$_GET["value"]);
-}
-
-if ($_GET["action"] == 'setvisible')
-{
-	$mc->setEntity($_GET['id'],'visible',$_GET["value"]);
-}
-
+$mc->doActions();
 
 
 /*
@@ -63,7 +53,7 @@ print_fiche_titre($langs->trans("MultiCompanySetup"),$linkback,'setup');
 
 print '<br>';
 
-$smarty->template_dir = DOL_DOCUMENT_ROOT.'/multicompany/tpl/';
+$mc->template_dir = DOL_DOCUMENT_ROOT.'/multicompany/tpl/';
 
 /*
  * Create
@@ -73,18 +63,18 @@ if ($_GET["action"] == 'create')
 {
 	print_titre($langs->trans("AddEntity"));
 
-	$template = 'add-entity.tpl';
+	$mc->template = 'entity_create.tpl.php';
 }
 
 /*
  * Edit
  */
 
-else if ($_GET["action"] == 'modify')
+else if ($_GET["action"] == 'edit')
 {
 	print_titre($langs->trans("EditEntity"));
 
-	$template = 'edit-entity.tpl';
+	$mc->template = 'entity_edit.tpl.php';
 }
 
 /*
@@ -95,16 +85,13 @@ else
 {
 	print_titre($langs->trans("ListOfEntities"));
 
-	$mc->getEntities(1);
-	//var_dump($mc->entities);
-
-	$template = 'admin-entity.tpl';
+	$mc->template = 'entity_admin.tpl.php';
 
 }
 
-$mc->assign_smarty_values($smarty,$_GET["action"]);
-$smarty->display($template);
+$mc->assign_values($_GET["action"]);
+$mc->display();
 
 
-llxFooter('$Date: 2010/06/29 14:57:06 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2010/09/24 16:33:32 $ - $Revision: 1.2 $');
 ?>

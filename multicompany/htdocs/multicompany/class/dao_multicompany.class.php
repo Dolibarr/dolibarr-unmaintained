@@ -17,23 +17,25 @@
  */
 
 /**
- *	\file       htdocs/multicompany/multicompany.class.php
+ *	\file       htdocs/multicompany/dao_multicompany.class.php
  *	\ingroup    multicompany
  *	\brief      File Class multicompany
- *	\version    $Id: multicompany.class.php,v 1.1 2010/06/29 14:57:06 hregis Exp $
+ *	\version    $Id: dao_multicompany.class.php,v 1.1 2010/09/24 16:33:32 hregis Exp $
  */
 
 
 /**
- *	\class      Multicompany
+ *	\class      DaoMulticompany
  *	\brief      Class of the module multicompany
  */
-class Multicompany
+class DaoMulticompany
 {
 	var $db;
 	var $error;
 	//! Numero de l'erreur
 	var $errno = 0;
+	
+	var $tpl=array();
 
 	var $entities = array();
 
@@ -42,13 +44,9 @@ class Multicompany
 	 *    \param      DB          Handler acces base de donnees
 	 *    \param      id          Id produit (0 par defaut)
 	 */
-	function Multicompany($DB)
+	function DaoMulticompany($DB)
 	{
 		$this->db = $DB;
-
-		$this->canvas = "default";
-		$this->name = "admin";
-		$this->description = "";
 	}
 
 	/**
@@ -159,59 +157,7 @@ class Multicompany
 				$i++;
 			}
 		}
-
 	}
-
-	/**
-	 *    \brief      Return combo list of entities.
-	 *    \param      entities    Entities array
-	 *    \param      selected    Preselected entity
-	 */
-	function select_entities($entities,$selected='',$option='')
-	{
-		$return = '<select class="flat" name="entity" '.$option.'>';
-
-		if (is_array($entities))
-		{
-			foreach ($entities as $entity)
-			{
-				if ($entity['active'] == 1)
-				{
-					$return.= '<option value="'.$entity['id'].'" ';
-					if ($selected == $entity['id'])	$return.= 'selected="true"';
-					$return.= '>';
-					$return.= $entity['label'];
-					$return.= '</option>';
-				}
-			}
-		}
-		$return.= '</select>';
-
-		return $return;
-	}
-
-	/**
-	 *    \brief      Assigne les valeurs pour les templates Smarty
-	 *    \param      smarty     Instance de smarty
-	 */
-	function assign_smarty_values(&$smarty, $action='')
-	{
-		global $conf,$langs;
-
-		$smarty->assign('langs', $langs);
-
-		$picto='title.png';
-		if (empty($conf->browser->firefox)) $picto='title.gif';
-		$smarty->assign('title_picto', img_picto('',$picto));
-
-		$smarty->assign('entities',$this->entities);
-		$smarty->assign('img_on',img_picto($langs->trans("Activated"),'on'));
-		$smarty->assign('img_off',img_picto($langs->trans("Disabled"),'off'));
-		$smarty->assign('img_modify',img_edit());
-		$smarty->assign('img_delete',img_delete());
-	}
-
-
 
 }
 ?>

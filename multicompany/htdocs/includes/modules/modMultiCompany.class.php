@@ -24,7 +24,7 @@
  *      \file       htdocs/includes/modules/modMultiCompany.class.php
  *      \ingroup    multicompany
  *      \brief      Description and activation file for module MultiCompany
- *		\version	$Id: modMultiCompany.class.php,v 1.1 2010/06/29 14:57:05 hregis Exp $
+ *		\version	$Id: modMultiCompany.class.php,v 1.2 2010/09/24 16:33:32 hregis Exp $
  */
 include_once(DOL_DOCUMENT_ROOT ."/includes/modules/DolibarrModules.class.php");
 
@@ -80,14 +80,14 @@ class modMultiCompany extends DolibarrModules
 		$this->depends = array();		// List of modules id that must be enabled if this module is enabled
 		$this->requiredby = array();	// List of modules id to disable if this one is disabled
 		$this->phpmin = array(4,3);					// Minimum version of PHP required by module
-		$this->need_dolibarr_version = array(2,9,'0-dev');	// Minimum version of Dolibarr required by module
+		$this->need_dolibarr_version = array(2,9);	// Minimum version of Dolibarr required by module
 		$this->langfiles = array("multicompany");
 
 		// Constants
 		// List of particular constants to add when module is enabled
 		//Example: $this->const=array(0=>array('MODULE_MY_NEW_CONST1','chaine','myvalue','This is a constant to add',0),
 		//                            1=>array('MODULE_MY_NEW_CONST2','chaine','myvalue','This is another constant to add',0) );
-		$this->const=array(1=>array('MAIN_MODULE_MULTICOMPANY_NEEDSMARTY',"chaine",1,'Need smarty',0,'allentities'));
+		$this->const=array();
 
 		// Boxes
 		$this->boxes = array();			// List of boxes
