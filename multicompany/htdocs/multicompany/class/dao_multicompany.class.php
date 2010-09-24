@@ -20,7 +20,7 @@
  *	\file       htdocs/multicompany/dao_multicompany.class.php
  *	\ingroup    multicompany
  *	\brief      File Class multicompany
- *	\version    $Id: dao_multicompany.class.php,v 1.1 2010/09/24 16:33:32 hregis Exp $
+ *	\version    $Id: dao_multicompany.class.php,v 1.2 2010/09/24 16:44:13 hregis Exp $
  */
 
 
@@ -92,7 +92,9 @@ class DaoMulticompany
 
 				if (preg_match('/^MAIN_INFO_SOCIETE_PAYS$/i',$obj->name))
 				{
-					$entityDetails[$obj->name] = getCountry($obj->value);
+					$tmp=explode(':',$obj->value);
+					$pays_id=$tmp[0];
+					$entityDetails[$obj->name] = getCountry($pays_id);
 				}
 				else if (preg_match('/^MAIN_MONNAIE$/i',$obj->name))
 				{
