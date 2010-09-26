@@ -20,7 +20,7 @@
  *	\file       htdocs/multicompany/dao_multicompany.class.php
  *	\ingroup    multicompany
  *	\brief      File Class multicompany
- *	\version    $Id: dao_multicompany.class.php,v 1.2 2010/09/24 16:44:13 hregis Exp $
+ *	\version    $Id: dao_multicompany.class.php,v 1.3 2010/09/26 09:54:49 hregis Exp $
  */
 
 

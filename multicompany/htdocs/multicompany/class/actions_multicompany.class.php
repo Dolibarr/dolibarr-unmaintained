@@ -20,7 +20,7 @@
  *	\file       htdocs/multicompany/actions_multicompany.class.php
  *	\ingroup    multicompany
  *	\brief      File Class multicompany
- *	\version    $Id: actions_multicompany.class.php,v 1.1 2010/09/24 16:33:32 hregis Exp $
+ *	\version    $Id: actions_multicompany.class.php,v 1.2 2010/09/26 09:54:49 hregis Exp $
  */
 
 require_once(DOL_DOCUMENT_ROOT."/multicompany/class/dao_multicompany.class.php");
@@ -75,16 +75,20 @@ class ActionsMulticompany
 
 	/**
 	 *    Return combo list of entities.
-	 *    @param      entities    Entities array
-	 *    @param      selected    Preselected entity
+	 *    @param		selected    Preselected entity
+	 *    @param		option		Option
 	 */
-	function select_entities($entities,$selected='',$option='')
+	function select_entities($selected='',$option='')
 	{
+		$mc = new DaoMulticompany($this->db);
+		
+		$mc->getEntities(0,1);
+		
 		$return = '<select class="flat" name="entity" '.$option.'>';
 
-		if (is_array($entities))
+		if (is_array($mc->entities))
 		{
-			foreach ($entities as $entity)
+			foreach ($mc->entities as $entity)
 			{
 				if ($entity['active'] == 1)
 				{
