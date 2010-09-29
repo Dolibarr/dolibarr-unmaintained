@@ -1,5 +1,5 @@
 <?php
-/* Copyright (C) 2009 Laurent Léonard <laurent@open-minds.org>
+/* Copyright (C) 2009-2010 Laurent Léonard <laurent@open-minds.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -66,7 +66,7 @@ catch (Exception $exception)
 
 $vat_list->setVATNumber($conf->global->MAIN_INFO_TVAINTRA);
 
-$vat_list->addProposedName($user->fullname);
+$vat_list->addProposedName($user->getFullName());
 $vat_list->addProposedName($conf->global->MAIN_INFO_SOCIETE_NOM);
 $vat_list->selectName($name_id);
 $vat_list->setStreet($conf->global->MAIN_INFO_SOCIETE_ADRESSE);
