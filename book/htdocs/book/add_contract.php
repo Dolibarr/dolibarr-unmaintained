@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: add_contract.php,v 1.4 2010/09/23 16:20:01 cdelambert Exp $
+ * $Id: add_contract.php,v 1.5 2010/10/06 20:44:24 cdelambert Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/book/htdocs/book/add_contract.php,v $
  *
  */
@@ -65,16 +65,8 @@ $langs->load("@book");
 $langs->load("main");
 $langs->load("other");
 
-//Smarty inclusion
-// inclusion de Smarty
-require_once(DOL_DOCUMENT_ROOT.'/includes/smarty/libs/Smarty.class.php');
-
 /******************************* /Includes ***********************/
 
-// Instanciation d'un l'objet Smarty
-$oSmarty = new Smarty();
-if(!is_dir($oSmarty->template_dir)) mkdir($oSmarty->template_dir);	
-if(!is_dir($oSmarty->compile_dir)) mkdir($oSmarty->compile_dir);	
 
 $service = new service_book_contract($db) ;
 
@@ -118,12 +110,12 @@ if($user->rights->book->write)
 	
 	$serviceBook = new service_book($db); 
 	$dataBook = $serviceBook->getAttributesShow($_GET['product']) ;
-	$oSmarty->assign('dataBook',$dataBook) ;
+	$smarty->assign('dataBook',$dataBook) ;
 
 	
 	// file to call when to form is validate
 	$action_form = "add_contract.php?product=".$_GET['product'];
-	$oSmarty->assign('action_form', $action_form);
+	$smarty->assign('action_form', $action_form);
 
 	
 	// elements of the form
@@ -133,13 +125,13 @@ if($user->rights->book->write)
 	$listFk = $service->getAllFkDisplayed();
 	
 	//Ajout variables smarty
-	$oSmarty->assign('button', $langs->trans('add',$langs->trans('book_contract')));
-	$oSmarty->assign('data', $data);
-	$oSmarty->assign('user', $user->id);
-	$oSmarty->assign('product_book', $_GET['product']);
-	$oSmarty->assign('listFk', $listFk);
-	$oSmarty->assign('error', $error);
-	$oSmarty->assign('LastContracts', $langs->trans('LastContracts'));
+	$smarty->assign('button', $langs->trans('add',$langs->trans('book_contract')));
+	$smarty->assign('data', $data);
+	$smarty->assign('user', $user->id);
+	$smarty->assign('product_book', $_GET['product']);
+	$smarty->assign('listFk', $listFk);
+	$smarty->assign('error', $error);
+	$smarty->assign('LastContracts', $langs->trans('LastContracts'));
 
 	
 	/* ******************************************
@@ -165,16 +157,16 @@ if($user->rights->book->write)
 
 	$listes_contracts[$entityname] = $service_book_contract->getAllListDisplayed($where,$orderby) ;
 	
-	$oSmarty->assign("fields_contracts",$fields_contracts) ;
-	$oSmarty->assign("listes_contracts",$listes_contracts) ;
+	$smarty->assign("fields_contracts",$fields_contracts) ;
+	$smarty->assign("listes_contracts",$listes_contracts) ;
 
 }
 else
 {
-	$oSmarty->assign('error', $langs->trans('ErrorForbidden'));
+	$smarty->assign('error', $langs->trans('ErrorForbidden'));
 }
  	// Affichage du template après compilation
-	$oSmarty->display(DOL_DOCUMENT_ROOT.'/book/tpl/add_contract.tpl');
+	$smarty->display(DOL_DOCUMENT_ROOT.'/book/tpl/add_contract.tpl');
 
 
 //End of user code

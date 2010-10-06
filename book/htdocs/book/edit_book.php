@@ -41,7 +41,7 @@ require(DOL_DOCUMENT_ROOT."/book/class/data/dao_book_contract_societe.class.php"
 require(DOL_DOCUMENT_ROOT."/book/class/business/service_book_contract_societe.class.php");
 require(DOL_DOCUMENT_ROOT."/book/class/business/html.formbook.class.php");02111-1307, USA.
  *
- * $Id: edit_book.php,v 1.4 2010/09/23 16:20:01 cdelambert Exp $
+ * $Id: edit_book.php,v 1.5 2010/10/06 20:44:24 cdelambert Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/book/htdocs/book/edit_book.php,v $
  *
  */
@@ -50,7 +50,7 @@ require(DOL_DOCUMENT_ROOT."/book/class/business/html.formbook.class.php");02111-
    \file       htdocs/product/edit_book.php
    \ingroup    product
    \brief      edit_book
-   \version    $Revision: 1.4 $
+   \version    $Revision: 1.5 $
 */
 
 /******************************* Includes (old content of pre.inc.php) ***********************/
@@ -88,23 +88,7 @@ $langs->load("@book");
 $langs->load("main");
 $langs->load("other");
 
-//Smarty inclusion
-// inclusion de Smarty
-require_once(DOL_DOCUMENT_ROOT.'/includes/smarty/libs/Smarty.class.php');
-
-require_once(DOL_DOCUMENT_ROOT."/lib/product.lib.php");
-
 /******************************* /Includes ***********************/
-
-
-
-
-// Instanciation d'un l'objet Smarty
-$oSmarty = new Smarty();
-if(!is_dir($oSmarty->template_dir)) mkdir($oSmarty->template_dir);	
-if(!is_dir($oSmarty->compile_dir)) mkdir($oSmarty->compile_dir);	
-
-//$oSmarty->debugging = true;
 
 //Sous forme d'onglets
 $service = new service_book($db) ;
@@ -166,7 +150,7 @@ if($_GET['id'])
 		
 		//Fichier action de la balise Form
 		$action_form = "edit_book.php";
-		$oSmarty->assign('action_form', $action_form);
+		$smarty->assign('action_form', $action_form);
 
 		//Liste des �lements à saisir dans le formulaire
 		
@@ -184,19 +168,19 @@ if($_GET['id'])
 					);
 		
 		
-		$oSmarty->assign('buttons', $buttons);
-		$oSmarty->assign('data', $data);
-		$oSmarty->assign('error', $error);
-		$oSmarty->assign('urlForm', 'edit_book.php?id='.$_GET['id']);
+		$smarty->assign('buttons', $buttons);
+		$smarty->assign('data', $data);
+		$smarty->assign('error', $error);
+		$smarty->assign('urlForm', 'edit_book.php?id='.$_GET['id']);
 			
 	}
 	else
 	{
-		$oSmarty->assign('error', $langs->trans('ErrorForbidden'));
+		$smarty->assign('error', $langs->trans('ErrorForbidden'));
 	}
 	  
  	// Affichage du template après compilation
-	$oSmarty->display(DOL_DOCUMENT_ROOT.'/book/tpl/edit_book.tpl');
+	$smarty->display(DOL_DOCUMENT_ROOT.'/book/tpl/edit_book.tpl');
 
 	
 }

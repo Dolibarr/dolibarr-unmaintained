@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: add_book.php,v 1.4 2010/09/23 16:20:01 cdelambert Exp $
+ * $Id: add_book.php,v 1.5 2010/10/06 20:44:24 cdelambert Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/book/htdocs/book/add_book.php,v $
  *
  */
@@ -27,7 +27,7 @@
    \file       htdocs/product/add_book.php
    \ingroup    product
    \brief      add_book
-   \version    $Revision: 1.4 $
+   \version    $Revision: 1.5 $
 */
 
 /******************************* Includes (old content of pre.inc.php) ***********************/
@@ -65,17 +65,9 @@ $langs->load("@book");
 $langs->load("main");
 $langs->load("other");
 
-//Smarty inclusion
-// inclusion de Smarty
-require_once(DOL_DOCUMENT_ROOT.'/includes/smarty/libs/Smarty.class.php');
 
 /******************************* /Includes ***********************/
-
-
-// Instanciation of a Smarty object
-$oSmarty = new Smarty();
-if(!is_dir($oSmarty->template_dir)) mkdir($oSmarty->template_dir);	
-if(!is_dir($oSmarty->compile_dir)) mkdir($oSmarty->compile_dir);	
+	
 
  if ($_POST["action"] == 'add')
 {
@@ -120,7 +112,7 @@ if($user->rights->book->write)
 	
 	//Action file of Form tag
 	$action_form = "add_book.php";
-	$oSmarty->assign('action_form', $action_form);
+	$smarty->assign('action_form', $action_form);
 
 	
 	//List of elements to fill in form
@@ -129,7 +121,7 @@ if($user->rights->book->write)
 	$service = new service_book($db) ;
 	$data = $service->getAttributesAdd($_POST);
 
-	$oSmarty->assign('listFk', $listFk);
+	$smarty->assign('listFk', $listFk);
 	
 	//Product caracteristics
 	$product_caracteristics["type"] = 0; //a book is a regular product
@@ -138,19 +130,19 @@ if($user->rights->book->write)
 	
 	
 	//Adding Smarty variables
-	$oSmarty->assign('button', $langs->trans('add',$langs->trans('book')));
-	$oSmarty->assign('data', $data);
-	$oSmarty->assign('error', $error);
-	$oSmarty->assign('product_caracteristics', $product_caracteristics);
+	$smarty->assign('button', $langs->trans('add',$langs->trans('book')));
+	$smarty->assign('data', $data);
+	$smarty->assign('error', $error);
+	$smarty->assign('product_caracteristics', $product_caracteristics);
 
 	
 }
 else
 {
-	$oSmarty->assign('error', $langs->trans('ErrorForbidden'));
+	$smarty->assign('error', $langs->trans('ErrorForbidden'));
 }
  	//Template displaying after compilation
-	$oSmarty->display(DOL_DOCUMENT_ROOT.'/book/tpl/add_book.tpl');
+	$smarty->display(DOL_DOCUMENT_ROOT.'/book/tpl/add_book.tpl');
 
 
 //End of user code

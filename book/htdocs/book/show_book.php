@@ -19,7 +19,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: show_book.php,v 1.4 2010/09/23 16:20:01 cdelambert Exp $
+ * $Id: show_book.php,v 1.5 2010/10/06 20:44:24 cdelambert Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/book/htdocs/book/show_book.php,v $
  *
  */
@@ -28,7 +28,7 @@
    \file       htdocs/book/show_book.php
    \ingroup    
    \brief      * to complete *
-   \version    $Revision: 1.4 $
+   \version    $Revision: 1.5 $
 */
 
 /******************************* Includes (old content of pre.inc.php) ***********************/
@@ -66,9 +66,7 @@ $langs->load("@book");
 $langs->load("main");
 $langs->load("other");
 
-//Smarty inclusion
-// inclusion de Smarty
-require_once(DOL_DOCUMENT_ROOT.'/includes/smarty/libs/Smarty.class.php');
+
 
 /******************************* /Includes ***********************/
 
@@ -81,12 +79,8 @@ $langs->load("other");
 llxHeader("",$langs->trans("CardProduct0"));
 
 
-// Instanciation d'un l'objet Smarty
-$oSmarty = new Smarty();
-if(!is_dir($oSmarty->template_dir)) mkdir($oSmarty->template_dir);	
-if(!is_dir($oSmarty->compile_dir)) mkdir($oSmarty->compile_dir);	
 
-//$oSmarty->debugging = true;
+
 
 //Sous forme d'onglets
 $service = new service_book($db) ;
@@ -110,7 +104,7 @@ if($user->rights->book->read)
 	if ($_GET["action"] == 'delete')
 	{
 
-		$oSmarty->assign('delete_form',$service->confirmDeleteForm()) ;
+		$smarty->assign('delete_form',$service->confirmDeleteForm()) ;
 	}
 	/* ***********
 	 * Suppression
@@ -122,11 +116,11 @@ if($user->rights->book->read)
 		
 		if($deleted==0){
 		
-			$oSmarty->assign('deleted',$langs->trans("deleted",$langs->trans("book"))) ;
-			$oSmarty->assign('deleted_ok',$langs->trans("ok")) ;
-			$oSmarty->assign('deleted_ok_link',DOL_URL_ROOT.'/product/index.php') ;
+			$smarty->assign('deleted',$langs->trans("deleted",$langs->trans("book"))) ;
+			$smarty->assign('deleted_ok',$langs->trans("ok")) ;
+			$smarty->assign('deleted_ok_link',DOL_URL_ROOT.'/product/index.php') ;
 		} else {
-			$oSmarty->assign('errors',$service->getErrors()) ;
+			$smarty->assign('errors',$service->getErrors()) ;
 		}
 		
 		
@@ -145,7 +139,7 @@ if($user->rights->book->read)
 		
 			// Get Data
 			$data = $service->getAttributesShow($_GET['id']) ;
-			$oSmarty->assign('data',$data) ;
+			$smarty->assign('data',$data) ;
 			
 			//Right to modify
 			$edit = $user->rights->book->write ;
@@ -164,34 +158,28 @@ if($user->rights->book->read)
 			
 			//Liste des compositions
 			$service_compo = new service_product_composition($db);
-			$oSmarty->assign("fields",$service_compo->getListDisplayedFields()) ;
-			$oSmarty->assign("listesCompo",$service_compo->getCompoProductsDisplay($_GET['id'])) ;
-			$oSmarty->assign("titre_compo",$langs->trans("listeComposition"));
-			$oSmarty->assign("link",DOL_URL_ROOT.'/product/fiche.php?id=');		
-	
-			$conversion_eur_to_fr = 6.55957;
+			$smarty->assign("fields",$service_compo->getListDisplayedFields()) ;
+			$smarty->assign("listesCompo",$service_compo->getCompoProductsDisplay($_GET['id'])) ;
+			$smarty->assign("titre_compo",$langs->trans("listeComposition"));
+			$smarty->assign("link",DOL_URL_ROOT.'/product/fiche.php?id=');		
 			
 			//cout de revient total
 			$factory_price_all['label'] = $langs->trans('FactoryPriceAll');
 			$factory_price_all['value'] = $service_compo->getFactoryPriceAll($_GET['id']);
-			$oSmarty->assign("factory_price_all",$factory_price_all);
-			$oSmarty->assign("factory_price_all_value_ht_fr",price($factory_price_all['value']['HT'] * $conversion_eur_to_fr));
-			$oSmarty->assign("factory_price_all_value_ttc_fr",price($factory_price_all['value']['TTC'] * $conversion_eur_to_fr));
-			
+			$smarty->assign("factory_price_all",$factory_price_all);
+
 			//cout de revient
 			$factory_price['label'] = $langs->trans('FactoryPrice');
 			$factory_price['value'] = $service_compo->getFactoryPrice($_GET['id']);
-			$oSmarty->assign("factory_price",$factory_price);				
-			$oSmarty->assign("factory_price_value_ht_fr",price($factory_price['value']['HT'] * $conversion_eur_to_fr));
-			$oSmarty->assign("factory_price_value_ttc_fr",price($factory_price['value']['TTC'] * $conversion_eur_to_fr));
+			$smarty->assign("factory_price",$factory_price);				
 
 	
 			/* ******************************************
 			 *                 CONTRACTS
 			 ********************************************/
 			
-			$oSmarty->assign("titre_contract",$langs->trans("Contrat"));	
-			$oSmarty->assign("OldContracts",$langs->trans("OldContracts"));	
+			$smarty->assign("titre_contract",$langs->trans("Contrat"));	
+			$smarty->assign("OldContracts",$langs->trans("OldContracts"));	
 			//$contract = $service->getAttributesShow($_GET['id']) ;
 			$contract = new service_book_contract($db) ;
 			
@@ -199,11 +187,11 @@ if($user->rights->book->read)
 			{
 				// Get Data
 				$data_contract = $contract->getAttributesShow($data['book_contract']['value']) ;
-				$oSmarty->assign('data_contract',$data_contract) ;			
+				$smarty->assign('data_contract',$data_contract) ;			
 			}
 			else
 			{
-				$oSmarty->assign('NoContract',$langs->trans("NoContract")) ;
+				$smarty->assign('NoContract',$langs->trans("NoContract")) ;
 			}
 	
 	
@@ -243,9 +231,9 @@ if($user->rights->book->read)
 			// get the data from the service using the where and the order by clauses generated above
 			$listes_bill[$entityname] = $service_bill->getAllListDisplayed($where,$orderby) ;
 
-			$oSmarty->assign("ContractsBill",$langs->trans("ContractsBill")); 
-			$oSmarty->assign("listes_bill",$listes_bill) ;
-			$oSmarty->assign("fields_bill",$fields_bill) ;
+			$smarty->assign("ContractsBill",$langs->trans("ContractsBill")); 
+			$smarty->assign("listes_bill",$listes_bill) ;
+			$smarty->assign("fields_bill",$fields_bill) ;
 
 			/* ******************************************
 			 *                 OLD CONTRACTS
@@ -270,15 +258,15 @@ if($user->rights->book->read)
 	
 			$listes_contracts[$entityname] = $service_book_contract->getAllListDisplayed($where,$orderby) ;
 			
-			$oSmarty->assign("fields_contracts",$fields_contracts) ;
-			$oSmarty->assign("listes_contracts",$listes_contracts) ;
+			$smarty->assign("fields_contracts",$fields_contracts) ;
+			$smarty->assign("listes_contracts",$listes_contracts) ;
 	
 			
-			$oSmarty->assign('buttons',$buttons) ;
+			$smarty->assign('buttons',$buttons) ;
 		}
 		else
 		{
-			$oSmarty->assign('NoBook',$langs->trans('NoBook'));
+			$smarty->assign('NoBook',$langs->trans('NoBook'));
 		}
 
 	}
@@ -286,14 +274,14 @@ if($user->rights->book->read)
 }
 else
 {
-	$oSmarty->assign('errors', $langs->trans('ErrorForbidden'));
+	$smarty->assign('errors', $langs->trans('ErrorForbidden'));
 }
-	$oSmarty->assign('missing',$langs->trans('not_found', $langs->trans('book'))) ;
+	$smarty->assign('missing',$langs->trans('not_found', $langs->trans('book'))) ;
 	
-	$oSmarty->display(DOL_DOCUMENT_ROOT."/book/tpl/show_book.tpl") ;
+	$smarty->display(DOL_DOCUMENT_ROOT."/book/tpl/show_book.tpl") ;
 
 //End of user code
 
-llxFooter('$Date: 2010/09/23 16:20:01 $ - $Revision: 1.4 $');
+llxFooter('$Date: 2010/10/06 20:44:24 $ - $Revision: 1.5 $');
 
 ?>

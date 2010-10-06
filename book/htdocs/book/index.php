@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: index.php,v 1.4 2010/09/23 16:20:01 cdelambert Exp $
+ * $Id: index.php,v 1.5 2010/10/06 20:44:24 cdelambert Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/book/htdocs/book/index.php,v $
  *
  */
@@ -65,29 +65,19 @@ $langs->load("@book");
 $langs->load("main");
 $langs->load("other");
 
-//Smarty inclusion
-// inclusion de Smarty
-require_once(DOL_DOCUMENT_ROOT.'/includes/smarty/libs/Smarty.class.php');
-
 /******************************* /Includes ***********************/
 
 llxHeader("",$langs->trans("Livre"));
 
 print_fiche_titre($langs->trans("Livre"));
 
-// Instanciation of a Smarty object
-$oSmarty = new Smarty();
-if(!is_dir($oSmarty->template_dir)) mkdir($oSmarty->template_dir);	
-if(!is_dir($oSmarty->compile_dir)) mkdir($oSmarty->compile_dir);	
-//$oSmarty->debugging = true;
-
 	
 	// Global variables for template
-	$oSmarty->assign("img_up",img_up("Z-A")) ;
-	$oSmarty->assign("img_down",img_down("A-Z")) ;
-	$oSmarty->assign("this_link",'index.php') ;
-	$oSmarty->assign("img_search",DOL_URL_ROOT.'/theme/'.$conf->theme.'/img/search.png');
-	$oSmarty->assign("img_searchclear",DOL_URL_ROOT.'/theme/'.$conf->theme.'/img/searchclear.png');
+	$smarty->assign("img_up",img_up("Z-A")) ;
+	$smarty->assign("img_down",img_down("A-Z")) ;
+	$smarty->assign("this_link",'index.php') ;
+	$smarty->assign("img_search",DOL_URL_ROOT.'/theme/'.$conf->theme.'/img/search.png');
+	$smarty->assign("img_searchclear",DOL_URL_ROOT.'/theme/'.$conf->theme.'/img/searchclear.png');
 	
 	$listes = array() ; // lists of data to display for each entity
 	$params = array() ; // lists of fields to display for each entity
@@ -140,16 +130,16 @@ if(!is_dir($oSmarty->compile_dir)) mkdir($oSmarty->compile_dir);
 		"link" =>  DOL_URL_ROOT.'/book/add_book_contract_bill.php'
 	) ;	
 	
-	$oSmarty->assign("buttons",$buttons);
+	$smarty->assign("buttons",$buttons);
 	
 	
-	$oSmarty->assign("listes",$listes) ;
-	$oSmarty->assign("imgProduct",img_object($langs->trans("Book"),"product")) ;
-	$oSmarty->assign("fields",$fields) ;
-	$oSmarty->assign("params",$params) ;
-	$oSmarty->assign("types",$types) ;
+	$smarty->assign("listes",$listes) ;
+	$smarty->assign("imgProduct",img_object($langs->trans("Book"),"product")) ;
+	$smarty->assign("fields",$fields) ;
+	$smarty->assign("params",$params) ;
+	$smarty->assign("types",$types) ;
 	
-	$oSmarty->display(DOL_DOCUMENT_ROOT."/book/tpl/index.tpl") ;
+	$smarty->display(DOL_DOCUMENT_ROOT."/book/tpl/index.tpl") ;
 
 	
 	//print_barre_liste("", $pageNumber, "index.php", "&entity=".$entityname.$params[$entityname], $_GET['sortfield'], $_GET['sortorder'],'',$num+1,$nbtotal);

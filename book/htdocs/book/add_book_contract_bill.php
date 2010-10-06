@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: add_book_contract_bill.php,v 1.4 2010/09/23 16:20:01 cdelambert Exp $
+ * $Id: add_book_contract_bill.php,v 1.5 2010/10/06 20:44:24 cdelambert Exp $
  * $Source: /cvsroot/dolibarr/dolibarrmod/book/htdocs/book/add_book_contract_bill.php,v $
  *
  */
@@ -67,14 +67,9 @@ $langs->load("other");
 
 //Smarty inclusion
 // inclusion de Smarty
-require_once(DOL_DOCUMENT_ROOT.'/includes/smarty/libs/Smarty.class.php');
 
 /******************************* /Includes ***********************/
-
-// Instanciation d'un l'objet Smarty
-$oSmarty = new Smarty();
-if(!is_dir($oSmarty->template_dir)) mkdir($oSmarty->template_dir);	
-if(!is_dir($oSmarty->compile_dir)) mkdir($oSmarty->compile_dir);	
+	
 
 $service = new service_book_contract_bill($db) ;
 
@@ -140,7 +135,7 @@ if($user->rights->book->write)
 	
 	// file to call when to form is validate
 	$action_form = "add_book_contract_bill.php";
-	$oSmarty->assign('action_form', $action_form);
+	$smarty->assign('action_form', $action_form);
 
 
 	
@@ -153,8 +148,8 @@ if($user->rights->book->write)
 		$book->fetch($_GET['id']);
 
 		$ProductTitle = img_warning()." ".$langs->trans("GenerateMailFor",$book->ref,$book->libelle);
-		$oSmarty->assign('contract', $_GET['contract']);
-		$oSmarty->assign('product', $_GET['id']);
+		$smarty->assign('contract', $_GET['contract']);
+		$smarty->assign('product', $_GET['id']);
 	}
 	else
 	{
@@ -162,21 +157,21 @@ if($user->rights->book->write)
 	}
 	
 	//Ajout variables smarty
-	$oSmarty->assign('button', $langs->trans('Generate'));
-	$oSmarty->assign('data', $data);
-	$oSmarty->assign('listFk', $listFk);
-	$oSmarty->assign('error', $error);
-	$oSmarty->assign('Generation', $ProductTitle);
+	$smarty->assign('button', $langs->trans('Generate'));
+	$smarty->assign('data', $data);
+	$smarty->assign('listFk', $listFk);
+	$smarty->assign('error', $error);
+	$smarty->assign('Generation', $ProductTitle);
 
 	
 	
 }
 else
 {
-	$oSmarty->assign('error', $langs->trans('ErrorForbidden'));
+	$smarty->assign('error', $langs->trans('ErrorForbidden'));
 }
  	// Affichage du template après compilation
-	$oSmarty->display(DOL_DOCUMENT_ROOT.'/book/tpl/add_book_contract_bill.tpl');
+	$smarty->display(DOL_DOCUMENT_ROOT.'/book/tpl/add_book_contract_bill.tpl');
 
 
 //End of user code
