@@ -21,7 +21,7 @@
  *     \file       htdocs/droitpret/droitpret.class.php
  *     \ingroup    droitpret
  *     \brief      Fichier de la classe ddes droits de prets
- *     \version    $Id: droitpret.class.php,v 1.6 2010/08/24 20:27:24 grandoc Exp $
+ *     \version    $Id: droitpret.class.php,v 1.7 2010/10/06 16:29:39 cdelambert Exp $
  */
 
 
@@ -58,7 +58,7 @@ class DroitPret
 
     }
 
-    function CreateNewRapport()
+    function createNewRapport()
     {
     	global $conf;
 
@@ -82,26 +82,26 @@ class DroitPret
 		$ref = $this->db->last_insert_id(MAIN_DB_PREFIX."droitpret_rapport");
 		
 		$this->fp = fopen($lien,"w");
-		$this->WriteDEB($ref);
-		$this->WriteTET();
-		$this->WriteFin();
+		$this->writeDEB($ref);
+		$this->writeTET();
+		$this->writeFin();
 		fclose($this->fp);
 		
 		$sql = "UPDATE ".MAIN_DB_PREFIX."droitpret_rapport SET nbfact = ".$this->nbfact." WHERE rowid = ".$ref;
 		$this->db->query($sql);
     }
 
-    function WriteDEB($ref)
+    function writeDEB($ref)
     {
 
 		$dateEnvoie = date("Ymd",mktime($this->dateEnvoie['hours'],$this->dateEnvoie['minutes'],$this->dateEnvoie['seconds'],$this->dateEnvoie['mon'],$this->dateEnvoie['mday'],$this->dateEnvoie['year']));
-		$ligne = "DEB".$this->ComplChar($ref,"0",8).$dateEnvoie;
-		$ligne .= $this->ComplChar($this->format," ",10);
+		$ligne = "DEB".$this->complChar($ref,"0",8).$dateEnvoie;
+		$ligne .= $this->complChar($this->format," ",10);
 		fwrite($this->fp,$ligne."\n");
 
     }
 
-    function WriteTET()
+    function writeTET()
     {
     		global $conf;
 
@@ -127,14 +127,14 @@ class DroitPret
 			    while ($i < $num)
 	    		{
 	        		$obj = $this->db->fetch_object($result);
-	        		$ligne = "TET380".$this->ComplChar($obj->facnumber,"0",25);
-	        		$ligne.= $this->FormatDate($obj->datec);
-	        		$ligne.= $this->ComplChar("","",25).$this->ComplChar(str_replace(".","",$obj->total_ttc),"0",10);
-	        		$ligne.= $this->ComplChar(str_replace(".","",$obj->total),"0",10)."EUR";
+	        		$ligne = "TET380".$this->complChar($obj->facnumber,"0",25);
+	        		$ligne.= $this->formatDate($obj->datec);
+	        		$ligne.= $this->complChar("","",25).$this->complChar(str_replace(".","",$obj->total_ttc),"0",10);
+	        		$ligne.= $this->complChar(str_replace(".","",$obj->total),"0",10)."EUR";
 	        		fwrite($this->fp,$ligne."\n");
 
-	        		$this->WriteInt($obj->rowid);
-	        		$this->WriteLin($obj->rowid);
+	        		$this->writeInt($obj->rowid);
+	        		$this->writeLin($obj->rowid);
 
 	        		$this->nbfact++;
 	        		$i++;
@@ -143,7 +143,7 @@ class DroitPret
 
     }
 
-    function WriteINT($fac)
+    function writeINT($fac)
     {
     	global $conf;
 		$sql = "SELECT f.rowid, s.rowid as socid ";
@@ -161,7 +161,7 @@ class DroitPret
 		    while ($i < $num)
     		{
         		$obj = $this->db->fetch_object($result);
-				$ligne = "INT".$this->ComplChar($conf->global->MAIN_INFO_SOCIETE_GENCOD,"0",13).$this->ComplChar($obj->socid,"0",13);
+				$ligne = "INT".$this->complChar($conf->global->MAIN_INFO_SOCIETE_GENCOD,"0",13).$this->complChar($obj->socid,"0",13);
         		fwrite($this->fp,$ligne."\n");
         		$i++;
     		}
@@ -171,9 +171,9 @@ class DroitPret
 
     }
 
-    function WriteLIN($fac)
+    function writeLIN($fac)
     {
-		$sql = "SELECT p.gencode, d.total_ttc,d.qty ";
+		$sql = "SELECT p.barcode, d.total_ttc,d.qty ";
 		$sql.= "FROM llx_facture AS f, llx_facturedet AS d, llx_product AS p ";
 		$sql.= "WHERE d.fk_product = p.rowid ";
 		$sql.= "AND f.rowid = d.fk_facture ";
@@ -189,9 +189,9 @@ class DroitPret
 		    while ($i < $num)
     		{
         		$obj = $this->db->fetch_object($result);
-				$ligne = "LIN01".$this->ComplChar($obj->gencode,"0",13);
-				$ligne.= $this->ComplChar(""," ",250).str_replace(".","",$obj->total_ttc);
-				$ligne.= $this->ComplChar($obj->qty,"0",4);
+				$ligne = "LIN01".$this->complChar($obj->barcode,"0",13);
+				$ligne.= $this->complChar(""," ",250).str_replace(".","",$obj->total_ttc);
+				$ligne.= $this->complChar($obj->qty,"0",4);
         		fwrite($this->fp,$ligne."\n");
         		$i++;
     		}
@@ -199,19 +199,19 @@ class DroitPret
 
     }
 
-	function WriteFIN()
+	function writeFIN()
     {
 
-    	$ligne = "FIN".$this->ComplChar($obj->nbfact,"0",8);
+    	$ligne = "FIN".$this->complChar($obj->nbfact,"0",8);
     	fwrite($this->fp,$ligne);
     }
 
 
-    function EnvoiMail()
+    function envoiMail()
     {
 		global $langs, $conf;
 
-		$subject = ":::EDLFDT01".$this->ComplChar($conf->global->MAIN_INFO_SOCIETE_GENCOD,"0",13);
+		$subject = ":::EDLFDT01".$this->complChar($conf->global->MAIN_INFO_SOCIETE_GENCOD,"0",13);
 		$sendto = $conf->global->DROITPRET_MAIL;
 		$from = $conf->global->MAIN_INFO_SOCIETE_MAIL;
 		$message = "";
@@ -255,24 +255,24 @@ class DroitPret
     	return $mesg;
     }
 
-    function ComplChar($chaine,$char,$size)
+    function complChar($chaine,$char,$size)
     {
 		$chaineSize=dol_strlen ($chaine);
-		$ComplChar = $chaine;
+		$complChar = $chaine;
 		for ($i = $chaineSize; $i < $size;$i++)
 		{
-			$ComplChar = $char.$ComplChar;
+			$complChar = $char.$complChar;
 		}
 
-		return $ComplChar;
+		return $complChar;
 
     }
 
-    function FormatDate($datetime)
+    function formatDate($datetime)
     {
-    	$FormatDate = str_replace("-","",$datetime);
-    	$FormatDate = substr($FormatDate,0,8);
-    	return $FormatDate;
+    	$formatDate = str_replace("-","",$datetime);
+    	$formatDate = substr($formatDate,0,8);
+    	return $formatDate;
     }
 
 }
