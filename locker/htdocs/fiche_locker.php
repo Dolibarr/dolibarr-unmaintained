@@ -18,8 +18,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: fiche_locker.php,v 1.1 2010/10/07 10:24:20 cdelambert Exp $
- * $Source: /cvsroot/dolibarr/dolibarrmod/locker/Attic/fiche_locker.php,v $
+ * $Id: fiche_locker.php,v 1.1 2010/10/07 12:02:25 cdelambert Exp $
+ * $Source: /cvsroot/dolibarr/dolibarrmod/locker/htdocs/fiche_locker.php,v $
  *
  */
  
