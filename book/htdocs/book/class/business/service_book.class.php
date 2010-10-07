@@ -23,7 +23,7 @@
         \file       htdocs/product/book.class.php
         \ingroup    book
         \brief      *complete here*
-		\version    $Id: service_book.class.php,v 1.3 2010/09/23 16:20:01 cdelambert Exp $
+		\version    $Id: service_book.class.php,v 1.4 2010/10/07 15:57:58 cdelambert Exp $
 		\author		Patrick Raguin
 */
 
@@ -168,21 +168,18 @@ class service_book extends service_product
 		
 		$attributes[] = "pdt.ref as product_ref";
 		$attributes[] = "pdt.label as product_label";
-		//$attributes[] = "locker.code as locker_code";
 		$attributes[] = "sum(fdet.qty) as product_vente";
 		$attributes[] = "stock.reel as product_stock";
 		$attributes[] = "book.nbpages as book_pages";
 
 		$labels[] = "product_ref";
 		$labels[] = "product_label";
-		//$labels[] = "locker_code";
 		$labels[] = "product_vente";
 		$labels[] = "product_stock";
 		$labels[] = "book_pages";
 
 		$join[] = " JOIN ".MAIN_DB_PREFIX."product_book book ON pdt.rowid = book.rowid";
 		$join[] = " LEFT OUTER JOIN ".MAIN_DB_PREFIX."product_stock stock ON stock.fk_product = pdt.rowid";
-		//$join[] = " LEFT OUTER JOIN ".MAIN_DB_PREFIX."locker locker ON locker.rowid = stock.fk_locker";
 		$join[] = " LEFT OUTER JOIN ".MAIN_DB_PREFIX."facturedet fdet ON fdet.fk_product = pdt.rowid";	
 		
 		//Current class
@@ -190,7 +187,6 @@ class service_book extends service_product
 		$query = "SELECT book.rowid, ".implode(", ",$attributes);
 		$query.= " FROM ".MAIN_DB_PREFIX."product pdt ".implode("",$join);
 		$query.= " GROUP BY pdt.ref, stock.reel";
-		//$query.= " GROUP BY pdt.ref, locker.code, stock.reel";
 
 		return $this->getFromQuery($query,$labels,$where,$order) ;
 	}
