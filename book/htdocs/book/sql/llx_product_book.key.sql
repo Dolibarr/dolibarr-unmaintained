@@ -17,7 +17,7 @@
 -- along with this program; if not, write to the Free Software
 -- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 --
--- $Id: llx_product_book.key.sql,v 1.2 2010/06/07 14:16:31 pit Exp $
+-- $Id: llx_product_book.key.sql,v 1.3 2010/10/07 15:57:39 cdelambert Exp $
 -- ============================================================================
 
 
@@ -25,3 +25,4 @@ ALTER TABLE llx_product_book ADD FOREIGN KEY (rowid) REFERENCES llx_product(rowi
 
 ALTER TABLE llx_product_book ADD INDEX idx_product_book_fk_contract (fk_contract);
 ALTER TABLE llx_product_book ADD FOREIGN KEY (fk_contract) REFERENCES llx_product_book_contract(rowid);
+ALTER TABLE `llx_facturedet` ADD INDEX ( `fk_product` ) ;
