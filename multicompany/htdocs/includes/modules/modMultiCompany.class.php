@@ -24,7 +24,7 @@
  *      \file       htdocs/includes/modules/modMultiCompany.class.php
  *      \ingroup    multicompany
  *      \brief      Description and activation file for module MultiCompany
- *		\version	$Id: modMultiCompany.class.php,v 1.2 2010/09/24 16:33:32 hregis Exp $
+ *		\version	$Id: modMultiCompany.class.php,v 1.3 2010/10/20 20:17:02 hregis Exp $
  */
 include_once(DOL_DOCUMENT_ROOT ."/includes/modules/DolibarrModules.class.php");
 
@@ -112,6 +112,8 @@ class modMultiCompany extends DolibarrModules
 	function init()
 	{
 		$sql = array();
+		
+		$result = $this->setFirstEntity();
 
 		return $this->_init($sql);
 	}
@@ -126,19 +128,71 @@ class modMultiCompany extends DolibarrModules
 	{
 		$sql = array();
 
-		$result = $this->destroy_cookie();
+		$result = $this->destroy_entityCookie();
 
 		return $this->_remove($sql);
 	}
-
+	
+   /**
+	*   Set the first entity
+	*/
+	function setFirstEntity()
+	{
+		global $user, $langs;
+		
+		$sql = 'SELECT count(rowid) FROM '.MAIN_DB_PREFIX.'entity';
+		$res = $this->db->query($sql);
+		if ($res) $num = $this->db->fetch_array($res);
+		else dol_print_error($this->db);
+		
+		
+		if (empty($num[0]))
+		{
+			$this->db->begin();
+			
+			$now = dol_now();
+			
+			$sql = 'INSERT INTO '.MAIN_DB_PREFIX.'entity (';
+			$sql.= 'label';
+			$sql.= ', description';
+			$sql.= ', datec';
+			$sql.= ', fk_user_creat';
+			$sql.= ') VALUES (';
+			$sql.= '"'.$langs->trans("DefaultEntityLabel").'"';
+			$sql.= ', "'.$langs->trans("DefaultEntityDesc").'"';
+			$sql.= ', "'.$this->db->idate($now).'"';
+			$sql.= ', '.$user->id;
+			
+			if ($this->db->query($sql))
+			{
+				$this->db->commit();
+				return 1;
+			}
+			else
+			{
+				$this->db->rollback();
+				return -1;
+			}
+		}
+		else
+		{
+			return 0;
+		}
+		
+		
+	}
 
    /**
-	*   \brief   Destroy a cookie
+	*   Destroy entity cookie
 	*/
-	function destroy_cookie()
+	function destroy_entityCookie()
 	{
+		// Add real path in session name
+		$realpath='';
+		if ( preg_match('/^([^.]+)\/htdocs\//i', realpath($_SERVER["SCRIPT_FILENAME"]), $regs))	$realpath = isset($regs[1])?$regs[1]:'';
+		
 		// Destroy entity cookie
-		$entityCookieName = "DOLENTITYID_".md5($_SERVER["SERVER_NAME"].$_SERVER["DOCUMENT_ROOT"]);
+		$entityCookieName = "DOLENTITYID_".md5($_SERVER["SERVER_NAME"].$_SERVER["DOCUMENT_ROOT"].$realpath);
 		setcookie($entityCookieName, '', 1, "/");
 	}
 }
