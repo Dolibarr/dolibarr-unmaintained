@@ -1,0 +1,16 @@
+# Composition module
+CHARSET=UTF-8
+addCompo=Add composition
+newCompo=New composition
+ComposedProductsAbility=Support compositions
+qte=Quantity
+total_price=Total price  %s
+FactoryPrice=Cost price %s
+FactoryPriceAll=Total cost price %s
+listeComposition=List of compositions
+ComposedProducts=Composition of products
+StockManaged=Gestion des stocks
+etatStock=Inventory Management
+confirm_delete=Delete Confirmation
+delete=Delete
+deleted=Deleted
