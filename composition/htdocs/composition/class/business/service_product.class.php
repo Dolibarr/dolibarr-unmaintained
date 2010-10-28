@@ -23,7 +23,7 @@
         \file       htdocs/product_composition/product.class.php
         \ingroup    product
         \brief      *complete here*
-		\version    $Id: service_product.class.php,v 1.3 2010/09/23 16:20:01 cdelambert Exp $
+		\version    $Id: service_product.class.php,v 1.4 2010/10/28 14:00:38 cdelambert Exp $
 		\author		Patrick Raguin
 */
 

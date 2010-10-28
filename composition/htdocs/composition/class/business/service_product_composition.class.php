@@ -23,7 +23,7 @@
         \file       htdocs/product_composition/product_composition.class.php
         \ingroup    product_composition
         \brief      *complete here*
-		\version    $Id: service_product_composition.class.php,v 1.2 2010/08/14 02:43:19 eldy Exp $
+		\version    $Id: service_product_composition.class.php,v 1.3 2010/10/28 14:00:40 cdelambert Exp $
 		\author		Patrick Raguin
 */
 
@@ -301,12 +301,19 @@ class service_product_composition
 							$price_ttc = $item->price_pmp * (1 +($item->tva_tx / 100));
 
 						}
-						//� partir du prix de vente
+						//� partir d'achat
 						else
 						{
-							$price = $item->price;
-							$price_ttc = $item->price_ttc;
+							$price=$this->getAverageSupplierPrice($item->rowid);
+							if ($price>0){
+								$price_ttc = $price * (1 +($item->tva_tx / 100));
+							}else{
+								$price = $item->price;
+								$price_ttc = $item->price_ttc;
+							}
+							$this->db->free($resqlpf);
 						}
+						
 
 
 						$liste[] = array(
@@ -592,18 +599,19 @@ class service_product_composition
 
 	}
 
-
-
 	/*
-     *      \brief      Cette méthode calcul le cout de revient pour toutes les compositions
+     *      \brief      Cette méthode calcul le cout de revient pour les compositions
      *      \return     array of prices (HT and TTC)
      */
-	public function getFactoryPriceAll($product_id)
+	public function getFactoryPrice($product_id,$all=true)
 	{
-		$sql = "SELECT p.tva_tx, p.price*c.qte as total_price, p.price_ttc*c.qte as total_price_ttc, p.pmp*c.qte as cump";
+		$sql = "SELECT p.rowid, p.tva_tx, c.qte, p.price, p.price_ttc, p.pmp";
 		$sql.= " FROM llx_product_composition c JOIN llx_product p ON c.fk_product_composition = p.rowid";
 		$sql.= " WHERE c.fk_product = ".$product_id;
-
+		if ($all){
+			$sql.= " AND c.buying_cost = 1";
+		}
+		
 		$query = dao_product_composition::selectQuery($this->db,$sql);
 
 		$factory_price = 0;
@@ -613,13 +621,19 @@ class service_product_composition
 		{
 			if($obj->cump != 0)
 			{
-				$factory_price += $obj->cump;
-				$factory_price_ttc += $obj->cump * (1 + $obj->tva_tx / 100);
+				$factory_price += $obj->pmp * $obj->qte;
+				$factory_price_ttc += $obj->pmp * $obj->qte * (1 + $obj->tva_tx / 100);
 			}
 			else
 			{
-				$factory_price += $obj->total_price;
-				$factory_price_ttc += $obj->total_price_ttc;
+				$priceAverage=$this->getAverageSupplierPrice($obj->rowid);
+				if ($priceAverage<=0){
+					$factory_price += $obj->price * $obj->qte ;
+					$factory_price_ttc += $obj->price_ttc * $obj->qte;
+				}else{
+					$factory_price += $priceAverage * $obj->qte;
+					$factory_price_ttc += $priceAverage * $obj->qte * (1 + $obj->tva_tx / 100);
+				}
 			}
 
 		}
@@ -628,54 +642,40 @@ class service_product_composition
 		$price['TTC'] = $factory_price_ttc;
 		return $price;
 
-
 	}
-
-
-
-
-
-	/*
-     *      \brief   	Cette méthode calcul le cout de revient avec les compositions dont la l'option "cout de revient" est à 1.
+	
+		/*
+     *      \brief   	Cette méthode calcul le cout moyen d'achat à partir des tarifs fournisseur
      *      \return     array of prices (HT and TTC)
      */
-	public function getFactoryPrice($product_id)
+	public function getAverageSupplierPrice($product_id)
 	{
-		$sql = "SELECT p.tva_tx, p.price*c.qte as total_price, p.price_ttc*c.qte as total_price_ttc, p.pmp*c.qte as cump";
-		$sql.= " FROM llx_product_composition c JOIN llx_product p ON c.fk_product_composition = p.rowid";
-		$sql.= " WHERE c.fk_product = ".$product_id;
-		$sql.= " AND c.buying_cost = 1";
-
-		$query = dao_product_composition::selectQuery($this->db,$sql);
-
-		$factory_price = 0;
-		$factoy_price_ttc = 0;
-
-		if($query)
-		{
-			while($obj = $this->db->fetch_object($query))
+		$sqlpf = "SELECT pfp.unitprice";
+		$sqlpf.= " FROM ".MAIN_DB_PREFIX."product_fournisseur pf";
+		$sqlpf.= " LEFT JOIN ".MAIN_DB_PREFIX."product_fournisseur_price as pfp ON pfp.fk_product_fournisseur=pf.rowid";
+		$sqlpf.= " WHERE pf.fk_product = ".$product_id;
+		$resqlpf=$this->db->query($sqlpf);
+		$price=0;
+		if ($resqlpf){
+			$num = $this->db->num_rows($resqlpf);
+			$i = 0;
+			$priceAll=0;
+			while ($i < $num)
 			{
-				if($obj->cump != 0)
-				{
-					$factory_price += $obj->cump;
-					$factory_price_ttc += $obj->cump * (1 + $obj->tva_tx / 100);
-				}
-				else
-				{
-					$factory_price += $obj->total_price;
-					$factory_price_ttc += $obj->total_price_ttc;
-				}
-
+				$objpf = $this->db->fetch_object($resqlpf);
+				$priceAll=floatval($objpf->unitprice)+$priceAll;
+				$i++;
 			}
+			if ($i>0 && $priceAll>0){
+				$price=$priceAll/$i;
+			}else{
+				$price=0;
+			}
+		}else{
+			return 0;
 		}
-
-		$price['HT'] = $factory_price;
-		$price['TTC'] = $factory_price_ttc;
 		return $price;
-
 	}
-
-
 
 }
 //End of user code

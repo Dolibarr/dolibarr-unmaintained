@@ -21,7 +21,7 @@
  *    \file       htdocs/composition/show_composition.php
  *    \ingroup
  *    \brief      * to complete *
- *    \version    $Id: show_composition.php,v 1.7 2010/06/07 14:49:46 pit Exp $
+ *    \version    $Id: show_composition.php,v 1.8 2010/10/28 14:00:35 cdelambert Exp $
  */
 
 require("../main.inc.php");
@@ -189,12 +189,12 @@ if (($_POST["action"] == 'confirm_delete')&&($_POST["confirm"] == 'yes'))
 		
 		//cout de revient total
 		$factory_price_all['label'] = $langs->trans('FactoryPriceAll');
-		$factory_price_all['value'] = $service->getFactoryPriceAll($_GET['id']);
+		$factory_price_all['value'] = $service->getFactoryPrice($_GET['id'],true);
 		$smarty->assign("factory_price_all",$factory_price_all);
 
 		//cout de revient
 		$factory_price['label'] = $langs->trans('FactoryPrice');
-		$factory_price['value'] = $service->getFactoryPrice($_GET['id']);
+		$factory_price['value'] = $service->getFactoryPrice($_GET['id'],true);
 		$smarty->assign("factory_price",$factory_price);		
 		
 		// variables pour le template
@@ -221,6 +221,6 @@ $smarty->display("show_composition.tpl") ;
 
 //End of user code
 
-llxFooter('$Date: 2010/06/07 14:49:46 $ - $Revision: 1.7 $');
+llxFooter('$Date: 2010/10/28 14:00:35 $ - $Revision: 1.8 $');
 
 ?>
