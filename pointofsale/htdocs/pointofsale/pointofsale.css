@@ -1,0 +1,95 @@
+@CHARSET "UTF-8";
+
+input.cashdeskinput {
+	font-size: 20px;
+	font-weight: bold;
+	color: #436976;
+	height: 90%;
+	width: 90%;
+}
+
+input.cashdesktext {
+	font-size: 230%;
+	font-weight: bold;
+	height: 90%;
+	width: 90%;
+	text-align: right;
+	border-color: #777777;
+}
+
+input.cashdeskinput:hover {
+	background: #dee7ec;
+}
+
+input.cashdeskinput:disabled {
+	background: #BBBBBB;
+}
+
+input.numkeyboardbtn {
+	font-size: 20px;
+	font-weight: bold;
+	height: 90%;
+}
+
+select.listcat {
+	width: 100%;
+}
+
+option.listcat {
+	font-size: 17px;
+	padding: 2px ;
+}
+
+p.postitre {
+	font-size: 17px;
+	margin: 2%;
+}
+
+p.customeraddress {
+	font-size: 15px;
+	margin: 0px;
+}
+
+p.customeraddress:first-line {
+	font-size: 17px;
+	font-weight: bold;
+}
+
+tr.selectedrow {
+	background: #BBFFFF;
+}
+
+ul.listpaiements {
+	text-align: center;
+	padding: 0px;
+	list-style-type: none;
+}
+
+li.paiement {
+	font-size: 16px ;
+	border: 1px solid #777777;
+	margin: 4px;
+}
+
+li.selectedpaiement {
+	font-size: 16px ;
+	border: 1px solid #777777;
+	margin: 4px;
+	background: #BBFFFF;
+}	
+
+input.customerzone {
+	font-size: 16px ;
+	font-weight: bold;
+	color: #436976;
+	padding: 1px 4px ;
+}
+
+table.customerzone {
+	font-size: 130% ;
+}
+
+select.flat {
+	font-size: 16px ;
+}
+
