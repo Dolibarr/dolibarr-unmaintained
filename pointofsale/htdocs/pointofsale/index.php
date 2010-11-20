@@ -21,7 +21,7 @@
  *   	\file       htdocs/pointofsale/index.php
  *		\ingroup    pointofsale
  *		\brief      Main page of the PointOfSale module
- *		\version    $Id: index.php,v 1.1 2010/10/29 16:40:50 hregis Exp $
+ *		\version    $Id: index.php,v 1.2 2010/11/20 13:50:43 denismartin Exp $
  *		\author		Denis Martin
  *		\remarks	Pages that will display "new sale" link and stats about pointofsale
  */
@@ -87,7 +87,7 @@ if ($resql) {
 else {
 	$error="Error ".$db->lasterror();
 	dol_syslog("pointofsale/index.php ".$error, LOG_ERR);
-	return -1;
+	//TODO Error display
 }
 
 
@@ -122,7 +122,9 @@ $form=new Form($db);
 		<td valign="top" width="50%" class="notopnoleft">
 			<table class="noborder" width="100%">
 				<tr class="liste_titre">
-					<td>Last Sales (Sales of the Month)</td>
+					<td>Last Sales (Sales of the Month)
+						<a class="butAction" href="<?php print DOL_URL_ROOT.'/pointofsale/monthsales.php' ;?>">MonthSales</a>
+					</td>
 				</tr>
 	
 			</table>
@@ -161,5 +163,5 @@ foreach($myobject->linked_object as $object => $objectid)
 
 // End of page
 $db->close();
-llxFooter('$Date: 2010/10/29 16:40:50 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2010/11/20 13:50:43 $ - $Revision: 1.2 $');
 ?>
