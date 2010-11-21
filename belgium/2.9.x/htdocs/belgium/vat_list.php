@@ -88,7 +88,7 @@ if ($action == 'export' && count($error_messages) == 0)
 	if (!$user->rights->belgium->vat_list->export)
 		accessforbidden();
 
-	header('content-type: application/xml');
+	header('Content-Type: application/xml');
 	echo $vat_list->outputXML();
 	exit();
 }
