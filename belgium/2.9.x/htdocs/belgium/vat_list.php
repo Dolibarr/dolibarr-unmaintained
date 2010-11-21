@@ -90,19 +90,20 @@ if ($action == 'export' && count($error_messages) == 0)
 
 	header('Content-Type: application/xml');
 	echo $vat_list->outputXML();
-	exit();
+}
+else
+{
+	llxHeader('', $langs->trans('Belgium') . ' - ' . $langs->trans('Intervat') . ' - ' . $langs->trans('VATClientsList'));
+
+	foreach ($error_messages as $error_message)
+		echo '<div class="error">' . $error_message . '</div>';
+	dol_fiche_head(array(array(NULL, $langs->trans('VATClientsList'))), NULL, $langs->trans('Intervat'));
+	echo $vat_list->printHTML();
+	echo '</div>';
+
+	llxFooter();
 }
 
-llxHeader('', $langs->trans('Belgium') . ' - ' . $langs->trans('Intervat') . ' - ' . $langs->trans('VATClientsList'));
-
-foreach ($error_messages as $error_message)
-	echo '<div class="error">' . $error_message . '</div>';
-dol_fiche_head(array(array(NULL, $langs->trans('VATClientsList'))), NULL, $langs->trans('Intervat'));
-echo $vat_list->printHTML();
-echo '</div>';
-
 $db->close();
-
-llxFooter();
 
 ?>

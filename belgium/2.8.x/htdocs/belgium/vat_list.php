@@ -1,5 +1,5 @@
 <?php
-/* Copyright (C) 2009 Laurent Léonard <laurent@open-minds.org>
+/* Copyright (C) 2009-2010 Laurent Léonard <laurent@open-minds.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -90,19 +90,20 @@ if ($action == 'export' && count($error_messages) == 0)
 
 	header('Content-Type: application/xml');
 	echo $vat_list->outputXML();
-	exit();
+}
+else
+{
+	llxHeader('', $langs->trans('Belgium') . ' - ' . $langs->trans('Intervat') . ' - ' . $langs->trans('VATClientsList'));
+
+	foreach ($error_messages as $error_message)
+		echo '<div class="error">' . $error_message . '</div>';
+	dol_fiche_head(array(array(NULL, $langs->trans('VATClientsList'))), NULL, $langs->trans('Intervat'));
+	echo $vat_list->printHTML();
+	echo '</div>';
+
+	llxFooter();
 }
 
-llxHeader('', $langs->trans('Belgium') . ' - ' . $langs->trans('Intervat') . ' - ' . $langs->trans('VATClientsList'));
-
-foreach ($error_messages as $error_message)
-	echo '<div class="error">' . $error_message . '</div>';
-dol_fiche_head(array(array(NULL, $langs->trans('VATClientsList'))), NULL, $langs->trans('Intervat'));
-echo $vat_list->printHTML();
-echo '</div>';
-
 $db->close();
-
-llxFooter();
 
 ?>
