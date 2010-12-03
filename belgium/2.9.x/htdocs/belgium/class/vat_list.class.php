@@ -263,6 +263,7 @@ class VATList
 
 		$xml->endElement();
 
+		$xml->endDocument();
 		return $xml->outputMemory(true);
 	}
 
