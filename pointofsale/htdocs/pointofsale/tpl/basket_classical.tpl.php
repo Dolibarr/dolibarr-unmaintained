@@ -20,7 +20,7 @@
  *   	\file       htdocs/pointofsale/tpl/basket_classical.tpl.php
  *		\ingroup    pointofsale
  *		\brief      Template page for basket zone in the cashdesk page
- *		\version    $Id: basket_classical.tpl.php,v 1.1 2010/10/29 16:40:51 hregis Exp $
+ *		\version    $Id: basket_classical.tpl.php,v 1.2 2010/12/10 10:23:07 denismartin Exp $
  *		\author		Denis Martin
  */
 
@@ -68,7 +68,7 @@ function clickPaiement(li, classname) {
 
 </script>
 
-<table border="solid" width="100%" height="100%" id="basketTable">
+<table width="100%" height="100%" id="basketTable" class="baskettable">
 
 	<tr height="5%">
 		<td align="center" colspan="4">

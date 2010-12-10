@@ -21,7 +21,7 @@
  *   	\file       pointofsale/cashdesk.php
  *		\ingroup    pointofsale
  *		\brief      This pages manages the cashdesk
- *		\version    $Id: cashdesk.php,v 1.1 2010/10/29 16:40:50 hregis Exp $
+ *		\version    $Id: cashdesk.php,v 1.2 2010/12/10 10:23:07 denismartin Exp $
  *		\author		dmartin
  */
 
@@ -171,6 +171,10 @@ elseif($_POST['action'] == 'setContact') {
 			$errors[] = $langs->trans("ErrorSettingContact") ;
 	}
 }
+elseif($_GET['action'] == 'unsetContact') {
+	if($cashdesk->unsetContact($user) != 1)
+		$errors[] = $langs->trans("ErrorUnsettingContact") ;
+}
 elseif($_POST['action'] == $langs->trans('ValidateAndPrint')) {
 	$invoiceCreated = $cashdesk->createInvoice($user) ;
 
@@ -191,9 +195,9 @@ if($invoiceCreated > 0) {
 ?>
 
 <script type="text/javascript">
-var p = window.open('<?php print DOL_URL_ROOT.'/document.php?modulepart=facture&file='.$cashdesk->ref.'/'.$cashdesk->ref.'.pdf' ; ?>', '') ;
-p.print() ;
-p.close() ;
+var p = window.open('<?php print DOL_URL_ROOT.'/document.php?modulepart=facture&file='.$cashdesk->ref.'/'.$cashdesk->ref.'.pdf' ; ?>', '_blank') ;
+//p.print() ;
+//p.close() ;
 </script>
 
 <?php
@@ -241,10 +245,10 @@ if(count($errors) != 0 || count($cashdesk->errors) != 0) {
 <!--  Main div -->
 <div style="height:600px; background-color:#EEEEEE;">
 <!-- Main table -->
-<table width="100%" height="100%" border="solid">
+<table width="100%" height="100%" class="cashdeskmaintable">
 
 <tr height="13%">
-	<td width="70%">
+	<td width="70%" class="cashdeskmaintable">
 	<!-- Title cell -->
 <?php 
 
@@ -253,7 +257,7 @@ $cashdesk->displayTitle() ;
 ?>
 	<!-- End of title cell -->
 	</td>
-	<td align="center" width="30%">
+	<td align="center" width="30%" class="cashdeskmaintable">
 <?php 
 
 $cashdesk->displayCustomer() ;
@@ -264,7 +268,7 @@ $cashdesk->displayCustomer() ;
 
 <tr height="90%">
 
-	<td>
+	<td class="cashdeskmaintable">
 	
 	<table height="100%" width="100%">
 		<tr height="50%"><td>
@@ -291,7 +295,7 @@ $cashdesk->displayControls() ;
 	
 	</td>
 	
-	<td>
+	<td class="cashdeskmaintable">
 	<!-- Cell to display basket -->
 <?php 
 
@@ -314,5 +318,5 @@ $cashdesk->displayBasket() ;
 
 // End of page
 $db->close();
-llxFooter('$Date: 2010/10/29 16:40:50 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2010/12/10 10:23:07 $ - $Revision: 1.2 $');
 ?>

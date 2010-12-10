@@ -20,7 +20,7 @@
  *      \file       htdocs/pointofsale/admin/pointofsale.php
  *		\ingroup    pointofsale
  *		\brief      Page to setup pointofsale module
- *		\version    $Id: pointofsale.php,v 1.1 2010/10/29 16:40:50 hregis Exp $
+ *		\version    $Id: pointofsale.php,v 1.2 2010/12/10 10:23:07 denismartin Exp $
  */
 
 
@@ -41,6 +41,18 @@ accessforbidden();
 
 $typeconst=array('yesno','texte','chaine');
 
+/**
+ * Function that return a select input to select the template from files existing
+ * in pointofsale/tpl folder.
+ * @param $zone zone of the screen. Can be 'basket', 'controls', 'customer', 'title' or 'products'
+ * @return string HTML string to display select input
+ */
+function select_template($zone) {
+	$str = '<select id="" class="flat" name="selecttpl'.$zone.'">'."\n" ;
+	
+	
+	$str.= "</select>\n" ;
+}
 
 /*
  * Action
@@ -78,6 +90,101 @@ if ($_GET["action"] == 'setmod')
 
 	dolibarr_set_const($db, "POS_FACTURE_ADDON",$_GET["value"],'chaine',0,'',$conf->entity);
 }
+
+if ($_GET["action"] == 'specimen')
+{
+	$modele=$_GET["module"];
+
+	$facture = new Facture($db);
+	$facture->initAsSpecimen();
+
+	// Charge le modele
+	$dir = DOL_DOCUMENT_ROOT . "/includes/modules/facture/";
+	$file = "pdf_".$modele.".modules.php";
+	if (file_exists($dir.$file))
+	{
+		$classname = "pdf_".$modele;
+		require_once($dir.$file);
+
+		$obj = new $classname($db);
+
+		if ($obj->write_file($facture,$langs) > 0)
+		{
+			header("Location: ".DOL_URL_ROOT."/document.php?modulepart=facture&file=SPECIMEN.pdf");
+			return;
+		}
+		else
+		{
+			$mesg='<div class="error">'.$obj->error.'</div>';
+			dol_syslog($obj->error, LOG_ERR);
+		}
+	}
+	else
+	{
+		$mesg='<div class="error">'.$langs->trans("ErrorModuleNotFound").'</div>';
+		dol_syslog($langs->trans("ErrorModuleNotFound"), LOG_ERR);
+	}
+}
+
+if ($_GET["action"] == 'set')
+{
+	$type='invoice';
+	$sql = "INSERT INTO ".MAIN_DB_PREFIX."document_model (nom, type, entity) VALUES ('".$_GET["value"]."','".$type."',".$conf->entity.")";
+	if ($db->query($sql))
+	{
+
+	}
+}
+
+if ($_GET["action"] == 'del')
+{
+	$type='invoice';
+	$sql = "DELETE FROM ".MAIN_DB_PREFIX."document_model";
+	$sql.= " WHERE nom = '".$_GET["value"]."'";
+	$sql.= " AND type = '".$type."'";
+	$sql.= " AND entity = ".$conf->entity;
+
+	if ($db->query($sql))
+	{
+
+	}
+}
+
+if ($_GET["action"] == 'setdoc')
+{
+	$db->begin();
+
+	if (dolibarr_set_const($db, "POS_FACTURE_ADDON_PDF",$_GET["value"],'chaine',0,'',$conf->entity))
+	{
+		$conf->global->POS_FACTURE_ADDON_PDF = $_GET["value"];
+	}
+
+	// On active le modele
+	$type='invoice';
+
+	$sql_del = "DELETE FROM ".MAIN_DB_PREFIX."document_model";
+	$sql_del.= " WHERE nom = '".addslashes($_GET["value"])."'";
+	$sql_del.= " AND type = '".$type."'";
+	$sql_del.= " AND entity = ".$conf->entity;
+    dol_syslog("facture.php ".$sql_del);
+	$result1=$db->query($sql_del);
+
+	$sql = "INSERT INTO ".MAIN_DB_PREFIX."document_model (nom,type,entity) VALUES ('".addslashes($_GET["value"])."','".$type."',".$conf->entity.")";
+    dol_syslog("facture.php ".$sql);
+	$result2=$db->query($sql);
+	if ($result1 && $result2)
+	{
+		$db->commit();
+	}
+	else
+	{
+		dol_syslog("facture.php ".$db->lasterror(), LOG_ERR);
+		$db->rollback();
+	}
+}
+
+
+
 
 
 /*
@@ -231,6 +338,7 @@ print '<td width="40%" align="right">' ;
 print '<form method="post" action="pointofsale.php">';
 print '<input type="hidden" name="token" value="'.$_SESSION['newtoken'].'">';
 print '<input type="hidden" name="action" value="changeproducttemplate">';
+
 print '<input type="submit" class="button" value="'.$langs->trans("Modify").'">';
 print '</form>';
 print "</td>\n";
@@ -381,9 +489,168 @@ $var=true;
 print '</table>';
 
 
+/*
+ * Document templates generators
+ */
+print '<br>';
+print_titre($langs->trans("BillsPDFModules"));
+
+// Load array def with activated templates
+$def = array();
+$sql = "SELECT nom";
+$sql.= " FROM ".MAIN_DB_PREFIX."document_model";
+$sql.= " WHERE type = 'invoice'";
+$sql.= " AND entity = ".$conf->entity;
+$resql=$db->query($sql);
+if ($resql)
+{
+	$i = 0;
+	$num_rows=$db->num_rows($resql);
+	while ($i < $num_rows)
+	{
+		$array = $db->fetch_array($resql);
+		array_push($def, $array[0]);
+		$i++;
+	}
+}
+else
+{
+	dol_print_error($db);
+}
+
+print '<table class="noborder" width="100%">';
+print '<tr class="liste_titre">';
+print '<td>'.$langs->trans("Name").'</td>';
+print '<td>'.$langs->trans("Description").'</td>';
+print '<td align="center" width="60">'.$langs->trans("Status").'</td>';
+print '<td align="center" width="60">'.$langs->trans("Default").'</td>';
+print '<td align="center" width="32" colspan="2">'.$langs->trans("Infos").'</td>';
+print "</tr>\n";
+
+clearstatcache();
+
+
+$var=true;
+foreach ($conf->file->dol_document_root as $dirroot)
+{
+	foreach (array('','/doc') as $valdir)
+	{
+		$dir = $dirroot . "/includes/modules/facture".$valdir;
+
+		if (is_dir($dir))
+		{
+			$handle=opendir($dir);
+			if ($handle)
+			{
+				while (($file = readdir($handle))!==false)
+				{
+					if (preg_match('/\.modules\.php$/i',$file) && preg_match('/^(pdf_|doc_)/',$file))
+					{
+						$name = substr($file, 4, dol_strlen($file) -16);
+						$classname = substr($file, 0, dol_strlen($file) -12);
+
+						require_once($dir.'/'.$file);
+						$module = new $classname($db);
+
+						$modulequalified=1;
+						if ($module->version == 'development'  && $conf->global->MAIN_FEATURES_LEVEL < 2) $modulequalified=0;
+						if ($module->version == 'experimental' && $conf->global->MAIN_FEATURES_LEVEL < 1) $modulequalified=0;
+
+						if ($modulequalified)
+						{
+							$var = !$var;
+							print '<tr '.$bc[$var].'><td width="100">';
+							print (empty($module->name)?$name:$module->name);
+							print "</td><td>\n";
+							if (method_exists($module,'info')) print $module->info($langs);
+							else print $module->description;
+							print '</td>';
+
+							// Active
+							if (in_array($name, $def))
+							{
+								print "<td align=\"center\">\n";
+								if ($conf->global->POS_FACTURE_ADDON_PDF != "$name")
+								{
+									print '<a href="'.$_SERVER["PHP_SELF"].'?action=del&amp;value='.$name.'">';
+									print img_picto($langs->trans("Enabled"),'on');
+									print '</a>';
+								}
+								else
+								{
+									print img_picto($langs->trans("Enabled"),'on');
+								}
+								print "</td>";
+							}
+							else
+							{
+								print "<td align=\"center\">\n";
+								print '<a href="'.$_SERVER["PHP_SELF"].'?action=set&amp;value='.$name.'">'.img_picto($langs->trans("Disabled"),'off').'</a>';
+								print "</td>";
+							}
+
+							// Defaut
+							print "<td align=\"center\">";
+							if ($conf->global->POS_FACTURE_ADDON_PDF == "$name")
+							{
+								print img_picto($langs->trans("Default"),'on');
+							}
+							else
+							{
+								print '<a href="'.$_SERVER["PHP_SELF"].'?action=setdoc&amp;value='.$name.'" alt="'.$langs->trans("Default").'">'.img_picto($langs->trans("Disabled"),'off').'</a>';
+							}
+							print '</td>';
+
+							// Info
+							$htmltooltip =    ''.$langs->trans("Name").': '.$module->name;
+							$htmltooltip.='<br>'.$langs->trans("Type").': '.($module->type?$module->type:$langs->trans("Unknown"));
+							if ($module->type == 'pdf')
+							{
+								$htmltooltip.='<br>'.$langs->trans("Height").'/'.$langs->trans("Width").': '.$module->page_hauteur.'/'.$module->page_largeur;
+							}
+							$htmltooltip.='<br><br><u>'.$langs->trans("FeaturesSupported").':</u>';
+							$htmltooltip.='<br>'.$langs->trans("Logo").': '.yn($module->option_logo,1,1);
+							$htmltooltip.='<br>'.$langs->trans("PaymentMode").': '.yn($module->option_modereg,1,1);
+							$htmltooltip.='<br>'.$langs->trans("PaymentConditions").': '.yn($module->option_condreg,1,1);
+							$htmltooltip.='<br>'.$langs->trans("Escompte").': '.yn($module->option_escompte,1,1);
+							$htmltooltip.='<br>'.$langs->trans("CreditNote").': '.yn($module->option_credit_note,1,1);
+							$htmltooltip.='<br>'.$langs->trans("MultiLanguage").': '.yn($module->option_multilang,1,1);
+							$htmltooltip.='<br>'.$langs->trans("WatermarkOnDraftInvoices").': '.yn($module->option_draft_watermark,1,1);
+
+
+							print '<td align="center">';
+							print $html->textwithpicto('',$htmltooltip,1,0);
+							print '</td>';
+
+							// Preview
+							print '<td align="center">';
+							if ($module->type == 'pdf')
+							{
+								print '<a href="'.$_SERVER["PHP_SELF"].'?action=specimen&module='.$name.'">'.img_object($langs->trans("Preview"),'bill').'</a>';
+							}
+							else
+							{
+								print img_object($langs->trans("PreviewNotAvailable"),'generic');
+							}
+							print '</td>';
+
+							print "</tr>\n";
+						}
+					}
+				}
+				closedir($handle);
+			}
+		}
+	}
+}
+print '</table>';
+
+
+
+
 dol_fiche_end();
 
 $db->close();
 
-llxFooter('$Date: 2010/10/29 16:40:50 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2010/12/10 10:23:07 $ - $Revision: 1.2 $');
 ?>

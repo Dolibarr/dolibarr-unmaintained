@@ -20,7 +20,7 @@
  *   	\file       pointofsale/tpl/customer_classical.tpl.php
  *		\ingroup    pointofsale
  *		\brief      Template page that display the name and address of the customer
- *		\version    $Id: customer_classical.tpl.php,v 1.1 2010/10/29 16:40:51 hregis Exp $
+ *		\version    $Id: customer_classical.tpl.php,v 1.2 2010/12/10 10:23:07 denismartin Exp $
  *		\author		dmartin
  */
 
@@ -77,7 +77,7 @@ else {
 		print '<a class="butAction" href="'.DOL_URL_ROOT.'/pointofsale/cashdesk.php?action=newCustomer" >'.$langs->trans('NewCustomer').'</a>'."\n" ;
 		print '<a class="butAction" href="'.DOL_URL_ROOT.'/pointofsale/cashdesk.php?action=findCustomer" >'.$langs->trans('FindCustomer').'</a></p>'."\n" ;
 	} else {
-		print $this->contact->getFullName($langs, 1)."<br />\n" ;
+	print $this->contact->getFullName($langs, 1).' <a class="butAction" style="color:#AA0000;" href="'.DOL_URL_ROOT.'/pointofsale/cashdesk.php?action=unsetContact">X</a> <br />'. "\n" ;
 		print $this->contact->address." - ".$this->contact->cp." ".$this->contact->ville."<br />\n" ;
 		if($this->contact->phone_pro) print $this->contact->phone_pro." &nbsp; " ;
 		if($this->contact->email) print $this->contact->email ;

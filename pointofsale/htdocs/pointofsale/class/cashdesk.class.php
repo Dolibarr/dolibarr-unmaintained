@@ -21,7 +21,7 @@
  *      \file       htdocs/pointofsale/cashdesk.class.php
  *      \ingroup    pointofsale
  *      \brief      Class used to manages basket object from database and template display for PointOfSale module
- *		\version    $Id: cashdesk.class.php,v 1.1 2010/10/29 16:40:51 hregis Exp $
+ *		\version    $Id: cashdesk.class.php,v 1.2 2010/12/10 10:23:07 denismartin Exp $
  *		\author		Denis Martin
  */
 
@@ -448,7 +448,7 @@ class Cashdesk
     	global $langs ;
     	
         $sql = "UPDATE ".MAIN_DB_PREFIX."basket SET";
-        $sql.= " fk_contact=".(isset($this->contact->id)?trim($this->contact->id):"null").",";
+        $sql.= " fk_contact=".($this->contact->id?trim($this->contact->id):"null").",";
 		$sql.= " tms=".(dol_strlen($this->tms)!=0 ? "'".$this->db->idate($this->tms)."'" : 'null').",";
 		$sql.= " total_ttc=".(isset($this->total_ttc)?price2num($this->total_ttc):"null").",";
 		$sql.= " total_tva=".(isset($this->total_tva)?price2num($this->total_tva):"null").",";
@@ -796,9 +796,16 @@ class Cashdesk
 		
 	}
 	
-	
-	function unSetContact($user) {
-		
+	/**
+	 * Function taht will unset the previous selected contact and remove it from DB
+	 * @param $user user that performs the action
+	 * @return int 1 if OK, -1 if KO
+	 */
+	function unsetContact($user) {
+		dol_syslog("Cashdesk::unsetContact", LOG_DEBUG) ;
+		unset($this->contact) ;
+		if($this->updateBasket($user) == 1) return 1 ;
+		else return -1 ;
 	}
 	
 	
@@ -809,7 +816,7 @@ class Cashdesk
 	 */
 	function createInvoice($user) {
 		
-		global $langs ;
+		global $langs, $conf ;
 		
 		$error = 0 ;
 		// Create Facture object for to create it in DB
@@ -915,7 +922,7 @@ class Cashdesk
 		dol_syslog('Cashdesk::createInvoice Invoice '.$facture->id.' created.', LOG_DEBUG) ;		
 		
 		//PDF generation
-		$facture->setDocModel($user, 'crabe');
+		$facture->setDocModel($user, $conf->global->POS_FACTURE_ADDON_PDF);
 		
 		// Define output language
 		$outputlangs = $langs;

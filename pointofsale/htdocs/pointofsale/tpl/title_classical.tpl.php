@@ -20,7 +20,7 @@
  *   	\file       pointofsale/tpl/title_classical.tpl.php
  *		\ingroup    pointofsale
  *		\brief      Template page to display a classical title zone for cashdesk
- *		\version    $Id: title_classical.tpl.php,v 1.1 2010/10/29 16:40:51 hregis Exp $
+ *		\version    $Id: title_classical.tpl.php,v 1.2 2010/12/10 10:23:07 denismartin Exp $
  *		\author		dmartin
  */
 
@@ -32,7 +32,7 @@ $date = dol_print_date(dol_now(), "%d/%m/%Y") ;
 	<tr height="100%">
 		<td width="33%" align="center"><a class="butAction" style="font-size:20px;padding:4% 20%;" href="<?php print DOL_URL_ROOT . '/pointofsale/cashdesk.php?action=newsale'?>"><?php print $langs->trans('NewSale') ; ?></a></td>
 		<td width="33%" align="center"><a class="butAction" style="font-size:20px;padding:4% 20%;" href="<?php print DOL_URL_ROOT . '/pointofsale/index.php?action=deletelastsale' ; ?>"><?php print $langs->trans('Cancel') ; ?></a></td>
-		<td align="center"><p style="font-size:18px;"> <?php print $langs->trans('SaleNumberAndDate', $this->ref, $date) ; ?><br /> Login : <?php print $_SESSION['dol_login'] ;?> </p></td>
+		<td><p class="titlezone"> <?php print $langs->trans('SaleNumberAndDate', $this->ref, $date) ; ?><br /> Login : <?php print $_SESSION['dol_login'] ;?> </p></td>
 	</tr>
 </table>
 

@@ -64,6 +64,7 @@ NoPaymentSelected=Un paiement doit être sélectionné pour être supprimé.
 PaymentTooHigh=Paiement trop élevé. Le client ne peut pas nous donner plus qu'il nous doit
 ErrorAddingContact=Erreur à l'ajout du nouveau client. Vérifier le fichier LOG pour les détails.
 ErrorSettingContact=Erreur à la sélection du contact. Vérifier le fichier LOG pour les détails.
+ErrorUnsettingContact=Erreur à la suppression du contact. Vérifier le fichier LOG pour les détails.
 NoContactSelected=Aucun client sélectionné. Choisir un client dans la liste pour l'ajouter à la facture.
 CashdeskAccountNotConfigured=Comptes bancaires non définis, vérifiez la page de configuration du module.
 ErreurCreatingInvoice=Erreur à la création de la facture. Vérifier le fichier LOG pour les détails.
