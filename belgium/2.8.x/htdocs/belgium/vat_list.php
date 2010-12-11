@@ -66,8 +66,8 @@ catch (Exception $exception)
 
 $vat_list->setVATNumber($conf->global->MAIN_INFO_TVAINTRA);
 
-$vat_list->addProposedName($user->fullname);
 $vat_list->addProposedName($conf->global->MAIN_INFO_SOCIETE_NOM);
+$vat_list->addProposedName($user->fullname);
 $vat_list->selectName($name_id);
 $vat_list->setStreet($conf->global->MAIN_INFO_SOCIETE_ADRESSE);
 $vat_list->setZipCode($conf->global->MAIN_INFO_SOCIETE_CP);
