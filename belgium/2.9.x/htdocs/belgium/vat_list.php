@@ -72,7 +72,7 @@ $vat_list->selectName($name_id);
 $vat_list->setStreet($conf->global->MAIN_INFO_SOCIETE_ADRESSE);
 $vat_list->setZipCode($conf->global->MAIN_INFO_SOCIETE_CP);
 $vat_list->setCity($conf->global->MAIN_INFO_SOCIETE_VILLE);
-$resql=$db->query('SELECT code FROM ' . MAIN_DB_PREFIX . 'c_pays WHERE rowid = ' . $conf->global->MAIN_INFO_SOCIETE_PAYS);
+$resql=$db->query('SELECT code FROM ' . MAIN_DB_PREFIX . 'c_pays WHERE rowid = \'' . $conf->global->MAIN_INFO_SOCIETE_PAYS . '\'');
 if ($resql)
 {
 	$country = $db->fetch_array($resql);
