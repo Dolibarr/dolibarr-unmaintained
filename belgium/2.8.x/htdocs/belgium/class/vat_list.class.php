@@ -225,10 +225,11 @@ class VATList
 
 		$xml->startElement('VatList');
 		$xml->writeAttribute('xmlns', 'http://www.minfin.fgov.be/VatList');
-		$xml->writeAttributeNS('xsi', 'schemaLocation', 'http://www.w3.org/2001/XMLSchema-instance', 'http://www.minfin.fgov.be/VatList http://www.minfin.fgov.be/portail1/fr/vatlist/VatList.xsd');
+		$xml->writeAttributeNS('xsi', 'schemaLocation', 'http://www.w3.org/2001/XMLSchema-instance', 'http://www.minfin.fgov.be/VatList http://www.minfin.fgov.be/portail2/downloads/e-services/intervat/5.2.0/VatList-1.3.xsd');
 		$xml->writeAttribute('SenderId', $this->formatVATNumberXML($this->vatNumber));
 		$xml->writeAttribute('ControlRef', $this->formatControlReferenceXML($this->vatNumber, $this->sequenceNumber));
 		$xml->writeAttribute('SenderDate', date('Y-m-d', $this->date));
+		$xml->writeAttribute('VersionTech', '1.3');
 
 		$xml->startElement('AgentRepr');
 		$xml->writeAttribute('DecNumber', '1');
