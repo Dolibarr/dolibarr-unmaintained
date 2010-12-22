@@ -1,9 +1,0 @@
- **** Interface ****
- 
- - gestion des paiements
- - pagination des commandes
- - importer toutes lignes d'adresses d'une facture
- 
-**** WebService ****
-- méthode pour mettre à jour le statut lors de la validation dans dolibarr
-- prendre en compte les déclinaisons et caractéristiques produits
