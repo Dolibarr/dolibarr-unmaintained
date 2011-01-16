@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: OSCvente.php,v 1.5 2010/08/09 15:42:37 eldy Exp $
+ * $Id: OSCvente.php,v 1.6 2011/01/16 14:38:41 eldy Exp $
  */
 
 require("./pre.inc.php");
@@ -48,8 +48,8 @@ if ($_GET["action"] == 'liste' )
 	            $var=!$var;
 	            $obj = $db->fetch_object($resql);
 
-	            print '<tr $bc[$var]><td nowrap><a href="'.DOL_URL_ROOT.'/product/fiche.php?id='.$obj->idp.'">'.img_object($langs->trans("ShowProduct"),"Product").' '.$obj->idp.'</a></td>';
-	            print '<td><a href="'.DOL_URL_ROOT.'/comm/fiche.php?socid='.$obj->idp.'">'.img_object($langs->trans("OscProd"),"Product").' '.$obj->oscid.'</a></td></tr>';
+	            print '<tr $bc[$var]><td nowrap><a href="'.dol_buildpath('/product/fiche.php',1).'?id='.$obj->idp.'">'.img_object($langs->trans("ShowProduct"),"Product").' '.$obj->idp.'</a></td>';
+	            print '<td><a href="'.dol_buildpath('/comm/fiche.php',1).'?socid='.$obj->idp.'">'.img_object($langs->trans("OscProd"),"Product").' '.$obj->oscid.'</a></td></tr>';
 	            $i++;
 	        }
 	        print "</table><br>";
@@ -166,5 +166,5 @@ if ($_GET["action"] == 'vendre' )
  		print '<a class="tabAction" href="OSCvente.php?action=liste">'.$langs->trans("Liste").'</a>';
 	print "\n</div>\n";
 
-llxFooter('$Date: 2010/08/09 15:42:37 $ - $Revision: 1.5 $');
+llxFooter('$Date: 2011/01/16 14:38:41 $ - $Revision: 1.6 $');
 ?>
