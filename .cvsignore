@@ -6,3 +6,4 @@ index.php
 *.log
 document
 documents
+.buildpath
