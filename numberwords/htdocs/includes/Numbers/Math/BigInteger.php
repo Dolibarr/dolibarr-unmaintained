@@ -67,7 +67,7 @@
  * @author     Jim Wigginton <terrafrost@php.net>
  * @copyright  MMVI Jim Wigginton
  * @license    http://www.gnu.org/licenses/lgpl.txt
- * @version    $Id: BigInteger.php,v 1.1 2010/11/20 16:09:08 eldy Exp $
+ * @version    $Id: BigInteger.php,v 1.3 2011/01/17 01:56:54 eldy Exp $
  * @link       http://pear.php.net/package/Math_BigInteger
  */
 
