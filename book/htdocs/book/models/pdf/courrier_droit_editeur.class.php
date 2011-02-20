@@ -22,7 +22,7 @@
  \file       	product/book/courrier-droit-editeur.class.php
  \ingroup    	editeurs
  \brief      	Classe de generation des courriers pour les editeurs
- \version		$Id: courrier_droit_editeur.class.php,v 1.2 2010/06/07 14:16:32 pit Exp $
+ \version		$Id: courrier_droit_editeur.class.php,v 1.3 2011/02/20 12:39:43 eldy Exp $
  */
 
 require_once(DOL_DOCUMENT_ROOT.'/includes/fpdf/fpdfi/fpdi_protection.php');
@@ -325,7 +325,7 @@ class pdf_courrier_droit_editeur
 			$pdf->SetTextColor(200,0,0);
 			$pdf->SetXY($this->marge_gauche, $this->marge_haute);
 			$pdf->SetFont('Arial','B',16);
-			$pdf->MultiCell(100, 3, utf8_decode($mysoc->nom), 0, 'L');
+			$pdf->MultiCell(100, 3, utf8_decode($mysoc->name), 0, 'L');
 //			$pdf->MultiCell(100, 3, utf8_decode($langs->transnoentities("ErrorLogoFileNotFound",$logo)), 0, 'L');
 //			$pdf->MultiCell(100, 3, utf8_decode($langs->transnoentities("ErrorGoToGlobalSetup")), 0, 'L');
 			$pdf->SetTextColor(0,0,0);
