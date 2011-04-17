@@ -20,7 +20,7 @@
  *  \file       htdocs/docs/index.php
  *  \ingroup    document
  *  \brief      Page d'accueil module document
- *  \version    $Id: index.php,v 1.2 2011/04/17 12:27:27 eldy Exp $
+ *  \version    $Id: index.php,v 1.3 2011/04/17 18:31:37 hregis Exp $
  */
 
 require("../main.inc.php");
@@ -58,7 +58,7 @@ if ($resql)
       $loc = get_exdir($obj->rowid).$obj->rowid.".pdf";
       $file = stripslashes($obj->name);
       echo '<a href="'.DOL_URL_ROOT.'/document.php?modulepart=ged&attachment=1&file='.urlencode($loc).'">'.$file.'</a></td>';
-      print '<td>'.dol_print_date($$db->jdate($obj->date_generation),'dayhour').'</td>';
+      print '<td>'.dol_print_date($db->jdate($obj->date_generation),'dayhour').'</td>';
 
       print "</tr>\n";
     }
@@ -76,5 +76,5 @@ print '</table>';
 
 $db->close();
 
-llxFooter('$Date: 2011/04/17 12:27:27 $ - $Revision: 1.2 $');
+llxFooter('$Date: 2011/04/17 18:31:37 $ - $Revision: 1.3 $');
 ?>
