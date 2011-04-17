@@ -20,7 +20,7 @@
  *  \file       htdocs/docs/index.php
  *  \ingroup    document
  *  \brief      Page d'accueil module document
- *  \version    $Id: index.php,v 1.1 2010/09/23 17:12:04 cdelambert Exp $
+ *  \version    $Id: index.php,v 1.2 2011/04/17 12:27:27 eldy Exp $
  */
 
 require("../main.inc.php");
@@ -41,7 +41,7 @@ print '  <td>'.$langs->trans("GenerationDate").'</td>';
 print "</tr>\n";
 
 
-$sql = "SELECT dg.rowid,dg.name,".$db->pdate("dg.date_generation")." as date_generation";
+$sql = "SELECT dg.rowid,dg.name, dg.date_generation as date_generation";
 $sql.= " FROM ".MAIN_DB_PREFIX."document as dg";
 $sql.=" ORDER BY dg.name ASC;";
 
@@ -58,7 +58,7 @@ if ($resql)
       $loc = get_exdir($obj->rowid).$obj->rowid.".pdf";
       $file = stripslashes($obj->name);
       echo '<a href="'.DOL_URL_ROOT.'/document.php?modulepart=ged&attachment=1&file='.urlencode($loc).'">'.$file.'</a></td>';
-      print '<td>'.dol_print_date($obj->date_generation,'dayhour').'</td>';
+      print '<td>'.dol_print_date($$db->jdate($obj->date_generation),'dayhour').'</td>';
 
       print "</tr>\n";
     }
@@ -76,5 +76,5 @@ print '</table>';
 
 $db->close();
 
-llxFooter('$Date: 2010/09/23 17:12:04 $ - $Revision: 1.1 $');
+llxFooter('$Date: 2011/04/17 12:27:27 $ - $Revision: 1.2 $');
 ?>
