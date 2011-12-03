@@ -1,6 +1,0 @@
-# Dolibarr language file - fr_FR - droitpret
-CHARSET=UTF-8
-
-PretSetup=Configuration du droit de prêt
-catActive=Catégorie de clients concernée par le droit de prêt
-mailDroitPret=Mail du destinataire du droit de prêt

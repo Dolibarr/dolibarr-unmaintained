@@ -1,7 +1,0 @@
-# Book module administration
-CHARSET=UTF-8
-BookSetup=Configuration des propriétés du module book
-ParametersDescription=Les informations suivantes seront affichées en bas des courriers annuels de droits d'auteur.
-BookContractBillSloganDescription=Slogan de la société
-BookContractBillSocieteInfosDescription=Informations légales sur la société
-BookContractBillOtherInfosDescription=Autres informations sur la société (site Internet, par exemple)
