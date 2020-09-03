@@ -1,8 +1,7 @@
 README (english)
 --------------------------------
 
-This repository contains all non standard modules that are not included
-in Dolibarr main branch. Some reasons are:
+This repository contains some old modules that are not included in Dolibarr main branch. Main reasons are:
 * Too buggy or not tested module.
 * Feature not enough used.
 * Duplicate of an existing module.
