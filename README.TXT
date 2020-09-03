@@ -7,4 +7,4 @@ This repository contains some old modules that are not included in Dolibarr main
 * Duplicate of an existing module.
 * Modules that need a maintener.
 
-Warning: Some of the modules here are very old and does not work on a recent version of Dolibarr. We keep them for archive purpose and keep code still available on an official repository.
+Warning: Some of the modules here are very old and does not work on a recent version of Dolibarr. We keep them for archive purpose and to have code still available on an public repository.
