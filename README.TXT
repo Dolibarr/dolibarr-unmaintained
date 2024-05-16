@@ -2,6 +2,7 @@ README (english)
 --------------------------------
 
 This repository contains some old modules that are not included in Dolibarr main branch. Main reasons are:
+* Very old deprecated modules.
 * Too buggy or not tested module.
 * Feature not enough used.
 * Duplicate of an existing module.
